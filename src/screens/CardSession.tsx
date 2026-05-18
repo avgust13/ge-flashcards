@@ -77,6 +77,9 @@ const Stage = styled.div`
 
 const BehindWrap = styled.div`
   position: absolute;
+  width: 100%;
+  max-width: 340px;
+  height: 460px;
   transform: scale(0.94) translateY(10px);
   opacity: 0.7;
   pointer-events: none;
@@ -208,7 +211,7 @@ export function CardSession() {
       <Stage>
         {deck[i + 1] && (
           <BehindWrap>
-            <FlashCard word={deck[i + 1]} flipped={false} />
+            <FlashCard word={deck[i + 1]} flipped={false} isPreview />
           </BehindWrap>
         )}
 

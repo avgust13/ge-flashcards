@@ -204,7 +204,7 @@ export function AlphabetSession() {
 
       <Body>
         <WordCard $shake={shake}>
-          <ImageSlot height={150} label={word.ru} accent="#D7E5FF" />
+          <ImageSlot src={word.image} height={150} label={word.ru} accent="#D7E5FF" />
 
           <LetterRow>
             {letters.map((l, idx) => {

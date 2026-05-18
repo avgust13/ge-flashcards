@@ -102,13 +102,20 @@ export function CardFace({ side, word }: Props) {
         <Tag $back={back}>{back ? 'Russian' : 'Georgian'}</Tag>
         <SpeakerBtn
           aria-label="Pronounce"
-          onClick={(e) => e.stopPropagation()}
+          onPointerDown={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (word.audio) {
+              new Audio(`data:audio/mpeg;base64,${word.audio}`).play();
+            }
+          }}
         >
           <Icon name="speaker" size={18} />
         </SpeakerBtn>
       </TopRow>
 
       <ImageSlot
+        src={word.image}
         height={180}
         label={back ? word.ru : word.ka}
         accent={back ? '#D7E5FF' : '#FFD6B8'}

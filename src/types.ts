@@ -22,6 +22,8 @@ export interface Word {
   ka: string;
   tr: string;
   ru: string;
+  audio: string; // base64-encoded MP3 (44.1kHz, 128kbps)
+  image: string; // base64-encoded PNG flashcard (294x180)
   cat: CategoryId;
   correct: number;
   seen: number;

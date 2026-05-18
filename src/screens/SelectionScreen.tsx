@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
-import { CATEGORIES, WORDS } from '../data/words';
+import { CATEGORIES, WORDS } from '../data';
 import type { CategoryId, Mode, Word } from '../types';
 import { Chip } from '../components/ui/Chip';
 import { Icon } from '../components/ui/Icon';

@@ -5,7 +5,7 @@ import { Icon } from '../components/ui/Icon';
 import { ImageSlot } from '../components/ui/ImageSlot';
 import { Pill } from '../components/ui/Pill';
 import { ProgressBar } from '../components/ui/ProgressBar';
-import { LETTER_MAP } from '../data/words';
+import { LETTER_MAP } from '../data';
 import { useSession } from '../state/SessionContext';
 import type { AlphaResult } from '../types';
 import { shuffle } from '../utils/shuffle';

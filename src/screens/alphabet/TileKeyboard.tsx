@@ -57,6 +57,7 @@ const Grid = styled.div`
 
 const Tile = styled.button`
   aspect-ratio: 1;
+  max-height: 80px;
   border: none;
   border-radius: 12px;
   background: #FAF5EA;

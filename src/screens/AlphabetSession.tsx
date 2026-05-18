@@ -52,6 +52,16 @@ const Counter = styled.div`
   font-size: 13px;
 `;
 
+const Container = styled.div`
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+`;
+
 const Body = styled.div`
   padding: 18px 20px 8px;
   flex: 1;
@@ -192,6 +202,7 @@ export function AlphabetSession() {
 
   return (
     <Screen>
+      <Container>
       <HeaderRow>
         <IconBtn onClick={() => navigate('/')} aria-label="Close session">
           <Icon name="close" size={20} />
@@ -204,7 +215,7 @@ export function AlphabetSession() {
 
       <Body>
         <WordCard $shake={shake}>
-          <ImageSlot src={word.image} height={150} label={word.ru} accent="#D7E5FF" />
+          <ImageSlot src={word.image} height={180} label={word.ru} accent="#D7E5FF" />
 
           <LetterRow>
             {letters.map((l, idx) => {
@@ -225,7 +236,7 @@ export function AlphabetSession() {
             })}
           </LetterRow>
 
-          <TranslationCard ru={word.ru} solved={solved} />
+          <TranslationCard ru={word.ru} audio={word.audio} solved={solved} />
         </WordCard>
 
         <TileKeyboard options={options} onTap={tap} onHint={hint} solved={solved} />
@@ -249,6 +260,7 @@ export function AlphabetSession() {
           )}
         </Pill>
       </Footer>
+      </Container>
     </Screen>
   );
 }

@@ -3,6 +3,7 @@ import { Icon } from '../../components/ui/Icon';
 
 interface Props {
   ru: string;
+  audio?: string;
   solved: boolean;
 }
 
@@ -42,14 +43,21 @@ const SpeakerBtn = styled.button<{ $solved: boolean }>`
     $solved ? theme.colors.success : theme.colors.inkSoft};
 `;
 
-export function TranslationCard({ ru, solved }: Props) {
+export function TranslationCard({ ru, audio, solved }: Props) {
   return (
     <Box $solved={solved}>
       <div>
         <Tag $solved={solved}>Translation</Tag>
         <Word $solved={solved}>{ru}</Word>
       </div>
-      <SpeakerBtn $solved={solved} aria-label="Pronounce">
+      <SpeakerBtn
+        $solved={solved}
+        aria-label="Pronounce"
+        disabled={!solved}
+        onClick={() => {
+          if (solved && audio) new Audio(`data:audio/mpeg;base64,${audio}`).play();
+        }}
+      >
         <Icon name="speaker" size={22} />
       </SpeakerBtn>
     </Box>

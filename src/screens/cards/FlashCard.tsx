@@ -6,6 +6,7 @@ import { CardFace } from './CardFace';
 interface Props {
   word: Word;
   flipped: boolean;
+  isPreview?: boolean;
   style?: CSSProperties;
 }
 
@@ -26,7 +27,20 @@ const Inner = styled.div<{ $flipped: boolean }>`
   transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
 `;
 
-export function FlashCard({ word, flipped, style }: Props) {
+const PreviewOuter = styled.div`
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+`;
+
+export function FlashCard({ word, flipped, isPreview, style }: Props) {
+  if (isPreview) {
+    return (
+      <PreviewOuter style={style}>
+        <CardFace side="front" word={word} />
+      </PreviewOuter>
+    );
+  }
   return (
     <Outer style={style}>
       <Inner $flipped={flipped}>

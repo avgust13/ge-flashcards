@@ -4,3 +4,4 @@ dev-dist
 .vite
 *.log
 .DS_Store
+src/data/.media

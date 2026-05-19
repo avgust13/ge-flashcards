@@ -146,6 +146,7 @@ export function CardSession() {
   const decide = (right: boolean) => {
     if (!word) return;
     setExiting(right ? 'right' : 'left');
+    setDrag((d) => ({ ...d, active: false }));
     const newResults: FlashResult[] = [
       ...results,
       { id: word.id, right, ka: word.ka, ru: word.ru, tr: word.tr },
@@ -216,6 +217,7 @@ export function CardSession() {
         )}
 
         <CardSwipeable
+          key={word.id}
           word={word}
           flipped={flipped}
           drag={drag}

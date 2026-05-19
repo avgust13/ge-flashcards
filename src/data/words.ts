@@ -10,8 +10,17 @@ export interface LoadProgress {
 export async function loadWords(
   onProgress?: (p: LoadProgress) => void,
   signal?: AbortSignal,
+  forceRedownload = false,
 ): Promise<Word[]> {
-  const response = await fetch(`${import.meta.env.BASE_URL}words.json`, { signal });
+  const baseUrl = `${import.meta.env.BASE_URL}words.json`;
+  const url = forceRedownload
+    ? `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}_ts=${Date.now()}`
+    : baseUrl;
+
+  const response = await fetch(url, {
+    signal,
+    cache: forceRedownload ? 'no-store' : 'default',
+  });
   if (!response.ok) throw new Error(`Failed to load words.json: ${response.status}`);
 
   const total = Number(response.headers.get('Content-Length')) || 0;

@@ -4,6 +4,7 @@ import { Icon } from '../components/ui/Icon';
 import { SectionLabel } from '../components/ui/SectionLabel';
 import { StatCard } from './home/StatCard';
 import { ModeCard } from './home/ModeCard';
+import { useWordsLoad } from '../state/WordsContext';
 import type { Mode } from '../types';
 
 const stats = { streak: 12, mastered: 184, learning: 47 };
@@ -118,6 +119,7 @@ const Spacer = styled.div`
 export function HomeScreen() {
   const navigate = useNavigate();
   const theme = useTheme();
+  const { wordCount } = useWordsLoad();
 
   const onPick = (mode: Mode) => navigate(`/select/${mode}`);
 
@@ -131,7 +133,7 @@ export function HomeScreen() {
               Let's learn <span>Georgian</span>
             </Heading>
           </div>
-          <SettingsDot aria-label="Settings">
+          <SettingsDot aria-label="Settings" onClick={() => navigate('/settings')}>
             <Icon name="settings" size={20} color={theme.colors.inkSoft} />
           </SettingsDot>
         </HeroRow>
@@ -152,7 +154,7 @@ export function HomeScreen() {
           icon="cards"
           title="Flashcards"
           subtitle="Swipe right if you know it, left if you don't"
-          extra="800 words · KA → RU"
+          extra={`${wordCount} words · KA → RU`}
           onClick={() => onPick('flash')}
         />
         <ModeCard

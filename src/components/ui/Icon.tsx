@@ -3,7 +3,7 @@ import type { CSSProperties } from 'react';
 export type IconName =
   | 'cards' | 'abc' | 'play' | 'arrow' | 'back' | 'close'
   | 'settings' | 'speaker' | 'flame' | 'bulb' | 'star'
-  | 'check' | 'refresh' | 'sparkle';
+  | 'check' | 'refresh' | 'sparkle' | 'github';
 
 interface Props {
   name: IconName;
@@ -60,6 +60,9 @@ export function Icon({ name, size = 22, color = 'currentColor', stroke = 1.8, st
       )}
       {name === 'sparkle' && (
         <path d="M12 4v4M12 16v4M4 12h4M16 12h4M7 7l2.5 2.5M14.5 14.5L17 17M17 7l-2.5 2.5M9.5 14.5L7 17" {...p} />
+      )}
+      {name === 'github' && (
+        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3.3-.4 6.8-1.6 6.8-7a5.4 5.4 0 0 0-1.4-3.7A5 5 0 0 0 20.3 1S19.2.7 16 2.9a13 13 0 0 0-7 0C5.8.7 4.7 1 4.7 1a5 5 0 0 0-.1 3.8A5.4 5.4 0 0 0 3.2 8.5c0 5.3 3.5 6.5 6.8 7a3.4 3.4 0 0 0-1 2.6V22" {...p} />
       )}
     </svg>
   );

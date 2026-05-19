@@ -6,6 +6,7 @@ import { CardSession } from './screens/CardSession';
 import { HomeScreen } from './screens/HomeScreen';
 import { LoadingScreen } from './screens/LoadingScreen';
 import { SelectionScreen } from './screens/SelectionScreen';
+import { SettingsScreen } from './screens/SettingsScreen';
 import { SummaryScreen } from './screens/SummaryScreen';
 import { SessionProvider } from './state/SessionContext';
 import { WordsProvider, useWordsLoad } from './state/WordsContext';
@@ -22,6 +23,7 @@ function Gate() {
         <Route path="/select/:mode" element={<SelectionScreen />} />
         <Route path="/session/flash" element={<CardSession />} />
         <Route path="/session/alpha" element={<AlphabetSession />} />
+        <Route path="/settings" element={<SettingsScreen />} />
         <Route path="/summary" element={<SummaryScreen />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -1,14 +1,28 @@
 export type CategoryId =
   | 'all'
+  | 'core'
+  | 'pronouns'
+  | 'numbers'
+  | 'questions'
   | 'family'
-  | 'food'
-  | 'nature'
   | 'body'
+  | 'food'
+  | 'home'
+  | 'clothing'
   | 'colors'
   | 'animals'
+  | 'nature'
+  | 'weather'
   | 'places'
   | 'time'
-  | 'verbs';
+  | 'transport'
+  | 'verbs'
+  | 'adjectives'
+  | 'emotions'
+  | 'work'
+  | 'health'
+  | 'shopping'
+  | 'directions';
 
 export interface Category {
   id: CategoryId;

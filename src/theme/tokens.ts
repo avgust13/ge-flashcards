@@ -17,6 +17,10 @@ export const theme = {
     warnSoft: '#FFF4D9',
     blue: '#3B82F6',
     blueSoft: '#E7F0FE',
+    purple: '#8B5CF6',
+    purpleSoft: '#EFE9FE',
+    gold: '#D4A017',
+    goldSoft: '#FBF1D7',
   },
   fonts: {
     ui: '"Nunito", system-ui, -apple-system, "Segoe UI", sans-serif',

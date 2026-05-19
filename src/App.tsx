@@ -4,6 +4,7 @@ import { InstallPrompt } from './components/install/InstallPrompt';
 import { AlphabetSession } from './screens/AlphabetSession';
 import { CardSession } from './screens/CardSession';
 import { HomeScreen } from './screens/HomeScreen';
+import { LevelsScreen } from './screens/LevelsScreen';
 import { LoadingScreen } from './screens/LoadingScreen';
 import { SelectionScreen } from './screens/SelectionScreen';
 import { SettingsScreen } from './screens/SettingsScreen';
@@ -20,6 +21,7 @@ function Gate() {
     <SessionProvider>
       <Routes>
         <Route path="/" element={<HomeScreen />} />
+        <Route path="/levels" element={<LevelsScreen />} />
         <Route path="/select/:mode" element={<SelectionScreen />} />
         <Route path="/session/flash" element={<CardSession />} />
         <Route path="/session/alpha" element={<AlphabetSession />} />

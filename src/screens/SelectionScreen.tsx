@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { CATEGORIES, WORDS } from '../data';
+import { LEVELS } from '../data/levels';
 import type { CategoryId, Mode, Word } from '../types';
 import { Chip } from '../components/ui/Chip';
 import { Icon } from '../components/ui/Icon';
@@ -10,6 +11,7 @@ import { ScreenHeader } from '../components/ui/ScreenHeader';
 import { SectionLabel } from '../components/ui/SectionLabel';
 import { useSession } from '../state/SessionContext';
 import { shuffle } from '../utils/shuffle';
+import { LevelChip } from './levels/LevelChip';
 import { BrushAxis } from './selection/BrushAxis';
 import { LegendDot } from './selection/LegendDot';
 import { MixToggle } from './selection/MixToggle';
@@ -105,8 +107,15 @@ export function SelectionScreen() {
   const navigate = useNavigate();
   const theme = useTheme();
   const { mode: modeParam } = useParams<{ mode: string }>();
+  const [searchParams] = useSearchParams();
   const mode: Mode = modeParam === 'alpha' ? 'alpha' : 'flash';
   const { startSession } = useSession();
+
+  const levelParam = searchParams.get('level');
+  const levelId =
+    levelParam !== null && /^\d+$/.test(levelParam) && Number(levelParam) >= 0 && Number(levelParam) < LEVELS.length
+      ? Number(levelParam)
+      : null;
 
   const [cat, setCat] = useState<CategoryId>('all');
   const [range, setRange] = useState<[number, number]>([0, 0.6]);
@@ -114,16 +123,19 @@ export function SelectionScreen() {
   const [mix, setMix] = useState(true);
 
   const pool = useMemo<Word[]>(() => {
-    const arr = cat === 'all' ? WORDS : WORDS.filter((w) => w.cat === cat);
+    let arr = WORDS;
+    if (levelId !== null) arr = arr.filter((w) => w.level === levelId);
+    if (cat !== 'all') arr = arr.filter((w) => w.cat === cat);
     return [...arr].sort((a, b) => a.correct - b.correct);
-  }, [cat]);
+  }, [cat, levelId]);
 
   const catCounts = useMemo<Record<string, number>>(() => {
-    const out: Record<string, number> = { all: WORDS.length };
+    const source = levelId !== null ? WORDS.filter((w) => w.level === levelId) : WORDS;
+    const out: Record<string, number> = { all: source.length };
     for (const c of CATEGORIES) if (c.id !== 'all') out[c.id] = 0;
-    for (const w of WORDS) out[w.cat] = (out[w.cat] || 0) + 1;
+    for (const w of source) out[w.cat] = (out[w.cat] || 0) + 1;
     return out;
-  }, []);
+  }, [levelId]);
 
   const selected = useMemo<Word[]>(() => {
     const lo = Math.floor(range[0] * pool.length);
@@ -158,9 +170,32 @@ export function SelectionScreen() {
 
   return (
     <Screen>
-      <ScreenHeader title={modeTitle} onBack={() => navigate('/')} />
+      <ScreenHeader
+        title={modeTitle}
+        onBack={() => navigate(levelId !== null ? '/levels' : '/')}
+      />
 
       <Scroll>
+        <SectionLabel style={{ padding: '8px 20px 6px' }}>Level</SectionLabel>
+        <ChipRow>
+          <LevelChip
+            label="All"
+            color={theme.colors.ink}
+            active={levelId === null}
+            onClick={() => navigate(`/select/${mode}`)}
+          />
+          {LEVELS.map((L) => (
+            <LevelChip
+              key={L.id}
+              label={`L${L.id} · ${L.name}`}
+              color={L.color}
+              tint={L.tint}
+              active={levelId === L.id}
+              onClick={() => navigate(`/select/${mode}?level=${L.id}`)}
+            />
+          ))}
+        </ChipRow>
+
         <SectionLabel style={{ padding: '8px 20px 6px' }}>Category</SectionLabel>
         <ChipRow>
           {CATEGORIES.map((c) => (

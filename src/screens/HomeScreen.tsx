@@ -5,6 +5,8 @@ import { SectionLabel } from '../components/ui/SectionLabel';
 import { StatCard } from './home/StatCard';
 import { ModeCard } from './home/ModeCard';
 import { useWordsLoad } from '../state/WordsContext';
+import { WORDS } from '../data';
+import { CURRENT_LEVEL_ID, LEVELS, levelStats } from '../data/levels';
 import type { Mode } from '../types';
 
 const stats = { streak: 12, mastered: 184, learning: 47 };
@@ -80,6 +82,112 @@ const GoalCard = styled.div`
   box-shadow: ${({ theme }) => theme.shadow};
 `;
 
+const JourneyCard = styled.button`
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border: none;
+  background: #fff;
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: ${({ theme }) => theme.shadow};
+  font-family: ${({ theme }) => theme.fonts.ui};
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 12px;
+`;
+
+const JourneyStripe = styled.div<{ $gradient: string }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: ${({ $gradient }) => $gradient};
+`;
+
+const JourneyRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+const JourneyBadge = styled.div<{ $color: string; $tint: string }>`
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: ${({ $tint }) => $tint};
+  color: ${({ $color }) => $color};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 16px;
+  flex-shrink: 0;
+`;
+
+const JourneyMeta = styled.div`
+  flex: 1;
+  min-width: 0;
+`;
+
+const JourneyEyebrow = styled.div`
+  font-size: 11px;
+  font-weight: 800;
+  color: ${({ theme }) => theme.colors.inkMute};
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+`;
+
+const JourneyName = styled.div`
+  font-size: 16px;
+  font-weight: 900;
+  color: ${({ theme }) => theme.colors.ink};
+`;
+
+const JourneyArrow = styled.div`
+  color: ${({ theme }) => theme.colors.inkMute};
+  display: flex;
+  align-items: center;
+`;
+
+const SegmentBar = styled.div`
+  display: flex;
+  gap: 4px;
+  margin-top: 12px;
+`;
+
+const Segment = styled.div`
+  flex: 1;
+  height: 10px;
+  border-radius: 99px;
+  background: #F3EBD8;
+  position: relative;
+  overflow: hidden;
+`;
+
+const SegmentFill = styled.div<{ $color: string; $pct: number }>`
+  width: ${({ $pct }) => $pct}%;
+  height: 100%;
+  background: ${({ $color }) => $color};
+  border-radius: 99px;
+  transition: width 0.5s;
+`;
+
+const JourneyFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.inkSoft};
+`;
+
+const JourneyPct = styled.span<{ $color: string }>`
+  color: ${({ $color }) => $color};
+  font-weight: 900;
+`;
+
 const GoalRow = styled.div`
   display: flex;
   align-items: center;
@@ -120,6 +228,10 @@ export function HomeScreen() {
   const navigate = useNavigate();
   const theme = useTheme();
   const { wordCount } = useWordsLoad();
+
+  const journeyLevel = LEVELS[CURRENT_LEVEL_ID];
+  const journeyStats = LEVELS.map((l) => levelStats(l.id, WORDS));
+  const currStats = journeyStats[CURRENT_LEVEL_ID];
 
   const onPick = (mode: Mode) => navigate(`/select/${mode}`);
 
@@ -166,6 +278,48 @@ export function HomeScreen() {
           extra="33 letters · Mkhedruli"
           onClick={() => onPick('alpha')}
         />
+
+        <SectionLabel style={{ marginTop: 18 }}>Your journey</SectionLabel>
+        <JourneyCard type="button" onClick={() => navigate('/levels')}>
+          <JourneyStripe
+            $gradient={`linear-gradient(to right, ${LEVELS.map((l) => l.color).join(', ')})`}
+          />
+          <JourneyRow>
+            <JourneyBadge $color={journeyLevel.color} $tint={journeyLevel.tint}>
+              L{journeyLevel.id}
+            </JourneyBadge>
+            <JourneyMeta>
+              <JourneyEyebrow>Currently on</JourneyEyebrow>
+              <JourneyName>{journeyLevel.name}</JourneyName>
+            </JourneyMeta>
+            <JourneyArrow>
+              <Icon name="arrow" size={20} />
+            </JourneyArrow>
+          </JourneyRow>
+
+          <SegmentBar>
+            {LEVELS.map((L, i) => {
+              const s = journeyStats[L.id];
+              const isPast = i < CURRENT_LEVEL_ID;
+              const isCurr = i === CURRENT_LEVEL_ID;
+              const pct = isPast ? 100 : isCurr ? s.progress * 100 : 0;
+              return (
+                <Segment key={L.id}>
+                  <SegmentFill $color={L.color} $pct={pct} />
+                </Segment>
+              );
+            })}
+          </SegmentBar>
+
+          <JourneyFooter>
+            <span>
+              {currStats.mastered} of {currStats.total} mastered this level
+            </span>
+            <JourneyPct $color={journeyLevel.color}>
+              {Math.round(currStats.progress * 100)}%
+            </JourneyPct>
+          </JourneyFooter>
+        </JourneyCard>
 
         <SectionLabel style={{ marginTop: 18 }}>Today's goal</SectionLabel>
         <GoalCard>

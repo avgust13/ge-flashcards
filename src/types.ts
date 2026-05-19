@@ -42,6 +42,7 @@ export interface Word {
   correct: number;
   seen: number;
   isSeed: boolean;
+  level: number; // 0..4
 }
 
 export type Mode = 'flash' | 'alpha';

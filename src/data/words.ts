@@ -1,4 +1,5 @@
 import type { Word } from '../types';
+import { LEVELS } from './levels';
 
 export const WORDS: Word[] = [];
 
@@ -28,6 +29,7 @@ export async function loadWords(
 
   if (!reader) {
     const data = (await response.json()) as Word[];
+    backfillLevels(data);
     WORDS.splice(0, WORDS.length, ...data);
     onProgress?.({ loaded: total || 1, total: total || 1 });
     return WORDS;
@@ -50,6 +52,17 @@ export async function loadWords(
     offset += c.length;
   }
   const data = JSON.parse(new TextDecoder().decode(buf)) as Word[];
+  backfillLevels(data);
   WORDS.splice(0, WORDS.length, ...data);
   return WORDS;
+}
+
+function backfillLevels(data: Word[]): void {
+  for (let i = 0; i < data.length; i++) {
+    const w = data[i];
+    if (w.level == null) {
+      const found = LEVELS.find((l) => i >= l.range[0] && i < l.range[1]);
+      w.level = found ? found.id : LEVELS.length - 1;
+    }
+  }
 }

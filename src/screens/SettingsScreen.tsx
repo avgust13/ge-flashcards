@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Icon } from '../components/ui/Icon';
 import { Pill } from '../components/ui/Pill';
 import { ScreenHeader } from '../components/ui/ScreenHeader';
+import { clearStats } from '../data/stats';
 import { useWordsLoad } from '../state/WordsContext';
 
 const Screen = styled.div`
@@ -57,6 +58,17 @@ const IconBadge = styled.div`
   background: ${({ theme }) => theme.colors.blueSoft};
   color: ${({ theme }) => theme.colors.blue};
   flex: 0 0 auto;
+`;
+
+const DangerIconBadge = styled(IconBadge)`
+  background: ${({ theme }) => theme.colors.dangerSoft};
+  color: ${({ theme }) => theme.colors.danger};
+`;
+
+const RowDivider = styled.div`
+  height: 1px;
+  background: ${({ theme }) => theme.colors.line};
+  margin: 4px 0;
 `;
 
 const Title = styled.div`
@@ -137,6 +149,7 @@ export function SettingsScreen() {
   const navigate = useNavigate();
   const { reloadWords, reloading, error } = useWordsLoad();
   const [status, setStatus] = useState('');
+  const [resetStatus, setResetStatus] = useState('');
 
   const onRedownload = async () => {
     setStatus('');
@@ -145,6 +158,18 @@ export function SettingsScreen() {
       setStatus('Words library is up to date.');
     } catch {
       setStatus('');
+    }
+  };
+
+  const onResetProgress = async () => {
+    if (!window.confirm('Reset all learning progress? This cannot be undone.')) return;
+    setResetStatus('');
+    clearStats();
+    try {
+      await reloadWords();
+      setResetStatus('Progress has been reset.');
+    } catch {
+      setResetStatus('Progress reset locally. Reload the app to refresh the library.');
     }
   };
 
@@ -173,6 +198,26 @@ export function SettingsScreen() {
             <Action>
               <Pill kind="primary" onClick={onRedownload} disabled={reloading}>
                 {reloading ? 'Updating...' : 'Update'}
+              </Pill>
+            </Action>
+          </SettingRow>
+          <RowDivider />
+          <SettingRow>
+            <Meta>
+              <DangerIconBadge>
+                <Icon name="close" size={20} />
+              </DangerIconBadge>
+              <div>
+                <Title>Progress</Title>
+                <Desc>
+                  Reset your learning stats. All words will start from zero.
+                </Desc>
+                {resetStatus && <Message $isError={false}>{resetStatus}</Message>}
+              </div>
+            </Meta>
+            <Action>
+              <Pill kind="ghost" onClick={onResetProgress} disabled={reloading}>
+                Reset
               </Pill>
             </Action>
           </SettingRow>

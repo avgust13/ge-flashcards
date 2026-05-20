@@ -6,8 +6,9 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { loadWords } from '../data/words';
+import { loadWords, WORDS } from '../data/words';
 import { loadCategories } from '../data/categories';
+import { applyStatsToWords, loadStats } from '../data/stats';
 
 interface WordsState {
   ready: boolean;
@@ -38,6 +39,7 @@ export function WordsProvider({ children }: { children: ReactNode }) {
       },
       signal,
     );
+    applyStatsToWords(WORDS, loadStats());
     setWordCount(words.length);
   };
 
@@ -67,6 +69,7 @@ export function WordsProvider({ children }: { children: ReactNode }) {
         undefined,
         true,
       );
+      applyStatsToWords(WORDS, loadStats());
       setWordCount(words.length);
     } catch (e) {
       setError((e as Error).message ?? 'Failed to re-download words.json');

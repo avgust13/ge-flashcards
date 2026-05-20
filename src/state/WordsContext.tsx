@@ -3,6 +3,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from 'react';
@@ -29,11 +30,13 @@ export function WordsProvider({ children }: { children: ReactNode }) {
   const [total, setTotal] = useState(0);
   const [wordCount, setWordCount] = useState(0);
   const [reloading, setReloading] = useState(false);
+  const totalRef = useRef(0);
 
   const loadInitial = async (signal: AbortSignal) => {
     await loadCategories(signal);
     const words = await loadWords(
       ({ loaded, total }) => {
+        totalRef.current = total;
         setLoaded(loaded);
         setTotal(total);
       },
@@ -48,6 +51,10 @@ export function WordsProvider({ children }: { children: ReactNode }) {
     (async () => {
       try {
         await loadInitial(controller.signal);
+        if (controller.signal.aborted) return;
+        if (totalRef.current > 0) setLoaded(totalRef.current);
+        await new Promise((resolve) => setTimeout(resolve, 400));
+        if (controller.signal.aborted) return;
         setReady(true);
       } catch (e) {
         if ((e as Error).name === 'AbortError') return;

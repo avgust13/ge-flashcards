@@ -21,6 +21,7 @@ const Screen = styled.div`
   font-family: ${({ theme }) => theme.fonts.ui};
   color: ${({ theme }) => theme.colors.ink};
   min-height: 100dvh;
+  overflow-y: auto;
 `;
 
 const HeaderRow = styled.div`
@@ -58,17 +59,13 @@ const Container = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  flex: 1;
-  min-height: 0;
 `;
 
 const Body = styled.div`
   padding: 18px 20px 8px;
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  min-height: 0;
 `;
 
 const shakeAnim = keyframes`
@@ -102,9 +99,6 @@ const Footer = styled.div`
   padding: 8px 20px 14px;
 `;
 
-const FooterPlaceholder = styled.span`
-  color: ${({ theme }) => theme.colors.inkMute};
-`;
 
 export function AlphabetSession() {
   const navigate = useNavigate();
@@ -239,27 +233,22 @@ export function AlphabetSession() {
           <TranslationCard ru={word.ru} audio={word.audio} solved={solved} />
         </WordCard>
 
-        <TileKeyboard options={options} onTap={tap} onHint={hint} solved={solved} />
+        <TileKeyboard options={options} onTap={tap} onHint={hint} solved={solved} hint={solved ? undefined : 'Fill all letters to continue'} />
       </Body>
 
-      <Footer>
-        <Pill
-          kind={solved ? 'success' : 'ghost'}
-          size="lg"
-          onClick={solved ? next : undefined}
-          disabled={!solved}
-          style={{ width: '100%' }}
-        >
-          {solved ? (
-            <>
-              <Icon name="check" size={18} />
-              <span>Next word</span>
-            </>
-          ) : (
-            <FooterPlaceholder>Fill all letters to continue</FooterPlaceholder>
-          )}
-        </Pill>
-      </Footer>
+      {solved && (
+        <Footer>
+          <Pill
+            kind="success"
+            size="lg"
+            onClick={next}
+            style={{ width: '100%' }}
+          >
+            <Icon name="check" size={18} />
+            <span>Next word</span>
+          </Pill>
+        </Footer>
+      )}
       </Container>
     </Screen>
   );

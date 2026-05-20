@@ -6,6 +6,7 @@ interface Props {
   onTap: (ru: string) => void;
   onHint: () => void;
   solved: boolean;
+  hint?: string;
 }
 
 const Card = styled.div`
@@ -28,6 +29,12 @@ const Label = styled.div`
   color: ${({ theme }) => theme.colors.inkMute};
   letter-spacing: 1.3px;
   text-transform: uppercase;
+`;
+
+const Hint = styled.div`
+  font-size: 11px;
+  color: ${({ theme }) => theme.colors.inkMute};
+  margin-top: 6px;
 `;
 
 const HintBtn = styled.button`
@@ -73,11 +80,14 @@ const Tile = styled.button`
   }
 `;
 
-export function TileKeyboard({ options, onTap, onHint, solved }: Props) {
+export function TileKeyboard({ options, onTap, onHint, solved, hint }: Props) {
   return (
     <Card>
       <Header>
-        <Label>Pick the Russian letter</Label>
+        <div>
+          <Label>Pick the Russian letter</Label>
+          {hint && <Hint>{hint}</Hint>}
+        </div>
         <HintBtn onClick={onHint} disabled={solved}>
           <Icon name="bulb" size={14} stroke={2.2} />
           Hint

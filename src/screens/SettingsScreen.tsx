@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import { Icon } from '../components/ui/Icon';
 import { Pill } from '../components/ui/Pill';
 import { ScreenHeader } from '../components/ui/ScreenHeader';
+import { IosInstallSheet } from '../components/install/IosInstallSheet';
 import { clearDaily, clearStats } from '../data/stats';
+import { useInstallPrompt } from '../hooks/useInstallPrompt';
 import { useWordsLoad } from '../state/WordsContext';
 
 const Screen = styled.div`
@@ -148,8 +150,22 @@ const FooterLink = styled.a`
 export function SettingsScreen() {
   const navigate = useNavigate();
   const { reloadWords, reloading, error } = useWordsLoad();
+  const { canShowSettings, platform, install } = useInstallPrompt();
   const [status, setStatus] = useState('');
   const [resetStatus, setResetStatus] = useState('');
+  const [showIosSheet, setShowIosSheet] = useState(false);
+
+  const onInstallClick = () => {
+    if (platform === 'ios') setShowIosSheet(true);
+    else if (platform === 'native') void install();
+  };
+
+  const installDesc =
+    platform === 'ios'
+      ? 'Add Flashcards to your iPhone home screen.'
+      : platform === 'native'
+        ? 'Get a standalone icon on your home screen.'
+        : 'Open in iPhone, iPad or Android to install.';
 
   const onRedownload = async () => {
     setStatus('');
@@ -202,6 +218,31 @@ export function SettingsScreen() {
               </Pill>
             </Action>
           </SettingRow>
+          {canShowSettings && (
+            <>
+              <RowDivider />
+              <SettingRow>
+                <Meta>
+                  <IconBadge>
+                    <Icon name="play" size={20} />
+                  </IconBadge>
+                  <div>
+                    <Title>Install app</Title>
+                    <Desc>{installDesc}</Desc>
+                  </div>
+                </Meta>
+                <Action>
+                  <Pill
+                    kind="ghost"
+                    onClick={onInstallClick}
+                    disabled={platform === 'other'}
+                  >
+                    Install
+                  </Pill>
+                </Action>
+              </SettingRow>
+            </>
+          )}
           <RowDivider />
           <SettingRow>
             <Meta>
@@ -240,6 +281,7 @@ export function SettingsScreen() {
           <Icon name="github" size={20} />
         </FooterLink>
       </Footer>
+      <IosInstallSheet open={showIosSheet} onClose={() => setShowIosSheet(false)} />
     </Screen>
   );
 }

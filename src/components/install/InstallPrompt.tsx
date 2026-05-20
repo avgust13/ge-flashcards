@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useInstallPrompt } from '../../hooks/useInstallPrompt';
 import { Icon } from '../ui/Icon';
+import { IosInstallSheet } from './IosInstallSheet';
 
 const Bar = styled.div`
   position: fixed;
@@ -62,18 +64,42 @@ const CloseBtn = styled.button`
 `;
 
 export function InstallPrompt() {
-  const { canInstall, install, dismiss } = useInstallPrompt();
-  if (!canInstall) return null;
+  const { canInstall, platform, install, dismiss } = useInstallPrompt();
+  const [showIosSheet, setShowIosSheet] = useState(false);
+
+  const onPrimary = () => {
+    if (platform === 'ios') {
+      setShowIosSheet(true);
+    } else {
+      void install();
+    }
+  };
+
+  const closeIosSheet = () => setShowIosSheet(false);
+
   return (
-    <Bar role="dialog" aria-label="Install Georgian Flashcards">
-      <Text>
-        <Title>Install Georgian Flashcards</Title>
-        <Sub>Add to your home screen for the full app experience</Sub>
-      </Text>
-      <InstallBtn onClick={install}>Install</InstallBtn>
-      <CloseBtn onClick={dismiss} aria-label="Dismiss">
-        <Icon name="close" size={16} />
-      </CloseBtn>
-    </Bar>
+    <>
+      {canInstall && (
+        <Bar role="dialog" aria-label="Install Georgian Flashcards">
+          <Text>
+            <Title>
+              {platform === 'ios' ? 'Install on iPhone' : 'Install Georgian Flashcards'}
+            </Title>
+            <Sub>
+              {platform === 'ios'
+                ? 'Add to your home screen via the Share menu'
+                : 'Add to your home screen for the full app experience'}
+            </Sub>
+          </Text>
+          <InstallBtn onClick={onPrimary}>
+            {platform === 'ios' ? 'How' : 'Install'}
+          </InstallBtn>
+          <CloseBtn onClick={dismiss} aria-label="Dismiss">
+            <Icon name="close" size={16} />
+          </CloseBtn>
+        </Bar>
+      )}
+      <IosInstallSheet open={showIosSheet} onClose={closeIosSheet} />
+    </>
   );
 }

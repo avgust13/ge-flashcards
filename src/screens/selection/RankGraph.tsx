@@ -31,7 +31,9 @@ export function RankGraph({ words, range, onRange }: Props) {
       for (let i = 0; i < samples; i++) {
         const t = i / (samples - 1);
         const idx = Math.min(words.length - 1, Math.floor(t * words.length));
-        pts.push([t, words[idx].correct]);
+        const c = words[idx].correct;
+        const v = typeof c === 'number' && Number.isFinite(c) ? Math.max(0, Math.min(1, c)) : 0;
+        pts.push([t, v]);
       }
     } else {
       pts.push([0, 0], [1, 0]);

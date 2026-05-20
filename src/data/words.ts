@@ -64,5 +64,19 @@ function backfillLevels(data: Word[]): void {
       const found = LEVELS.find((l) => i >= l.range[0] && i < l.range[1]);
       w.level = found ? found.id : LEVELS.length - 1;
     }
+    w.correct = sanitizeCorrect(w.correct);
+    w.seen = sanitizeSeen(w.seen);
   }
+}
+
+function sanitizeCorrect(v: unknown): number {
+  if (typeof v !== 'number' || !Number.isFinite(v)) return 0;
+  if (v < 0) return 0;
+  if (v > 1) return 1;
+  return v;
+}
+
+function sanitizeSeen(v: unknown): number {
+  if (typeof v !== 'number' || !Number.isFinite(v) || v < 0) return 0;
+  return v;
 }

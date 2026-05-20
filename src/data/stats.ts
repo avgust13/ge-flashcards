@@ -14,13 +14,34 @@ export interface WordStat {
 
 export type StatsMap = Record<number, WordStat>;
 
+function sanitizeStat(v: unknown): WordStat | null {
+  if (!v || typeof v !== 'object') return null;
+  const s = v as Partial<WordStat>;
+  const correct =
+    typeof s.correct === 'number' && Number.isFinite(s.correct)
+      ? Math.max(0, Math.min(1, s.correct))
+      : 0;
+  const seen =
+    typeof s.seen === 'number' && Number.isFinite(s.seen) && s.seen >= 0 ? s.seen : 0;
+  const lastSeen =
+    typeof s.lastSeen === 'number' && Number.isFinite(s.lastSeen) ? s.lastSeen : 0;
+  return { correct, seen, lastSeen };
+}
+
 export function loadStats(): StatsMap {
   try {
     const raw = localStorage.getItem(KEY);
     if (!raw) return {};
     const parsed = JSON.parse(raw) as unknown;
     if (!parsed || typeof parsed !== 'object') return {};
-    return parsed as StatsMap;
+    const out: StatsMap = {};
+    for (const [k, v] of Object.entries(parsed as Record<string, unknown>)) {
+      const id = Number(k);
+      if (!Number.isFinite(id)) continue;
+      const stat = sanitizeStat(v);
+      if (stat) out[id] = stat;
+    }
+    return out;
   } catch {
     return {};
   }
@@ -43,10 +64,11 @@ export function clearStats(): void {
 }
 
 export function updateStat(prev: WordStat | undefined, right: boolean): WordStat {
-  const base: WordStat = prev ?? { correct: 0, seen: 0, lastSeen: 0 };
+  const base: WordStat = sanitizeStat(prev) ?? { correct: 0, seen: 0, lastSeen: 0 };
   const target = right ? 1 : 0;
+  const next = base.correct + EMA_ALPHA * (target - base.correct);
   return {
-    correct: base.correct + EMA_ALPHA * (target - base.correct),
+    correct: Math.max(0, Math.min(1, next)),
     seen: base.seen + 1,
     lastSeen: Date.now(),
   };

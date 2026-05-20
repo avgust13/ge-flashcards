@@ -30,13 +30,16 @@ const High = styled.span`
   color: ${({ theme }) => theme.colors.success};
 `;
 
+function safePct(v: number | undefined): number {
+  if (typeof v !== 'number' || !Number.isFinite(v)) return 0;
+  return Math.round(Math.max(0, Math.min(1, v)) * 100);
+}
+
 export function BrushAxis({ range, pool }: Props) {
   const lo = Math.floor(range[0] * pool.length);
   const hi = Math.ceil(range[1] * pool.length);
-  const loW = pool[lo] ? Math.round(pool[lo].correct * 100) : 0;
-  const hiW = pool[Math.max(0, hi - 1)]
-    ? Math.round(pool[Math.max(0, hi - 1)].correct * 100)
-    : 0;
+  const loW = safePct(pool[lo]?.correct);
+  const hiW = safePct(pool[Math.max(0, hi - 1)]?.correct);
   return (
     <Row>
       <Low>{loW}%</Low>

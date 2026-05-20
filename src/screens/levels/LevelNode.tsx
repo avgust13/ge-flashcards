@@ -1,12 +1,9 @@
 import styled from 'styled-components';
 import type { Level, LevelStats } from '../../data/levels';
-import { LockIcon } from './LockIcon';
 
 interface Props {
   level: Level;
   stats: LevelStats;
-  unlocked: boolean;
-  active: boolean;
   isLast: boolean;
   onPick: () => void;
 }
@@ -27,13 +24,13 @@ const Rail = styled.div`
   align-items: center;
 `;
 
-const Dot = styled.div<{ $color: string; $dim: boolean; $active: boolean; $line: string }>`
+const Dot = styled.div<{ $color: string }>`
   width: 36px;
   height: 36px;
   border-radius: 18px;
   margin-top: 14px;
   z-index: 1;
-  background: ${({ $color, $dim }) => ($dim ? '#F3EBD8' : $color)};
+  background: ${({ $color }) => $color};
   color: #fff;
   display: flex;
   align-items: center;
@@ -41,23 +38,21 @@ const Dot = styled.div<{ $color: string; $dim: boolean; $active: boolean; $line:
   font-family: ${({ theme }) => theme.fonts.ui};
   font-weight: 900;
   font-size: 15px;
-  box-shadow: ${({ $active, $color, $line }) =>
-    $active ? `0 0 0 6px ${$color}33` : `0 2px 0 ${$line}`};
-  opacity: ${({ $dim }) => ($dim ? 0.6 : 1)};
+  box-shadow: 0 2px 0 #ECE2CC;
 `;
 
-const Connector = styled.div<{ $color: string; $line: string; $dim: boolean }>`
+const Connector = styled.div<{ $color: string }>`
   flex: 1;
   width: 3px;
   margin-top: -2px;
-  background: ${({ $color, $line, $dim }) =>
-    `repeating-linear-gradient(to bottom, ${$dim ? $line : $color}55 0 4px, transparent 4px 8px)`};
+  background: ${({ $color }) =>
+    `repeating-linear-gradient(to bottom, ${$color}55 0 4px, transparent 4px 8px)`};
 `;
 
-const Card = styled.button<{ $color: string; $dim: boolean; $active: boolean }>`
+const Card = styled.button`
   flex: 1;
   text-align: left;
-  cursor: ${({ $dim }) => ($dim ? 'default' : 'pointer')};
+  cursor: pointer;
   border: none;
   background: #fff;
   border-radius: 20px;
@@ -65,24 +60,7 @@ const Card = styled.button<{ $color: string; $dim: boolean; $active: boolean }>`
   margin: 8px 0;
   box-shadow: ${({ theme }) => theme.shadow};
   font-family: ${({ theme }) => theme.fonts.ui};
-  opacity: ${({ $dim }) => ($dim ? 0.55 : 1)};
   position: relative;
-  outline: ${({ $active, $color }) => ($active ? `2px solid ${$color}` : 'none')};
-  outline-offset: ${({ $active }) => ($active ? '-2px' : '0')};
-`;
-
-const HereTag = styled.div<{ $color: string }>`
-  position: absolute;
-  top: -8px;
-  right: 12px;
-  background: ${({ $color }) => $color};
-  color: #fff;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 99px;
 `;
 
 const HeaderRow = styled.div`
@@ -185,29 +163,17 @@ const GoalText = styled.span`
   font-style: italic;
 `;
 
-export function LevelNode({ level, stats, unlocked, active, isLast, onPick }: Props) {
-  const dim = !unlocked;
+export function LevelNode({ level, stats, isLast, onPick }: Props) {
   const themesShown = level.themes.slice(0, 6);
   const extraThemes = level.themes.length - 6;
   return (
     <Row>
       <Rail>
-        <Dot $color={level.color} $dim={dim} $active={active} $line="#ECE2CC">
-          {dim ? <LockIcon /> : `L${level.id}`}
-        </Dot>
-        {!isLast && <Connector $color={level.color} $line="#ECE2CC" $dim={dim} />}
+        <Dot $color={level.color}>L{level.id}</Dot>
+        {!isLast && <Connector $color={level.color} />}
       </Rail>
 
-      <Card
-        type="button"
-        onClick={onPick}
-        disabled={dim}
-        $color={level.color}
-        $dim={dim}
-        $active={active}
-      >
-        {active && <HereTag $color={level.color}>You are here</HereTag>}
-
+      <Card type="button" onClick={onPick}>
         <HeaderRow>
           <Name>{level.name}</Name>
           <RangePill $color={level.color} $tint={level.tint}>

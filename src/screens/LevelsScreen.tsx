@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ScreenHeader } from '../components/ui/ScreenHeader';
 import { Icon } from '../components/ui/Icon';
 import { WORDS } from '../data';
-import { CURRENT_LEVEL_ID, LEVELS, levelStats } from '../data/levels';
+import { LEVELS, levelStats } from '../data/levels';
 import { JourneyRing } from './levels/JourneyRing';
 import { LevelNode } from './levels/LevelNode';
 
@@ -45,15 +45,10 @@ const Eyebrow = styled.div`
   color: ${({ theme }) => theme.colors.inkMute};
 `;
 
-const CurrentName = styled.div<{ $color: string }>`
-  font-size: 20px;
-  font-weight: 900;
-  color: ${({ $color }) => $color};
-`;
-
 const MasteredLine = styled.div`
-  font-size: 12px;
-  color: ${({ theme }) => theme.colors.inkSoft};
+  font-size: 18px;
+  font-weight: 900;
+  color: ${({ theme }) => theme.colors.ink};
   margin-top: 2px;
 `;
 
@@ -94,7 +89,6 @@ const EndLabel = styled.div`
 export function LevelsScreen() {
   const navigate = useNavigate();
   const theme = useTheme();
-  const currentLevelId = CURRENT_LEVEL_ID;
 
   const stats = useMemo(() => LEVELS.map((l) => levelStats(l.id, WORDS)), []);
 
@@ -108,28 +102,15 @@ export function LevelsScreen() {
     return { mastered, total };
   }, [stats]);
 
-  const isUnlocked = (id: number) => id <= currentLevelId + 1;
-  const isActive = (id: number) => id === currentLevelId;
-
-  const current = LEVELS[currentLevelId];
-
   return (
     <Screen>
       <ScreenHeader title="Your journey" onBack={() => navigate('/')} />
 
       <SummaryWrap>
         <SummaryCard>
-          <JourneyRing
-            steps={5}
-            mastered={totals.mastered}
-            total={totals.total}
-            currentLevel={currentLevelId}
-          />
+          <JourneyRing steps={5} mastered={totals.mastered} total={totals.total} />
           <SummaryText>
-            <Eyebrow>Currently on</Eyebrow>
-            <CurrentName $color={current.color}>
-              L{currentLevelId} · {current.name}
-            </CurrentName>
+            <Eyebrow>Your journey</Eyebrow>
             <MasteredLine>
               {totals.mastered} / {totals.total} words mastered
             </MasteredLine>
@@ -143,19 +124,10 @@ export function LevelsScreen() {
             key={L.id}
             level={L}
             stats={stats[L.id]}
-            unlocked={isUnlocked(L.id)}
-            active={isActive(L.id)}
             isLast={idx === LEVELS.length - 1}
-            onPick={() => isUnlocked(L.id) && navigate(`/select/flash?level=${L.id}`)}
+            onPick={() => navigate(`/select/flash?level=${L.id}`)}
           />
         ))}
-
-        <EndMarker>
-          <Star>
-            <Icon name="star" size={22} stroke={2.2} color={theme.colors.inkMute} />
-          </Star>
-          <EndLabel>800 words · fluency</EndLabel>
-        </EndMarker>
       </Path>
     </Screen>
   );

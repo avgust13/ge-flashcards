@@ -1,11 +1,10 @@
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 import { LEVELS } from '../../data/levels';
 
 interface Props {
   steps: number;
   mastered: number;
   total: number;
-  currentLevel: number;
 }
 
 const Wrap = styled.div`
@@ -49,8 +48,7 @@ function describeArc(cx: number, cy: number, r: number, startAng: number, endAng
   return `M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2}`;
 }
 
-export function JourneyRing({ steps, mastered, total, currentLevel }: Props) {
-  const theme = useTheme();
+export function JourneyRing({ steps, mastered, total }: Props) {
   const size = 72;
   const r = 28;
   const cx = size / 2;
@@ -60,8 +58,7 @@ export function JourneyRing({ steps, mastered, total, currentLevel }: Props) {
   for (let i = 0; i < steps; i++) {
     const start = -90 + i * (360 / steps) + 2;
     const end = start + arc;
-    const filled = i <= currentLevel;
-    const color = filled ? LEVELS[i].color : theme.colors.line;
+    const color = LEVELS[i].color;
     segs.push(
       <path
         key={i}

@@ -6,7 +6,7 @@ import { StatCard } from './home/StatCard';
 import { ModeCard } from './home/ModeCard';
 import { useWordsLoad } from '../state/WordsContext';
 import { WORDS } from '../data';
-import { CURRENT_LEVEL_ID, LEVELS, globalStats, levelStats } from '../data/levels';
+import { LEVELS, globalStats, levelStats } from '../data/levels';
 import { DAILY_GOAL, getDailyCount } from '../data/stats';
 import type { Mode } from '../types';
 
@@ -109,20 +109,6 @@ const JourneyRow = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-`;
-
-const JourneyBadge = styled.div<{ $color: string; $tint: string }>`
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: ${({ $tint }) => $tint};
-  color: ${({ $color }) => $color};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  font-size: 16px;
-  flex-shrink: 0;
 `;
 
 const JourneyMeta = styled.div`
@@ -229,9 +215,12 @@ export function HomeScreen() {
   const theme = useTheme();
   const { wordCount } = useWordsLoad();
 
-  const journeyLevel = LEVELS[CURRENT_LEVEL_ID];
   const journeyStats = LEVELS.map((l) => levelStats(l.id, WORDS));
-  const currStats = journeyStats[CURRENT_LEVEL_ID];
+  const totals = journeyStats.reduce(
+    (acc, s) => ({ mastered: acc.mastered + s.mastered, total: acc.total + s.total }),
+    { mastered: 0, total: 0 },
+  );
+  const totalPct = totals.total === 0 ? 0 : Math.round((totals.mastered / totals.total) * 100);
   const g = globalStats(WORDS);
 
   const dailyDone = getDailyCount();
@@ -302,12 +291,9 @@ export function HomeScreen() {
             $gradient={`linear-gradient(to right, ${LEVELS.map((l) => l.color).join(', ')})`}
           />
           <JourneyRow>
-            <JourneyBadge $color={journeyLevel.color} $tint={journeyLevel.tint}>
-              L{journeyLevel.id}
-            </JourneyBadge>
             <JourneyMeta>
-              <JourneyEyebrow>Currently on</JourneyEyebrow>
-              <JourneyName>{journeyLevel.name}</JourneyName>
+              <JourneyEyebrow>Overall progress</JourneyEyebrow>
+              <JourneyName>Your journey</JourneyName>
             </JourneyMeta>
             <JourneyArrow>
               <Icon name="arrow" size={20} />
@@ -315,26 +301,18 @@ export function HomeScreen() {
           </JourneyRow>
 
           <SegmentBar>
-            {LEVELS.map((L, i) => {
-              const s = journeyStats[L.id];
-              const isPast = i < CURRENT_LEVEL_ID;
-              const isCurr = i === CURRENT_LEVEL_ID;
-              const pct = isPast ? 100 : isCurr ? s.progress * 100 : 0;
-              return (
-                <Segment key={L.id}>
-                  <SegmentFill $color={L.color} $pct={pct} />
-                </Segment>
-              );
-            })}
+            {LEVELS.map((L) => (
+              <Segment key={L.id}>
+                <SegmentFill $color={L.color} $pct={journeyStats[L.id].progress * 100} />
+              </Segment>
+            ))}
           </SegmentBar>
 
           <JourneyFooter>
             <span>
-              {currStats.mastered} of {currStats.total} mastered this level
+              {totals.mastered} of {totals.total} mastered
             </span>
-            <JourneyPct $color={journeyLevel.color}>
-              {Math.round(currStats.progress * 100)}%
-            </JourneyPct>
+            <JourneyPct $color={theme.colors.primary}>{totalPct}%</JourneyPct>
           </JourneyFooter>
         </JourneyCard>
 

@@ -116,5 +116,3 @@ export function globalStats(words: Word[]): GlobalStats {
   }
   return { explored, learning, mastered };
 }
-
-export const CURRENT_LEVEL_ID = 1;

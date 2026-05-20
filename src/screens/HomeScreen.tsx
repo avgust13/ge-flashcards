@@ -7,6 +7,7 @@ import { ModeCard } from './home/ModeCard';
 import { useWordsLoad } from '../state/WordsContext';
 import { WORDS } from '../data';
 import { CURRENT_LEVEL_ID, LEVELS, levelStats } from '../data/levels';
+import { DAILY_GOAL, getDailyCount } from '../data/stats';
 import type { Mode } from '../types';
 
 const stats = { streak: 12, mastered: 184, learning: 47 };
@@ -213,11 +214,12 @@ const GoalTrack = styled.div`
   overflow: hidden;
 `;
 
-const GoalFill = styled.div`
-  width: 60%;
+const GoalFill = styled.div<{ $pct: number }>`
+  width: ${({ $pct }) => $pct}%;
   height: 100%;
   background: ${({ theme }) => theme.colors.success};
   border-radius: 99px;
+  transition: width 0.5s;
 `;
 
 const Spacer = styled.div`
@@ -232,6 +234,9 @@ export function HomeScreen() {
   const journeyLevel = LEVELS[CURRENT_LEVEL_ID];
   const journeyStats = LEVELS.map((l) => levelStats(l.id, WORDS));
   const currStats = journeyStats[CURRENT_LEVEL_ID];
+
+  const dailyDone = getDailyCount();
+  const dailyPct = Math.min(100, Math.round((dailyDone / DAILY_GOAL) * 100));
 
   const onPick = (mode: Mode) => navigate(`/select/${mode}`);
 
@@ -258,7 +263,20 @@ export function HomeScreen() {
       </Hero>
 
       <Body>
-        <SectionLabel>Practice</SectionLabel>
+        <SectionLabel>Today's goal</SectionLabel>
+        <GoalCard>
+          <GoalRow>
+            <GoalTitle>Go through {DAILY_GOAL} cards</GoalTitle>
+            <GoalCount>
+              {Math.min(dailyDone, DAILY_GOAL)} / {DAILY_GOAL}
+            </GoalCount>
+          </GoalRow>
+          <GoalTrack>
+            <GoalFill $pct={dailyPct} />
+          </GoalTrack>
+        </GoalCard>
+
+        <SectionLabel style={{ marginTop: 18 }}>Practice</SectionLabel>
 
         <ModeCard
           accent={theme.colors.primary}
@@ -321,16 +339,6 @@ export function HomeScreen() {
           </JourneyFooter>
         </JourneyCard>
 
-        <SectionLabel style={{ marginTop: 18 }}>Today's goal</SectionLabel>
-        <GoalCard>
-          <GoalRow>
-            <GoalTitle>Review 20 weak words</GoalTitle>
-            <GoalCount>12 / 20</GoalCount>
-          </GoalRow>
-          <GoalTrack>
-            <GoalFill />
-          </GoalTrack>
-        </GoalCard>
       </Body>
 
       <Spacer />

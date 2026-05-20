@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Icon } from '../components/ui/Icon';
 import { Pill } from '../components/ui/Pill';
 import { ScreenHeader } from '../components/ui/ScreenHeader';
-import { clearStats } from '../data/stats';
+import { clearDaily, clearStats } from '../data/stats';
 import { useWordsLoad } from '../state/WordsContext';
 
 const Screen = styled.div`
@@ -165,6 +165,7 @@ export function SettingsScreen() {
     if (!window.confirm('Reset all learning progress? This cannot be undone.')) return;
     setResetStatus('');
     clearStats();
+    clearDaily();
     try {
       await reloadWords();
       setResetStatus('Progress has been reset.');

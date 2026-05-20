@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Icon } from '../components/ui/Icon';
 import { ProgressBar } from '../components/ui/ProgressBar';
 import { useSession } from '../state/SessionContext';
-import { loadStats, saveStats, updateStat } from '../data/stats';
+import { incrementDaily, loadStats, saveStats, updateStat } from '../data/stats';
 import type { FlashResult } from '../types';
 import { CardSwipeable, type DragState, type ExitDir } from './cards/CardSwipeable';
 import { Confetti } from './cards/Confetti';
@@ -160,6 +160,7 @@ export function CardSession() {
     saveStats(stats);
     word.correct = next.correct;
     word.seen = next.seen;
+    incrementDaily();
 
     const newStreak = right ? streak + 1 : 0;
     setStreak(newStreak);

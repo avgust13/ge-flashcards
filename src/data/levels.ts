@@ -99,4 +99,22 @@ export function levelStats(levelId: number, words: Word[]): LevelStats {
   return { total: slice.length, mastered, learning, weak, progress };
 }
 
+export interface GlobalStats {
+  explored: number;
+  learning: number;
+  mastered: number;
+}
+
+export function globalStats(words: Word[]): GlobalStats {
+  let explored = 0;
+  let learning = 0;
+  let mastered = 0;
+  for (const w of words) {
+    if (w.seen > 0) explored++;
+    if (w.correct > 0.7) mastered++;
+    else if (w.correct > 0.3) learning++;
+  }
+  return { explored, learning, mastered };
+}
+
 export const CURRENT_LEVEL_ID = 1;

@@ -6,11 +6,9 @@ import { StatCard } from './home/StatCard';
 import { ModeCard } from './home/ModeCard';
 import { useWordsLoad } from '../state/WordsContext';
 import { WORDS } from '../data';
-import { CURRENT_LEVEL_ID, LEVELS, levelStats } from '../data/levels';
+import { CURRENT_LEVEL_ID, LEVELS, globalStats, levelStats } from '../data/levels';
 import { DAILY_GOAL, getDailyCount } from '../data/stats';
 import type { Mode } from '../types';
-
-const stats = { streak: 12, mastered: 184, learning: 47 };
 
 const Screen = styled.div`
   flex: 1;
@@ -234,6 +232,7 @@ export function HomeScreen() {
   const journeyLevel = LEVELS[CURRENT_LEVEL_ID];
   const journeyStats = LEVELS.map((l) => levelStats(l.id, WORDS));
   const currStats = journeyStats[CURRENT_LEVEL_ID];
+  const g = globalStats(WORDS);
 
   const dailyDone = getDailyCount();
   const dailyPct = Math.min(100, Math.round((dailyDone / DAILY_GOAL) * 100));
@@ -256,9 +255,9 @@ export function HomeScreen() {
         </HeroRow>
 
         <StatsRow>
-          <StatCard icon="flame" color={theme.colors.primary} label="Day streak" value={stats.streak} />
-          <StatCard icon="check" color={theme.colors.success} label="Mastered" value={stats.mastered} />
-          <StatCard icon="bulb" color={theme.colors.warn} label="Learning" value={stats.learning} />
+          <StatCard icon="cards" color={theme.colors.primary} label="Explored" value={g.explored} />
+          <StatCard icon="check" color={theme.colors.success} label="Mastered" value={g.mastered} />
+          <StatCard icon="bulb" color={theme.colors.warn} label="Learning" value={g.learning} />
         </StatsRow>
       </Hero>
 

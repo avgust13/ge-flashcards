@@ -33,6 +33,28 @@ function loadDismissTs(): number {
   }
 }
 
+// Global state (module-scoped) for browser event caching
+let globalDeferred: BeforeInstallPromptEvent | null = null;
+let globalInstalled = false;
+const listeners = new Set<() => void>();
+
+function notify() {
+  listeners.forEach((l) => l());
+}
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('beforeinstallprompt', (e: Event) => {
+    e.preventDefault();
+    globalDeferred = e as BeforeInstallPromptEvent;
+    notify();
+  });
+  window.addEventListener('appinstalled', () => {
+    globalInstalled = true;
+    globalDeferred = null;
+    notify();
+  });
+}
+
 export interface InstallPromptApi {
   canInstall: boolean;
   canShowSettings: boolean;
@@ -43,27 +65,19 @@ export interface InstallPromptApi {
 }
 
 export function useInstallPrompt(): InstallPromptApi {
-  const [deferred, setDeferred] = useState<BeforeInstallPromptEvent | null>(null);
-  const [installed, setInstalled] = useState(false);
+  const [deferred, setDeferred] = useState<BeforeInstallPromptEvent | null>(globalDeferred);
+  const [installed, setInstalled] = useState<boolean>(() => globalInstalled || isStandalone());
   const [dismissTs, setDismissTs] = useState<number>(() => loadDismissTs());
 
   useEffect(() => {
-    const onBefore = (e: Event) => {
-      e.preventDefault();
-      setDeferred(e as BeforeInstallPromptEvent);
+    const update = () => {
+      setDeferred(globalDeferred);
+      setInstalled(globalInstalled || isStandalone());
     };
-    const onInstalled = () => {
-      setInstalled(true);
-      setDeferred(null);
-    };
-    window.addEventListener('beforeinstallprompt', onBefore);
-    window.addEventListener('appinstalled', onInstalled);
-
-    if (isStandalone()) setInstalled(true);
-
+    listeners.add(update);
+    update(); // synchronize in case of changes
     return () => {
-      window.removeEventListener('beforeinstallprompt', onBefore);
-      window.removeEventListener('appinstalled', onInstalled);
+      listeners.delete(update);
     };
   }, []);
 
@@ -71,8 +85,11 @@ export function useInstallPrompt(): InstallPromptApi {
     if (!deferred) return;
     await deferred.prompt();
     const { outcome } = await deferred.userChoice;
-    if (outcome === 'accepted') setInstalled(true);
-    setDeferred(null);
+    if (outcome === 'accepted') {
+      globalInstalled = true;
+      globalDeferred = null;
+      notify();
+    }
   }, [deferred]);
 
   const dismiss = useCallback(() => {

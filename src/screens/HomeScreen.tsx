@@ -21,7 +21,7 @@ const Screen = styled.div`
 `;
 
 const Hero = styled.div`
-  padding: 16px 20px 8px;
+  padding: 14px 20px 8px;
 `;
 
 const HeroRow = styled.div`

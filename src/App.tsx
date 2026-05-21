@@ -29,7 +29,6 @@ function Gate() {
         <Route path="/summary" element={<SummaryScreen />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <InstallPrompt />
     </SessionProvider>
   );
 }
@@ -41,6 +40,7 @@ export function App() {
       <WordsProvider>
         <Gate />
       </WordsProvider>
+      <InstallPrompt />
     </ThemeProvider>
   );
 }

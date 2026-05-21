@@ -9,13 +9,14 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'Georgian Flashcards',
-        short_name: 'GE Cards',
-        description: 'Learn Georgian → Russian with flashcards and alphabet drills.',
+        name: 'Uchikartuli — учи грузинский',
+        short_name: 'Uchikartuli',
+        description: 'Учи грузинский: карточки слов и алфавит мхедрули.',
         theme_color: '#FF6B47',
         background_color: '#FFF8EE',
         display: 'standalone',
         orientation: 'portrait',
+        lang: 'ru',
         start_url: '/',
         scope: '/',
         icons: [

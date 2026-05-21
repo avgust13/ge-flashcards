@@ -24,7 +24,10 @@ export async function loadWords(
   });
   if (!response.ok) throw new Error(`Failed to load words.json: ${response.status}`);
 
-  const total = Number(response.headers.get('Content-Length')) || 0;
+  // If the server serves the file with Gzip/Brotli compression, the Content-Length header 
+  // is removed by the browser. In this case, use the approximate size of the uncompressed JSON (~63.7 MB).
+  const APPROX_TOTAL = 66849908;
+  const total = Number(response.headers.get('Content-Length')) || APPROX_TOTAL;
   const reader = response.body?.getReader();
 
   if (!reader) {

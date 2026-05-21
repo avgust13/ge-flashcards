@@ -63,7 +63,7 @@ function formatMB(bytes: number): string {
 }
 
 export function LoadingScreen({ loaded, total, error }: Props) {
-  const value = total > 0 ? loaded / total : 0;
+  const value = total > 0 ? Math.min(loaded / total, 1) : 0;
   const pct = Math.round(value * 100);
 
   return (

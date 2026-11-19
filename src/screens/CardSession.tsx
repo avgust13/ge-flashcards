@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Icon } from '../components/ui/Icon';
 import { ProgressBar } from '../components/ui/ProgressBar';
 import { useSession } from '../state/SessionContext';
-import { incrementDaily, loadStats, saveStats, updateStat } from '../data/stats';
+import { recordWordAnswer } from '../data/stats';
 import type { FlashResult } from '../types';
 import { CardSwipeable, type DragState, type ExitDir } from './cards/CardSwipeable';
 import { Confetti } from './cards/Confetti';
@@ -145,7 +145,9 @@ export function CardSession() {
   };
 
   const decide = (right: boolean) => {
-    if (!word) return;
+    // `exiting` stays set until the next card is shown: a second tap or swipe
+    // inside that window must not grade the same card twice.
+    if (!word || exiting) return;
     setExiting(right ? 'right' : 'left');
     setDrag((d) => ({ ...d, active: false }));
     const newResults: FlashResult[] = [
@@ -154,13 +156,7 @@ export function CardSession() {
     ];
     setResults(newResults);
 
-    const stats = loadStats();
-    const next = updateStat(stats[word.id], right);
-    stats[word.id] = next;
-    saveStats(stats);
-    word.correct = next.correct;
-    word.seen = next.seen;
-    incrementDaily();
+    recordWordAnswer(word, right);
 
     const newStreak = right ? streak + 1 : 0;
     setStreak(newStreak);
@@ -198,7 +194,7 @@ export function CardSession() {
   return (
     <Screen>
       <HeaderRow>
-        <IconBtn onClick={() => navigate('/')} aria-label="Close session">
+        <IconBtn onClick={() => navigate('/')} aria-label="Закрыть">
           <Icon name="close" size={20} />
         </IconBtn>
         <ProgressBar value={progress} color={theme.colors.success} />
@@ -245,16 +241,16 @@ export function CardSession() {
       </Stage>
 
       <Actions>
-        <RoundBtn color={theme.colors.danger} onClick={() => decide(false)} aria-label="I didn't know">
+        <RoundBtn color={theme.colors.danger} onClick={() => decide(false)} aria-label="Не знал">
           <svg width="24" height="24" viewBox="0 0 24 24">
             <path d="M6 6l12 12M18 6L6 18" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" />
           </svg>
         </RoundBtn>
         <FlipBtn onClick={() => setFlipped((f) => !f)}>
           <Icon name="refresh" size={16} />
-          {flipped ? 'Hide translation' : 'Show translation'}
+          {flipped ? 'Скрыть перевод' : 'Показать перевод'}
         </FlipBtn>
-        <RoundBtn color={theme.colors.success} onClick={() => decide(true)} aria-label="I knew it">
+        <RoundBtn color={theme.colors.success} onClick={() => decide(true)} aria-label="Знал">
           <svg width="24" height="24" viewBox="0 0 24 24">
             <path
               d="M5 13l4 4 10-10"

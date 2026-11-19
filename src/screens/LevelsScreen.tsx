@@ -104,15 +104,15 @@ export function LevelsScreen() {
 
   return (
     <Screen>
-      <ScreenHeader title="Your journey" onBack={() => navigate('/')} />
+      <ScreenHeader title="Словарь по уровням" onBack={() => navigate('/')} />
 
       <SummaryWrap>
         <SummaryCard>
           <JourneyRing steps={5} mastered={totals.mastered} total={totals.total} />
           <SummaryText>
-            <Eyebrow>Your journey</Eyebrow>
+            <Eyebrow>Словарь</Eyebrow>
             <MasteredLine>
-              {totals.mastered} / {totals.total} words mastered
+              освоено {totals.mastered} из {totals.total}
             </MasteredLine>
           </SummaryText>
         </SummaryCard>

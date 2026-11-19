@@ -80,21 +80,21 @@ export function InstallPrompt() {
   return (
     <>
       {canInstall && (
-        <Bar role="dialog" aria-label="Install Georgian Flashcards">
+        <Bar role="dialog" aria-label="Установить приложение">
           <Text>
             <Title>
-              {platform === 'ios' ? 'Install on iPhone' : 'Install Georgian Flashcards'}
+              {platform === 'ios' ? 'Установить на iPhone' : 'Установить приложение'}
             </Title>
             <Sub>
               {platform === 'ios'
-                ? 'Add to your home screen via the Share menu'
-                : 'Add to your home screen for the full app experience'}
+                ? 'Добавь на главный экран через меню «Поделиться»'
+                : 'Добавь на главный экран — будет как обычное приложение'}
             </Sub>
           </Text>
           <InstallBtn onClick={onPrimary}>
-            {platform === 'ios' ? 'How' : 'Install'}
+            {platform === 'ios' ? 'Как' : 'Установить'}
           </InstallBtn>
-          <CloseBtn onClick={dismiss} aria-label="Dismiss">
+          <CloseBtn onClick={dismiss} aria-label="Скрыть">
             <Icon name="close" size={16} />
           </CloseBtn>
         </Bar>

@@ -62,8 +62,8 @@ export function MixToggle({ on, onToggle }: Props) {
         <Knob $on={on} />
       </Track>
       <Text>
-        <Title>Mix new + review</Title>
-        <Sub>Lean toward weaker words (70/30)</Sub>
+        <Title>Смешать слабые и сильные</Title>
+        <Sub>Больше слабых слов (70/30)</Sub>
       </Text>
     </Btn>
   );

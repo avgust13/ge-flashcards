@@ -1,14 +1,29 @@
+import { useMemo, useSyncExternalStore } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { unlockAudio } from '../audio/player';
 import { Icon } from '../components/ui/Icon';
+import { Pill } from '../components/ui/Pill';
 import { SectionLabel } from '../components/ui/SectionLabel';
-import { StatCard } from './home/StatCard';
+import { UNITS } from '../content/store';
+import {
+  allCards,
+  allDays,
+  cardCount,
+  getCard,
+  getCourse,
+  getDay,
+  getSettings,
+  hasWriteError,
+  today,
+} from '../db/progress';
+import { useProgressVersion } from '../db/useProgress';
+import { loadSavedSession, planDaily } from '../engine/run';
+import { applyUpdate, isUpdateWaiting, subscribeUpdate } from '../pwa';
+import { streak } from '../srs/day';
+import { isAutomatic, unitProgress } from '../srs/mastery';
 import { ModeCard } from './home/ModeCard';
-import { useWordsLoad } from '../state/WordsContext';
-import { WORDS } from '../data';
-import { LEVELS, globalStats, levelStats } from '../data/levels';
-import { DAILY_GOAL, getDailyCount } from '../data/stats';
-import type { Mode } from '../types';
+import { StatCard } from './home/StatCard';
 
 const Screen = styled.div`
   flex: 1;
@@ -18,6 +33,12 @@ const Screen = styled.div`
   font-family: ${({ theme }) => theme.fonts.ui};
   color: ${({ theme }) => theme.colors.ink};
   min-height: 100dvh;
+`;
+
+const Wrap = styled.div`
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
 `;
 
 const Hero = styled.div`
@@ -70,18 +91,55 @@ const StatsRow = styled.div`
 `;
 
 const Body = styled.div`
-  padding: 14px 20px 0;
-  flex: 1;
+  padding: 14px 20px 20px;
 `;
 
-const GoalCard = styled.div`
+const DailyCard = styled.div`
   background: #fff;
-  border-radius: 18px;
-  padding: 16px;
+  border-radius: 22px;
+  padding: 18px;
   box-shadow: ${({ theme }) => theme.shadow};
+  margin-bottom: 18px;
 `;
 
-const JourneyCard = styled.button`
+const DailyTitle = styled.div`
+  font-size: 20px;
+  font-weight: 900;
+`;
+
+const DailySub = styled.div`
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.inkSoft};
+  margin-top: 4px;
+  line-height: 1.4;
+`;
+
+const Track = styled.div`
+  height: 8px;
+  background: #F3EBD8;
+  border-radius: 99px;
+  margin: 14px 0 6px;
+  overflow: hidden;
+`;
+
+const Fill = styled.div<{ $pct: number; $color: string }>`
+  width: ${({ $pct }) => $pct}%;
+  height: 100%;
+  background: ${({ $color }) => $color};
+  border-radius: 99px;
+  transition: width 0.5s;
+`;
+
+const TrackMeta = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.inkSoft};
+  margin-bottom: 14px;
+`;
+
+const UnitCard = styled.button`
   width: 100%;
   text-align: left;
   cursor: pointer;
@@ -91,234 +149,232 @@ const JourneyCard = styled.button`
   padding: 16px;
   box-shadow: ${({ theme }) => theme.shadow};
   font-family: ${({ theme }) => theme.fonts.ui};
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 12px;
-`;
-
-const JourneyStripe = styled.div<{ $gradient: string }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: ${({ $gradient }) => $gradient};
-`;
-
-const JourneyRow = styled.div`
+  margin-bottom: 18px;
   display: flex;
   align-items: center;
   gap: 12px;
 `;
 
-const JourneyMeta = styled.div`
-  flex: 1;
-  min-width: 0;
+const UnitNum = styled.div`
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFEFE6;
+  color: ${({ theme }) => theme.colors.primary};
+  font-weight: 900;
+  font-size: 18px;
 `;
 
-const JourneyEyebrow = styled.div`
-  font-size: 11px;
-  font-weight: 800;
-  color: ${({ theme }) => theme.colors.inkMute};
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-`;
-
-const JourneyName = styled.div`
+const UnitName = styled.div`
   font-size: 16px;
   font-weight: 900;
   color: ${({ theme }) => theme.colors.ink};
 `;
 
-const JourneyArrow = styled.div`
-  color: ${({ theme }) => theme.colors.inkMute};
-  display: flex;
-  align-items: center;
-`;
-
-const SegmentBar = styled.div`
-  display: flex;
-  gap: 4px;
-  margin-top: 12px;
-`;
-
-const Segment = styled.div`
-  flex: 1;
-  height: 10px;
-  border-radius: 99px;
-  background: #F3EBD8;
-  position: relative;
-  overflow: hidden;
-`;
-
-const SegmentFill = styled.div<{ $color: string; $pct: number }>`
-  width: ${({ $pct }) => $pct}%;
-  height: 100%;
-  background: ${({ $color }) => $color};
-  border-radius: 99px;
-  transition: width 0.5s;
-`;
-
-const JourneyFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
+const UnitMeta = styled.div`
   font-size: 12px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.inkSoft};
+  margin-top: 2px;
 `;
 
-const JourneyPct = styled.span<{ $color: string }>`
-  color: ${({ $color }) => $color};
-  font-weight: 900;
-`;
-
-const GoalRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const GoalTitle = styled.div`
-  font-weight: 800;
-  font-size: 15px;
-`;
-
-const GoalCount = styled.div`
-  font-weight: 800;
+const Banner = styled.div<{ $tone: 'warn' | 'danger' }>`
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
   font-size: 13px;
-  color: ${({ theme }) => theme.colors.inkSoft};
+  line-height: 1.4;
+  font-weight: 700;
+  background: ${({ $tone, theme }) => ($tone === 'danger' ? theme.colors.dangerSoft : theme.colors.warnSoft)};
+  color: ${({ $tone }) => ($tone === 'danger' ? '#9B2C2C' : '#7A5600')};
+  cursor: pointer;
 `;
 
-const GoalTrack = styled.div`
-  height: 8px;
-  background: #F3EBD8;
-  border-radius: 99px;
-  margin-top: 10px;
-  overflow: hidden;
-`;
-
-const GoalFill = styled.div<{ $pct: number }>`
-  width: ${({ $pct }) => $pct}%;
-  height: 100%;
-  background: ${({ theme }) => theme.colors.success};
-  border-radius: 99px;
-  transition: width 0.5s;
-`;
-
-const Spacer = styled.div`
-  height: 16px;
-`;
+const BACKUP_AFTER_DAYS = 14;
 
 export function HomeScreen() {
   const navigate = useNavigate();
   const theme = useTheme();
-  const { wordCount } = useWordsLoad();
+  const version = useProgressVersion();
+  const updateReady = useSyncExternalStore(subscribeUpdate, isUpdateWaiting, isUpdateWaiting);
 
-  const journeyStats = LEVELS.map((l) => levelStats(l.id, WORDS));
-  const totals = journeyStats.reduce(
-    (acc, s) => ({ mastered: acc.mastered + s.mastered, total: acc.total + s.total }),
-    { mastered: 0, total: 0 },
-  );
-  const totalPct = totals.total === 0 ? 0 : Math.round((totals.mastered / totals.total) * 100);
-  const g = globalStats(WORDS);
+  const view = useMemo(() => {
+    const settings = getSettings();
+    const course = getCourse();
+    const day = getDay(today());
+    const plan = planDaily();
+    const saved = loadSavedSession();
+    let automatic = 0;
+    for (const c of allCards()) if (isAutomatic(c)) automatic++;
+    const unit = UNITS.find((u) => u.id === course.unlocked) ?? UNITS[0];
+    return {
+      settings,
+      day,
+      plan,
+      saved,
+      automatic,
+      unit,
+      unitProgress: unit ? unitProgress(unit, getCard) : null,
+      streakDays: streak(allDays(), today()),
+    };
+    // Recomputed whenever saved progress changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [version]);
 
-  const dailyDone = getDailyCount();
-  const dailyPct = Math.min(100, Math.round((dailyDone / DAILY_GOAL) * 100));
+  const { settings, day, plan, saved, unit } = view;
+  const goalMs = settings.dailyMinutes * 60_000;
+  const doneMin = Math.floor(day.ms / 60_000);
+  const pct = Math.min(100, Math.round((day.ms / goalMs) * 100));
+  const hasWork = plan.items.length > 0;
+  const goalMet = day.ms >= goalMs;
 
-  const onPick = (mode: Mode) => navigate(`/select/${mode}`);
+  const start = () => {
+    unlockAudio();
+    navigate('/session', { state: { mode: 'daily' } });
+  };
+
+  let sub: string;
+  if (saved) sub = 'Занятие начато — можно продолжить с того же места.';
+  else if (!hasWork) sub = 'На сегодня всё повторено. Новый материал откроется завтра.';
+  else {
+    const parts: string[] = [];
+    if (plan.reviewCount) parts.push(`${plan.reviewCount} повторений`);
+    if (plan.newCount) parts.push(`${plan.newCount} новых`);
+    sub = parts.join(' · ') || 'Тренировка на скорость';
+    if (plan.backlog) sub += '. Накопились повторения — сначала они, новое подождёт.';
+  }
+
+  const lastBackup = settings.lastBackupAt;
+  const backupStale =
+    cardCount() >= 40 && (!lastBackup || Date.now() - lastBackup > BACKUP_AFTER_DAYS * 86_400_000);
 
   return (
     <Screen>
-      <Hero>
-        <HeroRow>
-          <div>
-            <Hello>გამარჯობა · Привет</Hello>
-            <Heading>
-              Let's learn <span>Georgian</span>
-            </Heading>
-          </div>
-          <SettingsDot aria-label="Settings" onClick={() => navigate('/settings')}>
-            <Icon name="settings" size={20} color={theme.colors.inkSoft} />
-          </SettingsDot>
-        </HeroRow>
+      <Wrap>
+        <Hero>
+          <HeroRow>
+            <div>
+              <Hello>გამარჯობა · Привет</Hello>
+              <Heading>
+                Каркас <span>грузинского</span>
+              </Heading>
+            </div>
+            <SettingsDot aria-label="Настройки" onClick={() => navigate('/settings')}>
+              <Icon name="settings" size={20} color={theme.colors.inkSoft} />
+            </SettingsDot>
+          </HeroRow>
 
-        <StatsRow>
-          <StatCard icon="cards" color={theme.colors.primary} label="Explored" value={g.explored} />
-          <StatCard icon="check" color={theme.colors.success} label="Mastered" value={g.mastered} />
-          <StatCard icon="bulb" color={theme.colors.warn} label="Learning" value={g.learning} />
-        </StatsRow>
-      </Hero>
+          <StatsRow>
+            <StatCard icon="flame" color={theme.colors.primary} label="дней подряд" value={view.streakDays} />
+            <StatCard icon="star" color={theme.colors.success} label="на автомате" value={view.automatic} />
+            <StatCard icon="cards" color={theme.colors.warn} label="к повторению" value={plan.dueCount} />
+          </StatsRow>
+        </Hero>
 
-      <Body>
-        <SectionLabel>Today's goal</SectionLabel>
-        <GoalCard>
-          <GoalRow>
-            <GoalTitle>Go through {DAILY_GOAL} cards</GoalTitle>
-            <GoalCount>
-              {Math.min(dailyDone, DAILY_GOAL)} / {DAILY_GOAL}
-            </GoalCount>
-          </GoalRow>
-          <GoalTrack>
-            <GoalFill $pct={dailyPct} />
-          </GoalTrack>
-        </GoalCard>
+        <Body>
+          {updateReady && (
+            <Banner $tone="warn" onClick={applyUpdate}>
+              Доступна новая версия приложения. Нажми, чтобы обновить.
+            </Banner>
+          )}
+          {hasWriteError() && (
+            <Banner $tone="danger" onClick={() => navigate('/settings')}>
+              Прогресс не сохраняется на устройстве. Сделай резервную копию в настройках.
+            </Banner>
+          )}
+          {backupStale && (
+            <Banner $tone="warn" onClick={() => navigate('/settings')}>
+              Давно не было резервной копии. Сохрани прогресс в файл — это одна кнопка в настройках.
+            </Banner>
+          )}
 
-        <SectionLabel style={{ marginTop: 18 }}>Practice</SectionLabel>
+          <DailyCard>
+            <DailyTitle>Занятие дня</DailyTitle>
+            <DailySub>{sub}</DailySub>
+            <Track>
+              <Fill $pct={pct} $color={goalMet ? theme.colors.success : theme.colors.primary} />
+            </Track>
+            <TrackMeta>
+              <span>
+                {doneMin} из {settings.dailyMinutes} мин
+              </span>
+              <span>{goalMet ? 'цель выполнена' : `${pct}%`}</span>
+            </TrackMeta>
+            <Pill
+              kind={hasWork || saved ? 'primary' : 'ghost'}
+              size="lg"
+              style={{ width: '100%' }}
+              disabled={!hasWork && !saved}
+              onClick={start}
+            >
+              <Icon name="play" size={18} />
+              {saved ? 'Продолжить' : hasWork ? (day.ms > 0 ? 'Ещё подход' : 'Начать') : 'Готово'}
+            </Pill>
+          </DailyCard>
 
-        <ModeCard
-          accent={theme.colors.primary}
-          tint="#FFEFE6"
-          icon="cards"
-          title="Flashcards"
-          subtitle="Swipe right if you know it, left if you don't"
-          extra={`${wordCount} words · KA → RU`}
-          onClick={() => onPick('flash')}
-        />
-        <ModeCard
-          accent={theme.colors.blue}
-          tint={theme.colors.blueSoft}
-          icon="abc"
-          title="Alphabet trainer"
-          subtitle="Match each Georgian letter to its Russian sound"
-          extra="33 letters · Mkhedruli"
-          onClick={() => onPick('alpha')}
-        />
+          {unit && view.unitProgress && (
+            <>
+              <SectionLabel>Текущий урок</SectionLabel>
+              <UnitCard type="button" onClick={() => navigate(`/course/${unit.id}`)}>
+                <UnitNum>{unit.id}</UnitNum>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <UnitName>{unit.titleRu}</UnitName>
+                  <UnitMeta>
+                    пройдено {view.unitProgress.introduced} из {view.unitProgress.total} · на автомате{' '}
+                    {view.unitProgress.automatic} из {view.unitProgress.skeleton}
+                  </UnitMeta>
+                  <Track style={{ margin: '8px 0 0' }}>
+                    <Fill $pct={Math.round(view.unitProgress.fraction * 100)} $color={theme.colors.primary} />
+                  </Track>
+                </div>
+                <Icon name="arrow" size={20} color={theme.colors.inkMute} />
+              </UnitCard>
+            </>
+          )}
 
-        <SectionLabel style={{ marginTop: 18 }}>Your journey</SectionLabel>
-        <JourneyCard type="button" onClick={() => navigate('/levels')}>
-          <JourneyStripe
-            $gradient={`linear-gradient(to right, ${LEVELS.map((l) => l.color).join(', ')})`}
+          <SectionLabel>Разделы</SectionLabel>
+          <ModeCard
+            accent={theme.colors.primary}
+            tint="#FFEFE6"
+            icon="sparkle"
+            title="Курс «Каркас»"
+            subtitle="16 уроков: от матрицы глагола до связной речи"
+            extra={`Открыт урок ${getCourse().unlocked}`}
+            onClick={() => navigate('/course')}
           />
-          <JourneyRow>
-            <JourneyMeta>
-              <JourneyEyebrow>Overall progress</JourneyEyebrow>
-              <JourneyName>Your journey</JourneyName>
-            </JourneyMeta>
-            <JourneyArrow>
-              <Icon name="arrow" size={20} />
-            </JourneyArrow>
-          </JourneyRow>
-
-          <SegmentBar>
-            {LEVELS.map((L) => (
-              <Segment key={L.id}>
-                <SegmentFill $color={L.color} $pct={journeyStats[L.id].progress * 100} />
-              </Segment>
-            ))}
-          </SegmentBar>
-
-          <JourneyFooter>
-            <span>
-              {totals.mastered} of {totals.total} mastered
-            </span>
-            <JourneyPct $color={theme.colors.primary}>{totalPct}%</JourneyPct>
-          </JourneyFooter>
-        </JourneyCard>
-
-      </Body>
-
-      <Spacer />
+          <ModeCard
+            accent={theme.colors.purple}
+            tint={theme.colors.purpleSoft}
+            icon="bulb"
+            title="Глаголы и матрица"
+            subtitle="Все формы глагола в трёх временах и прокрутка на скорость"
+            extra="Справочник и тренировка"
+            onClick={() => navigate('/verbs')}
+          />
+          <ModeCard
+            accent={theme.colors.blue}
+            tint={theme.colors.blueSoft}
+            icon="cards"
+            title="Карточки слов"
+            subtitle="Свободная практика словаря с картинками"
+            extra="836 слов · по уровням и темам"
+            onClick={() => navigate('/select/flash')}
+          />
+          <ModeCard
+            accent={theme.colors.gold}
+            tint={theme.colors.goldSoft}
+            icon="abc"
+            title="Алфавит"
+            subtitle="Собери слово по буквам мхедрули"
+            extra="33 буквы"
+            onClick={() => navigate('/select/alpha')}
+          />
+        </Body>
+      </Wrap>
     </Screen>
   );
 }

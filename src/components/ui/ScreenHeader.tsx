@@ -47,7 +47,7 @@ export function ScreenHeader({ title, onBack, right }: Props) {
   return (
     <Wrap>
       {onBack && (
-        <BackBtn onClick={onBack} aria-label="Back">
+        <BackBtn onClick={onBack} aria-label="Назад">
           <Icon name="back" />
         </BackBtn>
       )}

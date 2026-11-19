@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import styled, { useTheme, keyframes, css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '../components/ui/Icon';
@@ -115,7 +115,10 @@ export function AlphabetSession() {
   const [filled, setFilled] = useState<Array<{ ru: string; correct: boolean }>>([]);
   const [shake, setShake] = useState(false);
   const [solved, setSolved] = useState(false);
-  const [hintsUsed, setHintsUsed] = useState(0);
+  // Refs, not state: `hint()` fills a letter in the same tick, and the result
+  // recorded for the word must already include that hint and every wrong tap.
+  const hintsUsed = useRef(0);
+  const mistakes = useRef(0);
   const [results, setResults] = useState<AlphaResult[]>([]);
 
   const word = deck[i];
@@ -141,7 +144,8 @@ export function AlphabetSession() {
   useEffect(() => {
     setFilled([]);
     setSolved(false);
-    setHintsUsed(0);
+    hintsUsed.current = 0;
+    mistakes.current = 0;
     setShake(false);
   }, [i]);
 
@@ -159,8 +163,8 @@ export function AlphabetSession() {
           ...r,
           {
             id: word.id,
-            perfect: hintsUsed === 0,
-            hints: hintsUsed,
+            perfect: hintsUsed.current === 0 && mistakes.current === 0,
+            hints: hintsUsed.current,
             ka: word.ka,
             ru: word.ru,
             tr: word.tr,
@@ -168,6 +172,7 @@ export function AlphabetSession() {
         ]);
       }
     } else {
+      mistakes.current += 1;
       setShake(true);
       setFilled([...filled, { ru, correct: false }]);
       window.setTimeout(() => {
@@ -179,7 +184,7 @@ export function AlphabetSession() {
 
   const hint = () => {
     if (!word || solved || nextSlot >= letters.length) return;
-    setHintsUsed((h) => h + 1);
+    hintsUsed.current += 1;
     tap(letters[nextSlot].ru);
   };
 
@@ -198,7 +203,7 @@ export function AlphabetSession() {
     <Screen>
       <Container>
       <HeaderRow>
-        <IconBtn onClick={() => navigate('/')} aria-label="Close session">
+        <IconBtn onClick={() => navigate('/')} aria-label="Закрыть">
           <Icon name="close" size={20} />
         </IconBtn>
         <ProgressBar value={i / Math.max(1, deck.length)} color={theme.colors.blue} />
@@ -233,7 +238,7 @@ export function AlphabetSession() {
           <TranslationCard ru={word.ru} audio={word.audio} solved={solved} />
         </WordCard>
 
-        <TileKeyboard options={options} onTap={tap} onHint={hint} solved={solved} hint={solved ? undefined : 'Fill all letters to continue'} />
+        <TileKeyboard options={options} onTap={tap} onHint={hint} solved={solved} hint={solved ? undefined : 'Заполни все буквы, чтобы продолжить'} />
       </Body>
 
       {solved && (
@@ -245,7 +250,7 @@ export function AlphabetSession() {
             style={{ width: '100%' }}
           >
             <Icon name="check" size={18} />
-            <span>Next word</span>
+            <span>Следующее слово</span>
           </Pill>
         </Footer>
       )}

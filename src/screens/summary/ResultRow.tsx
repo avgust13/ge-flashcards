@@ -77,7 +77,7 @@ export function ResultRow({ r, mode, last }: Props) {
       </Body>
       {!isFlash && !isFlashResult(r) && r.hints > 0 && (
         <HintTag>
-          {r.hints} hint{r.hints > 1 ? 's' : ''}
+          подсказок: {r.hints}
         </HintTag>
       )}
     </Row>

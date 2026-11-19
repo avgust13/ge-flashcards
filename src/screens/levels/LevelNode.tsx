@@ -175,12 +175,12 @@ export function LevelNode({ level, stats, isLast, onPick }: Props) {
 
       <Card type="button" onClick={onPick}>
         <HeaderRow>
-          <Name>{level.name}</Name>
+          <Name>{level.ru}</Name>
           <RangePill $color={level.color} $tint={level.tint}>
-            {level.range[0]}–{level.range[1]}
+            {stats.total} слов
           </RangePill>
         </HeaderRow>
-        <Sub>{level.ru}</Sub>
+        <Sub>{level.blurbRu}</Sub>
 
         <ThemeChips>
           {themesShown.map((t) => (

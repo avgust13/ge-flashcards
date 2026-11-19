@@ -85,12 +85,12 @@ export function TileKeyboard({ options, onTap, onHint, solved, hint }: Props) {
     <Card>
       <Header>
         <div>
-          <Label>Pick the Russian letter</Label>
+          <Label>Выбери русскую букву</Label>
           {hint && <Hint>{hint}</Hint>}
         </div>
         <HintBtn onClick={onHint} disabled={solved}>
           <Icon name="bulb" size={14} stroke={2.2} />
-          Hint
+          Подсказка
         </HintBtn>
       </Header>
       <Grid>

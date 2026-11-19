@@ -18,6 +18,16 @@ export async function loadWords(
     ? `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}_ts=${Date.now()}`
     : baseUrl;
 
+  if (forceRedownload) {
+    // The service worker serves words.json cache-first; drop its copy so
+    // "update" really fetches a fresh file.
+    try {
+      await globalThis.caches?.delete('legacy-words-v1');
+    } catch {
+      // Cache Storage unavailable: the cache-busting query below still applies.
+    }
+  }
+
   const response = await fetch(url, {
     signal,
     cache: forceRedownload ? 'no-store' : 'default',
@@ -63,10 +73,8 @@ export async function loadWords(
 function backfillLevels(data: Word[]): void {
   for (let i = 0; i < data.length; i++) {
     const w = data[i];
-    if (w.level == null) {
-      const found = LEVELS.find((l) => i >= l.range[0] && i < l.range[1]);
-      w.level = found ? found.id : LEVELS.length - 1;
-    }
+    // Every record carries an explicit level; this only guards a malformed one.
+    if (w.level == null) w.level = LEVELS.length - 1;
     w.correct = sanitizeCorrect(w.correct);
     w.seen = sanitizeSeen(w.seen);
   }

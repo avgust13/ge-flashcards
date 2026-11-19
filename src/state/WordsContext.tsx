@@ -1,7 +1,7 @@
 import {
   createContext,
+  useCallback,
   useContext,
-  useEffect,
   useMemo,
   useRef,
   useState,
@@ -9,7 +9,7 @@ import {
 } from 'react';
 import { loadWords, WORDS } from '../data/words';
 import { loadCategories } from '../data/categories';
-import { applyStatsToWords, loadStats } from '../data/stats';
+import { applyStatsToWords } from '../data/stats';
 
 interface WordsState {
   ready: boolean;
@@ -18,11 +18,18 @@ interface WordsState {
   total: number;
   wordCount: number;
   reloading: boolean;
+  /** Start downloading the word library if that has not happened yet. Safe to call repeatedly. */
+  ensureWords: () => void;
   reloadWords: () => Promise<void>;
 }
 
 const WordsContext = createContext<WordsState | null>(null);
 
+/**
+ * The legacy vocabulary (public/words.json, ~67 MB with inline media) is
+ * loaded lazily: only the free-practice screens need it, so the course itself
+ * starts without waiting for the download.
+ */
 export function WordsProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -30,44 +37,34 @@ export function WordsProvider({ children }: { children: ReactNode }) {
   const [total, setTotal] = useState(0);
   const [wordCount, setWordCount] = useState(0);
   const [reloading, setReloading] = useState(false);
-  const totalRef = useRef(0);
+  const started = useRef(false);
 
-  const loadInitial = async (signal: AbortSignal) => {
-    await loadCategories(signal);
-    const words = await loadWords(
-      ({ loaded, total }) => {
-        totalRef.current = total;
-        setLoaded(loaded);
-        setTotal(total);
-      },
-      signal,
-    );
-    applyStatsToWords(WORDS, loadStats());
-    setWordCount(words.length);
-  };
-
-  useEffect(() => {
-    const controller = new AbortController();
+  const ensureWords = useCallback(() => {
+    if (started.current) return;
+    started.current = true;
+    setError(null);
     (async () => {
       try {
-        await loadInitial(controller.signal);
-        if (controller.signal.aborted) return;
-        if (totalRef.current > 0) setLoaded(totalRef.current);
-        await new Promise((resolve) => setTimeout(resolve, 400));
-        if (controller.signal.aborted) return;
+        await loadCategories();
+        const words = await loadWords(({ loaded, total }) => {
+          setLoaded(loaded);
+          setTotal(total);
+        });
+        applyStatsToWords(WORDS);
+        setWordCount(words.length);
         setReady(true);
       } catch (e) {
-        if ((e as Error).name === 'AbortError') return;
-        setError((e as Error).message ?? 'Failed to load data');
+        started.current = false;
+        setError((e as Error).message ?? 'Не удалось загрузить слова');
       }
     })();
-    return () => controller.abort();
   }, []);
 
-  const reloadWords = async () => {
+  const reloadWords = useCallback(async () => {
     setReloading(true);
     setError(null);
     try {
+      await loadCategories();
       const words = await loadWords(
         ({ loaded, total }) => {
           setLoaded(loaded);
@@ -76,19 +73,21 @@ export function WordsProvider({ children }: { children: ReactNode }) {
         undefined,
         true,
       );
-      applyStatsToWords(WORDS, loadStats());
+      applyStatsToWords(WORDS);
       setWordCount(words.length);
+      started.current = true;
+      setReady(true);
     } catch (e) {
-      setError((e as Error).message ?? 'Failed to re-download words.json');
+      setError((e as Error).message ?? 'Не удалось обновить words.json');
       throw e;
     } finally {
       setReloading(false);
     }
-  };
+  }, []);
 
   const value = useMemo<WordsState>(
-    () => ({ ready, error, loaded, total, wordCount, reloading, reloadWords }),
-    [ready, error, loaded, total, wordCount, reloading],
+    () => ({ ready, error, loaded, total, wordCount, reloading, ensureWords, reloadWords }),
+    [ready, error, loaded, total, wordCount, reloading, ensureWords, reloadWords],
   );
 
   return <WordsContext.Provider value={value}>{children}</WordsContext.Provider>;

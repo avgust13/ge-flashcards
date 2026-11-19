@@ -165,7 +165,7 @@ export function SelectionScreen() {
     navigate(`/session/${mode}`);
   };
 
-  const modeTitle = mode === 'flash' ? 'Flashcards' : 'Alphabet trainer';
+  const modeTitle = mode === 'flash' ? 'Карточки слов' : 'Алфавит';
   const stepMax = Math.max(5, Math.min(100, selected.length));
 
   return (
@@ -176,10 +176,10 @@ export function SelectionScreen() {
       />
 
       <Scroll>
-        <SectionLabel style={{ padding: '8px 20px 6px' }}>Level</SectionLabel>
+        <SectionLabel style={{ padding: '8px 20px 6px' }}>Уровень</SectionLabel>
         <ChipRow>
           <LevelChip
-            label="All"
+            label="Все"
             color={theme.colors.ink}
             active={levelId === null}
             onClick={() => navigate(`/select/${mode}`)}
@@ -187,7 +187,7 @@ export function SelectionScreen() {
           {LEVELS.map((L) => (
             <LevelChip
               key={L.id}
-              label={`L${L.id} · ${L.name}`}
+              label={`L${L.id} · ${L.ru}`}
               color={L.color}
               tint={L.tint}
               active={levelId === L.id}
@@ -196,7 +196,7 @@ export function SelectionScreen() {
           ))}
         </ChipRow>
 
-        <SectionLabel style={{ padding: '8px 20px 6px' }}>Category</SectionLabel>
+        <SectionLabel style={{ padding: '8px 20px 6px' }}>Тема</SectionLabel>
         <ChipRow>
           {CATEGORIES.map((c) => (
             <Chip
@@ -213,9 +213,9 @@ export function SelectionScreen() {
 
         <Block>
           <RowSpaced>
-            <SectionLabel style={{ margin: 0 }}>Mastery curve</SectionLabel>
+            <SectionLabel style={{ margin: 0 }}>Кривая освоения</SectionLabel>
             <SmallMeta>
-              {selected.length} of {pool.length} words selected
+              выбрано {selected.length} из {pool.length}
             </SmallMeta>
           </RowSpaced>
 
@@ -225,14 +225,14 @@ export function SelectionScreen() {
           </GraphCard>
 
           <Legend>
-            <LegendDot color={theme.colors.danger}>Struggle</LegendDot>
-            <LegendDot color={theme.colors.warn}>Learning</LegendDot>
-            <LegendDot color={theme.colors.success}>Mastered</LegendDot>
+            <LegendDot color={theme.colors.danger}>Трудные</LegendDot>
+            <LegendDot color={theme.colors.warn}>Учу</LegendDot>
+            <LegendDot color={theme.colors.success}>Освоены</LegendDot>
           </Legend>
         </Block>
 
         <Block style={{ paddingTop: 18 }}>
-          <SectionLabel>How many today?</SectionLabel>
+          <SectionLabel>Сколько слов?</SectionLabel>
           <CountCard>
             <CountRow>
               <Stepper value={count} setValue={setCount} min={5} max={stepMax} step={5} />
@@ -275,7 +275,7 @@ export function SelectionScreen() {
         >
           <Icon name="play" size={18} />
           <span>
-            Start {count} {mode === 'flash' ? 'cards' : 'rounds'}
+            Начать: {count}
           </span>
         </Pill>
       </Footer>

@@ -20,7 +20,7 @@ export function RandomDice({ onClick }: { onClick: () => void }) {
   return (
     <Btn onClick={onClick}>
       <Icon name="sparkle" size={14} stroke={2.2} />
-      Random
+      Случайно
     </Btn>
   );
 }

@@ -79,13 +79,13 @@ const Actions = styled.div`
 export function IosInstallSheet({ open, onClose }: Props) {
   if (!open) return null;
   return (
-    <Overlay $open={open} onClick={onClose} role="dialog" aria-label="Install on iPhone">
+    <Overlay $open={open} onClick={onClose} role="dialog" aria-label="Установка на iPhone">
       <Sheet onClick={(e) => e.stopPropagation()}>
-        <Heading>Install on iPhone</Heading>
+        <Heading>Установка на iPhone</Heading>
         <Step>
           <StepNum>1</StepNum>
           <StepText>
-            Tap the Share button
+            Нажми кнопку «Поделиться»
             <ShareIcon
               width="20"
               height="20"
@@ -99,20 +99,20 @@ export function IosInstallSheet({ open, onClose }: Props) {
             >
               <path d="M12 16V4M8 8l4-4 4 4M4 14v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5" />
             </ShareIcon>
-            at the bottom of Safari
+            внизу Safari
           </StepText>
         </Step>
         <Step>
           <StepNum>2</StepNum>
-          <StepText>Scroll and pick «Add to Home Screen»</StepText>
+          <StepText>Прокрути и выбери «На экран „Домой“»</StepText>
         </Step>
         <Step>
           <StepNum>3</StepNum>
-          <StepText>Confirm «Add» in the top-right corner</StepText>
+          <StepText>Подтверди «Добавить» в правом верхнем углу</StepText>
         </Step>
         <Actions>
           <Pill kind="primary" onClick={onClose}>
-            Got it
+            Понятно
           </Pill>
         </Actions>
       </Sheet>

@@ -7,3 +7,5 @@ dev-dist
 src/data/.media
 .env*
 !.env.example
+# TTS comparison clips for listening; regenerate with: npm run content:tts -- --sample content-src/review/tts-sample
+content-src/review/tts-sample

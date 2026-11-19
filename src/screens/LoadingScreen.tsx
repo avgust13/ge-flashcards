@@ -59,7 +59,7 @@ const ErrorBox = styled.div`
 `;
 
 function formatMB(bytes: number): string {
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} МБ`;
 }
 
 export function LoadingScreen({ loaded, total, error }: Props) {
@@ -70,7 +70,7 @@ export function LoadingScreen({ loaded, total, error }: Props) {
     <Screen>
       <Hello>გამარჯობა · Привет</Hello>
       <Heading>
-        Preparing your <span>flashcards</span>
+        Загружаем <span>словарь</span>
       </Heading>
 
       {error ? (
@@ -82,8 +82,8 @@ export function LoadingScreen({ loaded, total, error }: Props) {
           </BarRow>
           <Meta>
             {total > 0
-              ? `${formatMB(loaded)} of ${formatMB(total)} · ${pct}%`
-              : 'Starting download…'}
+              ? `${formatMB(loaded)} из ${formatMB(total)} · ${pct}%`
+              : 'Начинаем загрузку…'}
           </Meta>
         </>
       )}

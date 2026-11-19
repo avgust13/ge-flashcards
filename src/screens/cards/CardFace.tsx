@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Icon } from '../../components/ui/Icon';
 import { ImageSlot } from '../../components/ui/ImageSlot';
+import { playBase64 } from '../../audio/player';
 import type { Word } from '../../types';
 
 interface Props {
@@ -99,15 +100,13 @@ export function CardFace({ side, word }: Props) {
   return (
     <Face $back={back}>
       <TopRow>
-        <Tag $back={back}>{back ? 'Russian' : 'Georgian'}</Tag>
+        <Tag $back={back}>{back ? 'Русский' : 'Грузинский'}</Tag>
         <SpeakerBtn
-          aria-label="Pronounce"
+          aria-label="Прослушать"
           onPointerDown={(e) => e.stopPropagation()}
           onClick={(e) => {
             e.stopPropagation();
-            if (word.audio) {
-              new Audio(`data:audio/mpeg;base64,${word.audio}`).play();
-            }
+            playBase64(word.audio);
           }}
         >
           <Icon name="speaker" size={18} />
@@ -135,7 +134,7 @@ export function CardFace({ side, word }: Props) {
         )}
       </Center>
 
-      <Hint>{back ? 'tap to flip back' : 'tap to reveal translation'}</Hint>
+      <Hint>{back ? 'нажми, чтобы перевернуть' : 'нажми, чтобы увидеть перевод'}</Hint>
     </Face>
   );
 }

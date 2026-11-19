@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { playBase64 } from '../../audio/player';
 import { Icon } from '../../components/ui/Icon';
 
 interface Props {
@@ -47,15 +48,15 @@ export function TranslationCard({ ru, audio, solved }: Props) {
   return (
     <Box $solved={solved}>
       <div>
-        <Tag $solved={solved}>Translation</Tag>
+        <Tag $solved={solved}>Перевод</Tag>
         <Word $solved={solved}>{ru}</Word>
       </div>
       <SpeakerBtn
         $solved={solved}
-        aria-label="Pronounce"
+        aria-label="Прослушать"
         disabled={!solved}
         onClick={() => {
-          if (solved && audio) new Audio(`data:audio/mpeg;base64,${audio}`).play();
+          if (solved) playBase64(audio);
         }}
       >
         <Icon name="speaker" size={22} />

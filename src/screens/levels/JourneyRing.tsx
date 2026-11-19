@@ -78,7 +78,7 @@ export function JourneyRing({ steps, mastered, total }: Props) {
       </svg>
       <Centre>
         <Pct>{pct}%</Pct>
-        <PctLabel>fluency</PctLabel>
+        <PctLabel>освоено</PctLabel>
       </Centre>
     </Wrap>
   );

@@ -43,7 +43,7 @@ export function BrushAxis({ range, pool }: Props) {
   return (
     <Row>
       <Low>{loW}%</Low>
-      <Mid>← correct rate →</Mid>
+      <Mid>← доля верных ответов →</Mid>
       <High>{hiW}%</High>
     </Row>
   );

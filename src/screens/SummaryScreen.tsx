@@ -178,13 +178,13 @@ export function SummaryScreen() {
         <Card>
           <ScoreRing value={pct / 100} color={accent} />
           <CardBody>
-            <CardTag>{isFlash ? 'Knew it' : 'Perfect'}</CardTag>
+            <CardTag>{isFlash ? 'Знал' : 'Без подсказок'}</CardTag>
             <CardValue>
               {right} <span>/ {total}</span>
             </CardValue>
             {!isFlash && (
               <CardSub>
-                <Icon name="bulb" size={12} /> {hints} hints used
+                <Icon name="bulb" size={12} /> подсказок: {hints}
               </CardSub>
             )}
           </CardBody>
@@ -192,7 +192,7 @@ export function SummaryScreen() {
       </div>
 
       <div style={{ padding: '14px 20px 0', flex: 1 }}>
-        <SectionTitle>Words this round</SectionTitle>
+        <SectionTitle>Слова этого раунда</SectionTitle>
         <ListWrap>
           {results.slice(0, 8).map((r, idx) => (
             <ResultRow
@@ -202,17 +202,17 @@ export function SummaryScreen() {
               last={idx === Math.min(7, results.length - 1)}
             />
           ))}
-          {results.length > 8 && <More>+ {results.length - 8} more</More>}
+          {results.length > 8 && <More>и ещё {results.length - 8}</More>}
         </ListWrap>
       </div>
 
       <CTAs>
         <Pill kind="ghost" size="lg" onClick={onHome} style={{ flex: 1 }}>
-          Home
+          На главную
         </Pill>
         <Pill kind="primary" size="lg" onClick={onAgain} style={{ flex: 1.4 }}>
           <Icon name="refresh" size={16} />
-          Practice again
+          Ещё раз
         </Pill>
       </CTAs>
     </Screen>

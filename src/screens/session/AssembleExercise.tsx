@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { playClip } from '../../audio/player';
 import { Icon } from '../../components/ui/Icon';
 import { Pill } from '../../components/ui/Pill';
+import { trVisible } from '../../content/reading';
 import { translit } from '../../content/translit';
 import { checkAssemble } from '../../engine/grade';
 import type { AssembleExercise as Ex, ExerciseResult, Tile } from '../../engine/types';
@@ -10,7 +11,6 @@ import { Body, Card, Eyebrow, Footer, Muted, PromptRu, RevealCard, shake } from 
 
 interface Props {
   ex: Ex;
-  showTr: boolean;
   autoplay: boolean;
   onDone: (r: ExerciseResult) => void;
 }
@@ -82,7 +82,7 @@ const LinkBtn = styled.button`
 `;
 
 /** Build the Georgian sentence from word tiles. Word order before the verb is free. */
-export function AssembleExercise({ ex, showTr, autoplay, onDone }: Props) {
+export function AssembleExercise({ ex, autoplay, onDone }: Props) {
   const [answer, setAnswer] = useState<Tile[]>([]);
   const [errs, setErrs] = useState(0);
   const [errOnFocus, setErrOnFocus] = useState(false);
@@ -133,7 +133,7 @@ export function AssembleExercise({ ex, showTr, autoplay, onDone }: Props) {
   const renderTile = (t: Tile, onClick: () => void, hidden = false) => (
     <TileBtn key={t.i} type="button" $used={hidden} disabled={done || hidden} onClick={onClick}>
       {t.t}
-      {showTr && t.t !== '?' && <TileTr>{translit(t.t)}</TileTr>}
+      {t.t !== '?' && trVisible(t.t) && <TileTr>{translit(t.t)}</TileTr>}
     </TileBtn>
   );
 
@@ -159,7 +159,7 @@ export function AssembleExercise({ ex, showTr, autoplay, onDone }: Props) {
           </>
         )}
 
-        {done && <RevealCard reveal={ex.reveal} showTr={showTr} ok={status === 'right' && errs === 0} />}
+        {done && <RevealCard reveal={ex.reveal} ok={status === 'right' && errs === 0} />}
       </Body>
 
       <Footer>

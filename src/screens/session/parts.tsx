@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 import { SpeakerButton } from '../../components/ui/SpeakerButton';
+import { trOnReveal } from '../../content/reading';
 import { translit } from '../../content/translit';
 import type { Reveal } from '../../engine/types';
 
@@ -107,18 +108,17 @@ const Note = styled.div`
 
 interface RevealProps {
   reveal: Reveal;
-  showTr: boolean;
   /** false: the answer is being shown after a miss. */
   ok?: boolean;
 }
 
 /** The correct answer: Georgian, transliteration, Russian, a replay button and an optional rule. */
-export function RevealCard({ reveal, showTr, ok = true }: RevealProps) {
+export function RevealCard({ reveal, ok = true }: RevealProps) {
   return (
     <RevealBox $ok={ok}>
       <RevealText>
         <Ka>{reveal.ka}</Ka>
-        {showTr && <Tr>{translit(reveal.ka)}</Tr>}
+        {trOnReveal() && <Tr>{translit(reveal.ka)}</Tr>}
         <RevealRu>{reveal.ru}</RevealRu>
         {reveal.note && <Note>{reveal.note}</Note>}
       </RevealText>

@@ -5,7 +5,7 @@
  * cache) and played from object URLs. Reusing a single element that was
  * started inside a user gesture keeps later programmatic plays allowed.
  */
-import { audioUrl } from '../content/store';
+import { getClip } from './cache';
 
 let el: HTMLAudioElement | null = null;
 const blobUrls = new Map<string, string>();
@@ -33,10 +33,9 @@ async function blobUrl(id: string): Promise<string | null> {
   const cached = blobUrls.get(id);
   if (cached) return cached;
   try {
-    const res = await fetch(audioUrl(id));
-    const type = res.headers.get('Content-Type') ?? '';
-    // A missing file must not be played (or cached) as if it were audio.
-    if (!res.ok || !type.startsWith('audio/')) return null;
+    // Offline cache first, then the network; never anything that is not audio.
+    const res = await getClip(id);
+    if (!res) return null;
     const url = URL.createObjectURL(await res.blob());
     blobUrls.set(id, url);
     if (blobUrls.size > MAX_BLOBS) {
@@ -86,6 +85,6 @@ export function stopAudio(): void {
 /** Warm the cache for clips a session is about to use. Failures are ignored. */
 export function prefetchClips(ids: Array<string | null | undefined>): void {
   for (const id of new Set(ids)) {
-    if (id && !blobUrls.has(id)) void fetch(audioUrl(id)).catch(() => undefined);
+    if (id && !blobUrls.has(id)) void getClip(id);
   }
 }

@@ -7,6 +7,7 @@ import { ScreenHeader } from '../components/ui/ScreenHeader';
 import { SectionLabel } from '../components/ui/SectionLabel';
 import { SpeakerButton } from '../components/ui/SpeakerButton';
 import { UNITS, audioIdFor, getUnit } from '../content/store';
+import { trVisible } from '../content/reading';
 import { translit } from '../content/translit';
 import { getCard, getCourse, getSettings, setCourse } from '../db/progress';
 import { useProgressVersion } from '../db/useProgress';
@@ -133,7 +134,6 @@ export function UnitScreen() {
 
   const p = unitProgress(unit, getCard);
   const { unlocked } = getCourse();
-  const showTr = getSettings().translit === 'always';
   const next = UNITS.find((u) => u.id === unit.id + 1);
   const canOpenNext = unit.id === unlocked && p.allIntroduced && !!next?.ready && !p.gateMet;
   const pct = (n: number) => `${Math.round(n * 100)}%`;
@@ -184,7 +184,7 @@ export function UnitScreen() {
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <Ka>{e.ka}</Ka>
                     <Small>
-                      {showTr ? `${translit(e.ka)} · ` : ''}
+                      {trVisible(e.ka) ? `${translit(e.ka)} · ` : ''}
                       {e.ru}
                     </Small>
                   </div>

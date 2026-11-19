@@ -2,14 +2,30 @@
  * Live course content. Like `WORDS`, these arrays are filled in place by the
  * loader, so every importer holds the same reference.
  */
-import type { Course, Lexeme, PatternCell, Sentence, Tense, Person, Unit, Verb } from './types';
+import type {
+  Course,
+  Letter,
+  LetterGroup,
+  LetterPair,
+  Lexeme,
+  PatternCell,
+  Person,
+  Sentence,
+  Tense,
+  Unit,
+  Verb,
+} from './types';
 
 export const UNITS: Unit[] = [];
 export const VERBS: Verb[] = [];
 export const LEXICON: Lexeme[] = [];
 export const PATTERNS: PatternCell[] = [];
 export const SENTENCES: Sentence[] = [];
+export const LETTERS: Letter[] = [];
+export const LETTER_GROUPS: LetterGroup[] = [];
+export const LETTER_PAIRS: LetterPair[] = [];
 
+const letterByCh = new Map<string, Letter>();
 const verbById = new Map<string, Verb>();
 const lexById = new Map<number, Lexeme>();
 const sentenceById = new Map<string, Sentence>();
@@ -32,8 +48,13 @@ export function fillCourse(course: Course, sentences: Sentence[], audioIndex: Re
   LEXICON.splice(0, LEXICON.length, ...course.lexicon);
   PATTERNS.splice(0, PATTERNS.length, ...course.patterns);
   SENTENCES.splice(0, SENTENCES.length, ...sentences);
+  LETTERS.splice(0, LETTERS.length, ...(course.letters ?? []));
+  LETTER_GROUPS.splice(0, LETTER_GROUPS.length, ...(course.letterGroups ?? []));
+  LETTER_PAIRS.splice(0, LETTER_PAIRS.length, ...(course.letterPairs ?? []));
   version = course.version;
 
+  letterByCh.clear();
+  for (const l of LETTERS) letterByCh.set(l.ch, l);
   verbById.clear();
   lexById.clear();
   sentenceById.clear();
@@ -107,16 +128,32 @@ export const unitOfCard = (cardId: string): number | null => cardUnitMap.get(car
 export const allCardIds = (): readonly string[] => cardOrder;
 /** Audio clip id for a Georgian text, if one has been generated. */
 export const audioIdFor = (text: string): string | null => audio.get(text) ?? null;
+/** Every generated clip the course refers to. */
+export const allAudioIds = (): string[] => [...new Set(audio.values())];
 export const audioUrl = (id: string): string =>
   `${import.meta.env.BASE_URL}audio/${id.slice(0, 2)}/${id}.mp3`;
+
+export const getLetter = (ch: string): Letter | undefined => letterByCh.get(ch);
+/** Letter cards in the order the letters are taught. */
+export const letterCardIds = (): string[] => LETTERS.map((l) => `l:${l.ch}`);
+/** The minimal pair a letter takes part in, with its own word first. */
+export function pairFor(ch: string): { mine: LetterPair['a']; other: LetterPair['a'] } | null {
+  for (const p of LETTER_PAIRS) {
+    if (p.a.ch === ch) return { mine: p.a, other: p.b };
+    if (p.b.ch === ch) return { mine: p.b, other: p.a };
+  }
+  return null;
+}
 
 export type ParsedCard =
   | { kind: 'word'; lexId: number }
   | { kind: 'cell'; verb: string; tense: Tense; person: Person }
   | { kind: 'pattern'; pattern: string }
-  | { kind: 'phrase'; sentenceId: string };
+  | { kind: 'phrase'; sentenceId: string }
+  | { kind: 'letter'; ch: string };
 
 export function parseCardId(id: string): ParsedCard | null {
+  if (id.startsWith('l:')) return { kind: 'letter', ch: id.slice(2) };
   if (id.startsWith('w:')) return { kind: 'word', lexId: Number(id.slice(2)) };
   if (id.startsWith('s:')) return { kind: 'phrase', sentenceId: id.slice(2) };
   const cell = /^c:([a-z]+)\.(prs|aor|fut)\.(1sg|2sg|3sg|1pl|2pl|3pl)$/.exec(id);
@@ -138,6 +175,10 @@ export interface CardView {
 export function describeCard(id: string): CardView | null {
   const p = parseCardId(id);
   if (!p) return null;
+  if (p.kind === 'letter') {
+    const l = letterByCh.get(p.ch);
+    return l ? { id, kind: 'letter', ka: l.ch, ru: `${l.ru} — ${l.hintRu}`, note: `Например: ${l.word.ka} — ${l.word.ru}` } : null;
+  }
   if (p.kind === 'word') {
     const l = lexById.get(p.lexId);
     return l ? { id, kind: 'word', ka: l.ka, ru: l.ru, note: l.note } : null;

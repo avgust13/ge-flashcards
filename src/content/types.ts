@@ -127,14 +127,57 @@ export interface Unit {
   steps: UnitStep[];
 }
 
+export interface Letter {
+  /** The Mkhedruli letter. */
+  ch: string;
+  /** Latin transliteration, same scheme as `translit()`. */
+  tr: string;
+  /** Short Russian label of the sound; unique per letter (тʰ vs т’). */
+  ru: string;
+  /** How it sounds / how to say it. */
+  hintRu: string;
+  /** Teaching group, 1..6, in order of introduction. */
+  group: number;
+  /** Letters that look similar — distractors when reading. */
+  lookAlike: string[];
+  /** Letters that sound similar — distractors when listening. */
+  soundAlike: string[];
+  /** Text of the letter's audio clip: the vowel itself or the syllable "…ა". */
+  say: string;
+  /** A common word that starts with the letter. */
+  word: { ka: string; ru: string };
+}
+
+export interface LetterGroup {
+  id: number;
+  titleRu: string;
+  noteRu: string;
+}
+
+export interface PairWord {
+  ch: string;
+  ka: string;
+  ru: string;
+}
+
+/** Two words that differ only in one consonant of a confusable pair. */
+export interface LetterPair {
+  a: PairWord;
+  b: PairWord;
+}
+
 export interface Course {
   version: string;
   units: Unit[];
   verbs: Verb[];
   lexicon: Lexeme[];
   patterns: PatternCell[];
+  letters: Letter[];
+  letterGroups: LetterGroup[];
+  letterPairs: LetterPair[];
 }
 
 export const cellCardId = (verbId: string, tense: Tense, person: Person): string =>
   `c:${verbId}.${tense}.${person}`;
 export const wordCardId = (lexId: number): string => `w:${lexId}`;
+export const letterCardId = (ch: string): string => `l:${ch}`;

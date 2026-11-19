@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { Icon } from '../components/ui/Icon';
 import { ProgressBar } from '../components/ui/ProgressBar';
 import { useSession } from '../state/SessionContext';
+import { playBase64 } from '../audio/player';
 import { recordWordAnswer } from '../data/stats';
+import { getSettings } from '../db/progress';
 import type { FlashResult } from '../types';
 import { CardSwipeable, type DragState, type ExitDir } from './cards/CardSwipeable';
 import { Confetti } from './cards/Confetti';
@@ -129,11 +131,31 @@ export function CardSession() {
   const [confetti, setConfetti] = useState(0);
   const [drag, setDrag] = useState<DragState>({ x: 0, y: 0, active: false });
   const [exiting, setExiting] = useState<ExitDir>(null);
+  // The card can be graded only after its answer side has been seen.
+  const [checked, setChecked] = useState(false);
 
   const word = deck[i];
+  const { freeDirection: dir, autoplay } = getSettings();
+
+  // Listening first: a Georgian question is read out as it appears; a Russian
+  // question is answered aloud by the app only once the card is turned.
+  useEffect(() => {
+    if (autoplay && dir === 'ka-ru' && deck[i]) playBase64(deck[i].audio);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i]);
+  useEffect(() => {
+    if (autoplay && dir === 'ru-ka' && checked && deck[i]) playBase64(deck[i].audio);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked]);
+
+  const flip = () => {
+    setFlipped((f) => !f);
+    setChecked(true);
+  };
 
   const goNext = (next: FlashResult[]) => {
     setFlipped(false);
+    setChecked(false);
     setExiting(null);
     setDrag({ x: 0, y: 0, active: false });
     if (i + 1 >= deck.length) {
@@ -147,7 +169,7 @@ export function CardSession() {
   const decide = (right: boolean) => {
     // `exiting` stays set until the next card is shown: a second tap or swipe
     // inside that window must not grade the same card twice.
-    if (!word || exiting) return;
+    if (!word || exiting || !checked) return;
     setExiting(right ? 'right' : 'left');
     setDrag((d) => ({ ...d, active: false }));
     const newResults: FlashResult[] = [
@@ -186,8 +208,9 @@ export function CardSession() {
   const onPointerUp = () => {
     if (!drag.active) return;
     const t = 90;
-    if (drag.x > t) decide(true);
-    else if (drag.x < -t) decide(false);
+    // A swipe before the answer has been seen just springs back.
+    if (checked && drag.x > t) decide(true);
+    else if (checked && drag.x < -t) decide(false);
     else setDrag({ x: 0, y: 0, active: false });
   };
 
@@ -218,7 +241,7 @@ export function CardSession() {
       <Stage>
         {deck[i + 1] && (
           <BehindWrap>
-            <FlashCard word={deck[i + 1]} flipped={false} isPreview />
+            <FlashCard word={deck[i + 1]} flipped={false} dir={dir} isPreview />
           </BehindWrap>
         )}
 
@@ -226,6 +249,7 @@ export function CardSession() {
           key={word.id}
           word={word}
           flipped={flipped}
+          dir={dir}
           drag={drag}
           exiting={exiting}
           swipeStyle={SWIPE_STYLE}
@@ -233,24 +257,24 @@ export function CardSession() {
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
           onTap={() => {
-            if (!drag.active && Math.abs(drag.x) < 6) setFlipped((f) => !f);
+            if (!drag.active && Math.abs(drag.x) < 6) flip();
           }}
         />
 
-        <JudgementBadge dx={drag.x} />
+        {checked && <JudgementBadge dx={drag.x} />}
       </Stage>
 
       <Actions>
-        <RoundBtn color={theme.colors.danger} onClick={() => decide(false)} aria-label="Не знал">
+        <RoundBtn color={theme.colors.danger} onClick={() => decide(false)} aria-label="Не знал" disabled={!checked}>
           <svg width="24" height="24" viewBox="0 0 24 24">
             <path d="M6 6l12 12M18 6L6 18" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" />
           </svg>
         </RoundBtn>
-        <FlipBtn onClick={() => setFlipped((f) => !f)}>
+        <FlipBtn onClick={flip}>
           <Icon name="refresh" size={16} />
-          {flipped ? 'Скрыть перевод' : 'Показать перевод'}
+          {flipped ? 'Скрыть ответ' : checked ? 'Показать ответ' : 'Проверить себя'}
         </FlipBtn>
-        <RoundBtn color={theme.colors.success} onClick={() => decide(true)} aria-label="Знал">
+        <RoundBtn color={theme.colors.success} onClick={() => decide(true)} aria-label="Знал" disabled={!checked}>
           <svg width="24" height="24" viewBox="0 0 24 24">
             <path
               d="M5 13l4 4 10-10"

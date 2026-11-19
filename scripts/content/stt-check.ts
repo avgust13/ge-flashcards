@@ -18,6 +18,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { compile, letterTexts } from './build';
 import {
   clipId,
   clipPath as ttsClipPath,
@@ -192,7 +193,7 @@ const letters = (s: string) => norm(s).replace(/ /g, '');
  * the current one — only if it is strictly better. Where the recogniser is at
  * fault, new takes do not help and the clip is left alone.
  */
-async function retake(max: number, offset = 0): Promise<void> {
+async function retake(max: number, offset = 0, only: Set<string> | null = null): Promise<void> {
   const { voice, model } = ttsConfig();
   if (!voice) throw new Error('ELEVENLABS_VOICE_ID не задан');
   const manifest = readManifest();
@@ -201,7 +202,7 @@ async function retake(max: number, offset = 0): Promise<void> {
     ? (JSON.parse(readFileSync(CACHE, 'utf8')) as Record<string, string>)
     : {};
   const flagged = Object.entries(manifest).filter(
-    ([text, id]) => cache[id] !== undefined && letters(text) !== letters(cache[id]),
+    ([text, id]) => (!only || only.has(text)) && cache[id] !== undefined && letters(text) !== letters(cache[id]),
   );
   console.log(`клипов с расхождением в буквах: ${flagged.length} · до ${max} дублей на каждый`);
 
@@ -270,7 +271,9 @@ async function main(): Promise<void> {
   if (args.includes('--retake')) {
     const i = args.indexOf('--max');
     const o = args.indexOf('--offset');
-    return retake(i >= 0 ? Number(args[i + 1]) : 3, o >= 0 ? Number(args[o + 1]) : 0);
+    // `--letters` limits the round to the alphabet clips.
+    const only = args.includes('--letters') ? new Set(letterTexts(compile().course)) : null;
+    return retake(i >= 0 ? Number(args[i + 1]) : 3, o >= 0 ? Number(args[o + 1]) : 0, only);
   }
   for (let i = 0; i + 1 < args.length; i += 2) {
     const [file, expected] = [args[i], args[i + 1]];

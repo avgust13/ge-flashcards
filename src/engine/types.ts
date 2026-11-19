@@ -13,6 +13,8 @@ export interface ChoiceOption {
   text: string;
   /** true: Georgian text (use the Georgian font, show transliteration). */
   ka: boolean;
+  /** Second line under the option, e.g. the meaning of a minimal-pair word. */
+  sub?: string;
 }
 
 export interface Tile {
@@ -31,6 +33,10 @@ interface Base {
   /** Words in the answer, for the "automatic" time threshold. */
   tokens: number;
   reveal: Reveal;
+  /** Overrides the default question line ("Что это значит?"). */
+  title?: string;
+  /** Never show transliteration in this exercise: it would be the answer (letter drills). */
+  noTranslit?: boolean;
 }
 
 export interface RecogniseExercise extends Base {

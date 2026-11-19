@@ -5,7 +5,7 @@ import { unlockAudio } from '../audio/player';
 import { Icon } from '../components/ui/Icon';
 import { Pill } from '../components/ui/Pill';
 import { SectionLabel } from '../components/ui/SectionLabel';
-import { UNITS } from '../content/store';
+import { LETTERS, UNITS } from '../content/store';
 import {
   allCards,
   allDays,
@@ -212,6 +212,7 @@ export function HomeScreen() {
     for (const c of allCards()) if (isAutomatic(c)) automatic++;
     const unit = UNITS.find((u) => u.id === course.unlocked) ?? UNITS[0];
     return {
+      lettersKnown: LETTERS.filter((l) => getCard(`l:${l.ch}`)?.state === 2).length,
       settings,
       day,
       plan,
@@ -243,7 +244,9 @@ export function HomeScreen() {
   else {
     const parts: string[] = [];
     if (plan.reviewCount) parts.push(`${plan.reviewCount} повторений`);
-    if (plan.newCount) parts.push(`${plan.newCount} новых`);
+    const fresh = plan.newCount - plan.newLetters;
+    if (fresh > 0) parts.push(`${fresh} новых`);
+    if (plan.newLetters) parts.push(`букв: ${plan.newLetters}`);
     sub = parts.join(' · ') || 'Тренировка на скорость';
     if (plan.backlog) sub += '. Накопились повторения — сначала они, новое подождёт.';
   }
@@ -369,9 +372,9 @@ export function HomeScreen() {
             tint={theme.colors.goldSoft}
             icon="abc"
             title="Алфавит"
-            subtitle="Собери слово по буквам мхедрули"
-            extra="33 буквы"
-            onClick={() => navigate('/select/alpha')}
+            subtitle="33 буквы со звуком; пары, которые легко спутать"
+            extra={`выучено ${view.lettersKnown} из ${LETTERS.length}`}
+            onClick={() => navigate('/alphabet')}
           />
         </Body>
       </Wrap>

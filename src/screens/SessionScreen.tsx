@@ -7,6 +7,7 @@ import { Pill } from '../components/ui/Pill';
 import { ProgressBar } from '../components/ui/ProgressBar';
 import { SpeakerButton } from '../components/ui/SpeakerButton';
 import { UNITS, audioIdFor, unitOfCard } from '../content/store';
+import { trVisible } from '../content/reading';
 import { translit } from '../content/translit';
 import type { ExplainStep } from '../content/types';
 import { getCard, getSettings, requestPersistence, today } from '../db/progress';
@@ -20,6 +21,7 @@ import {
   logReadingTime,
   markExplainSeen,
   planDaily,
+  planAlphabet,
   planMatrix,
   planUnit,
   saveSession,
@@ -47,7 +49,8 @@ import { Body, Card, Eyebrow, Footer, Ka, Muted, Tr } from './session/parts';
 export type SessionLaunch =
   | { mode: 'daily' }
   | { mode: 'unit'; unitId: number }
-  | { mode: 'matrix'; verbId: string };
+  | { mode: 'matrix'; verbId: string }
+  | { mode: 'alphabet'; learnNext: boolean };
 
 const Screen = styled.div`
   flex: 1;
@@ -148,6 +151,10 @@ function initSession(launch: SessionLaunch | undefined): SessionState | null {
     const plan = planUnit(launch.unitId);
     return plan?.items.length ? startSession(plan, 'unit', day, t, `/course/${launch.unitId}`) : null;
   }
+  if (launch.mode === 'alphabet') {
+    const plan = planAlphabet(launch.learnNext);
+    return plan.items.length ? startSession(plan, 'alphabet', day, t, '/alphabet') : null;
+  }
   const plan = planMatrix(launch.verbId);
   return plan.items.length ? startSession(plan, 'matrix', day, t, `/verbs/${launch.verbId}`) : null;
 }
@@ -170,7 +177,6 @@ export function SessionScreen() {
   const [timeUp, setTimeUp] = useState(false);
   const itemStart = useRef(Date.now());
   const settings = getSettings();
-  const showTr = settings.translit === 'always';
 
   const item = state ? currentItem(state) : null;
   const finished = !state || isFinished(state);
@@ -329,7 +335,7 @@ export function SessionScreen() {
                   <Row key={i}>
                     <RowText>
                       <Ka $size={22}>{e.ka}</Ka>
-                      {showTr && <Tr>{translit(e.ka)}</Tr>}
+                      {trVisible(e.ka) && <Tr>{translit(e.ka)}</Tr>}
                       <RowRu>{e.ru}</RowRu>
                     </RowText>
                     <SpeakerButton audio={audioIdFor(e.ka)} />
@@ -360,8 +366,8 @@ export function SessionScreen() {
               {rows.map((r) => (
                 <Row key={r.id}>
                   <RowText>
-                    {r.ka && <Ka $size={22}>{r.ka}</Ka>}
-                    {r.ka && showTr && <Tr>{translit(r.ka)}</Tr>}
+                    {r.ka && <Ka $size={[...r.ka].length === 1 ? 40 : 22}>{r.ka}</Ka>}
+                    {r.ka && trVisible(r.ka) && <Tr>{translit(r.ka)}</Tr>}
                     <RowRu>{r.ru}</RowRu>
                     {r.note && <Muted style={{ marginTop: 4 }}>{r.note}</Muted>}
                   </RowText>
@@ -396,18 +402,17 @@ export function SessionScreen() {
       <Screen onPointerDown={unlockAudio}>
         {header}
         {ex.kind === 'assemble' ? (
-          <AssembleExercise key={ex.uid} ex={ex} showTr={showTr} autoplay={settings.autoplay} onDone={onAnswer} />
+          <AssembleExercise key={ex.uid} ex={ex} autoplay={settings.autoplay} onDone={onAnswer} />
         ) : ex.kind === 'speak' ? (
           <SpeakExercise
             key={ex.uid}
             ex={ex}
-            showTr={showTr}
             autoplay={settings.autoplay}
             intervals={intervals}
             onDone={onAnswer}
           />
         ) : (
-          <ChoiceExercise key={ex.uid} ex={ex} showTr={showTr} autoplay={settings.autoplay} onDone={onAnswer} />
+          <ChoiceExercise key={ex.uid} ex={ex} autoplay={settings.autoplay} onDone={onAnswer} />
         )}
       </Screen>
     );

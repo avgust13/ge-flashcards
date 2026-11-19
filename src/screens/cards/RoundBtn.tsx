@@ -20,6 +20,13 @@ const Btn = styled.button<{ $color: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: opacity 0.15s;
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+    box-shadow: none;
+  }
 `;
 
 export function RoundBtn({ color, children, ...rest }: Props) {

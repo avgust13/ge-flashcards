@@ -52,7 +52,17 @@ export function parseV1Daily(raw: string | null, today: string): DayStat | null 
  * The localStorage keys are left in place for one release as a rollback.
  */
 export async function migrateV1IfNeeded(db: AppDb, today: string): Promise<boolean> {
-  if (await db.get('kv', FLAG)) return false;
+  if (await db.get('kv', FLAG)) {
+    // The copy was made on an earlier start and has been in use since: the
+    // old keys have served their purpose as a rollback and can go.
+    try {
+      globalThis.localStorage?.removeItem(V1_STATS_KEY);
+      globalThis.localStorage?.removeItem(V1_DAILY_KEY);
+    } catch {
+      // storage unavailable
+    }
+    return false;
+  }
 
   let statsRaw: string | null = null;
   let dailyRaw: string | null = null;

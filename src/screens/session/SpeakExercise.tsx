@@ -10,7 +10,6 @@ import { Body, Card, Eyebrow, Footer, Muted, PromptRu, RevealCard, shortInterval
 
 interface Props {
   ex: Ex;
-  showTr: boolean;
   autoplay: boolean;
   /** Time until the card comes back for each grade, ms. */
   intervals: Record<Rating, number> | null;
@@ -71,7 +70,7 @@ const GradeBtn = styled.button<{ $r: Rating }>`
  * reveal the answer and grade yourself. The time until "Показать ответ" is
  * the measure of automatism.
  */
-export function SpeakExercise({ ex, showTr, autoplay, intervals, onDone }: Props) {
+export function SpeakExercise({ ex, autoplay, intervals, onDone }: Props) {
   const [revealed, setRevealed] = useState(false);
   const startedAt = useRef(Date.now());
   const thinkMs = useRef(0);
@@ -98,7 +97,7 @@ export function SpeakExercise({ ex, showTr, autoplay, intervals, onDone }: Props
 
         {revealed && (
           <>
-            <RevealCard reveal={ex.reveal} showTr={showTr} />
+            <RevealCard reveal={ex.reveal} />
             <Muted style={{ textAlign: 'center' }}>Насколько легко это далось?</Muted>
           </>
         )}

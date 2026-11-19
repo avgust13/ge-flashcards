@@ -1,12 +1,16 @@
 import styled from 'styled-components';
+import { playBase64 } from '../../audio/player';
 import { Icon } from '../../components/ui/Icon';
 import { ImageSlot } from '../../components/ui/ImageSlot';
-import { playBase64 } from '../../audio/player';
+import { trOnReveal, trVisible } from '../../content/reading';
 import type { Word } from '../../types';
+
+export type CardDir = 'ka-ru' | 'ru-ka';
 
 interface Props {
   side: 'front' | 'back';
   word: Word;
+  dir?: CardDir;
 }
 
 const Face = styled.div<{ $back: boolean }>`
@@ -28,12 +32,13 @@ const TopRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: 34px;
 `;
 
-const Tag = styled.div<{ $back: boolean }>`
+const Tag = styled.div<{ $ka: boolean }>`
   font-size: 10px;
   font-weight: 900;
-  color: ${({ $back, theme }) => ($back ? theme.colors.blue : theme.colors.primary)};
+  color: ${({ $ka, theme }) => ($ka ? theme.colors.primary : theme.colors.blue)};
   letter-spacing: 1.5px;
   text-transform: uppercase;
 `;
@@ -49,6 +54,19 @@ const SpeakerBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+/** Takes the picture's place on a question side, where a picture would give the answer away. */
+const Blank = styled.div`
+  height: 180px;
+  border-radius: 18px;
+  background: repeating-linear-gradient(135deg, #FAF5EA 0 12px, #F6EEDC 12px 24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors.inkMute};
+  font-size: 44px;
+  font-weight: 900;
 `;
 
 const Center = styled.div`
@@ -80,8 +98,8 @@ const Ru = styled.div`
   line-height: 1.1;
 `;
 
-const RuSub = styled.div`
-  font-family: ${({ theme }) => theme.fonts.ka};
+const Sub = styled.div<{ $ka?: boolean }>`
+  font-family: ${({ $ka, theme }) => ($ka ? theme.fonts.ka : theme.fonts.ui)};
   font-size: 16px;
   color: ${({ theme }) => theme.colors.inkSoft};
   margin-top: 6px;
@@ -95,46 +113,62 @@ const Hint = styled.div`
   letter-spacing: 0.4px;
 `;
 
-export function CardFace({ side, word }: Props) {
+/**
+ * One side of a word card. The question side never gives the answer away:
+ * a Georgian question shows no picture, and a Russian question shows no
+ * Georgian text and has no audio button.
+ */
+export function CardFace({ side, word, dir = 'ka-ru' }: Props) {
   const back = side === 'back';
+  // Which language this side is in.
+  const georgian = back !== (dir === 'ka-ru');
+  const showTr = back ? trOnReveal() : trVisible(word.ka);
+
   return (
     <Face $back={back}>
       <TopRow>
-        <Tag $back={back}>{back ? 'Русский' : 'Грузинский'}</Tag>
-        <SpeakerBtn
-          aria-label="Прослушать"
-          onPointerDown={(e) => e.stopPropagation()}
-          onClick={(e) => {
-            e.stopPropagation();
-            playBase64(word.audio);
-          }}
-        >
-          <Icon name="speaker" size={18} />
-        </SpeakerBtn>
+        <Tag $ka={georgian}>{georgian ? 'Грузинский' : 'Русский'}</Tag>
+        {(georgian || back) && (
+          <SpeakerBtn
+            aria-label="Прослушать"
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              playBase64(word.audio);
+            }}
+          >
+            <Icon name="speaker" size={18} />
+          </SpeakerBtn>
+        )}
       </TopRow>
 
-      <ImageSlot
-        src={word.image}
-        height={180}
-        label={back ? word.ru : word.ka}
-        accent={back ? '#D7E5FF' : '#FFD6B8'}
-      />
+      {georgian && !back ? (
+        <Blank aria-hidden="true">?</Blank>
+      ) : (
+        <ImageSlot src={word.image} height={180} label={word.ru} accent={georgian ? '#FFD6B8' : '#D7E5FF'} />
+      )}
 
       <Center>
-        {!back ? (
+        {georgian ? (
           <>
             <Ka>{word.ka}</Ka>
-            <Tr>/{word.tr}/</Tr>
+            {showTr && <Tr>/{word.tr}/</Tr>}
+            {back && <Sub>{word.ru}</Sub>}
           </>
         ) : (
           <>
             <Ru>{word.ru}</Ru>
-            <RuSub>{word.ka} · /{word.tr}/</RuSub>
+            {back && (
+              <Sub $ka>
+                {word.ka}
+                {showTr ? ` · /${word.tr}/` : ''}
+              </Sub>
+            )}
           </>
         )}
       </Center>
 
-      <Hint>{back ? 'нажми, чтобы перевернуть' : 'нажми, чтобы увидеть перевод'}</Hint>
+      <Hint>{back ? 'нажми, чтобы перевернуть' : 'вспомни, потом нажми, чтобы проверить'}</Hint>
     </Face>
   );
 }

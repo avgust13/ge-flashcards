@@ -85,7 +85,7 @@ export function TileKeyboard({ options, onTap, onHint, solved, hint }: Props) {
     <Card>
       <Header>
         <div>
-          <Label>Выбери русскую букву</Label>
+          <Label>Выбери звук буквы</Label>
           {hint && <Hint>{hint}</Hint>}
         </div>
         <HintBtn onClick={onHint} disabled={solved}>

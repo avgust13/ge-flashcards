@@ -18,13 +18,22 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { audioTexts, compile } from './build';
+import { audioTexts, compile, hiFiTexts, letterTexts } from './build';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const AUDIO_DIR = join(ROOT, 'public/audio');
 const MANIFEST = join(ROOT, 'content-src/audio-manifest.json');
 const API = 'https://api.elevenlabs.io';
 const FORMAT = 'mp3_44100_64';
+/** Letter sounds and minimal pairs: the consonant burst is the lesson, so spend more bits on it. */
+const FORMAT_HIFI = 'mp3_44100_128';
+
+let hifi: Set<string> | null = null;
+/** Is this text recorded at the higher bitrate? */
+export function isHiFi(text: string): boolean {
+  if (!hifi) hifi = new Set(hiFiTexts(compile().course));
+  return hifi.has(text);
+}
 
 /** `--voice <id>` overrides ELEVENLABS_VOICE_ID for this run. */
 function argEarly(flag: string): string | undefined {
@@ -49,7 +58,9 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
  * URL), which keeps every published file immutable for the service-worker cache.
  */
 export function clipId(voice: string, model: string, text: string, take = 0): string {
-  const key = take > 0 ? `${voice}|${model}|${text}|take${take}` : `${voice}|${model}|${text}`;
+  let key = `${voice}|${model}|${text}`;
+  if (isHiFi(text)) key += '|128';
+  if (take > 0) key += `|take${take}`;
   return createHash('sha1').update(key).digest('hex').slice(0, 12);
 }
 
@@ -91,7 +102,7 @@ async function describeError(res: Response): Promise<string> {
 /** `seed` asks for a different rendition of the same text (used for retakes). */
 export async function synthesize(text: string, voice: string, model: string, seed?: number): Promise<Buffer> {
   for (let attempt = 0; ; attempt++) {
-    const res = await api(`/v1/text-to-speech/${voice}?output_format=${FORMAT}`, {
+    const res = await api(`/v1/text-to-speech/${voice}?output_format=${isHiFi(text) ? FORMAT_HIFI : FORMAT}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text, model_id: model, language_code: 'ka', ...(seed != null ? { seed } : {}) }),
@@ -234,7 +245,8 @@ async function main(): Promise<void> {
 
   const { course, sentences } = compile();
   const unit = arg('--unit') ? Number(arg('--unit')) : null;
-  const unitTexts = unit == null ? null : new Set([
+  // "Unit 0" is the alphabet.
+  const unitTexts = unit == null ? null : unit === 0 ? new Set(letterTexts(course)) : new Set([
     ...course.lexicon.filter((l) => l.unit === unit).map((l) => l.ka),
     ...sentences.filter((s) => s.unit === unit).map((s) => s.ka),
   ]);
@@ -376,7 +388,7 @@ function audit(): void {
       continue;
     }
     // Constant bitrate: duration follows from the size.
-    const sec = (statSync(file).size * 8) / 64_000;
+    const sec = (statSync(file).size * 8) / (isHiFi(text) ? 128_000 : 64_000);
     rows.push({ text, id, sec, n: text.replace(/[ .?]/g, '').length });
   }
   if (!rows.length) {

@@ -1,6 +1,7 @@
 import type { PointerEventHandler } from 'react';
 import styled from 'styled-components';
 import type { Word } from '../../types';
+import type { CardDir } from './CardFace';
 import { FlashCard } from './FlashCard';
 
 export type SwipeStyle = 'tilt' | 'slide' | 'stack' | 'fly';
@@ -17,6 +18,7 @@ export interface DragState {
 interface Props {
   word: Word;
   flipped: boolean;
+  dir?: CardDir;
   drag: DragState;
   exiting: ExitDir;
   swipeStyle?: SwipeStyle;
@@ -60,6 +62,7 @@ const Wrap = styled.div<{ $exit: ExitDir; $active: boolean; $transform: string }
 export function CardSwipeable({
   word,
   flipped,
+  dir,
   drag,
   exiting,
   swipeStyle = 'tilt',
@@ -80,7 +83,7 @@ export function CardSwipeable({
       onPointerCancel={onPointerUp}
       onClick={onTap}
     >
-      <FlashCard word={word} flipped={flipped} />
+      <FlashCard word={word} flipped={flipped} dir={dir} />
     </Wrap>
   );
 }

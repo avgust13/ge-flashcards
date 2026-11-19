@@ -9,6 +9,8 @@ import {
   describeCard,
   examplesFor,
   getUnit,
+  LETTERS,
+  letterCardIds,
   parseCardId,
   ruText,
   unitOfCard,
@@ -33,6 +35,7 @@ import {
 } from '../db/progress';
 import { now } from '../srs/clock';
 import {
+  composeAlphabet,
   composeDaily,
   composeMatrixDrill,
   composeUnitPractice,
@@ -59,6 +62,7 @@ function composerInput(): ComposerInput {
     cards: allCards(),
     getCard,
     units: UNITS,
+    letterIds: letterCardIds(),
     unlocked: course.unlocked,
     seenExplain: new Set(course.seenExplain),
     settings: getSettings(),
@@ -80,6 +84,19 @@ export function planUnit(unitId: number): SessionPlan | null {
 
 export function planMatrix(verbId: string): SessionPlan {
   return composeMatrixDrill(composerInput(), verbId, [...allCardIds()]);
+}
+
+/** The first group that still has letters to learn, as card ids (empty when all are introduced). */
+export function nextLetterGroup(): string[] {
+  const pending = LETTERS.filter((l) => !hasCard(`l:${l.ch}`));
+  if (!pending.length) return [];
+  const group = Math.min(...pending.map((l) => l.group));
+  return pending.filter((l) => l.group === group).map((l) => `l:${l.ch}`);
+}
+
+/** Alphabet practice; `learnNext` also introduces the next group of letters. */
+export function planAlphabet(learnNext: boolean): SessionPlan {
+  return composeAlphabet(composerInput(), learnNext ? nextLetterGroup() : []);
 }
 
 export function buildCtx(): BuildCtx {
@@ -109,6 +126,7 @@ export function logReadingTime(ms: number): void {
 }
 
 function kindOf(cardId: string): CardKind {
+  if (cardId.startsWith('l:')) return 'l';
   return cardId.startsWith('w:') ? 'w' : cardId.startsWith('s:') ? 's' : 'c';
 }
 

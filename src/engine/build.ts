@@ -4,20 +4,23 @@
  * distractors that differ exactly where the card is being tested.
  */
 import {
+  LETTERS,
   LEXICON,
   SENTENCES,
   audioIdFor,
   describeCard,
   examplesFor,
+  getLetter,
   getLexeme,
   getPattern,
   getSentence,
   getVerb,
+  pairFor,
   parseCardId,
   ruText,
   unitOfCard,
 } from '../content/store';
-import { PERSONS, TENSES, type Person, type Sentence, type Tense, type Verb } from '../content/types';
+import { PERSONS, TENSES, type Letter, type Person, type Sentence, type Tense, type Verb } from '../content/types';
 import type { CardInfo } from '../srs/composer';
 import type { ExerciseKind, SrsCard } from '../srs/types';
 import { shuffled } from './rng';
@@ -80,6 +83,10 @@ export function pickExample(cardId: string, ctx: BuildCtx): Sentence | null {
 export function cardInfo(cardId: string): CardInfo {
   const p = parseCardId(cardId);
   if (!p) return { cardKind: 'word', tokens: 1, hasAudio: false, group: null };
+  if (p.kind === 'letter') {
+    const l = getLetter(p.ch);
+    return { cardKind: 'letter', tokens: 1, hasAudio: !!(l && audioIdFor(l.say)), group: null };
+  }
   if (p.kind === 'word') {
     const l = getLexeme(p.lexId);
     return { cardKind: 'word', tokens: 1, hasAudio: !!(l && audioIdFor(l.ka)), group: null };
@@ -261,6 +268,104 @@ function buildWord(cardId: string, lexId: number, kind: ExerciseKind, ctx: Build
   return { ...base, kind: 'recognise', dir: 'ru-ka', prompt: l.ru, promptAudio: null, ...c } satisfies RecogniseExercise;
 }
 
+/**
+ * Three other letters to offer next to the right one: first the ones the
+ * learner is likely to confuse it with (by shape when reading, by sound when
+ * listening), then letters already met, then the rest of the same group.
+ */
+export function letterDistractors(l: Letter, prefer: 'look' | 'sound', ctx: BuildCtx): Letter[] {
+  const explicit = prefer === 'look' ? [...l.lookAlike, ...l.soundAlike] : [...l.soundAlike, ...l.lookAlike];
+  const seen = new Set([l.ch]);
+  const out: Letter[] = [];
+  const push = (ch: string) => {
+    const x = getLetter(ch);
+    if (x && !seen.has(ch)) {
+      seen.add(ch);
+      out.push(x);
+    }
+  };
+  // A similar letter from a later group only once it has been introduced.
+  for (const ch of explicit) {
+    const x = getLetter(ch);
+    if (x && (x.group <= l.group || ctx.introduced(`l:${ch}`))) push(ch);
+  }
+  const rest = LETTERS.filter((x) => !seen.has(x.ch))
+    .map((x) => ({
+      ch: x.ch,
+      score: (ctx.introduced(`l:${x.ch}`) ? 2 : 0) + (x.group === l.group ? 1.5 : 0) + (x.group < l.group ? 0.5 : 0) + ctx.rng(),
+    }))
+    .sort((a, b) => b.score - a.score);
+  for (const r of rest) {
+    if (out.length >= 3) break;
+    push(r.ch);
+  }
+  return out.slice(0, 3);
+}
+
+function buildLetter(cardId: string, ch: string, kind: ExerciseKind, ctx: BuildCtx): Exercise | null {
+  const l = getLetter(ch);
+  if (!l) return null;
+  const audio = audioIdFor(l.say);
+  const reveal: Reveal = {
+    ka: l.ch,
+    ru: `${l.ru} — ${l.hintRu}`,
+    audio,
+    note: `Например: ${l.word.ka} — ${l.word.ru}`,
+  };
+  const base = { uid: nextUid(cardId), card: cardId, sentenceId: null, tokens: 1, reveal, noTranslit: true };
+  const asLetter = (x: Letter): ChoiceOption => ({ text: x.ch, ka: true });
+  const asSound = (x: Letter): ChoiceOption => ({ text: x.ru, ka: false, sub: x.hintRu });
+  const card = ctx.getCard(cardId);
+
+  if (kind === 'listen' && audio) {
+    // For a mature letter of a confusable pair, half the time test the contrast
+    // on real words: "дверь" or "ветер"?
+    const pair = pairFor(ch);
+    const pairAudio = pair ? audioIdFor(pair.mine.ka) : null;
+    if (pair && pairAudio && card?.state === 2 && ctx.introduced(`l:${pair.other.ch}`) && ctx.rng() < 0.5) {
+      const c = choice(
+        { text: pair.mine.ka, ka: true, sub: pair.mine.ru },
+        [{ text: pair.other.ka, ka: true, sub: pair.other.ru }],
+        ctx,
+      );
+      return {
+        ...base,
+        kind: 'listen',
+        audio: pairAudio,
+        title: 'Какое слово ты слышишь?',
+        reveal: { ka: pair.mine.ka, ru: pair.mine.ru, audio: pairAudio, note: `${l.ch} — ${l.ru}: ${l.hintRu}` },
+        ...c,
+      } satisfies ListenExercise;
+    }
+    const c = choice(asLetter(l), letterDistractors(l, 'sound', ctx).map(asLetter), ctx);
+    return { ...base, kind: 'listen', audio, title: 'Какую букву ты слышишь?', ...c } satisfies ListenExercise;
+  }
+
+  // First meeting: see the letter, name the sound. Afterwards: from the sound back to the letter.
+  if ((card?.state ?? 0) === 0) {
+    const c = choice(asSound(l), letterDistractors(l, 'look', ctx).map(asSound), ctx);
+    return {
+      ...base,
+      kind: 'recognise',
+      dir: 'ka-ru',
+      prompt: l.ch,
+      promptAudio: null,
+      title: 'Какой это звук?',
+      ...c,
+    } satisfies RecogniseExercise;
+  }
+  const c = choice(asLetter(l), letterDistractors(l, 'look', ctx).map(asLetter), ctx);
+  return {
+    ...base,
+    kind: 'recognise',
+    dir: 'ru-ka',
+    prompt: `${l.ru} — ${l.hintRu}`,
+    promptAudio: null,
+    title: 'Какая это буква?',
+    ...c,
+  } satisfies RecogniseExercise;
+}
+
 function assemble(cardId: string, s: Sentence, ctx: BuildCtx, reveal: Reveal): AssembleExercise {
   const p = parseCardId(cardId);
   const verbTok = s.tokens.find((t) => t.role === 'verb') ?? null;
@@ -341,6 +446,7 @@ function buildSentenceCard(cardId: string, s: Sentence, kind: ExerciseKind, ctx:
 export function buildExercise(cardId: string, kind: ExerciseKind, ctx: BuildCtx): Exercise | null {
   const p = parseCardId(cardId);
   if (!p) return null;
+  if (p.kind === 'letter') return buildLetter(cardId, p.ch, kind, ctx);
   if (p.kind === 'word') return buildWord(cardId, p.lexId, kind, ctx);
   const s = p.kind === 'phrase' ? getSentence(p.sentenceId) ?? null : pickExample(cardId, ctx);
   if (!s) return null;
@@ -352,6 +458,10 @@ export function introRows(cardIds: string[], ctx: BuildCtx): { id: string; ka: s
   return cardIds.flatMap((id) => {
     const view = describeCard(id);
     if (!view) return [];
+    if (view.kind === 'letter') {
+      const l = getLetter(view.ka);
+      return [{ id, ka: view.ka, ru: view.ru, audio: l ? audioIdFor(l.say) : null, note: view.note }];
+    }
     if (view.kind === 'pattern') {
       const s = pickExample(id, ctx);
       return [{ id, ka: s?.ka ?? '', ru: s ? ruText(s.ru, ctx.gender) : view.ru, audio: s ? audioIdFor(s.ka) : null, note: view.note }];

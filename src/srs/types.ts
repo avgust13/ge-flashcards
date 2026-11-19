@@ -85,7 +85,10 @@ export interface Settings {
   newPerDay: 'auto' | number;
   desiredRetention: number;
   dayStartHour: number;
-  translit: 'always' | 'never';
+  /** `auto`: shown only for text that contains a letter not yet learned. */
+  translit: 'always' | 'auto' | 'never';
+  /** Direction of the free-practice word cards. */
+  freeDirection: 'ka-ru' | 'ru-ka';
   autoplay: boolean;
   /** Grammatical gender used for the learner in Russian prompts ("я сделал / сделала"). */
   ruGender: 'm' | 'f';
@@ -98,7 +101,8 @@ export const DEFAULT_SETTINGS: Settings = {
   newPerDay: 'auto',
   desiredRetention: 0.9,
   dayStartHour: 4,
-  translit: 'always',
+  translit: 'auto',
+  freeDirection: 'ka-ru',
   autoplay: true,
   ruGender: 'm',
   lastBackupAt: null,

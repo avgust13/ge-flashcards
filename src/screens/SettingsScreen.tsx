@@ -1,6 +1,13 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import {
+  downloadAllAudio,
+  offlineStatus,
+  offlineSupported,
+  storageUsed,
+  type OfflineStatus,
+} from '../audio/cache';
 import { Icon } from '../components/ui/Icon';
 import { Pill } from '../components/ui/Pill';
 import { ScreenHeader } from '../components/ui/ScreenHeader';
@@ -148,6 +155,38 @@ export function SettingsScreen() {
   const [showIosSheet, setShowIosSheet] = useState(false);
   const [clock, setClock] = useState(getClockOffset());
   const fileInput = useRef<HTMLInputElement>(null);
+  const [offline, setOffline] = useState<OfflineStatus | null>(null);
+  const [usedMb, setUsedMb] = useState<number | null>(null);
+  const [downloading, setDownloading] = useState(false);
+  const [offlineMsg, setOfflineMsg] = useState<{ text: string; error?: boolean } | null>(null);
+
+  const refreshOffline = async () => {
+    setOffline(await offlineStatus());
+    const used = await storageUsed();
+    setUsedMb(used == null ? null : Math.round(used / 1_048_576));
+  };
+
+  useEffect(() => {
+    void refreshOffline();
+  }, []);
+
+  const onDownloadAudio = async () => {
+    setDownloading(true);
+    setOfflineMsg(null);
+    try {
+      const { failed } = await downloadAllAudio(setOffline);
+      setOfflineMsg(
+        failed
+          ? { text: `Не скачалось клипов: ${failed}. Проверь сеть и нажми ещё раз.`, error: true }
+          : { text: 'Весь звук курса сохранён на устройстве.' },
+      );
+    } catch (e) {
+      setOfflineMsg({ text: (e as Error).message || 'Не удалось скачать звук.', error: true });
+    } finally {
+      setDownloading(false);
+      void refreshOffline();
+    }
+  };
 
   const onInstallClick = () => {
     if (platform === 'ios') setShowIosSheet(true);
@@ -288,11 +327,17 @@ export function SettingsScreen() {
           <Row>
             <Meta>
               <Title>Транслитерация</Title>
-              <Desc>Латинская подпись под грузинским текстом. Выключи, когда буквы станут привычными.</Desc>
+              <Desc>
+                Латинская подпись под грузинским текстом. «Авто» убирает её у слов, все буквы которых ты уже
+                выучил.
+              </Desc>
             </Meta>
             <Choices>
+              <Pill size="sm" kind={settings.translit === 'auto' ? 'dark' : 'ghost'} onClick={() => setSettings({ translit: 'auto' })}>
+                авто
+              </Pill>
               <Pill size="sm" kind={settings.translit === 'always' ? 'dark' : 'ghost'} onClick={() => setSettings({ translit: 'always' })}>
-                показывать
+                всегда
               </Pill>
               <Pill size="sm" kind={settings.translit === 'never' ? 'dark' : 'ghost'} onClick={() => setSettings({ translit: 'never' })}>
                 скрыть
@@ -341,6 +386,31 @@ export function SettingsScreen() {
               hidden
               onChange={(e) => void onImportFile(e.target.files?.[0])}
             />
+          </Row>
+        </Card>
+
+        <SectionLabel>Офлайн</SectionLabel>
+        <Card>
+          <Row>
+            <Meta>
+              <Title>Звук курса на устройстве</Title>
+              <Desc>
+                {offline
+                  ? `Скачано ${offline.cached} из ${offline.total} клипов.`
+                  : 'Скачай весь звук заранее, чтобы заниматься без сети.'}{' '}
+                Весь звук занимает около 10 МБ.
+                {usedMb != null && ` Сейчас приложение хранит ${usedMb} МБ.`}
+              </Desc>
+              {offlineMsg && <Message $isError={offlineMsg.error}>{offlineMsg.text}</Message>}
+            </Meta>
+            <Pill
+              kind={offline && offline.cached < offline.total ? 'primary' : 'ghost'}
+              size="sm"
+              disabled={downloading || !offlineSupported() || (!!offline && offline.cached >= offline.total)}
+              onClick={onDownloadAudio}
+            >
+              {downloading ? 'Скачиваю…' : offline && offline.cached >= offline.total ? 'Скачано' : 'Скачать'}
+            </Pill>
           </Row>
         </Card>
 

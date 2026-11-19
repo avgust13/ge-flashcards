@@ -3,6 +3,7 @@ import styled, { useTheme } from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Icon } from '../components/ui/Icon';
 import { Pill } from '../components/ui/Pill';
+import { trVisible } from '../content/reading';
 import { translit } from '../content/translit';
 import { getSettings } from '../db/progress';
 import type { SessionResultRow } from '../engine/types';
@@ -149,7 +150,6 @@ export function DoneScreen() {
   const navigate = useNavigate();
   const theme = useTheme();
   const data = useLocation().state as DoneState | null;
-  const showTr = getSettings().translit === 'always';
 
   useEffect(() => {
     if (!data) navigate('/', { replace: true });
@@ -212,7 +212,7 @@ export function DoneScreen() {
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <RowKa>{r.ka}</RowKa>
                     <RowMeta>
-                      {showTr && r.ka ? `${translit(r.ka)} · ` : ''}
+                      {r.ka && trVisible(r.ka) ? `${translit(r.ka)} · ` : ''}
                       {r.ru}
                     </RowMeta>
                   </div>

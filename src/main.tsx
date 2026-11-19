@@ -1,3 +1,6 @@
+// Fonts are bundled with the app: no third-party request, and they work offline.
+import '@fontsource-variable/nunito';
+import '@fontsource-variable/noto-sans-georgian';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';

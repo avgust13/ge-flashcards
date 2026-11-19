@@ -6,7 +6,7 @@
 import type { ExerciseKind, SrsCard } from './types';
 
 export interface LadderInfo {
-  cardKind: 'word' | 'cell' | 'pattern' | 'phrase';
+  cardKind: 'word' | 'cell' | 'pattern' | 'phrase' | 'letter';
   /** Words in the example sentence (1 for a single word). */
   tokens: number;
   hasAudio: boolean;
@@ -15,6 +15,15 @@ export interface LadderInfo {
 export function pickExercise(card: SrsCard | undefined, info: LadderInfo): ExerciseKind {
   const state = card?.state ?? 0;
   const reps = card?.reps ?? 0;
+
+  if (info.cardKind === 'letter') {
+    // See the letter and name its sound; hear the sound and find the letter;
+    // then the reverse reading (sound → letter). Mature letters alternate.
+    if (state === 0) return 'recognise';
+    if (!info.hasAudio) return 'recognise';
+    if (state === 1 || state === 3) return reps <= 1 ? 'listen' : 'recognise';
+    return reps % 2 === 0 ? 'listen' : 'recognise';
+  }
 
   if (info.cardKind === 'word') {
     // Meaning first (Georgian → Russian), then the other way round, then aloud.
@@ -45,6 +54,7 @@ export const EXERCISE_COST_MS: Record<ExerciseKind, number> = {
 
 /** A new card climbs several rungs inside the session that introduces it. */
 export function newCardCostMs(cardKind: LadderInfo['cardKind']): number {
+  if (cardKind === 'letter') return EXERCISE_COST_MS.recognise * 2 + EXERCISE_COST_MS.listen;
   return cardKind === 'word'
     ? EXERCISE_COST_MS.recognise * 2 + EXERCISE_COST_MS.speak
     : EXERCISE_COST_MS.recognise + EXERCISE_COST_MS.assemble + EXERCISE_COST_MS.speak;

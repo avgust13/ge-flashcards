@@ -15,7 +15,7 @@ import {
   type Tense,
   type Verb,
 } from '../../src/content/types';
-import { isGeorgianWord } from '../../src/content/translit';
+import { isGeorgianWord, translit } from '../../src/content/translit';
 
 const NOM_PRON: Record<Person, string> = {
   '1sg': 'მე', '2sg': 'შენ', '3sg': 'ის', '1pl': 'ჩვენ', '2pl': 'თქვენ', '3pl': 'ისინი',
@@ -85,6 +85,36 @@ export function validateCourse(course: Course, sentences: Sentence[]): string[] 
       if (!isGeorgianWord(f)) err(`lexeme ${l.id}: form "${f}" is not Georgian`);
       surfaces.add(f);
     }
+  }
+
+  // ── letters ────────────────────────────────────────────────────────────
+  const letters = new Map(course.letters.map((l) => [l.ch, l]));
+  const groups = new Set(course.letterGroups.map((g) => g.id));
+  if (course.letters.length !== 33 || letters.size !== 33) err(`alphabet: expected 33 distinct letters, got ${letters.size}`);
+  const labels = new Set<string>();
+  for (const l of course.letters) {
+    const where = `letter ${l.ch}`;
+    if ([...l.ch].length !== 1 || !isGeorgianWord(l.ch)) err(`${where}: not a single Mkhedruli letter`);
+    if (translit(l.ch) !== l.tr) err(`${where}: transliteration "${l.tr}" disagrees with translit() ("${translit(l.ch)}")`);
+    if (labels.has(l.ru)) err(`${where}: sound label "${l.ru}" is used by another letter — pairs would be indistinguishable`);
+    labels.add(l.ru);
+    if (!l.hintRu.trim()) err(`${where}: no pronunciation hint`);
+    if (!groups.has(l.group)) err(`${where}: unknown group ${l.group}`);
+    if (!l.say.startsWith(l.ch) || !isGeorgianWord(l.say)) err(`${where}: clip text "${l.say}" must start with the letter`);
+    if (!isGeorgianWord(l.word.ka) || !l.word.ka.startsWith(l.ch)) err(`${where}: example word "${l.word.ka}" must start with the letter`);
+    for (const other of [...l.lookAlike, ...l.soundAlike]) {
+      if (other === l.ch) err(`${where}: lists itself as a look-alike`);
+      if (!letters.has(other)) err(`${where}: unknown similar letter "${other}"`);
+    }
+  }
+  for (const p of course.letterPairs) {
+    const a = [...p.a.ka];
+    const b = [...p.b.ka];
+    const diff = a.length === b.length ? a.map((c, i) => (c === b[i] ? -1 : i)).filter((i) => i >= 0) : [];
+    if (diff.length !== 1 || a[diff[0]] !== p.a.ch || b[diff[0]] !== p.b.ch) {
+      err(`pair ${p.a.ka}/${p.b.ka}: the words must differ in exactly one letter, ${p.a.ch} vs ${p.b.ch}`);
+    }
+    if (!letters.get(p.a.ch)?.soundAlike.includes(p.b.ch)) err(`pair ${p.a.ka}/${p.b.ka}: ${p.a.ch} and ${p.b.ch} are not marked as sounding alike`);
   }
 
   // ── cards and units ────────────────────────────────────────────────────

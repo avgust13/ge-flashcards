@@ -1,5 +1,6 @@
 import 'fake-indexeddb/auto';
 import { beforeEach, describe, expect, it } from 'vitest';
+import { lettersKnown, trOnReveal, trVisible } from '../content/reading';
 import { newSrsCard, review } from '../srs/fsrs';
 import type { ReviewLogEntry } from '../srs/types';
 import { buildBackup, parseBackup, restoreBackup } from './backup';
@@ -138,6 +139,44 @@ describe('progress store', () => {
     expect(() => parseBackup('{}')).toThrow();
     expect(() => parseBackup('nope')).toThrow();
     expect(() => parseBackup(JSON.stringify({ app: 'ge-flashcards', format: 2 }))).toThrow();
+  });
+
+  it('drops the old localStorage keys on the start after the migration', async () => {
+    store.set(V1_STATS_KEY, JSON.stringify({ '19': { correct: 0.8, seen: 6, lastSeen: 1 } }));
+    await initProgress();
+    expect(store.has(V1_STATS_KEY)).toBe(true);
+    await flush();
+    await closeDbForTests();
+    resetMirrorForTests();
+    await initProgress();
+    expect(store.has(V1_STATS_KEY)).toBe(false);
+    expect(allWordStats().get(19)?.correct).toBe(0.8);
+  });
+
+  it('hides the transliteration of a text once all its letters are learned', async () => {
+    await initProgress();
+    const learn = (ch: string) => putCard({ ...newSrsCard(`l:${ch}`, 'l', null, Date.now()), state: 2 });
+    expect(trVisible('მე')).toBe(true);
+    learn('მ');
+    expect(trVisible('მე')).toBe(true);
+    learn('ე');
+    expect(lettersKnown('მე')).toBe(true);
+    expect(trVisible('მე')).toBe(false);
+    // Punctuation and spaces do not count; an unknown letter brings it back.
+    expect(trVisible('მე მე?')).toBe(false);
+    expect(trVisible('შენ')).toBe(true);
+    // A letter still in its learning steps is not "learned" yet.
+    putCard({ ...newSrsCard('l:შ', 'l', null, Date.now()), state: 1 });
+    putCard({ ...newSrsCard('l:ნ', 'l', null, Date.now()), state: 2 });
+    expect(trVisible('შენ')).toBe(true);
+
+    setSettings({ translit: 'always' });
+    expect(trVisible('მე')).toBe(true);
+    setSettings({ translit: 'never' });
+    expect(trVisible('შენ')).toBe(false);
+    expect(trOnReveal()).toBe(false);
+    setSettings({ translit: 'auto' });
+    expect(trOnReveal()).toBe(true);
   });
 
   it('reset keeps settings but removes cards and the old localStorage progress', async () => {

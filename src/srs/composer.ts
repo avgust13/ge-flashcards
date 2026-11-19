@@ -18,7 +18,10 @@ export interface SessionPlan {
   /** Cards due today, whether or not they fit into this session. */
   dueCount: number;
   reviewCount: number;
+  /** New cards in this session, letters included. */
   newCount: number;
+  /** How many of the new cards are letters. */
+  newLetters: number;
   /** More was due than the time budget allows; no new material is given. */
   backlog: boolean;
   estMs: number;
@@ -34,6 +37,8 @@ export interface ComposerInput {
   cards: Iterable<SrsCard>;
   getCard: (id: string) => SrsCard | undefined;
   units: Unit[];
+  /** Letter cards in teaching order. The alphabet runs alongside the units, a few letters a day. */
+  letterIds: readonly string[];
   unlocked: number;
   seenExplain: ReadonlySet<string>;
   settings: Settings;
@@ -48,6 +53,8 @@ const MIN_BUDGET_MS = 3 * 60_000;
 const REVIEW_SHARE = 0.7;
 const AUTO_NEW_SKELETON = 8;
 const AUTO_NEW_WORDS = 5;
+/** At four letters a day the whole alphabet takes nine days. */
+const AUTO_NEW_LETTERS = 4;
 const WARMUP = 6;
 
 function reviewCost(card: SrsCard, info: CardInfo): number {
@@ -113,10 +120,12 @@ export function pendingNew(input: Pick<ComposerInput, 'units' | 'unlocked' | 'ge
   return [];
 }
 
-function limits(settings: Settings): { skeleton: number; words: number } {
-  if (settings.newPerDay === 'auto') return { skeleton: AUTO_NEW_SKELETON, words: AUTO_NEW_WORDS };
+function limits(settings: Settings): { skeleton: number; words: number; letters: number } {
+  if (settings.newPerDay === 'auto') {
+    return { skeleton: AUTO_NEW_SKELETON, words: AUTO_NEW_WORDS, letters: AUTO_NEW_LETTERS };
+  }
   const n = Math.max(0, Math.floor(settings.newPerDay));
-  return { skeleton: n, words: Math.ceil(n / 2) };
+  return { skeleton: n, words: Math.ceil(n / 2), letters: Math.min(6, Math.ceil(n / 2)) };
 }
 
 export function composeDaily(input: ComposerInput): SessionPlan {
@@ -136,7 +145,8 @@ export function composeDaily(input: ComposerInput): SessionPlan {
   });
 
   const groups = pendingNew(input);
-  const reviewBudget = groups.length ? budgetMs * REVIEW_SHARE : budgetMs;
+  const pendingLetters = input.letterIds.filter((id) => !input.getCard(id));
+  const reviewBudget = groups.length || pendingLetters.length ? budgetMs * REVIEW_SHARE : budgetMs;
 
   const reviews: SrsCard[] = [];
   let reviewMs = 0;
@@ -154,8 +164,9 @@ export function composeDaily(input: ComposerInput): SessionPlan {
   const newItems: PlanItem[] = [];
   let newMs = 0;
   let newCount = 0;
+  let newLetters = 0;
   if (!backlog) {
-    let { skeleton, words } = limits(settings);
+    let { skeleton, words, letters } = limits(settings);
     // Ease off when tomorrow already looks full.
     let tomorrowMs = 0;
     for (const c of all) {
@@ -166,18 +177,38 @@ export function composeDaily(input: ComposerInput): SessionPlan {
     if (tomorrowMs > dailyMs * 0.8) {
       skeleton = Math.ceil(skeleton / 2);
       words = Math.ceil(words / 2);
+      letters = Math.ceil(letters / 2);
     }
     // The allowance is per study day, not per session: a second sitting today
     // only gets what the first one left.
     const dayStart = end - 86_400_000;
     for (const c of all) {
       if (c.introducedAt < dayStart) continue;
-      if (c.kind === 'w') words--;
+      if (c.kind === 'l') letters--;
+      else if (c.kind === 'w') words--;
       else skeleton--;
     }
     skeleton = Math.max(0, skeleton);
     words = Math.max(0, words);
+    letters = Math.max(0, letters);
     const newBudget = budgetMs - reviewMs;
+
+    // Letters first: they are quick, and reading is what everything else leans on.
+    const freshLetters: string[] = [];
+    for (const id of pendingLetters) {
+      const cost = newCardCostMs('letter');
+      if (freshLetters.length >= letters || (newCount > 0 && newMs + cost > newBudget)) break;
+      freshLetters.push(id);
+      newMs += cost;
+      newCount++;
+    }
+    if (freshLetters.length) {
+      newLetters = freshLetters.length;
+      newItems.push({ type: 'intro', unit: 0, title: 'Буквы', cards: freshLetters });
+      newMs += EXERCISE_COST_MS.intro;
+      for (const id of freshLetters) newItems.push({ type: 'card', card: id, isNew: true, counted: true });
+    }
+
     let stop = false;
     for (const g of groups) {
       const take: string[] = [];
@@ -186,9 +217,9 @@ export function composeDaily(input: ComposerInput): SessionPlan {
         const isWord = kind === 'word';
         const cost = newCardCostMs(kind);
         const room = isWord ? words > 0 : skeleton > 0;
-        // Within the daily allowance, always allow one new card, so a short
-        // time budget never blocks progress entirely.
-        if (!room || (newCount > 0 && newMs + cost > newBudget)) {
+        // Within the daily allowance, always allow one new card of the course
+        // itself, so a short time budget never blocks progress entirely.
+        if (!room || (newCount > newLetters && newMs + cost > newBudget)) {
           stop = true;
           break;
         }
@@ -247,9 +278,50 @@ export function composeDaily(input: ComposerInput): SessionPlan {
     dueCount: due.length,
     reviewCount: reviews.length,
     newCount,
+    newLetters,
     backlog,
     estMs: reviewMs + newMs + extraMs,
     budgetMs,
+  };
+}
+
+/**
+ * Extra alphabet practice: optionally the next group of new letters, then the
+ * letters learned so far, weakest first.
+ */
+export function composeAlphabet(input: ComposerInput, nextGroup: readonly string[], max = 24): SessionPlan {
+  const fresh = nextGroup.filter((id) => !input.getCard(id));
+  const known = input.letterIds
+    .filter((id) => input.getCard(id))
+    .sort((a, b) => {
+      const ca = input.getCard(a)!;
+      const cb = input.getCard(b)!;
+      const la = ca.state === 2 ? 1 : 0;
+      const lb = cb.state === 2 ? 1 : 0;
+      return la - lb || ca.stability - cb.stability;
+    })
+    .slice(0, max);
+  const items: PlanItem[] = [];
+  if (fresh.length) {
+    items.push({ type: 'intro', unit: 0, title: 'Буквы', cards: fresh });
+    for (const id of fresh) items.push({ type: 'card', card: id, isNew: true, counted: true });
+  }
+  for (const id of shuffle(known, input.rng)) {
+    const c = input.getCard(id)!;
+    items.push({ type: 'card', card: id, isNew: false, counted: c.due <= input.now });
+  }
+  const estMs =
+    fresh.length * newCardCostMs('letter') +
+    known.reduce((sum, id) => sum + EXERCISE_COST_MS[pickExercise(input.getCard(id), input.info(id))], 0);
+  return {
+    items,
+    dueCount: 0,
+    reviewCount: known.length,
+    newCount: fresh.length,
+    newLetters: fresh.length,
+    backlog: false,
+    estMs,
+    budgetMs: estMs,
   };
 }
 
@@ -263,7 +335,16 @@ function practicePlan(ids: string[], input: ComposerInput, forced?: ExerciseKind
     const kind = forced ?? pickExercise(input.getCard(id), input.info(id));
     return sum + EXERCISE_COST_MS[kind];
   }, 0);
-  return { items, dueCount: 0, reviewCount: ids.length, newCount: 0, backlog: false, estMs, budgetMs: estMs };
+  return {
+    items,
+    dueCount: 0,
+    reviewCount: ids.length,
+    newCount: 0,
+    newLetters: 0,
+    backlog: false,
+    estMs,
+    budgetMs: estMs,
+  };
 }
 
 /** Extra practice of one unit: its introduced cards, weakest first. */

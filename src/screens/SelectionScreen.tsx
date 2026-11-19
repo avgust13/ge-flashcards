@@ -9,6 +9,9 @@ import { Icon } from '../components/ui/Icon';
 import { Pill } from '../components/ui/Pill';
 import { ScreenHeader } from '../components/ui/ScreenHeader';
 import { SectionLabel } from '../components/ui/SectionLabel';
+import { LEXICON } from '../content/store';
+import { getSettings, setSettings } from '../db/progress';
+import { useProgressVersion } from '../db/useProgress';
 import { useSession } from '../state/SessionContext';
 import { shuffle } from '../utils/shuffle';
 import { LevelChip } from './levels/LevelChip';
@@ -121,13 +124,19 @@ export function SelectionScreen() {
   const [range, setRange] = useState<[number, number]>([0, 0.6]);
   const [count, setCount] = useState(20);
   const [mix, setMix] = useState(true);
+  // Only the words the course itself uses — the core vocabulary.
+  const [coreOnly, setCoreOnly] = useState(false);
+  useProgressVersion();
+  const direction = getSettings().freeDirection;
+  const courseIds = useMemo(() => new Set(LEXICON.map((l) => l.id)), []);
 
   const pool = useMemo<Word[]>(() => {
     let arr = WORDS;
     if (levelId !== null) arr = arr.filter((w) => w.level === levelId);
     if (cat !== 'all') arr = arr.filter((w) => w.cat === cat);
+    if (coreOnly) arr = arr.filter((w) => courseIds.has(w.id));
     return [...arr].sort((a, b) => a.correct - b.correct);
-  }, [cat, levelId]);
+  }, [cat, levelId, coreOnly, courseIds]);
 
   const catCounts = useMemo<Record<string, number>>(() => {
     const source = levelId !== null ? WORDS.filter((w) => w.level === levelId) : WORDS;
@@ -209,6 +218,23 @@ export function SelectionScreen() {
               <span>{c.ru}</span>
             </Chip>
           ))}
+        </ChipRow>
+
+        <SectionLabel style={{ padding: '8px 20px 6px' }}>Что показывать</SectionLabel>
+        <ChipRow>
+          {mode === 'flash' && (
+            <>
+              <Chip active={direction === 'ka-ru'} onClick={() => setSettings({ freeDirection: 'ka-ru' })}>
+                <span>грузинский → русский</span>
+              </Chip>
+              <Chip active={direction === 'ru-ka'} onClick={() => setSettings({ freeDirection: 'ru-ka' })}>
+                <span>русский → грузинский</span>
+              </Chip>
+            </>
+          )}
+          <Chip active={coreOnly} onClick={() => setCoreOnly((v) => !v)}>
+            <span>только слова курса</span>
+          </Chip>
         </ChipRow>
 
         <Block>

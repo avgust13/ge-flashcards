@@ -1,13 +1,26 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { fillCourse, allCardIds, examplesFor, getUnit, UNITS } from '../../src/content/store';
 import type { Course, Sentence } from '../../src/content/types';
-import { buildExercise, cardInfo, pickExample, verbDistractors, type BuildCtx } from '../../src/engine/build';
+import {
+  buildExercise,
+  cardInfo,
+  letterDistractors,
+  pickExample,
+  verbDistractors,
+  type BuildCtx,
+} from '../../src/engine/build';
 import { checkAssemble } from '../../src/engine/grade';
 import { seededRng } from '../../src/engine/rng';
 import { afterAnswer, startSession } from '../../src/engine/session';
-import { composeDaily, composeUnitPractice, interleave, type ComposerInput } from '../../src/srs/composer';
+import {
+  composeAlphabet,
+  composeDaily,
+  composeUnitPractice,
+  interleave,
+  type ComposerInput,
+} from '../../src/srs/composer';
 import { newSrsCard, review } from '../../src/srs/fsrs';
-import { EXERCISE_COST_MS } from '../../src/srs/ladder';
+import { EXERCISE_COST_MS, pickExercise } from '../../src/srs/ladder';
 import { nextUnlocked, noteAttempt, unitProgress } from '../../src/srs/mastery';
 import { DEFAULT_SETTINGS, type SrsCard } from '../../src/srs/types';
 import { compile } from './build';
@@ -18,7 +31,15 @@ let sentences: Sentence[];
 
 beforeAll(() => {
   ({ course, sentences } = compile());
-  fillCourse(course, sentences, {});
+  // Sentences have no audio in these tests; letter sounds and pair words do,
+  // so the listening rung of the alphabet can be exercised.
+  const audio: Record<string, string> = {};
+  for (const l of course.letters) audio[l.say] = 'a'.repeat(12);
+  for (const p of course.letterPairs) {
+    audio[p.a.ka] = 'b'.repeat(12);
+    audio[p.b.ka] = 'c'.repeat(12);
+  }
+  fillCourse(course, sentences, audio);
 });
 
 const NOW = new Date(2026, 10, 20, 10).getTime();
@@ -38,6 +59,8 @@ function inputFor(cards: Map<string, SrsCard>, patch: Partial<ComposerInput> = {
     cards: cards.values(),
     getCard: (id) => cards.get(id),
     units: UNITS,
+    // The alphabet track is switched on only in the tests that are about it.
+    letterIds: [],
     unlocked: 1,
     seenExplain: new Set(),
     settings: DEFAULT_SETTINGS,
@@ -288,6 +311,130 @@ describe('daily session', () => {
     expect(plan.items).toHaveLength(2);
     const counted = Object.fromEntries(plan.items.map((i) => (i.type === 'card' ? [i.card, i.counted] : ['', false])));
     expect(counted).toMatchObject({ 'c:do.prs.1sg': true, 'c:do.prs.2sg': false });
+  });
+});
+
+describe('alphabet', () => {
+  const letterIds = () => course.letters.map((l) => `l:${l.ch}`);
+  const learned = (ids: string[], state: 1 | 2, reps: number): Map<string, SrsCard> => {
+    const cards = new Map<string, SrsCard>();
+    for (const id of ids) cards.set(id, { ...newSrsCard(id, 'l', null, NOW), state, reps, stability: 5, due: NOW + 86_400_000 });
+    return cards;
+  };
+
+  it('has 33 letters, each with its own sound label', () => {
+    expect(course.letters).toHaveLength(33);
+    expect(new Set(course.letters.map((l) => l.ru)).size).toBe(33);
+  });
+
+  it('the validator rejects two letters sharing a sound label', () => {
+    const broken: Course = {
+      ...course,
+      letters: course.letters.map((l) => (l.ch === 'ტ' ? { ...l, ru: 'тʰ' } : l)),
+    };
+    expect(validateCourse(broken, sentences).join('\n')).toMatch(/indistinguishable/);
+  });
+
+  it('offers the confusable partner as a distractor', () => {
+    const cards = learned(letterIds(), 2, 3);
+    const byCh = new Map(course.letters.map((l) => [l.ch, l]));
+    for (const [a, b] of [['თ', 'ტ'], ['ქ', 'კ'], ['ფ', 'პ'], ['ც', 'წ'], ['ჩ', 'ჭ']]) {
+      const d = letterDistractors(byCh.get(a)!, 'sound', ctxFor(cards)).map((x) => x.ch);
+      expect(d, a).toContain(b);
+      expect(d).not.toContain(a);
+      expect(new Set(d).size).toBe(3);
+    }
+  });
+
+  it('does not use a letter from a later group as a distractor before it is introduced', () => {
+    const e = course.letters.find((l) => l.ch === 'ე')!; // looks like ვ, which is in group 2
+    const none = letterDistractors(e, 'look', ctxFor(new Map())).map((x) => x.ch);
+    expect(none).not.toContain('ვ');
+    const withV = letterDistractors(e, 'look', ctxFor(learned(['l:ვ'], 1, 1))).map((x) => x.ch);
+    expect(withV).toContain('ვ');
+  });
+
+  it('first shows the letter and asks for its sound, never revealing the transliteration', () => {
+    for (const l of course.letters) {
+      const ex = buildExercise(`l:${l.ch}`, 'recognise', ctxFor(new Map(), 2));
+      if (ex?.kind !== 'recognise') throw new Error(`no exercise for ${l.ch}`);
+      expect(ex.dir).toBe('ka-ru');
+      expect(ex.prompt).toBe(l.ch);
+      expect(ex.noTranslit).toBe(true);
+      expect(ex.options[ex.correct].text).toBe(l.ru);
+      expect(new Set(ex.options.map((o) => o.text)).size).toBe(ex.options.length);
+      expect(ex.options.length).toBeGreaterThanOrEqual(4);
+    }
+  });
+
+  it('then plays the sound and asks for the letter', () => {
+    const cards = learned(letterIds(), 1, 1);
+    for (const l of course.letters) {
+      const ex = buildExercise(`l:${l.ch}`, 'listen', ctxFor(cards, 4));
+      if (ex?.kind !== 'listen') throw new Error(`no listening exercise for ${l.ch}`);
+      expect(ex.options[ex.correct].text).toBe(l.ch);
+      expect(ex.options.every((o) => o.ka)).toBe(true);
+      expect(ex.noTranslit).toBe(true);
+    }
+  });
+
+  it('tests a mature pair letter on real words some of the time', () => {
+    const cards = learned(letterIds(), 2, 4);
+    const seen = new Set<string>();
+    for (let seed = 1; seed <= 12; seed++) {
+      const ex = buildExercise('l:ქ', 'listen', ctxFor(cards, seed));
+      if (ex?.kind !== 'listen') continue;
+      seen.add(ex.options.length === 2 ? 'pair' : 'letter');
+      if (ex.options.length === 2) {
+        expect(ex.options.map((o) => o.text).sort()).toEqual(['კარი', 'ქარი'].sort());
+        expect(ex.options[ex.correct].text).toBe('ქარი');
+      }
+    }
+    expect([...seen].sort()).toEqual(['letter', 'pair']);
+  });
+
+  it('follows the letter ladder: see → hear → sound-to-letter', () => {
+    const info = cardInfo('l:ბ');
+    expect(info.cardKind).toBe('letter');
+    expect(info.hasAudio).toBe(true);
+    const card = (state: 0 | 1 | 2, reps: number) => ({ ...newSrsCard('l:ბ', 'l', null, NOW), state, reps });
+    expect(pickExercise(undefined, info)).toBe('recognise');
+    expect(pickExercise(card(1, 1), info)).toBe('listen');
+    expect(pickExercise(card(1, 2), info)).toBe('recognise');
+    expect(pickExercise(card(2, 4), info)).toBe('listen');
+    expect(pickExercise(card(2, 5), info)).toBe('recognise');
+  });
+
+  it('brings four new letters a day into the daily session, in order', () => {
+    const cards = new Map<string, SrsCard>();
+    const plan = composeDaily(inputFor(cards, { letterIds: letterIds() }));
+    const intro = plan.items.find((i) => i.type === 'intro');
+    expect(intro).toMatchObject({ title: 'Буквы', cards: letterIds().slice(0, 4) });
+    expect(plan.newLetters).toBe(4);
+    // The course itself still gets its own new material after the letters.
+    expect(plan.newCount).toBeGreaterThan(4);
+
+    for (const id of letterIds().slice(0, 4)) cards.set(id, review(newSrsCard(id, 'l', null, NOW), 3, NOW, 0.9));
+    const again = composeDaily(inputFor(cards, { letterIds: letterIds() }));
+    expect(again.newLetters).toBe(0);
+    const tomorrow = composeDaily(inputFor(cards, { letterIds: letterIds(), now: NOW + 86_400_000 }));
+    expect(tomorrow.newLetters).toBe(4);
+    const next = tomorrow.items.find((i) => i.type === 'intro' && i.title === 'Буквы');
+    expect(next).toMatchObject({ cards: letterIds().slice(4, 8) });
+  });
+
+  it('extra practice can introduce the next group and repeats the learned letters', () => {
+    const ids = letterIds();
+    const cards = learned(ids.slice(0, 5), 2, 3);
+    const group2 = course.letters.filter((l) => l.group === 2).map((l) => `l:${l.ch}`);
+    const plan = composeAlphabet(inputFor(cards, { letterIds: ids }), group2);
+    expect(plan.items[0]).toMatchObject({ type: 'intro', cards: group2 });
+    expect(plan.newLetters).toBe(group2.length);
+    const repeated = plan.items.flatMap((i) => (i.type === 'card' && !i.isNew ? [i.card] : []));
+    expect(repeated.sort()).toEqual(ids.slice(0, 5).sort());
+
+    const onlyReview = composeAlphabet(inputFor(cards, { letterIds: ids }), []);
+    expect(onlyReview.items.every((i) => i.type === 'card' && !i.isNew)).toBe(true);
   });
 });
 

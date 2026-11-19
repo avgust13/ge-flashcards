@@ -5,7 +5,8 @@ import { Icon } from '../components/ui/Icon';
 import { ImageSlot } from '../components/ui/ImageSlot';
 import { Pill } from '../components/ui/Pill';
 import { ProgressBar } from '../components/ui/ProgressBar';
-import { LETTER_MAP } from '../data';
+import { LETTERS, getLetter } from '../content/store';
+import { bumpDay } from '../db/progress';
 import { useSession } from '../state/SessionContext';
 import type { AlphaResult } from '../types';
 import { shuffle } from '../utils/shuffle';
@@ -125,16 +126,24 @@ export function AlphabetSession() {
 
   const letters = useMemo(() => {
     if (!word) return [] as Array<{ ka: string; ru: string }>;
-    return [...word.ka].map((ch) => ({ ka: ch, ru: LETTER_MAP[ch] || '?' }));
+    // Sound labels come from the course alphabet, where every letter has its
+    // own (თ is "тʰ", ტ is "т’") — so the confusable pairs can be told apart.
+    return [...word.ka].map((ch) => ({ ka: ch, ru: getLetter(ch)?.ru ?? '?' }));
   }, [word]);
 
   const options = useMemo(() => {
     const correct = letters.map((l) => l.ru);
-    const pool = [
-      'а','е','и','о','у','м','н','р','с','т','к','л','б','в','г','д','з','п','ф','х','ч','ш','ц','э','ж',
-    ];
     const set = new Set<string>(correct);
-    while (set.size < Math.max(8, correct.length + 4)) {
+    // Offer the look- and sound-alikes of the word's own letters first: those are the real traps.
+    for (const l of letters) {
+      const src = getLetter(l.ka);
+      for (const ch of [...(src?.soundAlike ?? []), ...(src?.lookAlike ?? [])]) {
+        const label = getLetter(ch)?.ru;
+        if (label && set.size < Math.max(8, correct.length + 4)) set.add(label);
+      }
+    }
+    const pool = LETTERS.map((l) => l.ru);
+    while (pool.length && set.size < Math.max(8, correct.length + 4)) {
       set.add(pool[Math.floor(Math.random() * pool.length)]);
     }
     return shuffle([...set]);
@@ -159,6 +168,8 @@ export function AlphabetSession() {
       setFilled(updated);
       if (updated.length === letters.length) {
         setSolved(true);
+        // A spelled word counts toward the day's activity (and the streak).
+        bumpDay({ reviews: 1 });
         setResults((r) => [
           ...r,
           {

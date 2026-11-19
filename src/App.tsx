@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { InstallPrompt } from './components/install/InstallPrompt';
+import { AlphabetScreen } from './screens/AlphabetScreen';
 import { AlphabetSession } from './screens/AlphabetSession';
 import { CardSession } from './screens/CardSession';
 import { CourseScreen } from './screens/CourseScreen';
@@ -92,6 +93,7 @@ function Gate() {
           <Route path="/course/:unitId" element={<UnitScreen />} />
           <Route path="/verbs" element={<VerbsScreen />} />
           <Route path="/verbs/:verbId" element={<MatrixScreen />} />
+          <Route path="/alphabet" element={<AlphabetScreen />} />
           <Route path="/settings" element={<SettingsScreen />} />
           <Route element={<RequireWords />}>
             <Route path="/levels" element={<LevelsScreen />} />

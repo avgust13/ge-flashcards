@@ -6,6 +6,7 @@ import { Icon } from '../components/ui/Icon';
 import { Pill } from '../components/ui/Pill';
 import { ScreenHeader } from '../components/ui/ScreenHeader';
 import { audioIdFor, examplesFor, getVerb, ruText } from '../content/store';
+import { trVisible } from '../content/reading';
 import { translit } from '../content/translit';
 import {
   PERSONS,
@@ -181,7 +182,6 @@ export function MatrixScreen() {
   const verb = getVerb(verbId ?? '');
   const [person, setPerson] = useState<Person>('1sg');
   const settings = getSettings();
-  const showTr = settings.translit === 'always';
 
   if (!verb) {
     return (
@@ -241,7 +241,7 @@ export function MatrixScreen() {
                   return (
                     <Cell key={pol} type="button" $state={state} onClick={() => play(t, pol)}>
                       {text}
-                      {showTr && <CellTr>{translit(text)}</CellTr>}
+                      {trVisible(text) && <CellTr>{translit(text)}</CellTr>}
                     </Cell>
                   );
                 })}

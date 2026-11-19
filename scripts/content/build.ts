@@ -11,6 +11,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { LETTERS, LETTER_GROUPS, LETTER_PAIRS } from '../../content-src/letters';
 import { LEXICON } from '../../content-src/lexicon';
 import { RU_DAT, RU_NOM, RU_U, buildSentences } from '../../content-src/sentences';
 import { PATTERNS, UNITS } from '../../content-src/units';
@@ -113,13 +114,31 @@ export function compile(): { course: Course; sentences: Sentence[]; dropped: str
   }));
   const sentences = buildSentences().filter((s) => shippable(s.focus));
 
-  const body = { units, verbs, lexicon, patterns: PATTERNS };
+  const body = {
+    units,
+    verbs,
+    lexicon,
+    patterns: PATTERNS,
+    letters: LETTERS,
+    letterGroups: LETTER_GROUPS,
+    letterPairs: LETTER_PAIRS,
+  };
   const version = createHash('sha1')
     .update(JSON.stringify(body))
     .update(JSON.stringify(sentences))
     .digest('hex')
     .slice(0, 10);
   return { course: { version, ...body }, sentences, dropped };
+}
+
+/** Clips where the consonant itself is the lesson: letter sounds and minimal pairs. Recorded at a higher bitrate. */
+export function hiFiTexts(course: Course): string[] {
+  return [...course.letters.map((l) => l.say), ...course.letterPairs.flatMap((p) => [p.a.ka, p.b.ka])];
+}
+
+/** Every text the alphabet trainer plays ("unit 0" for the audio tooling). */
+export function letterTexts(course: Course): string[] {
+  return [...hiFiTexts(course), ...course.letters.map((l) => l.word.ka)];
 }
 
 /** Texts the app may want to play, in priority order (cheapest way to cover the most cards first). */
@@ -132,6 +151,8 @@ export function audioTexts(course: Course, sentences: Sentence[]): string[] {
       out.push(t);
     }
   };
+  // The alphabet first: letter sounds, the minimal pairs, then each letter's example word.
+  for (const t of letterTexts(course)) add(t);
   const readyUnits = course.units.filter((u) => u.ready).map((u) => u.id);
   for (const unit of readyUnits) {
     for (const l of course.lexicon) if (l.unit === unit) add(l.ka);

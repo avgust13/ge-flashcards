@@ -1,11 +1,12 @@
 import type { CSSProperties } from 'react';
 import styled from 'styled-components';
 import type { Word } from '../../types';
-import { CardFace } from './CardFace';
+import { CardFace, type CardDir } from './CardFace';
 
 interface Props {
   word: Word;
   flipped: boolean;
+  dir?: CardDir;
   isPreview?: boolean;
   style?: CSSProperties;
 }
@@ -33,19 +34,19 @@ const PreviewOuter = styled.div`
   border-radius: 28px;
 `;
 
-export function FlashCard({ word, flipped, isPreview, style }: Props) {
+export function FlashCard({ word, flipped, dir = 'ka-ru', isPreview, style }: Props) {
   if (isPreview) {
     return (
       <PreviewOuter style={style}>
-        <CardFace side="front" word={word} />
+        <CardFace side="front" word={word} dir={dir} />
       </PreviewOuter>
     );
   }
   return (
     <Outer style={style}>
       <Inner $flipped={flipped}>
-        <CardFace side="front" word={word} />
-        <CardFace side="back" word={word} />
+        <CardFace side="front" word={word} dir={dir} />
+        <CardFace side="back" word={word} dir={dir} />
       </Inner>
     </Outer>
   );

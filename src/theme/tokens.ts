@@ -23,8 +23,8 @@ export const theme = {
     goldSoft: '#FBF1D7',
   },
   fonts: {
-    ui: '"Nunito", system-ui, -apple-system, "Segoe UI", sans-serif',
-    ka: '"Noto Sans Georgian", "Nunito", system-ui, sans-serif',
+    ui: '"Nunito Variable", "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif',
+    ka: '"Noto Sans Georgian Variable", "Noto Sans Georgian", "Nunito Variable", system-ui, sans-serif',
   },
   shadow: '0 2px 0 #ECE2CC, 0 8px 24px rgba(31,26,20,.06)',
 } as const;

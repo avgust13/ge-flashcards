@@ -44,13 +44,32 @@ function arg(flag: string): string | undefined {
 }
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-function clipId(voice: string, model: string, text: string): string {
-  return createHash('sha1').update(`${voice}|${model}|${text}`).digest('hex').slice(0, 12);
+/**
+ * Clip id. `take` > 0 marks a re-recorded clip: it gets a new id (and so a new
+ * URL), which keeps every published file immutable for the service-worker cache.
+ */
+export function clipId(voice: string, model: string, text: string, take = 0): string {
+  const key = take > 0 ? `${voice}|${model}|${text}|take${take}` : `${voice}|${model}|${text}`;
+  return createHash('sha1').update(key).digest('hex').slice(0, 12);
 }
 
-function clipPath(id: string): string {
+export function clipPath(id: string): string {
   return join(AUDIO_DIR, id.slice(0, 2), `${id}.mp3`);
 }
+
+const TAKES = join(ROOT, 'content-src/audio-takes.json');
+
+/** Which take of each text is in use (absent = the first one). Written by the retake check. */
+export function readTakes(): Record<string, number> {
+  return existsSync(TAKES) ? (JSON.parse(readFileSync(TAKES, 'utf8')) as Record<string, number>) : {};
+}
+
+export function writeTakes(takes: Record<string, number>): void {
+  const sorted = Object.fromEntries(Object.entries(takes).sort(([a], [b]) => a.localeCompare(b)));
+  writeFileSync(TAKES, JSON.stringify(sorted, null, 2) + '\n');
+}
+
+export const ttsConfig = () => ({ voice: VOICE, model: MODEL });
 
 async function api(path: string, init?: RequestInit): Promise<Response> {
   return fetch(API + path, { ...init, headers: { 'xi-api-key': KEY, ...(init?.headers ?? {}) } });
@@ -69,12 +88,13 @@ async function describeError(res: Response): Promise<string> {
   return `${res.status} ${body.slice(0, 200)}`;
 }
 
-async function synthesize(text: string, voice: string, model: string): Promise<Buffer> {
+/** `seed` asks for a different rendition of the same text (used for retakes). */
+export async function synthesize(text: string, voice: string, model: string, seed?: number): Promise<Buffer> {
   for (let attempt = 0; ; attempt++) {
     const res = await api(`/v1/text-to-speech/${voice}?output_format=${FORMAT}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, model_id: model, language_code: 'ka' }),
+      body: JSON.stringify({ text, model_id: model, language_code: 'ka', ...(seed != null ? { seed } : {}) }),
     });
     if (res.ok) return Buffer.from(await res.arrayBuffer());
     if ((res.status === 429 || res.status >= 500) && attempt < 4) {
@@ -223,8 +243,9 @@ async function main(): Promise<void> {
   const manifest: Record<string, string> = existsSync(MANIFEST)
     ? (JSON.parse(readFileSync(MANIFEST, 'utf8')) as Record<string, string>)
     : {};
+  const takes = readTakes();
   const todo = wanted.filter((t) => {
-    const id = clipId(VOICE, MODEL, t);
+    const id = clipId(VOICE, MODEL, t, takes[t] ?? 0);
     return !(manifest[t] === id && existsSync(clipPath(id)));
   });
   const limit = arg('--limit') ? Number(arg('--limit')) : Infinity;
@@ -253,11 +274,12 @@ async function main(): Promise<void> {
   const worker = async (): Promise<void> => {
     while (next < batch.length && failures.length < 5) {
       const text = batch[next++];
-      const id = clipId(VOICE, MODEL, text);
+      const take = takes[text] ?? 0;
+      const id = clipId(VOICE, MODEL, text, take);
       const file = clipPath(id);
       try {
         if (!existsSync(file)) {
-          const audio = await synthesize(text, VOICE, MODEL);
+          const audio = await synthesize(text, VOICE, MODEL, take > 0 ? take : undefined);
           mkdirSync(dirname(file), { recursive: true });
           writeFileSync(file, audio);
           spent += text.length;
@@ -286,12 +308,12 @@ async function main(): Promise<void> {
   }
 }
 
-function writeManifest(manifest: Record<string, string>): void {
+export function writeManifest(manifest: Record<string, string>): void {
   const sorted = Object.fromEntries(Object.entries(manifest).sort(([a], [b]) => a.localeCompare(b)));
   writeFileSync(MANIFEST, JSON.stringify(sorted, null, 2) + '\n');
 }
 
-function readManifest(): Record<string, string> {
+export function readManifest(): Record<string, string> {
   return existsSync(MANIFEST) ? (JSON.parse(readFileSync(MANIFEST, 'utf8')) as Record<string, string>) : {};
 }
 
@@ -315,9 +337,10 @@ function prune(): void {
   const { course, sentences } = compile();
   const wanted = new Set(audioTexts(course, sentences));
   const manifest = readManifest();
+  const takes = readTakes();
   let dropped = 0;
   for (const text of Object.keys(manifest)) {
-    if (!wanted.has(text) || manifest[text] !== clipId(VOICE, MODEL, text)) {
+    if (!wanted.has(text) || manifest[text] !== clipId(VOICE, MODEL, text, takes[text] ?? 0)) {
       delete manifest[text];
       dropped++;
     }
@@ -389,7 +412,10 @@ function audit(): void {
   }
 }
 
-main().catch((e) => {
-  console.error(`Ошибка: ${(e as Error).message}`);
-  process.exit(1);
-});
+// Run only as a script: the retake check imports helpers from this module.
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((e) => {
+    console.error(`Ошибка: ${(e as Error).message}`);
+    process.exit(1);
+  });
+}

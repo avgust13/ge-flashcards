@@ -11,7 +11,8 @@
     "content": "tsx scripts/content/build.ts",
     "content:check": "tsx scripts/content/build.ts --check",
     "content:verify": "tsx scripts/content/verify-verbs.ts",
-    "content:tts": "tsx --env-file=.env.local scripts/content/tts.ts"
+    "content:tts": "tsx --env-file=.env.local scripts/content/tts.ts",
+    "content:stt": "tsx --env-file=.env.local scripts/content/stt-check.ts"
   },
   "dependencies": {
     "idb": "8.0.4",

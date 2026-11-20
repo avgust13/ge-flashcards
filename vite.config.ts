@@ -33,6 +33,8 @@ export default defineConfig({
         type: 'module',
       },
       workbox: {
+        // Takes over from the old app's service worker at once (see the file).
+        importScripts: ['sw-legacy-migrate.js'],
         // Precache the app shell and the small course JSON, so the course works
         // offline right after install. The 67 MB word library and the audio
         // clips are cached lazily instead (see runtimeCaching).

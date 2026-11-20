@@ -15,12 +15,17 @@ import {
   getDay,
   getSettings,
   hasWriteError,
+  putCard,
   today,
 } from '../db/progress';
 import { useProgressVersion } from '../db/useProgress';
+import { cardInfo } from '../engine/build';
 import { loadSavedSession, planDaily } from '../engine/run';
 import { applyUpdate, isUpdateWaiting, subscribeUpdate } from '../pwa';
+import { planSpread } from '../srs/backlog';
+import { now } from '../srs/clock';
 import { streak } from '../srs/day';
+import { EXERCISE_COST_MS, pickExercise } from '../srs/ladder';
 import { isAutomatic, unitProgress } from '../srs/mastery';
 import { ModeCard } from './home/ModeCard';
 import { StatCard } from './home/StatCard';
@@ -196,6 +201,22 @@ const Banner = styled.div<{ $tone: 'warn' | 'danger' }>`
 
 const BACKUP_AFTER_DAYS = 14;
 
+const Debt = styled.div`
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid ${({ theme }) => theme.colors.line};
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: ${({ theme }) => theme.colors.inkSoft};
+
+  span {
+    flex: 1;
+  }
+`;
+
 export function HomeScreen() {
   const navigate = useNavigate();
   const theme = useTheme();
@@ -209,15 +230,25 @@ export function HomeScreen() {
     const plan = planDaily();
     const saved = loadSavedSession();
     let automatic = 0;
-    for (const c of allCards()) if (isAutomatic(c)) automatic++;
+    let inReview = 0;
+    for (const c of allCards()) {
+      if (isAutomatic(c)) automatic++;
+      if (c.state === 2 && !c.suspended) inReview++;
+    }
     const unit = UNITS.find((u) => u.id === course.unlocked) ?? UNITS[0];
+    // More is due than fits into a day: offer to spread it over the next days.
+    const spread = plan.backlog
+      ? planSpread(allCards(), now(), settings, (c) => EXERCISE_COST_MS[pickExercise(c, cardInfo(c.id))])
+      : null;
     return {
+      spread,
       lettersKnown: LETTERS.filter((l) => getCard(`l:${l.ch}`)?.state === 2).length,
       settings,
       day,
       plan,
       saved,
       automatic,
+      inReview,
       unit,
       unitProgress: unit ? unitProgress(unit, getCard) : null,
       streakDays: streak(allDays(), today()),
@@ -236,6 +267,11 @@ export function HomeScreen() {
   const start = () => {
     unlockAudio();
     navigate('/session', { state: { mode: 'daily' } });
+  };
+
+  const spread = view.spread && view.spread.moved.length > 0 ? view.spread : null;
+  const applySpread = () => {
+    if (spread) for (const c of spread.moved) putCard(c);
   };
 
   let sub: string;
@@ -271,7 +307,7 @@ export function HomeScreen() {
             </SettingsDot>
           </HeroRow>
 
-          <StatsRow>
+          <StatsRow role="button" aria-label="Статистика" onClick={() => navigate('/stats')}>
             <StatCard icon="flame" color={theme.colors.primary} label="дней подряд" value={view.streakDays} />
             <StatCard icon="star" color={theme.colors.success} label="на автомате" value={view.automatic} />
             <StatCard icon="cards" color={theme.colors.warn} label="к повторению" value={plan.dueCount} />
@@ -317,6 +353,17 @@ export function HomeScreen() {
               <Icon name="play" size={18} />
               {saved ? 'Продолжить' : hasWork ? (day.ms > 0 ? 'Ещё подход' : 'Начать') : 'Готово'}
             </Pill>
+            {spread && !saved && (
+              <Debt>
+                <span>
+                  К повторению {plan.dueCount} — в один день не помещается. Можно оставить на сегодня {spread.today},
+                  а остальные разложить на {spread.days} дн. вперёд.
+                </span>
+                <Pill kind="ghost" size="sm" onClick={applySpread}>
+                  Распределить
+                </Pill>
+              </Debt>
+            )}
           </DailyCard>
 
           {unit && view.unitProgress && (
@@ -366,6 +413,15 @@ export function HomeScreen() {
             subtitle="Свободная практика словаря с картинками"
             extra="836 слов · по уровням и темам"
             onClick={() => navigate('/select/flash')}
+          />
+          <ModeCard
+            accent={theme.colors.success}
+            tint={theme.colors.successSoft}
+            icon="star"
+            title="Статистика"
+            subtitle="Занятия по дням, повторения на неделю вперёд, память"
+            extra={`в повторении ${view.inReview}`}
+            onClick={() => navigate('/stats')}
           />
           <ModeCard
             accent={theme.colors.gold}

@@ -14,18 +14,22 @@ import { fileURLToPath } from 'node:url';
 import { LETTERS, LETTER_GROUPS, LETTER_PAIRS } from '../../content-src/letters';
 import { LEXICON } from '../../content-src/lexicon';
 import { RU_DAT, RU_NOM, RU_U, buildSentences } from '../../content-src/sentences';
-import { PATTERNS, UNITS } from '../../content-src/units';
+import { PATTERNS, UNITS, type ExampleSrc } from '../../content-src/units';
 import { VERBS, type VerbSrc } from '../../content-src/verbs';
 import {
+  CELL_RE,
   PERSONS,
+  SCREEVES,
   TENSES,
   type CellKey,
   type Course,
+  type KaForm,
+  type LexStatus,
   type Lexeme,
   type Person,
   type ReviewStatus,
   type Sentence,
-  type Tense,
+  type Unit,
   type Verb,
 } from '../../src/content/types';
 import { validateCourse } from './validate';
@@ -33,10 +37,12 @@ import { validateCourse } from './validate';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const OUT = join(ROOT, 'public/content');
 const STATUS_FILE = join(ROOT, 'content-src/generated/verb-status.json');
+const LEX_STATUS_FILE = join(ROOT, 'content-src/generated/lexicon-status.json');
 const AUDIO_MANIFEST = join(ROOT, 'content-src/audio-manifest.json');
 const AUDIO_DIR = join(ROOT, 'public/audio');
 
 type StatusFile = Record<string, Record<string, { status: ReviewStatus; sources: string[] }>>;
+type LexStatusFile = Record<string, Record<string, { status: LexStatus; sources: string[] }>>;
 
 function readJson<T>(path: string, fallback: T): T {
   return existsSync(path) ? (JSON.parse(readFileSync(path, 'utf8')) as T) : fallback;
@@ -57,9 +63,25 @@ function compileVerb(v: VerbSrc, status: StatusFile): Verb {
       const i = PI[p];
       forms[t][p] = v.forms[t][i];
       const gloss = v.zeroCopula && t === 'prs' ? `(${v.ruForms[t][i]})` : v.ruForms[t][i];
-      ruCells[t][p] = `${pron[p]} ${gloss}`;
-      const key = `${t}.${p}` as CellKey;
-      const unit = v.cellUnit(t as Tense, p);
+      ruCells[t][p] = `${pron[p]} ${gloss}${v.ruHint ?? ''}`;
+    }
+  }
+  let opt: Verb['opt'] = null;
+  let ruOpt: Verb['ruOpt'] = null;
+  if (v.opt) {
+    opt = {} as Record<Person, string>;
+    ruOpt = {} as Record<Person, string>;
+    for (const p of PERSONS) {
+      opt[p] = v.opt[PI[p]];
+      // The Russian «чтобы» takes the past form, which is exactly how the Georgian one is built.
+      ruOpt[p] = `чтобы ${RU_NOM[p]} ${v.ruForms.aor[PI[p]]}`;
+    }
+  }
+  for (const s of SCREEVES) {
+    if (s === 'opt' && !v.opt) continue;
+    for (const p of PERSONS) {
+      const key = `${s}.${p}` as CellKey;
+      const unit = v.cellUnit(s, p);
       if (unit != null) cellUnit[key] = unit;
       st[key] = status[v.id]?.[key]?.status ?? 'needs-review';
     }
@@ -70,49 +92,91 @@ function compileVerb(v: VerbSrc, status: StatusFile): Verb {
     lemma: v.lemma,
     kind: v.kind,
     subjectCase: v.subjectCase,
+    objCase: v.objCase ?? null,
     pastLabel: v.pastLabel,
     forms,
+    opt,
     ruCells,
+    ruOpt,
     cellUnit,
     status: st,
     noteRu: v.noteRu ?? null,
   };
 }
 
+const RANK: Record<LexStatus, number> = { verified: 2, attested: 1, 'needs-review': 0 };
+
+function compileLexicon(status: LexStatusFile): Lexeme[] {
+  return LEXICON.map((l) => {
+    const cases: Partial<Record<KaForm, string>> = { ...(l.k ?? {}) };
+    // A word is only as trustworthy as its least confirmed surface.
+    let worst: LexStatus = 'verified';
+    for (const form of ['ka', ...Object.keys(cases)]) {
+      const st = status[l.key]?.[form]?.status ?? 'needs-review';
+      if (RANK[st] < RANK[worst]) worst = st;
+    }
+    return {
+      id: l.id,
+      ka: l.ka,
+      ru: l.ru,
+      unit: l.unit,
+      note: l.note ?? null,
+      forms: Object.values(cases),
+      cases,
+      status: worst,
+    };
+  });
+}
+
 export function compile(): { course: Course; sentences: Sentence[]; dropped: string[] } {
   const status = readJson<StatusFile>(STATUS_FILE, {});
   const verbs = VERBS.map((v) => compileVerb(v, status));
-  const lexicon: Lexeme[] = LEXICON.map((l) => ({
-    id: l.id,
-    ka: l.ka,
-    ru: l.ru,
-    unit: l.unit,
-    note: l.note ?? null,
-    forms: l.forms ?? [],
-  }));
+  const lexicon = compileLexicon(readJson<LexStatusFile>(LEX_STATUS_FILE, {}));
 
   // Shipping rule: an unverified verb cell takes its card and its sentences with it.
   const verbById = new Map(verbs.map((v) => [v.id, v]));
-  const shippable = (cardId: string): boolean => {
-    const m = /^c:([a-z]+)\.((?:prs|aor|fut)\.(?:1sg|2sg|3sg|1pl|2pl|3pl))$/.exec(cardId);
-    if (!m) return true;
-    const st = verbById.get(m[1])?.status[m[2] as CellKey];
+  const cellOk = (verbId: string, key: string): boolean => {
+    const st = verbById.get(verbId)?.status[key as CellKey];
     return st === 'verified' || st === 'auto-verified';
   };
+  const shippable = (cardId: string): boolean => {
+    const m = CELL_RE.exec(cardId);
+    return m ? cellOk(m[1], `${m[2]}.${m[3]}`) : true;
+  };
+  const sentences = buildSentences().filter(
+    (s) => shippable(s.focus) && s.tokens.every((t) => !t.cell || shippable(`c:${t.cell}`)),
+  );
+  const sentenceById = new Map(sentences.map((s) => [s.id, s]));
+  const lexByKey = new Map(LEXICON.map((l) => [l.key, l]));
+
+  const example = (unit: number, e: ExampleSrc): { ka: string; ru: string; who?: string } => {
+    const who = e.who ? { who: e.who } : {};
+    if ('ref' in e) {
+      const s = sentenceById.get(e.ref);
+      if (!s) throw new Error(`Unit ${unit}: example refers to an unknown sentence "${e.ref}"`);
+      return { ka: s.ka, ru: s.ru, ...who };
+    }
+    if ('w' in e) {
+      const l = lexByKey.get(e.w);
+      if (!l) throw new Error(`Unit ${unit}: example refers to an unknown word "${e.w}"`);
+      return { ka: l.ka, ru: l.ru.charAt(0).toUpperCase() + l.ru.slice(1), ...who };
+    }
+    return { ka: e.ka, ru: e.ru, ...who };
+  };
+
   const dropped: string[] = [];
-  const units = UNITS.map((u) => ({
+  const units: Unit[] = UNITS.map((u) => ({
     ...u,
     steps: u.steps.map((step) => {
-      if (step.kind !== 'cards') return step;
+      if (step.kind === 'explain') return { ...step, examples: step.examples.map((e) => example(u.id, e)) };
       const keep = step.cards.filter((c) => {
-        const ok = shippable(c);
+        const ok = shippable(c) && (!c.startsWith('s:') || sentenceById.has(c.slice(2)));
         if (!ok) dropped.push(c);
         return ok;
       });
       return { ...step, cards: keep };
     }),
   }));
-  const sentences = buildSentences().filter((s) => shippable(s.focus));
 
   const body = {
     units,
@@ -186,7 +250,7 @@ function main(): void {
   }
   if (errors.length) {
     console.error(`✗ ${errors.length} content problem(s):`);
-    for (const e of errors.slice(0, 60)) console.error(`    ${e}`);
+    for (const e of errors.slice(0, 80)) console.error(`    ${e}`);
     process.exit(1);
   }
 

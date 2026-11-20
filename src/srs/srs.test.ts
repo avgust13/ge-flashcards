@@ -150,3 +150,115 @@ describe('automatism', () => {
     expect(isAutomatic(c)).toBe(false);
   });
 });
+
+describe('statistics', () => {
+  const NOW = at(2026, 11, 20, 10);
+  const card = (id: string, patch: Partial<SrsCard>): SrsCard => ({ ...newSrsCard(id, 'c', 1, NOW - 86_400_000), ...patch });
+
+  it('counts cards by state and builds a week of due reviews', async () => {
+    const { summarise } = await import('./stats');
+    const cards = [
+      card('a', { state: 2, stability: 30, due: NOW - 1000 }), // overdue, mature
+      card('b', { state: 2, stability: 3, due: at(2026, 11, 21, 10) }), // tomorrow
+      card('c', { state: 1, due: NOW + 60_000 }), // still learning, today
+      card('d', { state: 2, stability: 3, due: at(2026, 11, 24, 10) }), // in four days
+      card('e', { state: 2, stability: 3, due: NOW - 1000, suspended: true }),
+      { ...card('w', { state: 0 }), kind: 'w' as const },
+    ];
+    const days = new Map<string, DayStat>([
+      ['2026-11-20', { day: '2026-11-20', reviews: 40, newCards: 8, ms: 15 * 60_000 }],
+      ['2026-11-18', { day: '2026-11-18', reviews: 10, newCards: 0, ms: 5 * 60_000 }],
+    ]);
+    const s = summarise(cards, days, NOW);
+    expect(s.total).toBe(6);
+    expect(s.review).toBe(3);
+    expect(s.learning).toBe(1);
+    expect(s.mature).toBe(1);
+    expect(s.suspended).toBe(1);
+    expect(s.byKind).toMatchObject({ c: 5, w: 1 });
+    expect(s.forecast.map((f) => f.count)).toEqual([2, 1, 0, 0, 1, 0, 0]);
+    expect(s.activity).toHaveLength(14);
+    expect(s.activity[13]).toMatchObject({ day: '2026-11-20', minutes: 15, reviews: 40, newCards: 8, label: 'пт' });
+    expect(s.activity[12]).toMatchObject({ day: '2026-11-19', minutes: 0, reviews: 0 });
+    expect(s.totalMinutes).toBe(20);
+    expect(s.studyDays).toBe(2);
+  });
+
+  it('measures retention only on cards that were already in review', async () => {
+    const { retention } = await import('./stats');
+    const log = (rating: 1 | 2 | 3 | 4, state: 0 | 1 | 2 | 3, counted = true) =>
+      ({ rating, counted, prev: { state, due: 0, s: 0, d: 0 } }) as never;
+    const logs = [
+      ...Array.from({ length: 18 }, () => log(3, 2)),
+      log(1, 2),
+      log(1, 2),
+      log(1, 1), // a miss while learning is not forgetting
+      log(1, 2, false), // extra practice does not count
+    ];
+    expect(retention(logs)).toMatchObject({ n: 20, recalled: 18, rate: 0.9 });
+    expect(retention(logs.slice(0, 5)).rate).toBeNull();
+  });
+});
+
+describe('spreading a backlog', () => {
+  const NOW = at(2026, 11, 20, 10);
+  const END = at(2026, 11, 21, 4);
+  const DAY = 86_400_000;
+  const settings = { dailyMinutes: 10, dayStartHour: 4 };
+  const cost = () => 60_000; // one minute a card → seven reviews fit a day (70% of ten minutes)
+  const due = (id: string, stability: number, patch: Partial<SrsCard> = {}): SrsCard => ({
+    ...newSrsCard(id, 'c', 1, NOW - 10 * DAY),
+    state: 2,
+    stability,
+    due: NOW - DAY,
+    ...patch,
+  });
+
+  it('keeps what fits today and moves the rest forward, weakest first', async () => {
+    const { planSpread } = await import('./backlog');
+    const cards = Array.from({ length: 20 }, (_, i) => due(`c${i}`, 20 - i));
+    const plan = planSpread(cards, NOW, settings, cost);
+    expect(plan.today).toBe(7);
+    expect(plan.moved).toHaveLength(13);
+    expect(plan.days).toBe(2);
+    // The seven weakest stay for today.
+    const movedIds = new Set(plan.moved.map((c) => c.id));
+    for (let i = 13; i < 20; i++) expect(movedIds.has(`c${i}`)).toBe(false);
+    // Nothing is moved into the past, and no day gets more than fits.
+    const perDay = new Map<number, number>();
+    for (const c of plan.moved) {
+      expect(c.due).toBeGreaterThan(END - 1);
+      const d = Math.ceil((c.due - END) / DAY);
+      perDay.set(d, (perDay.get(d) ?? 0) + 1);
+    }
+    for (const n of perDay.values()) expect(n).toBeLessThanOrEqual(7);
+    // Only the due date changes.
+    expect(plan.moved[0].stability).toBe(cards.find((c) => c.id === plan.moved[0].id)!.stability);
+  });
+
+  it('respects what is already scheduled and leaves learning cards alone', async () => {
+    const { planSpread } = await import('./backlog');
+    const cards = [
+      ...Array.from({ length: 10 }, (_, i) => due(`c${i}`, i + 1)),
+      // Tomorrow is already full.
+      ...Array.from({ length: 7 }, (_, i) => due(`t${i}`, 5, { due: END + DAY / 2 })),
+      due('learning', 0.1, { state: 1 }),
+      due('hidden', 1, { suspended: true }),
+    ];
+    const plan = planSpread(cards, NOW, settings, cost);
+    // The learning card takes one of today's seven places.
+    expect(plan.today).toBe(6);
+    expect(plan.moved.map((c) => c.id)).not.toContain('learning');
+    expect(plan.moved.map((c) => c.id)).not.toContain('hidden');
+    // Tomorrow has no room, so the overflow starts the day after.
+    expect(Math.min(...plan.moved.map((c) => c.due))).toBeGreaterThan(END + DAY);
+    expect(plan.days).toBe(2);
+  });
+
+  it('does nothing when the day is not overloaded', async () => {
+    const { planSpread } = await import('./backlog');
+    const plan = planSpread([due('a', 1), due('b', 2)], NOW, settings, cost);
+    expect(plan.moved).toEqual([]);
+    expect(plan.today).toBe(2);
+  });
+});

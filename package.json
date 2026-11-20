@@ -12,7 +12,8 @@
     "content:check": "tsx scripts/content/build.ts --check",
     "content:verify": "tsx scripts/content/verify-verbs.ts",
     "content:tts": "tsx --env-file=.env.local scripts/content/tts.ts",
-    "content:stt": "tsx --env-file=.env.local scripts/content/stt-check.ts"
+    "content:stt": "tsx --env-file=.env.local scripts/content/stt-check.ts",
+    "content:verify-lexicon": "tsx scripts/content/verify-lexicon.ts"
   },
   "dependencies": {
     "@fontsource-variable/noto-sans-georgian": "^5.3.0",

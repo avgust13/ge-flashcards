@@ -1,9 +1,21 @@
 {
-  "version": "58cd12e873",
+  "version": "bd668ce4d8",
   "sentences": [
     "sentences/u01.json",
     "sentences/u02.json",
     "sentences/u03.json",
-    "sentences/u04.json"
+    "sentences/u04.json",
+    "sentences/u05.json",
+    "sentences/u06.json",
+    "sentences/u07.json",
+    "sentences/u08.json",
+    "sentences/u09.json",
+    "sentences/u10.json",
+    "sentences/u11.json",
+    "sentences/u12.json",
+    "sentences/u13.json",
+    "sentences/u14.json",
+    "sentences/u15.json",
+    "sentences/u16.json"
   ]
 }

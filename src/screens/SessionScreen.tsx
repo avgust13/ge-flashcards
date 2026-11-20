@@ -6,7 +6,7 @@ import { Icon } from '../components/ui/Icon';
 import { Pill } from '../components/ui/Pill';
 import { ProgressBar } from '../components/ui/ProgressBar';
 import { SpeakerButton } from '../components/ui/SpeakerButton';
-import { UNITS, audioIdFor, unitOfCard } from '../content/store';
+import { UNITS, audioIdFor, ruText, unitOfCard } from '../content/store';
 import { trVisible } from '../content/reading';
 import { translit } from '../content/translit';
 import type { ExplainStep } from '../content/types';
@@ -136,6 +136,22 @@ const RowRu = styled.div`
   font-weight: 700;
   color: ${({ theme }) => theme.colors.inkSoft};
   margin-top: 2px;
+`;
+
+/** Speaker label in front of a line of a dialogue. */
+const Who = styled.div`
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background: ${({ theme }) => theme.colors.blueSoft};
+  color: ${({ theme }) => theme.colors.blue};
+  font-size: 12px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
 `;
 
 function initSession(launch: SessionLaunch | undefined): SessionState | null {
@@ -333,10 +349,11 @@ export function SessionScreen() {
               <Rows>
                 {step.examples.map((e, i) => (
                   <Row key={i}>
+                    {e.who && <Who>{e.who}</Who>}
                     <RowText>
                       <Ka $size={22}>{e.ka}</Ka>
                       {trVisible(e.ka) && <Tr>{translit(e.ka)}</Tr>}
-                      <RowRu>{e.ru}</RowRu>
+                      <RowRu>{ruText(e.ru, settings.ruGender)}</RowRu>
                     </RowText>
                     <SpeakerButton audio={audioIdFor(e.ka)} />
                   </Row>

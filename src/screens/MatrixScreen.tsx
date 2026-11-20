@@ -16,7 +16,9 @@ import {
   type CellKey,
   type Person,
   type Polarity,
-  type Tense,
+  type Screeve,
+  verbForm,
+  verbRu,
 } from '../content/types';
 import { getCard, getSettings } from '../db/progress';
 import { useProgressVersion } from '../db/useProgress';
@@ -191,7 +193,9 @@ export function MatrixScreen() {
     );
   }
 
-  const cellState = (t: Tense): CellState => {
+  const rows: Screeve[] = verb.opt ? [...TENSE_ROWS, 'opt'] : [...TENSE_ROWS];
+
+  const cellState = (t: Screeve): CellState => {
     const key = `${t}.${person}` as CellKey;
     const st = verb.status[key];
     if (st !== 'verified' && st !== 'auto-verified') return 'unverified';
@@ -200,14 +204,14 @@ export function MatrixScreen() {
     return isAutomatic(card) ? 'auto' : 'learned';
   };
 
-  const play = (t: Tense, pol: Polarity) => {
+  const play = (t: Screeve, pol: Polarity) => {
     const id = `c:${verb.id}.${t}.${person}`;
     const s = examplesFor(id).find((x) => x.polarity === pol && audioIdFor(x.ka)) ??
       examplesFor(id).find((x) => audioIdFor(x.ka));
     if (s) void playClip(audioIdFor(s.ka));
   };
 
-  const learnedCells = TENSE_ROWS.flatMap((t) => PERSONS.map((p) => `c:${verb.id}.${t}.${p}`)).filter((id) =>
+  const learnedCells = rows.flatMap((t) => PERSONS.map((p) => `c:${verb.id}.${t}.${p}`)).filter((id) =>
     getCard(id),
   ).length;
 
@@ -227,14 +231,14 @@ export function MatrixScreen() {
           {COLS.map(([, label]) => (
             <ColHead key={label}>{label}</ColHead>
           ))}
-          {TENSE_ROWS.map((t) => {
-            const form = verb.forms[t][person];
+          {rows.map((t) => {
+            const form = verbForm(verb, t, person) ?? '';
             const state = cellState(t);
             return (
               <FragmentRow key={t}>
                 <RowHead>
                   {TENSE_RU[t]}
-                  <span>{ruText(verb.ruCells[t][person], settings.ruGender)}</span>
+                  <span>{ruText(verbRu(verb, t, person), settings.ruGender)}</span>
                 </RowHead>
                 {COLS.map(([pol]) => {
                   const text = pol === 'neg' ? `არ ${form}` : pol === 'q' ? `${form}?` : form;

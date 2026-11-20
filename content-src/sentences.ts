@@ -2,124 +2,30 @@
  * Deterministic sentence bank: templates × verified verb forms × core words.
  * No model is involved, so every Georgian token is known by construction —
  * `scripts/content/validate.ts` re-checks that claim on the output.
+ *
+ * This file holds the hand-tuned templates of units 1–4. The generic
+ * generators for later verbs are in cells.ts, hand-written lines in lines.ts.
  */
-import type { Person, Polarity, Sentence, Tense, Token, TokenRole } from '../src/content/types';
-import { PERSONS, TENSES, cellCardId, wordCardId } from '../src/content/types';
+import type { Person, Polarity, Sentence, Tense } from '../src/content/types';
+import { PERSONS, TENSES, cellCardId } from '../src/content/types';
+import { cellSentences } from './cells';
+import { KA_DAT, KA_NOM, NEG, PI, RU_DAT, RU_NOM, RU_U, build, cycler, ruSentence, word, type Part } from './dsl';
 import { lex, type LexSrc, type RuGender } from './lexicon';
+import { lineSentences } from './lines';
 import { VERB_BY_ID, type VerbSrc } from './verbs';
 
-const PI: Record<Person, number> = { '1sg': 0, '2sg': 1, '3sg': 2, '1pl': 3, '2pl': 4, '3pl': 5 };
+export { RU_DAT, RU_NOM, RU_U };
 
-/** Lexeme keys of the Georgian subject pronouns. */
-const KA_NOM: Record<Person, string> = {
-  '1sg': 'me', '2sg': 'shen', '3sg': 'is', '1pl': 'chven', '2pl': 'tkven', '3pl': 'isini',
-};
-const KA_DAT: Record<Person, string> = {
-  '1sg': 'me', '2sg': 'shen', '3sg': 'mas', '1pl': 'chven', '2pl': 'tkven', '3pl': 'mat',
-};
-export const RU_NOM: Record<Person, string> = {
-  '1sg': 'я', '2sg': 'ты', '3sg': 'он', '1pl': 'мы', '2pl': 'вы', '3pl': 'они',
-};
-export const RU_DAT: Record<Person, string> = {
-  '1sg': 'мне', '2sg': 'тебе', '3sg': 'ему', '1pl': 'нам', '2pl': 'вам', '3pl': 'им',
-};
-export const RU_U: Record<Person, string> = {
-  '1sg': 'у меня', '2sg': 'у тебя', '3sg': 'у него', '1pl': 'у нас', '2pl': 'у вас', '3pl': 'у них',
-};
+/** Units that have content. Sentences that need anything from a later unit are not built. */
+export const READY_UNITS = 16;
 
-/** Units that have content so far. Cells scheduled for later units get no sentences yet. */
-export const READY_UNITS = 4;
+/** Units 1–4 keep their original schedule: a cell that arrives later gets its sentences from cells.ts. */
+const TEMPLATE_UNITS = 4;
 
-/** Unit of a cell, or null when it is not part of the course yet. */
+/** Unit of a cell, if these templates are the ones that teach it. */
 function liveUnit(v: VerbSrc, t: Tense, p: Person): number | null {
   const u = v.cellUnit(t, p);
-  return u != null && u <= READY_UNITS ? u : null;
-}
-
-/** Unit in which each pattern card is introduced. */
-export const PATTERN_UNIT: Record<string, number> = { 'c:neg': 1, 'c:q': 1, 'c:shi': 3, 'c:ze': 3 };
-
-interface Part {
-  t: string;
-  role: TokenRole;
-  lexKey?: string;
-  card?: string;
-  alts?: string[];
-}
-
-const word = (key: string, role: TokenRole, extra: Partial<Part> = {}): Part => ({
-  t: lex(key).ka,
-  role,
-  lexKey: key,
-  ...extra,
-});
-const NEG: Part = { t: 'არ', role: 'neg' };
-
-function cap(s: string): string {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
-function ruSentence(parts: Array<string | false | null | undefined>, pol: Polarity): string {
-  const text = parts.filter((x): x is string => !!x).join(' ');
-  return cap(text) + (pol === 'q' ? '?' : '.');
-}
-
-interface Draft {
-  id: string;
-  focus: string;
-  frame: string;
-  verb?: VerbSrc;
-  tense?: Tense;
-  person?: Person;
-  polarity: Polarity;
-  parts: Part[];
-  ru: string;
-  fixed?: boolean;
-  /** Unit of the focus card itself. */
-  unit: number;
-}
-
-function build(d: Draft): Sentence {
-  const req = new Set<string>();
-  let unit = d.unit;
-  for (const p of d.parts) {
-    if (p.lexKey) {
-      const l = lex(p.lexKey);
-      req.add(wordCardId(l.id));
-      unit = Math.max(unit, l.unit);
-    }
-    if (p.card) {
-      req.add(p.card);
-      unit = Math.max(unit, PATTERN_UNIT[p.card] ?? unit);
-    }
-  }
-  if (!d.fixed) {
-    if (d.polarity === 'neg') req.add('c:neg');
-    if (d.polarity === 'q') req.add('c:q');
-  }
-  req.delete(d.focus);
-  const tokens: Token[] = d.parts.map((p) => (p.alts?.length ? { t: p.t, role: p.role, alts: p.alts } : { t: p.t, role: p.role }));
-  return {
-    id: d.id,
-    unit,
-    focus: d.focus,
-    frame: d.frame,
-    verb: d.verb?.id ?? null,
-    tense: d.tense ?? null,
-    person: d.person ?? null,
-    polarity: d.polarity,
-    ka: d.parts.map((p) => p.t).join(' ') + (d.polarity === 'q' ? '?' : '.'),
-    ru: d.ru,
-    tokens,
-    req: [...req].sort(),
-    fixed: !!d.fixed,
-  };
-}
-
-/** Round-robin picker, so fillers are spread evenly and the output is stable between builds. */
-function cycler<T>(items: readonly T[]): () => T {
-  let i = 0;
-  return () => items[i++ % items.length];
+  return u != null && u <= TEMPLATE_UNITS ? u : null;
 }
 
 // ── Action verbs: делать, работать, говорить ───────────────────────────────
@@ -234,6 +140,7 @@ const LIVE_PLACES: Place[] = [
 
 const placePart = (pl: Place): Part => ({
   t: pl.ka, role: 'place', lexKey: pl.lexKey, card: pl.card, alts: pl.alts,
+  form: pl.card === 'c:shi' ? 'shi' : undefined,
 });
 
 function placeVerbSentences(v: VerbSrc, places: Place[], out: Sentence[]): void {
@@ -307,7 +214,7 @@ const RU_WAS: Record<RuGender, string> = { m: 'был', f: 'была', n: 'бы�
 function thingSentences(out: Sentence[]): void {
   const be = VERB_BY_ID.get('be')!;
   const onTable: Part = {
-    t: 'მაგიდაზე', role: 'place', lexKey: 'magida', card: 'c:ze', alts: ['მაგიდა', 'მაგიდაში'],
+    t: 'მაგიდაზე', role: 'place', lexKey: 'magida', form: 'ze', card: 'c:ze', alts: ['მაგიდა', 'მაგიდაში'],
   };
   const things = ['telefoni', 'gasaghebi', 'tsigni'].map(lex);
   const unit = 3;
@@ -461,5 +368,6 @@ export function buildSentences(): Sentence[] {
   thingSentences(out);
   for (const id of ['want', 'have', 'need', 'like', 'love']) dativeSentences(v(id), out);
   phraseSentences(out);
-  return out;
+  out.push(...cellSentences(), ...lineSentences());
+  return out.filter((s) => s.unit <= READY_UNITS);
 }

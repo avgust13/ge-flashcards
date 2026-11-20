@@ -174,7 +174,7 @@ export function ChoiceExercise({ ex, autoplay, onDone }: Props) {
           })}
         </Options>
 
-        {solved && <RevealCard reveal={ex.reveal} ok={errs === 0} />}
+        {solved && <RevealCard reveal={ex.reveal} ok={errs === 0} source={ex} />}
       </Body>
 
       <Footer>

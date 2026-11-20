@@ -6,7 +6,7 @@ import { Pill } from '../components/ui/Pill';
 import { ScreenHeader } from '../components/ui/ScreenHeader';
 import { SectionLabel } from '../components/ui/SectionLabel';
 import { SpeakerButton } from '../components/ui/SpeakerButton';
-import { UNITS, audioIdFor, getUnit } from '../content/store';
+import { UNITS, audioIdFor, getUnit, ruText } from '../content/store';
 import { trVisible } from '../content/reading';
 import { translit } from '../content/translit';
 import { getCard, getCourse, getSettings, setCourse } from '../db/progress';
@@ -106,6 +106,22 @@ const Small = styled.div`
   color: ${({ theme }) => theme.colors.inkSoft};
 `;
 
+/** Speaker label in front of a line of a dialogue. */
+const Who = styled.div`
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  background: ${({ theme }) => theme.colors.blueSoft};
+  color: ${({ theme }) => theme.colors.blue};
+  font-size: 12px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+`;
+
 const Footer = styled.div`
   padding: 10px 20px 16px;
   width: 100%;
@@ -181,11 +197,12 @@ export function UnitScreen() {
               ))}
               {s.examples.map((e, i) => (
                 <Example key={i}>
+                  {e.who && <Who>{e.who}</Who>}
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <Ka>{e.ka}</Ka>
                     <Small>
                       {trVisible(e.ka) ? `${translit(e.ka)} · ` : ''}
-                      {e.ru}
+                      {ruText(e.ru, getSettings().ruGender)}
                     </Small>
                   </div>
                   <SpeakerButton audio={audioIdFor(e.ka)} />

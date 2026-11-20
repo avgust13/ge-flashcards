@@ -17,6 +17,7 @@ import { applyStatsToWords } from '../data/stats';
 import { WORDS } from '../data/words';
 import { exportBackupToUser, parseBackup, restoreBackup } from '../db/backup';
 import { cardCount, getSettings, resetProgress, setSettings } from '../db/progress';
+import { clearReports, getReports, hiddenCount, reportsAsText, unhideAll } from '../db/reports';
 import { useProgressVersion } from '../db/useProgress';
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
 import { getClockOffset, setClockOffset } from '../srs/clock';
@@ -159,6 +160,19 @@ export function SettingsScreen() {
   const [usedMb, setUsedMb] = useState<number | null>(null);
   const [downloading, setDownloading] = useState(false);
   const [offlineMsg, setOfflineMsg] = useState<{ text: string; error?: boolean } | null>(null);
+  const [reportMsg, setReportMsg] = useState('');
+  // Read on every render: the screen re-renders whenever saved progress changes.
+  const reports = getReports();
+  const hidden = hiddenCount();
+
+  const onCopyReports = async () => {
+    try {
+      await navigator.clipboard.writeText(reportsAsText(reports));
+      setReportMsg('Скопировано.');
+    } catch {
+      setReportMsg('Не получилось скопировать. Замечания также попадают в резервную копию.');
+    }
+  };
 
   const refreshOffline = async () => {
     setOffline(await offlineStatus());
@@ -398,7 +412,7 @@ export function SettingsScreen() {
                 {offline
                   ? `Скачано ${offline.cached} из ${offline.total} клипов.`
                   : 'Скачай весь звук заранее, чтобы заниматься без сети.'}{' '}
-                Весь звук занимает около 10 МБ.
+                Весь звук занимает около 30 МБ.
                 {usedMb != null && ` Сейчас приложение хранит ${usedMb} МБ.`}
               </Desc>
               {offlineMsg && <Message $isError={offlineMsg.error}>{offlineMsg.text}</Message>}
@@ -412,6 +426,51 @@ export function SettingsScreen() {
               {downloading ? 'Скачиваю…' : offline && offline.cached >= offline.total ? 'Скачано' : 'Скачать'}
             </Pill>
           </Row>
+        </Card>
+
+        <SectionLabel>Замечания к карточкам</SectionLabel>
+        <Card>
+          <Row>
+            <Meta>
+              <Title>Отмеченные ошибки: {reports.length}</Title>
+              <Desc>
+                {reports.length
+                  ? 'Замечания, оставленные кнопкой «Здесь ошибка?» под ответом. Скопируй их, чтобы исправить контент.'
+                  : 'Если карточка кажется неверной, нажми «Здесь ошибка?» под ответом — замечание появится здесь.'}
+              </Desc>
+              {reports.slice(-3).map((r) => (
+                <Desc key={r.t}>
+                  {r.ka} — {r.note || 'без пояснения'}
+                </Desc>
+              ))}
+              {reportMsg && <Message>{reportMsg}</Message>}
+            </Meta>
+            <Pill kind="ghost" size="sm" disabled={!reports.length} onClick={onCopyReports}>
+              Скопировать
+            </Pill>
+          </Row>
+          {reports.length > 0 && (
+            <Row>
+              <Meta>
+                <Title>Очистить список</Title>
+                <Desc>После того как замечания переданы.</Desc>
+              </Meta>
+              <Pill kind="ghost" size="sm" onClick={() => { clearReports(); setReportMsg('Список очищен.'); }}>
+                Очистить
+              </Pill>
+            </Row>
+          )}
+          {hidden > 0 && (
+            <Row>
+              <Meta>
+                <Title>Скрытые карточки: {hidden}</Title>
+                <Desc>Они не появляются в занятиях, пока их не вернуть.</Desc>
+              </Meta>
+              <Pill kind="ghost" size="sm" onClick={() => setReportMsg(`Возвращено карточек: ${unhideAll()}.`)}>
+                Вернуть
+              </Pill>
+            </Row>
+          )}
         </Card>
 
         <SectionLabel>Приложение</SectionLabel>

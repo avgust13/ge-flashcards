@@ -1,0 +1,3585 @@
+{
+ "me": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1191923"
+   ]
+  }
+ },
+ "shen": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:478623"
+   ]
+  }
+ },
+ "ki": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:918938"
+   ]
+  }
+ },
+ "ara": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:907085"
+   ]
+  }
+ },
+ "dghes": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:205098"
+   ]
+  }
+ },
+ "khval": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:45902"
+   ]
+  }
+ },
+ "gushin": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:42359"
+   ]
+  }
+ },
+ "akhla": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:231746"
+   ]
+  }
+ },
+ "kartulad": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:23969"
+   ]
+  }
+ },
+ "rusulad": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:9683"
+   ]
+  }
+ },
+ "inglisurad": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:9115"
+   ]
+  }
+ },
+ "gamarjoba": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:15060"
+   ]
+  }
+ },
+ "madloba": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:128497"
+   ]
+  }
+ },
+ "nakhvamdis": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1382"
+   ]
+  }
+ },
+ "gtkhovt": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:37704"
+   ]
+  }
+ },
+ "bodishi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:20969"
+   ]
+  }
+ },
+ "kargi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:254748"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:35137"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:58581"
+   ]
+  }
+ },
+ "is": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:757457"
+   ]
+  }
+ },
+ "chven": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:212324"
+   ]
+  }
+ },
+ "tkven": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:146361"
+   ]
+  }
+ },
+ "isini": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:83938"
+   ]
+  }
+ },
+ "ak": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:429748"
+   ]
+  }
+ },
+ "ik": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:184298"
+   ]
+  }
+ },
+ "sad": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:191057"
+   ]
+  }
+ },
+ "sakhli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:19369"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:59570"
+   ]
+  },
+  "dan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:7848"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:6133"
+   ]
+  },
+  "gen": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:16857"
+   ]
+  }
+ },
+ "samsakhuri": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:12487"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:17512"
+   ]
+  },
+  "dan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4998"
+   ]
+  }
+ },
+ "tbilisi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:37176"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:45371"
+   ]
+  },
+  "dan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3922"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3989"
+   ]
+  }
+ },
+ "batumi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4917"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:9160"
+   ]
+  },
+  "dan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:906"
+   ]
+  }
+ },
+ "sakartvelo": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:78044"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:132162"
+   ]
+  },
+  "dan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:7071"
+   ]
+  }
+ },
+ "kalaki": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:26253"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:25745"
+   ]
+  },
+  "dan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2436"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:6018"
+   ]
+  }
+ },
+ "kargad": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:165028"
+   ]
+  }
+ },
+ "magida": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3676"
+   ]
+  },
+  "ze": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5192"
+   ]
+  }
+ },
+ "telefoni": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:21338"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:6134"
+   ]
+  }
+ },
+ "gasaghebi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3573"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:995"
+   ]
+  }
+ },
+ "tsigni": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:27973"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5628"
+   ]
+  }
+ },
+ "qava": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3913"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1792"
+   ]
+  }
+ },
+ "chai": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4335"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:6650"
+   ]
+  }
+ },
+ "tsqali": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:28329"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:10182"
+   ]
+  }
+ },
+ "ghvino": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:9795"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3640"
+   ]
+  }
+ },
+ "puri": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:11038"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2859"
+   ]
+  }
+ },
+ "es": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1428843"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:196630"
+   ]
+  },
+  "ze": {
+   "status": "attested",
+   "sources": [
+    "corpus:73197"
+   ]
+  }
+ },
+ "dro": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:83727"
+   ]
+  }
+ },
+ "puli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:76928"
+   ]
+  },
+  "ins": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:6291"
+   ]
+  }
+ },
+ "bileti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5340"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1353"
+   ]
+  }
+ },
+ "kitkhva": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:44411"
+   ]
+  }
+ },
+ "mas": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:179231"
+   ]
+  }
+ },
+ "mat": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:171234"
+   ]
+  }
+ },
+ "da": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:8670483"
+   ]
+  }
+ },
+ "mkvia": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:1729"
+   ]
+  }
+ },
+ "gkvia": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:1430"
+   ]
+  }
+ },
+ "gkviat": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:183"
+   ]
+  }
+ },
+ "nino": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:13806"
+   ]
+  },
+  "erg": {
+   "status": "attested",
+   "sources": [
+    "corpus:800"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:4429"
+   ]
+  }
+ },
+ "giorgi": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:48575"
+   ]
+  },
+  "erg": {
+   "status": "attested",
+   "sources": [
+    "corpus:2022"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:9754"
+   ]
+  }
+ },
+ "sasiamovnoa": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:2850"
+   ]
+  }
+ },
+ "kartuli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:149680"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:3168"
+   ]
+  }
+ },
+ "rusuli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:48034"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:1704"
+   ]
+  }
+ },
+ "inglisuri": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:23115"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:1802"
+   ]
+  }
+ },
+ "tsota": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:178552"
+   ]
+  }
+ },
+ "turisti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1463"
+   ]
+  }
+ },
+ "studenti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4168"
+   ]
+  }
+ },
+ "ekimi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:9708"
+   ]
+  },
+  "tan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3981"
+   ]
+  },
+  "erg": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3728"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3740"
+   ]
+  }
+ },
+ "mastsavlebeli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:7027"
+   ]
+  }
+ },
+ "programisti": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:2943"
+   ]
+  }
+ },
+ "rusi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:22590"
+   ]
+  }
+ },
+ "kartveli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:78727"
+   ]
+  }
+ },
+ "utskhoeli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5058"
+   ]
+  }
+ },
+ "ruseti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:47709"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:20742"
+   ]
+  },
+  "dan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3439"
+   ]
+  }
+ },
+ "moskovi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4247"
+   ]
+  },
+  "shi": {
+   "status": "attested",
+   "sources": [
+    "corpus:9971"
+   ]
+  },
+  "dan": {
+   "status": "attested",
+   "sources": [
+    "corpus:1519"
+   ]
+  }
+ },
+ "saidan": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:46596"
+   ]
+  }
+ },
+ "erti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:589008"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:256903"
+   ]
+  }
+ },
+ "ori": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:145856"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:46593"
+   ]
+  }
+ },
+ "sami": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:52189"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:19013"
+   ]
+  }
+ },
+ "otkhi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:14677"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:4959"
+   ]
+  }
+ },
+ "khuti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:11473"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:4071"
+   ]
+  }
+ },
+ "ekvsi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5961"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:2111"
+   ]
+  }
+ },
+ "shvidi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5799"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:1952"
+   ]
+  }
+ },
+ "rva": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5169"
+   ]
+  }
+ },
+ "tskhra": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5403"
+   ]
+  }
+ },
+ "ati": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:10039"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:5608"
+   ]
+  }
+ },
+ "vin": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:177453"
+   ]
+  }
+ },
+ "ra": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1869882"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:277107"
+   ]
+  }
+ },
+ "rodis": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:52787"
+   ]
+  }
+ },
+ "ratom": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:186888"
+   ]
+  }
+ },
+ "rogor": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:359903"
+   ]
+  }
+ },
+ "ramdeni": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:85824"
+   ]
+  }
+ },
+ "romeli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:81748"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:43920"
+   ]
+  }
+ },
+ "ghirs": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:73512"
+   ]
+  }
+ },
+ "khachapuri": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1454"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:491"
+   ]
+  }
+ },
+ "qveli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2776"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:875"
+   ]
+  }
+ },
+ "khili": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2488"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:570"
+   ]
+  }
+ },
+ "rame": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:279240"
+   ]
+  }
+ },
+ "araperi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:188894"
+   ]
+  }
+ },
+ "qvelaperi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:204904"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:69521"
+   ]
+  }
+ },
+ "maghazia": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:8727"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:10936"
+   ]
+  },
+  "dan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:732"
+   ]
+  }
+ },
+ "bazari": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:21000"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2634"
+   ]
+  },
+  "dan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:352"
+   ]
+  }
+ },
+ "skola": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:14411"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:14687"
+   ]
+  },
+  "dan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1508"
+   ]
+  }
+ },
+ "restorani": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1905"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3480"
+   ]
+  }
+ },
+ "kafe": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2161"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2436"
+   ]
+  }
+ },
+ "aeroporti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1526"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2420"
+   ]
+  },
+  "dan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:396"
+   ]
+  }
+ },
+ "sastumro": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5700"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2647"
+   ]
+  }
+ },
+ "tsentri": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:12371"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:12057"
+   ]
+  }
+ },
+ "zghva": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:10279"
+   ]
+  },
+  "ze": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4552"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2262"
+   ]
+  }
+ },
+ "mta": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:7235"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3298"
+   ]
+  }
+ },
+ "sopeli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:17729"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:14526"
+   ]
+  }
+ },
+ "parki": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5974"
+   ]
+  },
+  "shi": {
+   "status": "attested",
+   "sources": [
+    "corpus:2925"
+   ]
+  }
+ },
+ "kucha": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:6799"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:18177"
+   ]
+  }
+ },
+ "metro": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3232"
+   ]
+  },
+  "ins": {
+   "status": "attested",
+   "sources": [
+    "corpus:549"
+   ]
+  }
+ },
+ "avtobusi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2357"
+   ]
+  },
+  "ins": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1326"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:582"
+   ]
+  }
+ },
+ "taksi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1520"
+   ]
+  },
+  "ins": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:924"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1503"
+   ]
+  }
+ },
+ "mankana": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:58483"
+   ]
+  },
+  "ins": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:6707"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:23799"
+   ]
+  },
+  "gen": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:22456"
+   ]
+  }
+ },
+ "pekhit": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:7951"
+   ]
+  }
+ },
+ "megobari": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:17726"
+   ]
+  },
+  "tan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1400"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:7778"
+   ]
+  },
+  "gen": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4556"
+   ]
+  },
+  "erg": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4228"
+   ]
+  },
+  "pl": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:8617"
+   ]
+  }
+ },
+ "chemtan": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:32200"
+   ]
+  }
+ },
+ "shentan": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:15321"
+   ]
+  }
+ },
+ "chventan": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:28728"
+   ]
+  }
+ },
+ "ertad": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:143131"
+   ]
+  }
+ },
+ "shors": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:21638"
+   ]
+  }
+ },
+ "akhlos": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:23884"
+   ]
+  }
+ },
+ "chemi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:421896"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:127597"
+   ]
+  },
+  "erg": {
+   "status": "attested",
+   "sources": [
+    "corpus:15717"
+   ]
+  }
+ },
+ "sheni": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:205685"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:72964"
+   ]
+  },
+  "erg": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4693"
+   ]
+  }
+ },
+ "misi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:293569"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:164095"
+   ]
+  },
+  "erg": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:10898"
+   ]
+  }
+ },
+ "chveni": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:173996"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:78421"
+   ]
+  },
+  "erg": {
+   "status": "attested",
+   "sources": [
+    "corpus:8140"
+   ]
+  }
+ },
+ "tkveni": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:103137"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:34347"
+   ]
+  },
+  "erg": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2253"
+   ]
+  }
+ },
+ "mati": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:110415"
+   ]
+  },
+  "erg": {
+   "status": "attested",
+   "sources": [
+    "corpus:1849"
+   ]
+  }
+ },
+ "visi": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:18467"
+   ]
+  }
+ },
+ "deda": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:66899"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:25084"
+   ]
+  },
+  "gen": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:20550"
+   ]
+  },
+  "erg": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4335"
+   ]
+  },
+  "tan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1282"
+   ]
+  }
+ },
+ "mama": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:37670"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:7480"
+   ]
+  },
+  "gen": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:9617"
+   ]
+  },
+  "erg": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3657"
+   ]
+  },
+  "tan": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1172"
+   ]
+  }
+ },
+ "dedachemi": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:3318"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:2011"
+   ]
+  },
+  "erg": {
+   "status": "attested",
+   "sources": [
+    "corpus:1209"
+   ]
+  }
+ },
+ "mamachemi": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:4101"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:2693"
+   ]
+  },
+  "erg": {
+   "status": "attested",
+   "sources": [
+    "corpus:1536"
+   ]
+  }
+ },
+ "dzma": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:34550"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5543"
+   ]
+  },
+  "gen": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4987"
+   ]
+  },
+  "erg": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2330"
+   ]
+  }
+ },
+ "da2": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:8670483"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4426"
+   ]
+  },
+  "gen": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2712"
+   ]
+  },
+  "erg": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1734"
+   ]
+  }
+ },
+ "shvili": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:29691"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:11308"
+   ]
+  },
+  "pl": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:10583"
+   ]
+  }
+ },
+ "bavshvi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:25965"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:13146"
+   ]
+  },
+  "erg": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2419"
+   ]
+  },
+  "pl": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:14844"
+   ]
+  }
+ },
+ "tsoli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:18098"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:7394"
+   ]
+  },
+  "gen": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5501"
+   ]
+  },
+  "erg": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2309"
+   ]
+  }
+ },
+ "kmari": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:10520"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5772"
+   ]
+  },
+  "gen": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3770"
+   ]
+  },
+  "erg": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1736"
+   ]
+  }
+ },
+ "ojakhi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:19530"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:8675"
+   ]
+  }
+ },
+ "dzaghli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:11959"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3899"
+   ]
+  }
+ },
+ "kata": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5268"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1609"
+   ]
+  }
+ },
+ "bina": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:11345"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3298"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2696"
+   ]
+  }
+ },
+ "otakhi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:6038"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:16714"
+   ]
+  }
+ },
+ "pilmi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:34132"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:8254"
+   ]
+  }
+ },
+ "didi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:384253"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:62927"
+   ]
+  },
+  "erg": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3536"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:11488"
+   ]
+  }
+ },
+ "patara": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:97005"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:4425"
+   ]
+  }
+ },
+ "tsudi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:68681"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:11497"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:16453"
+   ]
+  }
+ },
+ "akhali": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:220226"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:67379"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:11100"
+   ]
+  }
+ },
+ "dzveli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:67369"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:22096"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:4750"
+   ]
+  }
+ },
+ "lamazi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:32296"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:6330"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:7566"
+   ]
+  }
+ },
+ "dzviri": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:19383"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:333"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:11907"
+   ]
+  }
+ },
+ "iapi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:13217"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:816"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:7112"
+   ]
+  }
+ },
+ "tskheli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:8796"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4597"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:626"
+   ]
+  }
+ },
+ "tsivi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:10586"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3422"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:621"
+   ]
+  }
+ },
+ "gemrieli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3905"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:625"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:1345"
+   ]
+  }
+ },
+ "dzalian": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:424854"
+   ]
+  }
+ },
+ "upro": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:417085"
+   ]
+  }
+ },
+ "qvelaze": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:193261"
+   ]
+  }
+ },
+ "bevri": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:173048"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:35407"
+   ]
+  },
+  "adv": {
+   "status": "attested",
+   "sources": [
+    "corpus:33473"
+   ]
+  }
+ },
+ "magram": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:987038"
+   ]
+  }
+ },
+ "khortsi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:7254"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2601"
+   ]
+  }
+ },
+ "tevzi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4690"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1189"
+   ]
+  }
+ },
+ "ludi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:6142"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1955"
+   ]
+  }
+ },
+ "tsveni": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2078"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:632"
+   ]
+  }
+ },
+ "rdze": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3995"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1167"
+   ]
+  }
+ },
+ "khinkali": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4282"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1150"
+   ]
+  }
+ },
+ "salati": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:336"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:68"
+   ]
+  }
+ },
+ "supi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:497"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:133"
+   ]
+  }
+ },
+ "man": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:73022"
+   ]
+  }
+ },
+ "ukve": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:339616"
+   ]
+  }
+ },
+ "jer": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:281404"
+   ]
+  }
+ },
+ "adre": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:89677"
+   ]
+  }
+ },
+ "didkhans": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:16925"
+   ]
+  }
+ },
+ "tertmeti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:792"
+   ]
+  }
+ },
+ "tormeti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2423"
+   ]
+  }
+ },
+ "tsameti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:850"
+   ]
+  }
+ },
+ "totkhmeti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:562"
+   ]
+  }
+ },
+ "tkhutmeti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1609"
+   ]
+  }
+ },
+ "tekvsmeti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:570"
+   ]
+  }
+ },
+ "chvidmeti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:482"
+   ]
+  }
+ },
+ "tvrameti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:569"
+   ]
+  }
+ },
+ "tskhrameti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:298"
+   ]
+  }
+ },
+ "otsi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4082"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:1408"
+   ]
+  }
+ },
+ "otsdaerti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:165"
+   ]
+  }
+ },
+ "otsdakhuti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:632"
+   ]
+  }
+ },
+ "otsdaati": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1509"
+   ]
+  }
+ },
+ "ormotsi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1784"
+   ]
+  }
+ },
+ "ormotsdaati": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1085"
+   ]
+  }
+ },
+ "samotsi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:789"
+   ]
+  }
+ },
+ "samotsdaati": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:465"
+   ]
+  }
+ },
+ "otkhmotsi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:391"
+   ]
+  }
+ },
+ "otkhmotsdaati": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:126"
+   ]
+  }
+ },
+ "asi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:7033"
+   ]
+  }
+ },
+ "lari": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:168552"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:18664"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:3777"
+   ]
+  }
+ },
+ "saati": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:27345"
+   ]
+  },
+  "cop": {
+   "status": "attested",
+   "sources": [
+    "corpus:3279"
+   ]
+  },
+  "ze": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:17768"
+   ]
+  }
+ },
+ "tsuti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:17609"
+   ]
+  }
+ },
+ "dghe": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:76567"
+   ]
+  }
+ },
+ "kvira": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:16503"
+   ]
+  }
+ },
+ "tve": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:23980"
+   ]
+  }
+ },
+ "tseli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:80036"
+   ]
+  },
+  "gen": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:246383"
+   ]
+  }
+ },
+ "pasi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:123908"
+   ]
+  }
+ },
+ "barati": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:6974"
+   ]
+  },
+  "ins": {
+   "status": "attested",
+   "sources": [
+    "corpus:1146"
+   ]
+  }
+ },
+ "naghdi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:7427"
+   ]
+  }
+ },
+ "angarishi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:8734"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2358"
+   ]
+  }
+ },
+ "khurda": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1130"
+   ]
+  }
+ },
+ "mometsit": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:5052"
+   ]
+  }
+ },
+ "mometsi": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:5104"
+   ]
+  }
+ },
+ "unda": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:1240086"
+   ]
+  }
+ },
+ "sheidzleba": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:383449"
+   ]
+  }
+ },
+ "ver": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:761302"
+   ]
+  }
+ },
+ "modi": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:32552"
+   ]
+  }
+ },
+ "modit": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:11801"
+   ]
+  }
+ },
+ "tsadi": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:23667"
+   ]
+  }
+ },
+ "tsadit": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:3821"
+   ]
+  }
+ },
+ "mitkhari": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:26434"
+   ]
+  }
+ },
+ "mitkharit": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:19445"
+   ]
+  }
+ },
+ "damekhmare": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:1621"
+   ]
+  }
+ },
+ "damekhmaret": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:14144"
+   ]
+  }
+ },
+ "machvenet": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:588"
+   ]
+  }
+ },
+ "moitsade": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:799"
+   ]
+  }
+ },
+ "moitsadet": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:556"
+   ]
+  }
+ },
+ "gaacheret": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:380"
+   ]
+  }
+ },
+ "nu": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:299198"
+   ]
+  }
+ },
+ "nela": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:27246"
+   ]
+  }
+ },
+ "chkara": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:6909"
+   ]
+  }
+ },
+ "kidev": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:332425"
+   ]
+  }
+ },
+ "ertkhel": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:88646"
+   ]
+  }
+ },
+ "rom": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2586399"
+   ]
+  }
+ },
+ "imitom": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:146266"
+   ]
+  }
+ },
+ "amitom": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:107875"
+   ]
+  }
+ },
+ "tu": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1735775"
+   ]
+  }
+ },
+ "rotsa": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:234250"
+   ]
+  }
+ },
+ "an": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:653509"
+   ]
+  }
+ },
+ "mets": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:252669"
+   ]
+  }
+ },
+ "mere": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:538679"
+   ]
+  }
+ },
+ "albat": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:202098"
+   ]
+  }
+ },
+ "ase": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:359476"
+   ]
+  }
+ },
+ "mgoni": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:181073"
+   ]
+  }
+ },
+ "rasakvirvelia": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:10539"
+   ]
+  }
+ },
+ "aptiaki": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:468"
+   ]
+  },
+  "shi": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1236"
+   ]
+  }
+ },
+ "tsamali": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:6017"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:1776"
+   ]
+  }
+ },
+ "tavi": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:147083"
+   ]
+  }
+ },
+ "mtkiva": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:4579"
+   ]
+  }
+ },
+ "misamarti": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:13730"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:2395"
+   ]
+  }
+ },
+ "kilo": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5145"
+   ]
+  }
+ },
+ "pomidori": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:508"
+   ]
+  }
+ },
+ "menu": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3104"
+   ]
+  }
+ },
+ "martskhniv": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:7728"
+   ]
+  }
+ },
+ "marjvniv": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:8904"
+   ]
+  }
+ },
+ "pirdapir": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:53476"
+   ]
+  }
+ },
+ "sul": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:259319"
+   ]
+  }
+ },
+ "tserili": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:17879"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3819"
+   ]
+  }
+ },
+ "mezobeli": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:9429"
+   ]
+  },
+  "pl": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:3373"
+   ]
+  }
+ },
+ "arapris": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:16177"
+   ]
+  }
+ },
+ "gagimarjos": {
+  "ka": {
+   "status": "attested",
+   "sources": [
+    "corpus:2280"
+   ]
+  }
+ },
+ "dila": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:5345"
+   ]
+  },
+  "ins": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:19656"
+   ]
+  }
+ },
+ "saghamo": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:4339"
+   ]
+  },
+  "dat": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:22513"
+   ]
+  }
+ },
+ "ghame": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:25823"
+   ]
+  },
+  "ins": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:9592"
+   ]
+  }
+ },
+ "qoveldghe": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:10920"
+   ]
+  }
+ },
+ "khshirad": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:65289"
+   ]
+  }
+ },
+ "zogjer": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:23893"
+   ]
+  }
+ },
+ "qoveltvis": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:73216"
+   ]
+  }
+ },
+ "arasdros": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:29273"
+   ]
+  }
+ },
+ "gvian": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:17062"
+   ]
+  }
+ },
+ "mushaoba": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:18723"
+   ]
+  },
+  "dat": {
+   "status": "attested",
+   "sources": [
+    "corpus:6873"
+   ]
+  }
+ },
+ "shemdeg": {
+  "ka": {
+   "status": "verified",
+   "sources": [
+    "wiktionary",
+    "corpus:267858"
+   ]
+  }
+ }
+}

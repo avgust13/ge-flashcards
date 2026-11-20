@@ -97,7 +97,7 @@ export function SpeakExercise({ ex, autoplay, intervals, onDone }: Props) {
 
         {revealed && (
           <>
-            <RevealCard reveal={ex.reveal} />
+            <RevealCard reveal={ex.reveal} source={ex} />
             <Muted style={{ textAlign: 'center' }}>Насколько легко это далось?</Muted>
           </>
         )}

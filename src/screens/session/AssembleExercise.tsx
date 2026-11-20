@@ -159,7 +159,7 @@ export function AssembleExercise({ ex, autoplay, onDone }: Props) {
           </>
         )}
 
-        {done && <RevealCard reveal={ex.reveal} ok={status === 'right' && errs === 0} />}
+        {done && <RevealCard reveal={ex.reveal} ok={status === 'right' && errs === 0} source={ex} />}
       </Body>
 
       <Footer>

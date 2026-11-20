@@ -143,6 +143,54 @@
         "blind",
         "corpus:4058"
       ]
+    },
+    "opt.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:14505"
+      ]
+    },
+    "opt.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:10440"
+      ]
+    },
+    "opt.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:8957"
+      ]
+    },
+    "opt.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:7200"
+      ]
+    },
+    "opt.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1877"
+      ]
+    },
+    "opt.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4069"
+      ]
     }
   },
   "work": {
@@ -270,6 +318,48 @@
       "sources": [
         "blind",
         "corpus:812"
+      ]
+    },
+    "opt.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:588"
+      ]
+    },
+    "opt.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:768"
+      ]
+    },
+    "opt.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:4029"
+      ]
+    },
+    "opt.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:563"
+      ]
+    },
+    "opt.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:174"
+      ]
+    },
+    "opt.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:755"
       ]
     }
   },
@@ -417,6 +507,54 @@
         "blind",
         "corpus:343"
       ]
+    },
+    "opt.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:998"
+      ]
+    },
+    "opt.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1397"
+      ]
+    },
+    "opt.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1326"
+      ]
+    },
+    "opt.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4120"
+      ]
+    },
+    "opt.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:347"
+      ]
+    },
+    "opt.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:754"
+      ]
     }
   },
   "be": {
@@ -562,6 +700,54 @@
         "wiktionary",
         "blind",
         "corpus:11752"
+      ]
+    },
+    "opt.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:21571"
+      ]
+    },
+    "opt.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:814109"
+      ]
+    },
+    "opt.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:312963"
+      ]
+    },
+    "opt.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:9485"
+      ]
+    },
+    "opt.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3751"
+      ]
+    },
+    "opt.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:61309"
       ]
     }
   },
@@ -1395,6 +1581,2804 @@
       "sources": [
         "wiktionary",
         "blind"
+      ]
+    }
+  },
+  "know": {
+    "prs.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:337805"
+      ]
+    },
+    "prs.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:127167"
+      ]
+    },
+    "prs.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:94464"
+      ]
+    },
+    "prs.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:25584"
+      ]
+    },
+    "prs.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:102682"
+      ]
+    },
+    "prs.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:26768"
+      ]
+    },
+    "aor.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:27996"
+      ]
+    },
+    "aor.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3258"
+      ]
+    },
+    "aor.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:21037"
+      ]
+    },
+    "aor.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1987"
+      ]
+    },
+    "aor.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1665"
+      ]
+    },
+    "aor.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:7929"
+      ]
+    },
+    "fut.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1489"
+      ]
+    },
+    "fut.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:5014"
+      ]
+    },
+    "fut.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:3586"
+      ]
+    },
+    "fut.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:721"
+      ]
+    },
+    "fut.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:2093"
+      ]
+    },
+    "fut.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1457"
+      ]
+    }
+  },
+  "understand": {
+    "prs.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:36555"
+      ]
+    },
+    "prs.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:7710"
+      ]
+    },
+    "prs.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:9534"
+      ]
+    },
+    "prs.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:2072"
+      ]
+    },
+    "prs.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:3277"
+      ]
+    },
+    "prs.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:3358"
+      ]
+    },
+    "aor.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:69219"
+      ]
+    },
+    "aor.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:11946"
+      ]
+    },
+    "aor.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:12155"
+      ]
+    },
+    "aor.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:4363"
+      ]
+    },
+    "aor.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:6041"
+      ]
+    },
+    "aor.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:2683"
+      ]
+    },
+    "fut.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:3198"
+      ]
+    },
+    "fut.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:11467"
+      ]
+    },
+    "fut.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:7555"
+      ]
+    },
+    "fut.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:2268"
+      ]
+    },
+    "fut.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:2476"
+      ]
+    },
+    "fut.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1833"
+      ]
+    }
+  },
+  "learn": {
+    "prs.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:3394"
+      ]
+    },
+    "prs.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1930"
+      ]
+    },
+    "prs.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:3715"
+      ]
+    },
+    "prs.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:666"
+      ]
+    },
+    "prs.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:386"
+      ]
+    },
+    "prs.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1858"
+      ]
+    },
+    "aor.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:3351"
+      ]
+    },
+    "aor.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:3356"
+      ]
+    },
+    "aor.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:2603"
+      ]
+    },
+    "aor.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:645"
+      ]
+    },
+    "aor.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1695"
+      ]
+    },
+    "aor.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1201"
+      ]
+    },
+    "fut.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1166"
+      ]
+    },
+    "fut.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:2540"
+      ]
+    },
+    "fut.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1845"
+      ]
+    },
+    "fut.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:639"
+      ]
+    },
+    "fut.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:357"
+      ]
+    },
+    "fut.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1085"
+      ]
+    }
+  },
+  "buy": {
+    "prs.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4843"
+      ]
+    },
+    "prs.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind"
+      ]
+    },
+    "prs.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3951"
+      ]
+    },
+    "prs.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:664"
+      ]
+    },
+    "prs.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:742"
+      ]
+    },
+    "prs.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2346"
+      ]
+    },
+    "aor.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:20990"
+      ]
+    },
+    "aor.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:13599"
+      ]
+    },
+    "aor.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:6798"
+      ]
+    },
+    "aor.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1074"
+      ]
+    },
+    "aor.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4381"
+      ]
+    },
+    "aor.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1686"
+      ]
+    },
+    "fut.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:21588"
+      ]
+    },
+    "fut.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:9169"
+      ]
+    },
+    "fut.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:5960"
+      ]
+    },
+    "fut.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:669"
+      ]
+    },
+    "fut.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1477"
+      ]
+    },
+    "fut.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1179"
+      ]
+    },
+    "opt.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:13030"
+      ]
+    },
+    "opt.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:9938"
+      ]
+    },
+    "opt.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3499"
+      ]
+    },
+    "opt.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1490"
+      ]
+    },
+    "opt.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1087"
+      ]
+    },
+    "opt.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:976"
+      ]
+    }
+  },
+  "go": {
+    "prs.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:12650"
+      ]
+    },
+    "prs.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:8743"
+      ]
+    },
+    "prs.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:53019"
+      ]
+    },
+    "prs.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:5121"
+      ]
+    },
+    "prs.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2245"
+      ]
+    },
+    "prs.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:5970"
+      ]
+    },
+    "aor.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:15439"
+      ]
+    },
+    "aor.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1574"
+      ]
+    },
+    "aor.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:30844"
+      ]
+    },
+    "aor.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3454"
+      ]
+    },
+    "aor.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:378"
+      ]
+    },
+    "aor.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:6174"
+      ]
+    },
+    "fut.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:12647"
+      ]
+    },
+    "fut.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4204"
+      ]
+    },
+    "fut.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:30467"
+      ]
+    },
+    "fut.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2848"
+      ]
+    },
+    "fut.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1169"
+      ]
+    },
+    "fut.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3060"
+      ]
+    },
+    "opt.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:5799"
+      ]
+    },
+    "opt.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4355"
+      ]
+    },
+    "opt.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:10493"
+      ]
+    },
+    "opt.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:7826"
+      ]
+    },
+    "opt.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:857"
+      ]
+    },
+    "opt.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:6174"
+      ]
+    }
+  },
+  "come": {
+    "prs.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:6271"
+      ]
+    },
+    "prs.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2356"
+      ]
+    },
+    "prs.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:35288"
+      ]
+    },
+    "prs.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1427"
+      ]
+    },
+    "prs.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:881"
+      ]
+    },
+    "prs.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:5160"
+      ]
+    },
+    "aor.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:6159"
+      ]
+    },
+    "aor.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1234"
+      ]
+    },
+    "aor.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:23945"
+      ]
+    },
+    "aor.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1316"
+      ]
+    },
+    "aor.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:430"
+      ]
+    },
+    "aor.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:5519"
+      ]
+    },
+    "fut.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:7088"
+      ]
+    },
+    "fut.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2241"
+      ]
+    },
+    "fut.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:25053"
+      ]
+    },
+    "fut.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:883"
+      ]
+    },
+    "fut.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:690"
+      ]
+    },
+    "fut.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3806"
+      ]
+    },
+    "opt.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1763"
+      ]
+    },
+    "opt.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:885"
+      ]
+    },
+    "opt.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:8072"
+      ]
+    },
+    "opt.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:424"
+      ]
+    },
+    "opt.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:350"
+      ]
+    },
+    "opt.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:5519"
+      ]
+    }
+  },
+  "havea": {
+    "prs.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:30755"
+      ]
+    },
+    "prs.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:12330"
+      ]
+    },
+    "prs.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:15188"
+      ]
+    },
+    "prs.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:14848"
+      ]
+    },
+    "prs.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:5015"
+      ]
+    },
+    "prs.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:5226"
+      ]
+    },
+    "aor.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:9401"
+      ]
+    },
+    "aor.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1189"
+      ]
+    },
+    "aor.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:8484"
+      ]
+    },
+    "aor.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2679"
+      ]
+    },
+    "aor.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:377"
+      ]
+    },
+    "aor.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2600"
+      ]
+    },
+    "fut.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1645"
+      ]
+    },
+    "fut.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2244"
+      ]
+    },
+    "fut.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4193"
+      ]
+    },
+    "fut.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2341"
+      ]
+    },
+    "fut.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:681"
+      ]
+    },
+    "fut.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1192"
+      ]
+    }
+  },
+  "see": {
+    "prs.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:28335"
+      ]
+    },
+    "prs.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:18410"
+      ]
+    },
+    "prs.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:13369"
+      ]
+    },
+    "prs.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:6528"
+      ]
+    },
+    "prs.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:9511"
+      ]
+    },
+    "prs.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3733"
+      ]
+    },
+    "aor.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:72068"
+      ]
+    },
+    "aor.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:72275"
+      ]
+    },
+    "aor.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:8767"
+      ]
+    },
+    "aor.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3594"
+      ]
+    },
+    "aor.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:30458"
+      ]
+    },
+    "aor.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3534"
+      ]
+    },
+    "fut.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:14667"
+      ]
+    },
+    "fut.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:17981"
+      ]
+    },
+    "fut.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4472"
+      ]
+    },
+    "fut.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4566"
+      ]
+    },
+    "fut.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:8288"
+      ]
+    },
+    "fut.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1746"
+      ]
+    },
+    "opt.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:11777"
+      ]
+    },
+    "opt.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:8933"
+      ]
+    },
+    "opt.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4407"
+      ]
+    },
+    "opt.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:28205"
+      ]
+    },
+    "opt.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4483"
+      ]
+    },
+    "opt.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1594"
+      ]
+    }
+  },
+  "eat": {
+    "prs.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2751"
+      ]
+    },
+    "prs.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:977"
+      ]
+    },
+    "prs.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:5001"
+      ]
+    },
+    "prs.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:743"
+      ]
+    },
+    "prs.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:337"
+      ]
+    },
+    "prs.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2333"
+      ]
+    },
+    "aor.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1416"
+      ]
+    },
+    "aor.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1809"
+      ]
+    },
+    "aor.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:7578"
+      ]
+    },
+    "aor.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:274"
+      ]
+    },
+    "aor.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:481"
+      ]
+    },
+    "aor.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:467"
+      ]
+    },
+    "fut.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1018"
+      ]
+    },
+    "fut.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:742"
+      ]
+    },
+    "fut.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1357"
+      ]
+    },
+    "fut.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:220"
+      ]
+    },
+    "fut.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind"
+      ]
+    },
+    "fut.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:453"
+      ]
+    },
+    "opt.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1021"
+      ]
+    },
+    "opt.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1118"
+      ]
+    },
+    "opt.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:815"
+      ]
+    },
+    "opt.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:2105"
+      ]
+    },
+    "opt.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:250"
+      ]
+    },
+    "opt.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:407"
+      ]
+    }
+  },
+  "drink": {
+    "prs.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3485"
+      ]
+    },
+    "prs.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1613"
+      ]
+    },
+    "prs.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2730"
+      ]
+    },
+    "prs.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:599"
+      ]
+    },
+    "prs.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:459"
+      ]
+    },
+    "prs.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1605"
+      ]
+    },
+    "aor.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2279"
+      ]
+    },
+    "aor.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3038"
+      ]
+    },
+    "aor.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1921"
+      ]
+    },
+    "aor.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:526"
+      ]
+    },
+    "aor.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:713"
+      ]
+    },
+    "aor.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:419"
+      ]
+    },
+    "fut.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1778"
+      ]
+    },
+    "fut.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1076"
+      ]
+    },
+    "fut.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1405"
+      ]
+    },
+    "fut.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:399"
+      ]
+    },
+    "fut.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:225"
+      ]
+    },
+    "fut.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:298"
+      ]
+    },
+    "opt.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1185"
+      ]
+    },
+    "opt.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1408"
+      ]
+    },
+    "opt.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:646"
+      ]
+    },
+    "opt.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2093"
+      ]
+    },
+    "opt.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:275"
+      ]
+    },
+    "opt.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:231"
+      ]
+    }
+  },
+  "pay": {
+    "prs.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:6246"
+      ]
+    },
+    "prs.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3784"
+      ]
+    },
+    "prs.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:6282"
+      ]
+    },
+    "prs.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1032"
+      ]
+    },
+    "prs.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:785"
+      ]
+    },
+    "prs.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3156"
+      ]
+    },
+    "aor.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2451"
+      ]
+    },
+    "aor.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1275"
+      ]
+    },
+    "aor.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1888"
+      ]
+    },
+    "aor.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:278"
+      ]
+    },
+    "aor.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:386"
+      ]
+    },
+    "aor.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:730"
+      ]
+    },
+    "fut.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:5061"
+      ]
+    },
+    "fut.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4625"
+      ]
+    },
+    "fut.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3638"
+      ]
+    },
+    "fut.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:363"
+      ]
+    },
+    "fut.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1316"
+      ]
+    },
+    "fut.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind"
+      ]
+    }
+  },
+  "can": {
+    "prs.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:37746"
+      ]
+    },
+    "prs.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:54124"
+      ]
+    },
+    "prs.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:47623"
+      ]
+    },
+    "prs.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:14588"
+      ]
+    },
+    "prs.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:32768"
+      ]
+    },
+    "prs.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:12007"
+      ]
+    },
+    "aor.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:3594"
+      ]
+    },
+    "aor.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1662"
+      ]
+    },
+    "aor.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:12694"
+      ]
+    },
+    "aor.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1058"
+      ]
+    },
+    "aor.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:561"
+      ]
+    },
+    "aor.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:4087"
+      ]
+    },
+    "fut.1sg": {
+      "status": "needs-review",
+      "sources": [
+        "corpus:985"
+      ]
+    },
+    "fut.2sg": {
+      "status": "needs-review",
+      "sources": [
+        "corpus:690"
+      ]
+    },
+    "fut.3sg": {
+      "status": "needs-review",
+      "sources": [
+        "corpus:1574"
+      ]
+    },
+    "fut.1pl": {
+      "status": "needs-review",
+      "sources": [
+        "corpus:539"
+      ]
+    },
+    "fut.2pl": {
+      "status": "needs-review",
+      "sources": [
+        "corpus:643"
+      ]
+    },
+    "fut.3pl": {
+      "status": "needs-review",
+      "sources": [
+        "corpus:614"
+      ]
+    }
+  },
+  "wait": {
+    "prs.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:12428"
+      ]
+    },
+    "prs.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:2224"
+      ]
+    },
+    "prs.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:4614"
+      ]
+    },
+    "prs.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:3185"
+      ]
+    },
+    "prs.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:883"
+      ]
+    },
+    "prs.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:2274"
+      ]
+    },
+    "aor.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:267"
+      ]
+    },
+    "aor.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1697"
+      ]
+    },
+    "aor.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:430"
+      ]
+    },
+    "aor.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:46"
+      ]
+    },
+    "aor.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:701"
+      ]
+    },
+    "aor.3pl": {
+      "status": "needs-review",
+      "sources": [
+        "blind"
+      ]
+    },
+    "fut.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:2049"
+      ]
+    },
+    "fut.2sg": {
+      "status": "needs-review",
+      "sources": [
+        "blind"
+      ]
+    },
+    "fut.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:419"
+      ]
+    },
+    "fut.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:282"
+      ]
+    },
+    "fut.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:130"
+      ]
+    },
+    "fut.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:139"
+      ]
+    }
+  },
+  "say": {
+    "prs.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:38807"
+      ]
+    },
+    "prs.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:27497"
+      ]
+    },
+    "prs.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:41062"
+      ]
+    },
+    "prs.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:2347"
+      ]
+    },
+    "prs.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:5125"
+      ]
+    },
+    "prs.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:27244"
+      ]
+    },
+    "aor.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:25670"
+      ]
+    },
+    "aor.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:20268"
+      ]
+    },
+    "aor.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:76452"
+      ]
+    },
+    "aor.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:1531"
+      ]
+    },
+    "aor.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:5338"
+      ]
+    },
+    "aor.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:8615"
+      ]
+    },
+    "fut.1sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:23665"
+      ]
+    },
+    "fut.2sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:15127"
+      ]
+    },
+    "fut.3sg": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:18606"
+      ]
+    },
+    "fut.1pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:3639"
+      ]
+    },
+    "fut.2pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:11363"
+      ]
+    },
+    "fut.3pl": {
+      "status": "auto-verified",
+      "sources": [
+        "blind",
+        "corpus:13305"
+      ]
+    }
+  },
+  "think": {
+    "prs.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:44678"
+      ]
+    },
+    "prs.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:12927"
+      ]
+    },
+    "prs.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:14431"
+      ]
+    },
+    "prs.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3054"
+      ]
+    },
+    "prs.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:13838"
+      ]
+    },
+    "prs.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:5896"
+      ]
+    },
+    "aor.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:12900"
+      ]
+    },
+    "aor.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2703"
+      ]
+    },
+    "aor.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2922"
+      ]
+    },
+    "aor.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:353"
+      ]
+    },
+    "aor.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1401"
+      ]
+    },
+    "aor.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:877"
+      ]
+    },
+    "fut.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1552"
+      ]
+    },
+    "fut.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1103"
+      ]
+    },
+    "fut.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2161"
+      ]
+    },
+    "fut.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:393"
+      ]
+    },
+    "fut.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:421"
+      ]
+    },
+    "fut.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:684"
+      ]
+    }
+  },
+  "write": {
+    "prs.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:15380"
+      ]
+    },
+    "prs.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:11435"
+      ]
+    },
+    "prs.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:21703"
+      ]
+    },
+    "prs.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2046"
+      ]
+    },
+    "prs.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3599"
+      ]
+    },
+    "prs.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:7331"
+      ]
+    },
+    "aor.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:36701"
+      ]
+    },
+    "aor.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:31676"
+      ]
+    },
+    "aor.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:21770"
+      ]
+    },
+    "aor.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:456"
+      ]
+    },
+    "aor.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:20076"
+      ]
+    },
+    "aor.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2425"
+      ]
+    },
+    "fut.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:18410"
+      ]
+    },
+    "fut.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4484"
+      ]
+    },
+    "fut.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4879"
+      ]
+    },
+    "fut.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:669"
+      ]
+    },
+    "fut.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1861"
+      ]
+    },
+    "fut.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1623"
+      ]
+    }
+  },
+  "read": {
+    "prs.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:8797"
+      ]
+    },
+    "prs.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3738"
+      ]
+    },
+    "prs.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:8264"
+      ]
+    },
+    "prs.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2167"
+      ]
+    },
+    "prs.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1259"
+      ]
+    },
+    "prs.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2180"
+      ]
+    },
+    "aor.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:18092"
+      ]
+    },
+    "aor.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:11943"
+      ]
+    },
+    "aor.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2589"
+      ]
+    },
+    "aor.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:224"
+      ]
+    },
+    "aor.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:5568"
+      ]
+    },
+    "aor.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:407"
+      ]
+    },
+    "fut.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2186"
+      ]
+    },
+    "fut.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2107"
+      ]
+    },
+    "fut.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3040"
+      ]
+    },
+    "fut.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:231"
+      ]
+    },
+    "fut.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:779"
+      ]
+    },
+    "fut.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:578"
+      ]
+    }
+  },
+  "begin": {
+    "prs.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3328"
+      ]
+    },
+    "prs.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1916"
+      ]
+    },
+    "prs.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:9975"
+      ]
+    },
+    "prs.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1615"
+      ]
+    },
+    "prs.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:522"
+      ]
+    },
+    "prs.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:3235"
+      ]
+    },
+    "aor.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:10733"
+      ]
+    },
+    "aor.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:7194"
+      ]
+    },
+    "aor.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:56369"
+      ]
+    },
+    "aor.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2866"
+      ]
+    },
+    "aor.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2084"
+      ]
+    },
+    "aor.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:10594"
+      ]
+    },
+    "fut.1sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:6318"
+      ]
+    },
+    "fut.2sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:2357"
+      ]
+    },
+    "fut.3sg": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:7825"
+      ]
+    },
+    "fut.1pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1714"
+      ]
+    },
+    "fut.2pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:1227"
+      ]
+    },
+    "fut.3pl": {
+      "status": "verified",
+      "sources": [
+        "wiktionary",
+        "blind",
+        "corpus:4102"
       ]
     }
   }

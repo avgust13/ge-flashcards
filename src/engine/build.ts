@@ -18,9 +18,21 @@ import {
   pairFor,
   parseCardId,
   ruText,
+  sentencesWithWord,
   unitOfCard,
 } from '../content/store';
-import { PERSONS, TENSES, type Letter, type Person, type Sentence, type Tense, type Verb } from '../content/types';
+import {
+  PERSONS,
+  SCREEVES,
+  endMark,
+  joinTokens,
+  verbForm,
+  type Letter,
+  type Person,
+  type Screeve,
+  type Sentence,
+  type Verb,
+} from '../content/types';
 import type { CardInfo } from '../srs/composer';
 import type { ExerciseKind, SrsCard } from '../srs/types';
 import { shuffled } from './rng';
@@ -123,18 +135,18 @@ function uniqueBy<T>(items: T[], key: (x: T) => string): T[] {
  */
 export function verbDistractors(
   verb: Verb,
-  tense: Tense,
+  tense: Screeve,
   person: Person,
   n: number,
   ctx: BuildCtx,
 ): string[] {
-  const target = verb.forms[tense][person];
+  const target = verbForm(verb, tense, person);
   const cand: { form: string; score: number; sameTense: boolean }[] = [];
-  for (const t of TENSES) {
+  for (const t of SCREEVES) {
     for (const p of PERSONS) {
       if (t === tense && p === person) continue;
-      const form = verb.forms[t][p];
-      if (form === target) continue;
+      const form = verbForm(verb, t, p);
+      if (!form || form === target) continue;
       const sameTense = t === tense;
       const samePerson = p === person;
       if (!sameTense && !samePerson) continue;
@@ -160,17 +172,38 @@ function revealOf(s: Sentence, ctx: BuildCtx, note: string | null = null): Revea
 }
 
 function withToken(s: Sentence, index: number, replacement: string): string {
-  const words = s.tokens.map((t, i) => (i === index ? replacement : t.t));
-  return words.join(' ') + (s.polarity === 'q' ? '?' : '.');
+  return joinTokens(
+    s.tokens.map((t, i) => (i === index ? { ...t, t: replacement } : t)),
+    endMark(s.ka),
+  );
+}
+
+/** Index of the token that is the sentence's tagged verb form. */
+function mainVerbIndex(s: Sentence): number {
+  const verb = s.verb ? getVerb(s.verb) : undefined;
+  const form = verb && s.tense && s.person ? verbForm(verb, s.tense, s.person) : undefined;
+  const exact = form ? s.tokens.findIndex((t) => t.role === 'verb' && t.t === form) : -1;
+  return exact >= 0 ? exact : s.tokens.findIndex((t) => t.role === 'verb');
+}
+
+/** The token where a card is tested: the instance of the pattern, or the word itself. */
+function focusIndex(cardId: string, s: Sentence): number {
+  const p = parseCardId(cardId);
+  if (p?.kind === 'pattern') {
+    const own = s.tokens.findIndex((t) => t.pat === cardId);
+    return own >= 0 ? own : s.tokens.findIndex((t) => t.alts?.length);
+  }
+  if (p?.kind === 'word') return s.tokens.findIndex((t) => t.lex === p.lexId);
+  return -1;
 }
 
 /** Georgian answer options for a sentence, differing in the place the card tests. */
 function kaVariants(cardId: string, s: Sentence, ctx: BuildCtx): string[] {
   const p = parseCardId(cardId);
-  const verbIdx = s.tokens.findIndex((t) => t.role === 'verb');
+  const verbIdx = mainVerbIndex(s);
   const verb = s.verb ? getVerb(s.verb) : undefined;
 
-  if (p?.kind === 'pattern' && (p.pattern === 'neg' || p.pattern === 'q') && verbIdx >= 0) {
+  if (p?.kind === 'pattern' && (p.pattern === 'neg' || p.pattern === 'q') && verbIdx >= 0 && !s.strict) {
     // Same words, different sentence type — plus the classic misplacement of "არ".
     const base = s.tokens.filter((t) => t.t !== NEG).map((t) => t.t);
     const vi = base.length - 1;
@@ -180,14 +213,24 @@ function kaVariants(cardId: string, s: Sentence, ctx: BuildCtx): string[] {
   }
 
   if (p?.kind === 'pattern') {
-    const idx = s.tokens.findIndex((t) => t.alts?.length);
-    if (idx >= 0) {
-      const alts = s.tokens[idx].alts!.map((a) => withToken(s, idx, a));
-      const extra = verb && s.tense && s.person && verbIdx >= 0
-        ? verbDistractors(verb, s.tense, s.person, 1, ctx).map((f) => withToken(s, verbIdx, f))
-        : [];
-      return [...alts, ...extra];
+    const idx = focusIndex(cardId, s);
+    const out: string[] = [];
+    if (idx >= 0) out.push(...(s.tokens[idx].alts ?? []).map((a) => withToken(s, idx, a)));
+    if (verb && s.tense && s.person && verbIdx >= 0 && verbIdx !== idx) {
+      out.push(...verbDistractors(verb, s.tense, s.person, 1, ctx).map((f) => withToken(s, verbIdx, f)));
     }
+    if (out.length < 3) {
+      // Too few ways to get this one wrong: fill up with other sentences of the same pattern.
+      const own = ruText(s.ru, ctx.gender);
+      const siblings = shuffled(
+        examplesFor(cardId).filter(
+          (o) => o.id !== s.id && o.ka !== s.ka && ruText(o.ru, ctx.gender) !== own && unmet(o, cardId, ctx) === 0,
+        ),
+        ctx.rng,
+      ).map((o) => o.ka);
+      out.push(...siblings.slice(0, 3 - out.length));
+    }
+    if (out.length) return out;
   }
 
   if (verb && s.tense && s.person && verbIdx >= 0) {
@@ -252,6 +295,26 @@ function buildWord(cardId: string, lexId: number, kind: ExerciseKind, ctx: Build
   const others = otherLexemes(lexId, ctx);
 
   if (kind === 'speak') {
+    // A word that is already in review is said inside a sentence every other
+    // time: that is where it will be needed.
+    const card = ctx.getCard(cardId);
+    if (card?.state === 2 && card.reps % 2 === 1) {
+      const fits = sentencesWithWord(cardId).filter((s) => unmet(s, cardId, ctx) === 0);
+      if (fits.length) {
+        const s = fits[Math.floor(ctx.rng() * fits.length)];
+        const sentenceReveal: Reveal = { ka: s.ka, ru: ruText(s.ru, ctx.gender), audio: audioIdFor(s.ka), note: `${l.ka} — ${l.ru}` };
+        if (card.reps % 4 === 1 && s.tokens.length >= 2) return assemble(cardId, s, ctx, sentenceReveal);
+        return {
+          uid: nextUid(cardId),
+          card: cardId,
+          sentenceId: s.id,
+          tokens: s.tokens.length,
+          reveal: sentenceReveal,
+          kind: 'speak',
+          promptRu: sentenceReveal.ru,
+        } satisfies SpeakExercise;
+      }
+    }
     return { ...base, kind: 'speak', promptRu: l.ru } satisfies SpeakExercise;
   }
   if (kind === 'listen' && audio) {
@@ -368,7 +431,9 @@ function buildLetter(cardId: string, ch: string, kind: ExerciseKind, ctx: BuildC
 
 function assemble(cardId: string, s: Sentence, ctx: BuildCtx, reveal: Reveal): AssembleExercise {
   const p = parseCardId(cardId);
-  const verbTok = s.tokens.find((t) => t.role === 'verb') ?? null;
+  const verbTok = s.tokens[mainVerbIndex(s)] ?? null;
+  // One fixed order: set phrases, two clauses, an attribute in front of its noun.
+  const rigid = s.fixed || !!s.strict;
   const verb = s.verb ? getVerb(s.verb) : undefined;
   const solution = s.tokens.map((t) => t.t);
   if (s.polarity === 'q') solution.push('?');
@@ -393,7 +458,9 @@ function assemble(cardId: string, s: Sentence, ctx: BuildCtx, reveal: Reveal): A
   if (p?.kind === 'pattern') {
     if (p.pattern === 'neg') focus = NEG;
     else if (p.pattern === 'q') focus = '?';
-    else focus = s.tokens.find((t) => t.alts?.length)?.t ?? focus;
+    else focus = s.tokens[focusIndex(cardId, s)]?.t ?? focus;
+  } else if (p?.kind === 'word') {
+    focus = s.tokens[focusIndex(cardId, s)]?.t ?? focus;
   }
 
   return {
@@ -406,7 +473,7 @@ function assemble(cardId: string, s: Sentence, ctx: BuildCtx, reveal: Reveal): A
     promptRu: ruText(s.ru, ctx.gender),
     tiles,
     solution,
-    verb: s.fixed ? null : verbTok?.t ?? null,
+    verb: rigid ? null : verbTok?.t ?? null,
     beforeVerb: s.tokens.filter((t) => t.role === 'qword').map((t) => t.t),
     focus: s.fixed ? null : focus,
   };

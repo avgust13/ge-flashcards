@@ -10,11 +10,12 @@ import type {
   Lexeme,
   PatternCell,
   Person,
+  Screeve,
   Sentence,
-  Tense,
   Unit,
   Verb,
 } from './types';
+import { CELL_RE, verbForm, verbRu } from './types';
 
 export const UNITS: Unit[] = [];
 export const VERBS: Verb[] = [];
@@ -32,6 +33,8 @@ const sentenceById = new Map<string, Sentence>();
 const patternById = new Map<string, PatternCell>();
 /** Sentences usable as an example of a card (its focus, or a pattern it contains). */
 const examples = new Map<string, Sentence[]>();
+/** Sentences a word occurs in, by word card — a learned word is practised inside them. */
+const wordSentences = new Map<string, Sentence[]>();
 const cardUnitMap = new Map<string, number>();
 const cardOrder: string[] = [];
 const audio = new Map<string, string>();
@@ -60,6 +63,7 @@ export function fillCourse(course: Course, sentences: Sentence[], audioIndex: Re
   sentenceById.clear();
   patternById.clear();
   examples.clear();
+  wordSentences.clear();
   cardUnitMap.clear();
   cardOrder.length = 0;
   audio.clear();
@@ -85,7 +89,14 @@ export function fillCourse(course: Course, sentences: Sentence[], audioIndex: Re
   for (const s of SENTENCES) {
     sentenceById.set(s.id, s);
     push(s.focus, s);
-    for (const r of s.req) if (patternIds.has(r)) push(r, s);
+    for (const r of s.req) {
+      if (patternIds.has(r)) push(r, s);
+      else if (r.startsWith('w:')) {
+        const list = wordSentences.get(r);
+        if (list) list.push(s);
+        else wordSentences.set(r, [s]);
+      }
+    }
   }
   for (const [text, id] of Object.entries(audioIndex)) audio.set(text, id);
 }
@@ -123,6 +134,8 @@ export const getSentence = (id: string): Sentence | undefined => sentenceById.ge
 export const getPattern = (id: string): PatternCell | undefined => patternById.get(id);
 export const getUnit = (id: number): Unit | undefined => UNITS.find((u) => u.id === id);
 export const examplesFor = (cardId: string): readonly Sentence[] => examples.get(cardId) ?? [];
+/** Template sentences that contain the word of a word card. */
+export const sentencesWithWord = (cardId: string): readonly Sentence[] => wordSentences.get(cardId) ?? [];
 export const unitOfCard = (cardId: string): number | null => cardUnitMap.get(cardId) ?? null;
 /** Every card of the course in the order it is introduced. */
 export const allCardIds = (): readonly string[] => cardOrder;
@@ -147,7 +160,7 @@ export function pairFor(ch: string): { mine: LetterPair['a']; other: LetterPair[
 
 export type ParsedCard =
   | { kind: 'word'; lexId: number }
-  | { kind: 'cell'; verb: string; tense: Tense; person: Person }
+  | { kind: 'cell'; verb: string; tense: Screeve; person: Person }
   | { kind: 'pattern'; pattern: string }
   | { kind: 'phrase'; sentenceId: string }
   | { kind: 'letter'; ch: string };
@@ -156,8 +169,8 @@ export function parseCardId(id: string): ParsedCard | null {
   if (id.startsWith('l:')) return { kind: 'letter', ch: id.slice(2) };
   if (id.startsWith('w:')) return { kind: 'word', lexId: Number(id.slice(2)) };
   if (id.startsWith('s:')) return { kind: 'phrase', sentenceId: id.slice(2) };
-  const cell = /^c:([a-z]+)\.(prs|aor|fut)\.(1sg|2sg|3sg|1pl|2pl|3pl)$/.exec(id);
-  if (cell) return { kind: 'cell', verb: cell[1], tense: cell[2] as Tense, person: cell[3] as Person };
+  const cell = CELL_RE.exec(id);
+  if (cell) return { kind: 'cell', verb: cell[1], tense: cell[2] as Screeve, person: cell[3] as Person };
   if (id.startsWith('c:')) return { kind: 'pattern', pattern: id.slice(2) };
   return null;
 }
@@ -190,14 +203,19 @@ export function describeCard(id: string): CardView | null {
   if (p.kind === 'cell') {
     const v = verbById.get(p.verb);
     return v
-      ? { id, kind: 'cell', ka: v.forms[p.tense][p.person], ru: v.ruCells[p.tense][p.person], note: null }
+      ? { id, kind: 'cell', ka: verbForm(v, p.tense, p.person) ?? '', ru: verbRu(v, p.tense, p.person), note: null }
       : null;
   }
   const pat = patternById.get(p.pattern);
   return pat ? { id, kind: 'pattern', ka: '', ru: pat.titleRu, note: pat.noteRu } : null;
 }
 
-/** Resolve the `{а}` speaker-gender marker in a Russian prompt. */
+/**
+ * Resolve the speaker-gender markers in a Russian prompt: `{а}` adds the
+ * feminine ending, `{ёл|ла}` chooses between two endings.
+ */
 export function ruText(ru: string, gender: 'm' | 'f'): string {
-  return ru.replace(/\{а\}/g, gender === 'f' ? 'а' : '');
+  return ru
+    .replace(/\{а\}/g, gender === 'f' ? 'а' : '')
+    .replace(/\{([^|{}]*)\|([^|{}]*)\}/g, (_, m: string, f: string) => (gender === 'f' ? f : m));
 }

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { addReport, hideCard } from '../../db/reports';
 import styled, { css, keyframes } from 'styled-components';
 import { SpeakerButton } from '../../components/ui/SpeakerButton';
 import { trOnReveal } from '../../content/reading';
@@ -106,24 +108,119 @@ const Note = styled.div`
   color: ${({ theme }) => theme.colors.inkSoft};
 `;
 
+const ReportLink = styled.button`
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 4px 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.inkMute};
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
+const ReportBox = styled.div`
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 16px;
+  background: ${({ theme }) => theme.colors.card};
+  box-shadow: ${({ theme }) => theme.shadow};
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.inkSoft};
+
+  textarea {
+    font: inherit;
+    font-size: 14px;
+    color: ${({ theme }) => theme.colors.ink};
+    border: 1px solid ${({ theme }) => theme.colors.line};
+    border-radius: 12px;
+    padding: 8px 10px;
+    resize: vertical;
+    min-height: 56px;
+  }
+`;
+
+const ReportActions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  button {
+    font: inherit;
+    font-size: 13px;
+    font-weight: 800;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid ${({ theme }) => theme.colors.line};
+    background: ${({ theme }) => theme.colors.bg};
+    color: ${({ theme }) => theme.colors.ink};
+    cursor: pointer;
+  }
+`;
+
 interface RevealProps {
   reveal: Reveal;
   /** false: the answer is being shown after a miss. */
   ok?: boolean;
+  /** The card behind the answer; with it the learner can flag a mistake in the content. */
+  source?: { card: string; sentenceId: string | null };
 }
 
-/** The correct answer: Georgian, transliteration, Russian, a replay button and an optional rule. */
-export function RevealCard({ reveal, ok = true }: RevealProps) {
+/**
+ * The correct answer: Georgian, transliteration, Russian, a replay button and
+ * an optional rule — and a way to say "this looks wrong".
+ */
+export function RevealCard({ reveal, ok = true, source }: RevealProps) {
+  const [stage, setStage] = useState<'idle' | 'form' | 'saved' | 'hidden'>('idle');
+  const [note, setNote] = useState('');
+  const save = (hide: boolean) => {
+    if (!source) return;
+    addReport({ t: Date.now(), card: source.card, sentenceId: source.sentenceId, ka: reveal.ka, ru: reveal.ru, note: note.trim() });
+    if (hide) hideCard(source.card);
+    setStage(hide ? 'hidden' : 'saved');
+  };
   return (
-    <RevealBox $ok={ok}>
-      <RevealText>
-        <Ka>{reveal.ka}</Ka>
-        {trOnReveal() && <Tr>{translit(reveal.ka)}</Tr>}
-        <RevealRu>{reveal.ru}</RevealRu>
-        {reveal.note && <Note>{reveal.note}</Note>}
-      </RevealText>
-      <SpeakerButton audio={reveal.audio} size={42} tone="solid" />
-    </RevealBox>
+    <>
+      <RevealBox $ok={ok}>
+        <RevealText>
+          <Ka>{reveal.ka}</Ka>
+          {trOnReveal() && <Tr>{translit(reveal.ka)}</Tr>}
+          <RevealRu>{reveal.ru}</RevealRu>
+          {reveal.note && <Note>{reveal.note}</Note>}
+        </RevealText>
+        <SpeakerButton audio={reveal.audio} size={42} tone="solid" />
+      </RevealBox>
+      {source && stage === 'idle' && (
+        <ReportLink type="button" onClick={() => setStage('form')}>
+          Здесь ошибка?
+        </ReportLink>
+      )}
+      {source && stage === 'form' && (
+        <ReportBox>
+          Что не так? Замечание сохранится в настройках, оттуда его можно скопировать.
+          <textarea value={note} onChange={(e) => setNote(e.target.value)} placeholder="Например: слово написано иначе" />
+          <ReportActions>
+            <button type="button" onClick={() => save(false)}>
+              Сохранить
+            </button>
+            <button type="button" onClick={() => save(true)}>
+              Сохранить и скрыть карточку
+            </button>
+            <button type="button" onClick={() => setStage('idle')}>
+              Отмена
+            </button>
+          </ReportActions>
+        </ReportBox>
+      )}
+      {source && stage === 'saved' && <Muted>Замечание сохранено.</Muted>}
+      {source && stage === 'hidden' && <Muted>Замечание сохранено, карточка больше не появится. Вернуть её можно в настройках.</Muted>}
+    </>
   );
 }
 

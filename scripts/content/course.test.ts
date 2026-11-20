@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it } from 'vitest';
-import { fillCourse, allCardIds, examplesFor, getUnit, UNITS } from '../../src/content/store';
+import { fillCourse, allCardIds, examplesFor, getUnit, ruText, sentencesWithWord, UNITS } from '../../src/content/store';
 import type { Course, Sentence } from '../../src/content/types';
 import {
   buildExercise,
@@ -88,11 +88,15 @@ describe('compiled course', () => {
   });
 
   it('ships only verified verb forms', () => {
-    for (const v of course.verbs) {
-      for (const [key, unit] of Object.entries(v.cellUnit)) {
-        if (unit <= 4) expect(['verified', 'auto-verified'], `${v.id}.${key}`).toContain(v.status[key as never]);
-      }
+    const verbs = new Map(course.verbs.map((v) => [v.id, v]));
+    let cells = 0;
+    for (const { id } of cardsInOrder(course)) {
+      const m = /^c:([a-z0-9]+)\.((?:prs|aor|fut|opt)\.\w+)$/.exec(id);
+      if (!m) continue;
+      cells++;
+      expect(['verified', 'auto-verified'], id).toContain(verbs.get(m[1])!.status[m[2] as never]);
     }
+    expect(cells).toBeGreaterThan(500);
   });
 
   it('has an example for every card using only earlier material', () => {
@@ -119,7 +123,7 @@ describe('validator catches broken content', () => {
     const s = base();
     const tokens = s.tokens.map((t) => (t.role === 'verb' ? { ...t, t: 'მუშაობ' } : t));
     const bad = { ...s, tokens, ka: tokens.map((t) => t.t).join(' ') + '.' };
-    expect(problems(bad).join('\n')).toMatch(/verb token/);
+    expect(problems(bad).join('\n')).toMatch(/no token is work\.prs\.1sg/);
   });
 
   it('"არ" away from the verb', () => {
@@ -139,14 +143,18 @@ describe('validator catches broken content', () => {
     const s = base();
     const tokens = s.tokens.map((t, i) => (i === 0 ? { ...t, t: 'ზეგ' } : t));
     const bad = { ...s, tokens, ka: tokens.map((t) => t.t).join(' ') + '.' };
-    expect(problems(bad).join('\n')).toMatch(/not in the lexicon/);
+    expect(problems(bad).join('\n')).toMatch(/is not the dictionary form of lexeme/);
+    // The same word without a claim about where it comes from is caught by the closed world.
+    const loose = s.tokens.map((t, i) => (i === 0 ? { t: 'ზეგ', role: t.role } : t));
+    const bad2 = { ...s, tokens: loose, ka: loose.map((t) => t.t).join(' ') + '.' };
+    expect(problems(bad2).join('\n')).toMatch(/neither a verified verb form nor in the lexicon/);
   });
 
   it('a nominative pronoun with a "мне…" verb', () => {
     const s = sentences.find((x) => x.id === 'want.prs.3sg.po')!;
     const tokens = s.tokens.map((t) => (t.role === 'subj' ? { ...t, t: 'ის' } : t));
     const bad = { ...s, tokens, ka: tokens.map((t) => t.t).join(' ') + '.' };
-    expect(problems(bad).join('\n')).toMatch(/subject pronoun/);
+    expect(problems(bad).join('\n')).toMatch(/should be in the dat case/);
   });
 
   it('vocabulary from a later unit', () => {
@@ -216,6 +224,177 @@ describe('exercise building', () => {
       exposure: (sid) => (sid === unseen.id ? undefined : { n: 2, last: NOW }),
     };
     expect(pickExample(id, ctx)?.id).toBe(unseen.id);
+  });
+});
+
+describe('units 5–16', () => {
+  const withSentence = (x: Sentence) => sentences.map((o) => (o.id === x.id ? x : o));
+  const problems = (x: Sentence) => validateCourse(course, withSentence(x)).join('\n');
+  const find = (id: string) => {
+    const x = sentences.find((o) => o.id === id);
+    if (!x) throw new Error('no sentence ' + id);
+    return x;
+  };
+  const retext = (x: Sentence, tokens: Sentence['tokens']): Sentence => ({
+    ...x,
+    tokens,
+    ka: tokens.map((t) => t.t + (t.after ?? '')).join(' ') + x.ka.slice(-1),
+  });
+
+  it('every unit is ready and teaches something', () => {
+    expect(course.units).toHaveLength(16);
+    for (const u of course.units) {
+      expect(u.ready, 'unit ' + u.id).toBe(true);
+      const cards = u.steps.flatMap((st) => (st.kind === 'cards' ? st.cards : []));
+      expect(cards.length, 'unit ' + u.id).toBeGreaterThan(20);
+      expect(sentences.some((x) => x.unit === u.id), 'unit ' + u.id).toBe(true);
+    }
+  });
+
+  it('every word of the lexicon is confirmed and introduced', () => {
+    const order = new Set(cardsInOrder(course).map((c) => c.id));
+    for (const l of course.lexicon) {
+      expect(l.status, l.ka).not.toBe('needs-review');
+      expect(order.has('w:' + l.id), l.ka).toBe(true);
+    }
+  });
+
+  it('rejects a word whose form nothing confirms', () => {
+    const broken: Course = {
+      ...course,
+      lexicon: course.lexicon.map((l) => (l.id === 59 ? { ...l, status: 'needs-review' } : l)),
+    };
+    expect(validateCourse(broken, sentences).join('\n')).toMatch(/confirmed by neither/);
+  });
+
+  it('rejects an object in the wrong case for the tense', () => {
+    // «ყავას ვსვამ»: the present wants -ს; the bare word belongs to the past.
+    const x = find('drink.prs.1sg.ca');
+    const lexeme = course.lexicon.find((l) => l.id === x.tokens.find((t) => t.role === 'obj')!.lex)!;
+    const tokens = x.tokens.map((t) => (t.role === 'obj' ? { t: lexeme.ka, role: t.role, lex: t.lex } : t));
+    expect(problems(retext(x, tokens))).toMatch(/should be in the dat case/);
+
+    const past = find('drink.aor.1sg.ca');
+    const pl = course.lexicon.find((l) => l.id === past.tokens.find((t) => t.role === 'obj')!.lex)!;
+    const wrong = past.tokens.map((t) => (t.role === 'obj' ? { ...t, t: pl.cases.dat!, form: 'dat' as const } : t));
+    expect(problems(retext(past, wrong))).toMatch(/should be in the nom case/);
+  });
+
+  it('rejects an attribute that does not agree with its noun', () => {
+    // «ცხელ ყავას»: before a word with -ს the adjective drops its -ი.
+    const x = find('u9.tskhel-qavas');
+    const tokens = x.tokens.map((t) => (t.role === 'attr' ? { ...t, t: 'ცხელი', form: undefined } : t));
+    expect(problems(retext(x, tokens))).toMatch(/should be "ცხელ"/);
+  });
+
+  it('rejects a plain "он" as the doer in the past', () => {
+    const x = find('do.aor.3sg.ca');
+    const subj = x.tokens.find((t) => t.role === 'subj')!;
+    expect(subj.t).toBe('მან');
+    const is = course.lexicon.find((l) => l.ka === 'ის')!;
+    const tokens = x.tokens.map((t) => (t === subj ? { t: 'ის', role: t.role, lex: is.id } : t));
+    expect(problems(retext(x, tokens))).toMatch(/should be in the erg case/);
+  });
+
+  it('rejects an unknown word in an explanation example', () => {
+    const broken: Course = {
+      ...course,
+      units: course.units.map((u) =>
+        u.id !== 5
+          ? u
+          : {
+              ...u,
+              steps: u.steps.map((st) =>
+                st.kind === 'explain' ? { ...st, examples: [...st.examples, { ka: 'ქართული ვიცით ხოლმე', ru: '…' }] } : st,
+              ),
+            },
+      ),
+    };
+    expect(validateCourse(broken, sentences).join('\n')).toMatch(/example word "ხოლმე" is not a known form/);
+  });
+
+  it('rejects an unknown Georgian word quoted in a note', () => {
+    const broken: Course = {
+      ...course,
+      patterns: course.patterns.map((p) => (p.id === 'dat' ? { ...p, noteRu: p.noteRu + ' Например: ყავას ვყიდულობთო.' } : p)),
+    };
+    const out = validateCourse(broken, sentences).join('\n');
+    expect(out).toMatch(/pattern c:dat: the text quotes "ვყიდულობთო"/);
+    // Hyphenated endings and prefixes are notation and pass.
+    expect(validateCourse(course, sentences)).toEqual([]);
+  });
+
+  it('holds back a sentence that uses an unverified cell anywhere', () => {
+    // «подождать»: two cells have no corpus attestation and are not taught.
+    const wait = course.verbs.find((v) => v.id === 'wait')!;
+    const held = Object.entries(wait.status).filter(([, st]) => st === 'needs-review').map(([k]) => k);
+    for (const key of held) {
+      expect(allCardIds()).not.toContain('c:wait.' + key);
+      expect(sentences.some((x) => x.tokens.some((t) => t.cell === 'wait.' + key))).toBe(false);
+    }
+  });
+
+  it('resolves both gender markers in Russian prompts', () => {
+    expect(ruText('Я пош{ёл|ла} домой и сделал{а} чай.', 'm')).toBe('Я пошёл домой и сделал чай.');
+    expect(ruText('Я пош{ёл|ла} домой и сделал{а} чай.', 'f')).toBe('Я пошла домой и сделала чай.');
+    expect(ruText('Я не смог{|ла}.', 'f')).toBe('Я не смогла.');
+    for (const x of sentences) expect(ruText(x.ru, 'f'), x.id).not.toMatch(/[{}|]/);
+  });
+
+  it('offers other rows of the verb as distractors for the «чтобы» form', () => {
+    const v = course.verbs.find((o) => o.id === 'do')!;
+    const d = verbDistractors(v, 'opt', '1sg', 3, ctxFor(new Map()));
+    expect(d).toHaveLength(3);
+    expect(d).not.toContain(v.opt!['1sg']);
+    expect(d.some((f) => f === v.forms.aor['1sg'] || f === v.forms.fut['1sg'] || f === v.forms.prs['1sg'])).toBe(true);
+  });
+
+  it('keeps one word order for sentences that have only one', () => {
+    const cards = new Map<string, SrsCard>();
+    for (const id of allCardIds()) cards.set(id, newSrsCard(id, 'c', 1, NOW));
+    // «უნდა გავაკეთო»: two verb-like words, an attribute before its noun, a clause after a comma.
+    for (const sid of ['do.opt.1sg.om', 'u9.tskhel-qavas', 'u14.vitsi-rom']) {
+      const x = find(sid);
+      expect(x.strict, sid).toBe(true);
+      const ex = buildExercise(x.focus, 'assemble', {
+        ...ctxFor(cards),
+        exposure: (id) => (id === sid ? undefined : { n: 9, last: NOW }),
+      });
+      if (ex?.kind !== 'assemble') throw new Error('no tile exercise for ' + sid);
+      expect(ex.sentenceId).toBe(sid);
+      expect(checkAssemble(ex.solution, ex).ok).toBe(true);
+      const swapped = [ex.solution[1], ex.solution[0], ...ex.solution.slice(2)];
+      expect(checkAssemble(swapped, ex).ok, sid).toBe(false);
+    }
+  });
+
+  it('practises a learned word inside a sentence', () => {
+    const cards = new Map<string, SrsCard>();
+    for (const id of allCardIds()) cards.set(id, reviewCard(id, -1000));
+    const word = 'w:' + course.lexicon.find((l) => l.ka === 'მაღაზია')!.id;
+    expect(sentencesWithWord(word).length).toBeGreaterThan(0);
+    cards.set(word, { ...cards.get(word)!, reps: 5 });
+    const ex = buildExercise(word, 'speak', ctxFor(cards));
+    expect(ex?.card).toBe(word);
+    expect(ex?.sentenceId).not.toBeNull();
+    expect(ex?.reveal.ka).toMatch(/მაღაზი/);
+    // An even repetition stays the bare word.
+    cards.set(word, { ...cards.get(word)!, reps: 6 });
+    expect(buildExercise(word, 'speak', ctxFor(cards))?.sentenceId).toBeNull();
+  });
+
+  it('tests a pattern on its own token even when the sentence shows two', () => {
+    const cards = new Map<string, SrsCard>();
+    for (const id of allCardIds()) cards.set(id, newSrsCard(id, 'c', 1, NOW));
+    const x = find('buy.aor.3sg.ca'); // «მან … იყიდა»: the doer form, no -ს on the object
+    expect(x.req).toContain('c:erg');
+    const ex = buildExercise('c:erg', 'recognise', {
+      ...ctxFor(cards),
+      exposure: (id) => (id === x.id ? undefined : { n: 9, last: NOW }),
+    });
+    if (ex?.kind !== 'recognise') throw new Error('no choice exercise');
+    const wrong = ex.options.filter((_, i) => i !== ex.correct).map((o) => o.text);
+    expect(wrong.some((t) => t.startsWith('ის ') || t.startsWith('მას '))).toBe(true);
   });
 });
 

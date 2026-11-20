@@ -1,0 +1,984 @@
+{
+ "verbs": {
+  "do": {
+   "prs": [
+    "ვაკეთებ",
+    "აკეთებ",
+    "აკეთებს",
+    "ვაკეთებთ",
+    "აკეთებთ",
+    "აკეთებენ"
+   ],
+   "fut": [
+    "გავაკეთებ",
+    "გააკეთებ",
+    "გააკეთებს",
+    "გავაკეთებთ",
+    "გააკეთებთ",
+    "გააკეთებენ"
+   ],
+   "past": [
+    "გავაკეთე",
+    "გააკეთე",
+    "გააკეთა",
+    "გავაკეთეთ",
+    "გააკეთეთ",
+    "გააკეთეს"
+   ],
+   "low": [],
+   "sources": [
+    "https://en.wiktionary.org/wiki/აკეთებს",
+    "https://lingua.ge/verbs/კეთება-2/"
+   ],
+   "notes": "All 18 cells match two external tables (Wiktionary conjugation table for აკეთებს with preverb გა-, and lingua.ge). Present is imperfective აკეთებს; future and aorist carry the perfectivising preverb გა-. Case frame: present/future = nominative subject + dative object (ის ამას აკეთებს); aorist = ergative subject + nominative object (მან ეს გააკეთა).",
+   "opt": [
+    "გავაკეთო",
+    "გააკეთო",
+    "გააკეთოს",
+    "გავაკეთოთ",
+    "გააკეთოთ",
+    "გააკეთონ"
+   ]
+  },
+  "work": {
+   "prs": [
+    "ვმუშაობ",
+    "მუშაობ",
+    "მუშაობს",
+    "ვმუშაობთ",
+    "მუშაობთ",
+    "მუშაობენ"
+   ],
+   "fut": [
+    "ვიმუშავებ",
+    "იმუშავებ",
+    "იმუშავებს",
+    "ვიმუშავებთ",
+    "იმუშავებთ",
+    "იმუშავებენ"
+   ],
+   "past": [
+    "ვიმუშავე",
+    "იმუშავე",
+    "იმუშავა",
+    "ვიმუშავეთ",
+    "იმუშავეთ",
+    "იმუშავეს"
+   ],
+   "low": [],
+   "sources": [
+    "https://lingua.ge/verbs/მუშაობა/",
+    "https://en.wiktionary.org/wiki/მუშაობს",
+    "https://en.wiktionary.org/wiki/ვმუშაობ",
+    "https://en.wiktionary.org/wiki/იმუშავებს",
+    "https://en.wikipedia.org/wiki/Georgian_verb_paradigm"
+   ],
+   "notes": "All 18 cells match the lingua.ge table. Wiktionary has no table on the lemma page but has form-of entries confirming all six present forms and 3sg future იმუშავებს. Medial (class 3) verb: future/aorist built with ი- and thematic -ებ, stem gains ვ (იმუშავ-); same pattern as the Wikipedia class 3 example თამაშობს / ითამაშებს / ითამაშა. Aorist takes an ergative 3rd-person subject (მან იმუშავა).",
+   "opt": [
+    "ვიმუშაო",
+    "იმუშაო",
+    "იმუშაოს",
+    "ვიმუშაოთ",
+    "იმუშაოთ",
+    "იმუშაონ"
+   ]
+  },
+  "speak": {
+   "prs": [
+    "ვლაპარაკობ",
+    "ლაპარაკობ",
+    "ლაპარაკობს",
+    "ვლაპარაკობთ",
+    "ლაპარაკობთ",
+    "ლაპარაკობენ"
+   ],
+   "fut": [
+    "ვილაპარაკებ",
+    "ილაპარაკებ",
+    "ილაპარაკებს",
+    "ვილაპარაკებთ",
+    "ილაპარაკებთ",
+    "ილაპარაკებენ"
+   ],
+   "past": [
+    "ვილაპარაკე",
+    "ილაპარაკე",
+    "ილაპარაკა",
+    "ვილაპარაკეთ",
+    "ილაპარაკეთ",
+    "ილაპარაკეს"
+   ],
+   "low": [],
+   "sources": [
+    "https://en.wiktionary.org/wiki/ლაპარაკობს",
+    "https://lingua.ge/verbs/ლაპარაკი/"
+   ],
+   "notes": "All 18 cells match both Wiktionary and lingua.ge. Medial (class 3) verb; aorist takes an ergative 3rd-person subject (მან ილაპარაკა). A common near-synonym is საუბრობს.",
+   "opt": [
+    "ვილაპარაკო",
+    "ილაპარაკო",
+    "ილაპარაკოს",
+    "ვილაპარაკოთ",
+    "ილაპარაკოთ",
+    "ილაპარაკონ"
+   ]
+  },
+  "be": {
+   "prs": [
+    "ვარ",
+    "ხარ",
+    "არის",
+    "ვართ",
+    "ხართ",
+    "არიან"
+   ],
+   "fut": [
+    "ვიქნები",
+    "იქნები",
+    "იქნება",
+    "ვიქნებით",
+    "იქნებით",
+    "იქნებიან"
+   ],
+   "past": [
+    "ვიყავი",
+    "იყავი",
+    "იყო",
+    "ვიყავით",
+    "იყავით",
+    "იყვნენ"
+   ],
+   "low": [],
+   "sources": [
+    "https://en.wiktionary.org/wiki/არის",
+    "https://lingua.ge/verbs/ყოფნა/"
+   ],
+   "notes": "All 18 cells match both Wiktionary and lingua.ge. Suppletive: present ვარ/ხარ/არის, future იქნება series, aorist იყო series. Subject is nominative in every row (ის იყო, ისინი იყვნენ). 3sg present also occurs as the enclitic -ა (მაგიდაზეა) and colloquial არი.",
+   "opt": [
+    "ვიყო",
+    "იყო",
+    "იყოს",
+    "ვიყოთ",
+    "იყოთ",
+    "იყვნენ"
+   ]
+  },
+  "live": {
+   "prs": [
+    "ვცხოვრობ",
+    "ცხოვრობ",
+    "ცხოვრობს",
+    "ვცხოვრობთ",
+    "ცხოვრობთ",
+    "ცხოვრობენ"
+   ],
+   "fut": [
+    "ვიცხოვრებ",
+    "იცხოვრებ",
+    "იცხოვრებს",
+    "ვიცხოვრებთ",
+    "იცხოვრებთ",
+    "იცხოვრებენ"
+   ],
+   "past": [
+    "ვიცხოვრე",
+    "იცხოვრე",
+    "იცხოვრა",
+    "ვიცხოვრეთ",
+    "იცხოვრეთ",
+    "იცხოვრეს"
+   ],
+   "low": [],
+   "sources": [
+    "https://en.wiktionary.org/wiki/ცხოვრობს",
+    "https://lingua.ge/verbs/ცხოვრება/"
+   ],
+   "notes": "All 18 cells match both Wiktionary and lingua.ge. Medial (class 3) verb; aorist takes an ergative 3rd-person subject (მან იცხოვრა)."
+  },
+  "want": {
+   "prs": [
+    "მინდა",
+    "გინდა",
+    "უნდა",
+    "გვინდა",
+    "გინდათ",
+    "უნდათ"
+   ],
+   "fut": [
+    "მომინდება",
+    "მოგინდება",
+    "მოუნდება",
+    "მოგვინდება",
+    "მოგინდებათ",
+    "მოუნდებათ"
+   ],
+   "past": [
+    "მინდოდა",
+    "გინდოდა",
+    "უნდოდა",
+    "გვინდოდა",
+    "გინდოდათ",
+    "უნდოდათ"
+   ],
+   "low": [],
+   "sources": [
+    "https://en.wiktionary.org/wiki/უნდა",
+    "https://lingua.ge/verbs/ნდომა/",
+    "https://ka.wikipedia.org/w/index.php?search=%22მოუნდება%22",
+    "https://ka.wikisource.org/w/index.php?search=%22მომინდება%22",
+    "https://tatoeba.org/en/sentences/search?from=kat&query=მოუნდება"
+   ],
+   "notes": "prs and past (imperfect) match both Wiktionary and lingua.ge. fut is the requested მო- series (მომინდება = \"захочу / захочется\", inceptive). No external full table was found for this series: Wiktionary lists მოუნდება (and ენდომება) only as related terms of უნდა, so the row is from my own derivation (regular: მო- + dative-marker set მ-ი/გ-ი/უ/გვ-ი + ნდ-ებ-ა, plural -თ), and each of the six forms was individually attested in native-written text on Georgian Wikipedia/Wikisource (Tatoeba also has \"ვისაც მოუნდება\" = \"whoever wants to\" and aorist \"მომინდა\" = \"захотелось\"). Rated high because the derivation is regular and I am certain of it, but it is the only row in this file without a matching external table. NOTE: lingua.ge gives a DIFFERENT future for ნდომა, the preverb-less series მენდომება, გენდომება, ენდომება, გვენდომება, გენდომებათ, ენდომებათ (\"буду хотеть\"); both series are real, they differ in meaning, not correctness. Also note მოუნდება has a second everyday meaning \"it will take (time)\" (ამას ერთი საათი მოუნდება). 3sg present უნდა is homographic with the modal particle უნდა \"must\"."
+  },
+  "have": {
+   "prs": [
+    "მაქვს",
+    "გაქვს",
+    "აქვს",
+    "გვაქვს",
+    "გაქვთ",
+    "აქვთ"
+   ],
+   "fut": [
+    "მექნება",
+    "გექნება",
+    "ექნება",
+    "გვექნება",
+    "გექნებათ",
+    "ექნებათ"
+   ],
+   "past": [
+    "მქონდა",
+    "გქონდა",
+    "ჰქონდა",
+    "გვქონდა",
+    "გქონდათ",
+    "ჰქონდათ"
+   ],
+   "low": [],
+   "sources": [
+    "https://en.wiktionary.org/wiki/აქვს",
+    "https://lingua.ge/verbs/ქონა/"
+   ],
+   "notes": "All 18 cells match both Wiktionary and lingua.ge. Dative experiencer, nominative possessed thing. There is no aorist; past is the imperfect მქონდა series; future is the suppletive მექნება series. 3rd-person imperfect is ჰქონდა/ჰქონდათ with ჰ- (ქონდა without ჰ- is colloquial/non-standard). Inanimate possessions only; people, animals and cars take ჰყავს (მყავს, გყავს, ჰყავს, გვყავს, გყავთ, ჰყავთ)."
+  },
+  "need": {
+   "prs": [
+    "მჭირდება",
+    "გჭირდება",
+    "სჭირდება",
+    "გვჭირდება",
+    "გჭირდებათ",
+    "სჭირდებათ"
+   ],
+   "fut": [
+    "დამჭირდება",
+    "დაგჭირდება",
+    "დასჭირდება",
+    "დაგვჭირდება",
+    "დაგჭირდებათ",
+    "დასჭირდებათ"
+   ],
+   "past": [
+    "მჭირდებოდა",
+    "გჭირდებოდა",
+    "სჭირდებოდა",
+    "გვჭირდებოდა",
+    "გჭირდებოდათ",
+    "სჭირდებოდათ"
+   ],
+   "low": [],
+   "sources": [
+    "https://lingua.ge/verbs/დაჭირვება/",
+    "https://en.wiktionary.org/wiki/სჭირდება",
+    "https://en.wiktionary.org/wiki/მჭირდება",
+    "https://en.wiktionary.org/wiki/დასჭირდება",
+    "https://ka.wikipedia.org/w/index.php?search=%22სჭირდებოდათ%22"
+   ],
+   "notes": "17 of 18 cells match the lingua.ge table exactly; Wiktionary form-of entries additionally confirm all six present forms and 3sg future დასჭირდება. The one mismatch is past.3pl: lingua.ge prints \"სჭრიდებოდათ\", which is a transposition typo on that site (not a possible Georgian form); the regular form სჭირდებოდათ is what the paradigm requires and it has 179 hits on Georgian Wikipedia, so the cell is rated high. 3rd-person forms keep the ს- prefix in standard spelling (სჭირდება, სჭირდებოდა, დასჭირდება); ჭირდება without ს- is colloquial."
+  },
+  "like": {
+   "prs": [
+    "მომწონს",
+    "მოგწონს",
+    "მოსწონს",
+    "მოგვწონს",
+    "მოგწონთ",
+    "მოსწონთ"
+   ],
+   "fut": [
+    "მომეწონება",
+    "მოგეწონება",
+    "მოეწონება",
+    "მოგვეწონება",
+    "მოგეწონებათ",
+    "მოეწონებათ"
+   ],
+   "past": [
+    "მომეწონა",
+    "მოგეწონა",
+    "მოეწონა",
+    "მოგვეწონა",
+    "მოგეწონათ",
+    "მოეწონათ"
+   ],
+   "low": [],
+   "sources": [
+    "https://lingua.ge/verbs/მოწონება/",
+    "https://en.wiktionary.org/wiki/მოსწონს",
+    "https://en.wiktionary.org/wiki/მომწონს",
+    "https://en.wiktionary.org/wiki/მოგწონს",
+    "https://tatoeba.org/en/sentences/search?from=kat&query=მოეწონა"
+   ],
+   "notes": "All 18 cells match the lingua.ge table. Wiktionary has no table but has form-of entries for მომწონს and მოგწონს; Tatoeba attests მას მოეწონება, მას მოეწონა, არ მომეწონა; plural forms მოგვწონს, მოგწონთ, მოსწონთ, მოგეწონებათ, მოეწონათ are attested on Georgian Wikipedia. Dative experiencer in every row (მას მოსწონს / მოეწონება / მოეწონა), liked thing nominative. Past row is the aorist (\"понравилось\"); the imperfect (\"нравилось\") would be მომწონდა, მოგწონდა, მოსწონდა, მოგვწონდა, მოგწონდათ, მოსწონდათ. 3rd person keeps ს- in standard spelling (მოსწონს, not მოწონს)."
+  },
+  "love": {
+   "prs": [
+    "მიყვარს",
+    "გიყვარს",
+    "უყვარს",
+    "გვიყვარს",
+    "გიყვართ",
+    "უყვართ"
+   ],
+   "fut": [
+    "მეყვარება",
+    "გეყვარება",
+    "ეყვარება",
+    "გვეყვარება",
+    "გეყვარებათ",
+    "ეყვარებათ"
+   ],
+   "past": [
+    "მიყვარდა",
+    "გიყვარდა",
+    "უყვარდა",
+    "გვიყვარდა",
+    "გიყვარდათ",
+    "უყვარდათ"
+   ],
+   "low": [],
+   "sources": [
+    "https://en.wiktionary.org/wiki/უყვარს",
+    "https://lingua.ge/verbs/სიყვარული/",
+    "https://en.wikipedia.org/wiki/Georgian_verb_paradigm"
+   ],
+   "notes": "All 18 cells match Wiktionary, lingua.ge and the Wikipedia class 4 example paradigm. Dative experiencer, nominative loved thing/person. Past is the imperfect (\"любил\"); the inceptive aorist \"полюбил / влюбился\" is a different verb, შემიყვარდა series. With a 1st/2nd-person object the verb changes (მიყვარხარ \"I love you\") - the forms here assume a 3sg object."
+  },
+  "learn": {
+   "prs": [
+    "ვსწავლობ",
+    "სწავლობ",
+    "სწავლობს",
+    "ვსწავლობთ",
+    "სწავლობთ",
+    "სწავლობენ"
+   ],
+   "fut": [
+    "ვისწავლი",
+    "ისწავლი",
+    "ისწავლის",
+    "ვისწავლით",
+    "ისწავლით",
+    "ისწავლიან"
+   ],
+   "past": [
+    "ვისწავლე",
+    "ისწავლე",
+    "ისწავლა",
+    "ვისწავლეთ",
+    "ისწავლეთ",
+    "ისწავლეს"
+   ],
+   "opt": [
+    "ვისწავლო",
+    "ისწავლო",
+    "ისწავლოს",
+    "ვისწავლოთ",
+    "ისწავლოთ",
+    "ისწავლონ"
+   ],
+   "low": []
+  },
+  "know": {
+   "prs": [
+    "ვიცი",
+    "იცი",
+    "იცის",
+    "ვიცით",
+    "იცით",
+    "იციან"
+   ],
+   "fut": [
+    "მეცოდინება",
+    "გეცოდინება",
+    "ეცოდინება",
+    "გვეცოდინება",
+    "გეცოდინებათ",
+    "ეცოდინებათ"
+   ],
+   "past": [
+    "ვიცოდი",
+    "იცოდი",
+    "იცოდა",
+    "ვიცოდით",
+    "იცოდით",
+    "იცოდნენ"
+   ],
+   "low": []
+  },
+  "understand": {
+   "prs": [
+    "მესმის",
+    "გესმის",
+    "ესმის",
+    "გვესმის",
+    "გესმით",
+    "ესმით"
+   ],
+   "fut": [
+    "გავიგებ",
+    "გაიგებ",
+    "გაიგებს",
+    "გავიგებთ",
+    "გაიგებთ",
+    "გაიგებენ"
+   ],
+   "past": [
+    "გავიგე",
+    "გაიგე",
+    "გაიგო",
+    "გავიგეთ",
+    "გაიგეთ",
+    "გაიგეს"
+   ],
+   "low": []
+  },
+  "buy": {
+   "prs": [
+    "ვყიდულობ",
+    "ყიდულობ",
+    "ყიდულობს",
+    "ვყიდულობთ",
+    "ყიდულობთ",
+    "ყიდულობენ"
+   ],
+   "fut": [
+    "ვიყიდი",
+    "იყიდი",
+    "იყიდის",
+    "ვიყიდით",
+    "იყიდით",
+    "იყიდიან"
+   ],
+   "past": [
+    "ვიყიდე",
+    "იყიდე",
+    "იყიდა",
+    "ვიყიდეთ",
+    "იყიდეთ",
+    "იყიდეს"
+   ],
+   "opt": [
+    "ვიყიდო",
+    "იყიდო",
+    "იყიდოს",
+    "ვიყიდოთ",
+    "იყიდოთ",
+    "იყიდონ"
+   ],
+   "low": []
+  },
+  "go": {
+   "prs": [
+    "მივდივარ",
+    "მიდიხარ",
+    "მიდის",
+    "მივდივართ",
+    "მიდიხართ",
+    "მიდიან"
+   ],
+   "fut": [
+    "წავალ",
+    "წახვალ",
+    "წავა",
+    "წავალთ",
+    "წახვალთ",
+    "წავლენ"
+   ],
+   "past": [
+    "წავედი",
+    "წახვედი",
+    "წავიდა",
+    "წავედით",
+    "წახვედით",
+    "წავიდნენ"
+   ],
+   "opt": [
+    "წავიდე",
+    "წახვიდე",
+    "წავიდეს",
+    "წავიდეთ",
+    "წახვიდეთ",
+    "წავიდნენ"
+   ],
+   "low": []
+  },
+  "come": {
+   "prs": [
+    "მოვდივარ",
+    "მოდიხარ",
+    "მოდის",
+    "მოვდივართ",
+    "მოდიხართ",
+    "მოდიან"
+   ],
+   "fut": [
+    "მოვალ",
+    "მოხვალ",
+    "მოვა",
+    "მოვალთ",
+    "მოხვალთ",
+    "მოვლენ"
+   ],
+   "past": [
+    "მოვედი",
+    "მოხვედი",
+    "მოვიდა",
+    "მოვედით",
+    "მოხვედით",
+    "მოვიდნენ"
+   ],
+   "opt": [
+    "მოვიდე",
+    "მოხვიდე",
+    "მოვიდეს",
+    "მოვიდეთ",
+    "მოხვიდეთ",
+    "მოვიდნენ"
+   ],
+   "low": []
+  },
+  "havea": {
+   "prs": [
+    "მყავს",
+    "გყავს",
+    "ჰყავს",
+    "გვყავს",
+    "გყავთ",
+    "ჰყავთ"
+   ],
+   "fut": [
+    "მეყოლება",
+    "გეყოლება",
+    "ეყოლება",
+    "გვეყოლება",
+    "გეყოლებათ",
+    "ეყოლებათ"
+   ],
+   "past": [
+    "მყავდა",
+    "გყავდა",
+    "ჰყავდა",
+    "გვყავდა",
+    "გყავდათ",
+    "ჰყავდათ"
+   ],
+   "low": []
+  },
+  "see": {
+   "prs": [
+    "ვხედავ",
+    "ხედავ",
+    "ხედავს",
+    "ვხედავთ",
+    "ხედავთ",
+    "ხედავენ"
+   ],
+   "fut": [
+    "ვნახავ",
+    "ნახავ",
+    "ნახავს",
+    "ვნახავთ",
+    "ნახავთ",
+    "ნახავენ"
+   ],
+   "past": [
+    "ვნახე",
+    "ნახე",
+    "ნახა",
+    "ვნახეთ",
+    "ნახეთ",
+    "ნახეს"
+   ],
+   "opt": [
+    "ვნახო",
+    "ნახო",
+    "ნახოს",
+    "ვნახოთ",
+    "ნახოთ",
+    "ნახონ"
+   ],
+   "low": []
+  },
+  "eat": {
+   "prs": [
+    "ვჭამ",
+    "ჭამ",
+    "ჭამს",
+    "ვჭამთ",
+    "ჭამთ",
+    "ჭამენ"
+   ],
+   "fut": [
+    "შევჭამ",
+    "შეჭამ",
+    "შეჭამს",
+    "შევჭამთ",
+    "შეჭამთ",
+    "შეჭამენ"
+   ],
+   "past": [
+    "ვჭამე",
+    "ჭამე",
+    "ჭამა",
+    "ვჭამეთ",
+    "ჭამეთ",
+    "ჭამეს"
+   ],
+   "opt": [
+    "ვჭამო",
+    "ჭამო",
+    "ჭამოს",
+    "ვჭამოთ",
+    "ჭამოთ",
+    "ჭამონ"
+   ],
+   "low": []
+  },
+  "drink": {
+   "prs": [
+    "ვსვამ",
+    "სვამ",
+    "სვამს",
+    "ვსვამთ",
+    "სვამთ",
+    "სვამენ"
+   ],
+   "fut": [
+    "დავლევ",
+    "დალევ",
+    "დალევს",
+    "დავლევთ",
+    "დალევთ",
+    "დალევენ"
+   ],
+   "past": [
+    "დავლიე",
+    "დალიე",
+    "დალია",
+    "დავლიეთ",
+    "დალიეთ",
+    "დალიეს"
+   ],
+   "opt": [
+    "დავლიო",
+    "დალიო",
+    "დალიოს",
+    "დავლიოთ",
+    "დალიოთ",
+    "დალიონ"
+   ],
+   "low": []
+  },
+  "pay": {
+   "prs": [
+    "ვიხდი",
+    "იხდი",
+    "იხდის",
+    "ვიხდით",
+    "იხდით",
+    "იხდიან"
+   ],
+   "fut": [
+    "გადავიხდი",
+    "გადაიხდი",
+    "გადაიხდის",
+    "გადავიხდით",
+    "გადაიხდით",
+    "გადაიხდიან"
+   ],
+   "past": [
+    "გადავიხადე",
+    "გადაიხადე",
+    "გადაიხადა",
+    "გადავიხადეთ",
+    "გადაიხადეთ",
+    "გადაიხადეს"
+   ],
+   "opt": [
+    "გადავიხადო",
+    "გადაიხადო",
+    "გადაიხადოს",
+    "გადავიხადოთ",
+    "გადაიხადოთ",
+    "გადაიხადონ"
+   ],
+   "low": []
+  },
+  "wait": {
+   "prs": [
+    "ველოდები",
+    "ელოდები",
+    "ელოდება",
+    "ველოდებით",
+    "ელოდებით",
+    "ელოდებიან"
+   ],
+   "fut": [
+    "დაველოდები",
+    "დაელოდები",
+    "დაელოდება",
+    "დაველოდებით",
+    "დაელოდებით",
+    "დაელოდებიან"
+   ],
+   "past": [
+    "დაველოდე",
+    "დაელოდე",
+    "დაელოდა",
+    "დაველოდეთ",
+    "დაელოდეთ",
+    "დაელოდნენ"
+   ],
+   "opt": [
+    "დაველოდო",
+    "დაელოდო",
+    "დაელოდოს",
+    "დაველოდოთ",
+    "დაელოდოთ",
+    "დაელოდონ"
+   ],
+   "low": [
+    "opt.3pl"
+   ]
+  },
+  "can": {
+   "prs": [
+    "შემიძლია",
+    "შეგიძლია",
+    "შეუძლია",
+    "შეგვიძლია",
+    "შეგიძლიათ",
+    "შეუძლიათ"
+   ],
+   "fut": [
+    "შემეძლება",
+    "შეგეძლება",
+    "შეეძლება",
+    "შეგვეძლება",
+    "შეგეძლებათ",
+    "შეეძლებათ"
+   ],
+   "past": [
+    "შემეძლო",
+    "შეგეძლო",
+    "შეეძლო",
+    "შეგვეძლო",
+    "შეგეძლოთ",
+    "შეეძლოთ"
+   ],
+   "low": [
+    "fut.1sg",
+    "fut.2sg",
+    "fut.3sg",
+    "fut.1pl",
+    "fut.2pl",
+    "fut.3pl"
+   ]
+  },
+  "write": {
+   "prs": [
+    "ვწერ",
+    "წერ",
+    "წერს",
+    "ვწერთ",
+    "წერთ",
+    "წერენ"
+   ],
+   "fut": [
+    "დავწერ",
+    "დაწერ",
+    "დაწერს",
+    "დავწერთ",
+    "დაწერთ",
+    "დაწერენ"
+   ],
+   "past": [
+    "დავწერე",
+    "დაწერე",
+    "დაწერა",
+    "დავწერეთ",
+    "დაწერეთ",
+    "დაწერეს"
+   ],
+   "opt": [
+    "დავწერო",
+    "დაწერო",
+    "დაწეროს",
+    "დავწეროთ",
+    "დაწეროთ",
+    "დაწერონ"
+   ],
+   "low": []
+  },
+  "read": {
+   "prs": [
+    "ვკითხულობ",
+    "კითხულობ",
+    "კითხულობს",
+    "ვკითხულობთ",
+    "კითხულობთ",
+    "კითხულობენ"
+   ],
+   "fut": [
+    "წავიკითხავ",
+    "წაიკითხავ",
+    "წაიკითხავს",
+    "წავიკითხავთ",
+    "წაიკითხავთ",
+    "წაიკითხავენ"
+   ],
+   "past": [
+    "წავიკითხე",
+    "წაიკითხე",
+    "წაიკითხა",
+    "წავიკითხეთ",
+    "წაიკითხეთ",
+    "წაიკითხეს"
+   ],
+   "opt": [
+    "წავიკითხო",
+    "წაიკითხო",
+    "წაიკითხოს",
+    "წავიკითხოთ",
+    "წაიკითხოთ",
+    "წაიკითხონ"
+   ],
+   "low": []
+  },
+  "say": {
+   "prs": [
+    "ვამბობ",
+    "ამბობ",
+    "ამბობს",
+    "ვამბობთ",
+    "ამბობთ",
+    "ამბობენ"
+   ],
+   "fut": [
+    "ვიტყვი",
+    "იტყვი",
+    "იტყვის",
+    "ვიტყვით",
+    "იტყვით",
+    "იტყვიან"
+   ],
+   "past": [
+    "ვთქვი",
+    "თქვი",
+    "თქვა",
+    "ვთქვით",
+    "თქვით",
+    "თქვეს"
+   ],
+   "opt": [
+    "ვთქვა",
+    "თქვა",
+    "თქვას",
+    "ვთქვათ",
+    "თქვათ",
+    "თქვან"
+   ],
+   "low": []
+  },
+  "think": {
+   "prs": [
+    "ვფიქრობ",
+    "ფიქრობ",
+    "ფიქრობს",
+    "ვფიქრობთ",
+    "ფიქრობთ",
+    "ფიქრობენ"
+   ],
+   "fut": [
+    "ვიფიქრებ",
+    "იფიქრებ",
+    "იფიქრებს",
+    "ვიფიქრებთ",
+    "იფიქრებთ",
+    "იფიქრებენ"
+   ],
+   "past": [
+    "ვიფიქრე",
+    "იფიქრე",
+    "იფიქრა",
+    "ვიფიქრეთ",
+    "იფიქრეთ",
+    "იფიქრეს"
+   ],
+   "opt": [
+    "ვიფიქრო",
+    "იფიქრო",
+    "იფიქროს",
+    "ვიფიქროთ",
+    "იფიქროთ",
+    "იფიქრონ"
+   ],
+   "low": []
+  },
+  "begin": {
+   "prs": [
+    "ვიწყებ",
+    "იწყებ",
+    "იწყებს",
+    "ვიწყებთ",
+    "იწყებთ",
+    "იწყებენ"
+   ],
+   "fut": [
+    "დავიწყებ",
+    "დაიწყებ",
+    "დაიწყებს",
+    "დავიწყებთ",
+    "დაიწყებთ",
+    "დაიწყებენ"
+   ],
+   "past": [
+    "დავიწყე",
+    "დაიწყე",
+    "დაიწყო",
+    "დავიწყეთ",
+    "დაიწყეთ",
+    "დაიწყეს"
+   ],
+   "opt": [
+    "დავიწყო",
+    "დაიწყო",
+    "დაიწყოს",
+    "დავიწყოთ",
+    "დაიწყოთ",
+    "დაიწყონ"
+   ],
+   "low": []
+  }
+ },
+ "usage": {
+  "A": "Aorist: ERGATIVE. Verb 1 (transitive, class 1) and verbs 2, 3, 5 (medial, class 3) all take an ergative subject in the aorist series: მან გააკეთა, მან იმუშავა, მან ილაპარაკა, მან იცხოვრა; plural მათ იმუშავეს; nouns take -მა/-მ (კაცმა იმუშავა, ნინომ იმუშავა). \"ის იმუშავა\" is non-standard. Present and future: NOMINATIVE (ის მუშაობს, ის იმუშავებს, ისინი მუშაობენ). 1st/2nd-person pronouns (მე, შენ, ჩვენ, თქვენ) do not change form. For verb 1 the object also flips: dative in present/future (ამას აკეთებს), nominative in aorist (ეს გააკეთა). Verb 4 \"be\" keeps a nominative subject in every row (ის იყო). Verbs 6-10 keep a dative experiencer in every row (მას უნდა / უნდოდა / მოეწონა). Sources: Wiktionary tables for აკეთებს and ცხოვრობს print \"ergative subject: მან ... მათ\" above the aorist series; en.wikipedia Georgian_verb_paradigm says medial verbs have the same case marking as class 1 (aorist = ergative-nominative); corpus check on ka.wikipedia: \"მან იმუშავა\" 31 hits vs \"ის იმუშავა\" 0, \"მან იცხოვრა\" 3 vs \"ის იცხოვრა\" 0.",
+  "B": "All four are natural: \"მე აქ ვარ\" (also just \"აქ ვარ\"; the pronoun is optional and adds emphasis), \"აქ არ ვარ\", \"სად ხარ?\", \"თბილისში ვცხოვრობ\". Georgian word order is fairly free but the neutral pattern is verb-final, with the focused word or the question word immediately before the verb. The negative particle არ (likewise ვერ, ნუ, აღარ) stands immediately before the finite verb: \"არ ვარ\", \"დრო არ მაქვს\", \"რატომ არ მუშაობ?\". The practical exceptions are that it precedes the modal particle rather than the lexical verb (\"არ უნდა წახვიდე\", \"არ შეიძლება\"), and that \"არ არის\" contracts to \"არაა\" / \"არ არი\" in speech (სახლში არაა). Standalone \"no\" is \"არა\", not \"არ\". Sources: en.wikipedia Georgian_grammar (examples all have the particle directly before the verb; interrogatives \"appear immediately pre-verbally\"); a 2023 paper in Theoretical Linguistics (https://www.degruyterbrill.com/document/doi/10.1515/tlr-2023-2001/html) on the immediately preverbal position of negative words and foci in Georgian; Tatoeba attests \"თბილისში ვცხოვრობ.\", \"სად ხარ?\", \"...რომ მე აქ ვარ\", \"ექიმი არ ვარ.\".",
+  "C": "All eight are correct, natural everyday sentences; none needs rephrasing. \"ყავა მინდა.\" fine. \"დრო არ მაქვს.\" fine (Tatoeba has \"ფული არ მაქვს.\", \"მე არ მაქვს დრო.\"). \"ფული გაქვს?\" fine. \"წყალი მჭირდება.\" fine (Tatoeba: \"შაქარი მჭირდება.\", \"დახმარება მჭირდება.\"). \"ეს მომწონს.\" fine. \"თბილისი მიყვარს.\" fine. \"მას ყავა უნდა.\" correct - dative მას + nominative ყავა; in real speech the pronoun is usually dropped or replaced by a name/noun in the dative (ნინოს ყავა უნდა), and უნდა here is the verb \"wants\", not the particle \"must\" (which would be followed by a verb). \"ჩვენ დრო გვაქვს.\" correct (Tatoeba: \"ჩვენ გვაქვს დრო.\"); the pronoun ჩვენ is optional since გვ- already marks \"we\" - \"დრო გვაქვს\" is the most neutral version. General point: in all of these the thing wanted/had/liked is in the nominative and the experiencer is in the dative.",
+  "D": "Yes. A car takes the animate verb: \"მანქანა მყავს\" (მყავს, გყავს, ჰყავს, გვყავს, გყავთ, ჰყავთ), not \"მანქანა მაქვს\". Wiktionary states it explicitly: ჰყავს is used for \"animate objects (human or animal) or cars\", აქვს for inanimate objects \"except for cars\" (https://en.wiktionary.org/wiki/აქვს, https://en.wiktionary.org/wiki/ჰყავს); Tatoeba has \"მანქანა მყავს.\" = \"I have a car\" / \"У меня есть автомобиль\". \"მანქანა მაქვს\" is heard colloquially (Tatoeba even has one such sentence, \"ორი მანქანა მქონდა.\" = \"I had two cars\") but it is not the norm for a car, and learners are taught მყავს; note that მანქანა also means \"machine\" (სარეცხი მანქანა \"washing machine\"), and in that sense მაქვს is correct. So do not use მანქანა as an example object for the აქვს paradigm.",
+  "E": "Yes, correct and natural. \"ქართულად ვლაპარაკობ\" = \"I speak (in) Georgian\"; ქართულად, რუსულად, ინგლისურად are the regular adverbial-case forms meaning \"in Georgian / Russian / English\". Tatoeba attests \"ქართულად ლაპარაკობ?\" = \"Do you speak Georgian?\", \"მე ქართულად ვლაპარაკობ.\", \"ინგლისურად ლაპარაკობ?\". Equally common ways to say you know a language: \"ქართული ვიცი\" (I know Georgian), and the slightly more formal verb საუბრობს (\"ინგლისურად საუბრობთ?\").",
+  "F": "Yes to all three. \"სამსახურში\" = at work / at the office (Tatoeba: \"სამსახურში ვარ.\" = \"I'm at work\"); \"სახლში\" = at home (Tatoeba: \"სახლში ვარ.\"); \"მაგიდაზე\" = on the table (-ში \"in/at\", -ზე \"on\", both attach to the dative stem). \"ტელეფონი მაგიდაზე არის.\" is grammatical and acceptable (Tatoeba has the parallel \"წიგნი მაგიდაზე არის.\" and \"გასაღები არის მაგიდაზე.\"), but in ordinary speech the copula is usually the enclitic -ა: \"ტელეფონი მაგიდაზეა.\", and for an object lying somewhere the most idiomatic verb is დევს: \"ტელეფონი მაგიდაზე დევს.\" (Tatoeba: \"მაგიდაზე რუკა დევს.\"). Full \"არის\" sounds a little careful/emphatic, which is fine for a beginner drill of the \"be\" paradigm."
+ }
+}

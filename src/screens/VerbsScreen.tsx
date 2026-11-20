@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Icon } from '../components/ui/Icon';
 import { ScreenHeader } from '../components/ui/ScreenHeader';
 import { VERBS } from '../content/store';
-import { PERSONS, TENSES } from '../content/types';
+import { PERSONS, SCREEVES, verbForm } from '../content/types';
 import { getCard } from '../db/progress';
 import { useProgressVersion } from '../db/useProgress';
 import { isAutomatic } from '../srs/mastery';
@@ -86,14 +86,18 @@ export function VerbsScreen() {
       <ScreenHeader title="Глаголы и матрица" onBack={() => navigate('/')} />
       <List>
         <Intro>
-          Глагол — основа каркаса. У каждого три строки (будущее, настоящее, прошедшее) и шесть лиц. Все
-          формы проверены по таблицам спряжения.
+          Глагол — основа каркаса. У каждого три строки (будущее, настоящее, прошедшее) и шесть лиц; у
+          части глаголов есть четвёртая — «чтобы…». Все формы проверены по таблицам спряжения.
         </Intro>
         {VERBS.map((v) => {
           let learned = 0;
           let auto = 0;
-          for (const t of TENSES) {
+          let total = 0;
+          for (const t of SCREEVES) {
             for (const p of PERSONS) {
+              // Only the cells the course teaches count: a few rare forms are reference only.
+              if (!verbForm(v, t, p) || v.cellUnit[`${t}.${p}`] == null) continue;
+              total++;
               const c = getCard(`c:${v.id}.${t}.${p}`);
               if (c) learned++;
               if (isAutomatic(c)) auto++;
@@ -106,7 +110,7 @@ export function VerbsScreen() {
                 <Ru>{v.ru}</Ru>
               </div>
               <Count $color={learned ? theme.colors.primary : theme.colors.inkMute}>
-                {learned} из 18
+                {learned} из {total}
                 <span>на автомате {auto}</span>
               </Count>
               <Icon name="arrow" size={18} color={theme.colors.inkMute} />

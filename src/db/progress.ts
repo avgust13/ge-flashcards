@@ -249,6 +249,12 @@ export async function logsForCard(id: CardId): Promise<ReviewLogEntry[]> {
   return (await getDb()).getAllFromIndex('revlog', 'by-card', id);
 }
 
+/** Review log entries of the study days from `fromDay` (a day key) on. */
+export async function logsSince(fromDay: string): Promise<ReviewLogEntry[]> {
+  await flush();
+  return (await getDb()).getAllFromIndex('revlog', 'by-day', IDBKeyRange.lowerBound(fromDay));
+}
+
 export async function logCount(): Promise<number> {
   await flush();
   return (await getDb()).count('revlog');

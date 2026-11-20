@@ -38,11 +38,14 @@ jobs:
       # locked to `rrsync /opt/uchikartuli`, so `site/` is /opt/uchikartuli/site,
       # which the site's own Caddy serves. --delay-updates swaps the new files in
       # at the end, so index.html never points at bundles that are not there yet.
+      # Files are compared by content and their times are not copied (no -t): a
+      # fresh checkout dates every file "now", which would re-send all ~100 MB and
+      # change every ETag, so browsers would download unchanged words.json again.
       - name: Rsync dist/ to server
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
-          rsync -rlptz --chmod=D755,F644 --delete --delay-updates --stats \
+          rsync -rlpz --checksum --chmod=D755,F644 --delete --delay-updates --stats \
             -e "ssh -i ~/.ssh/id_ed25519" \
             dist/ "$SSH_USER@$SSH_HOST:site/"

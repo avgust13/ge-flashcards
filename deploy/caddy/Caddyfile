@@ -1,0 +1,40 @@
+# Static server for the Uchikartuli PWA, behind the shared Caddy in /opt/edge,
+# which owns HTTPS and the domain. The build is mounted read-only at /srv.
+# After editing: cd /opt/uchikartuli && docker compose exec web caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile
+{
+	auto_https off
+}
+
+:80 {
+	root * /srv
+	encode zstd gzip
+
+	# Vite bundles are content-hashed; an audio id is sha1(voice|model|text) and a
+	# re-take gets a new id. Everything else (index.html, sw.js, the manifest,
+	# content/*.json, words.json) is revalidated on every load (ETag, then 304),
+	# so a deploy is seen at once and the service worker can offer the update.
+	@hashed path /assets/*
+	@audio path /audio/*
+	@other not path /assets/* /audio/*
+	header @hashed Cache-Control "public, max-age=31536000, immutable"
+	header @audio Cache-Control "public, max-age=2592000"
+	header @other Cache-Control "no-cache"
+	header X-Content-Type-Options nosniff
+
+	# Client-side routes (/course/3, /verbs/...) get the app shell. A path with a
+	# file extension, or under /audio, /content or /assets, never does: a missing
+	# clip or JSON must be a real 404, or it could be cached as audio.
+	@route {
+		not path_regexp \.[A-Za-z0-9]+$
+		not path /audio/* /content/* /assets/*
+		not file
+	}
+	rewrite @route /index.html
+
+	file_server
+
+	# A 404 must not be remembered: the clip may be uploaded by the next deploy.
+	handle_errors {
+		header Cache-Control "no-store"
+	}
+}

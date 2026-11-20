@@ -1,0 +1,2 @@
+# Server files are copied to Linux as they are: a CRLF would break the script.
+deploy/** text eol=lf

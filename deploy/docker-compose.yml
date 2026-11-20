@@ -1,0 +1,27 @@
+# Uchikartuli on the shared VPS, installed as /opt/uchikartuli by setup-server.sh.
+# HTTPS and the domain belong to the shared Caddy in /opt/edge, which reaches this
+# service as `uchikartuli-web:80` over the external `edge` network. Nothing is
+# published on the host. GitHub Actions rsyncs the build into ./site; the
+# container serves it read-only, so a deploy needs no restart.
+services:
+  web:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    volumes:
+      - ./caddy:/etc/caddy:ro
+      - ./site:/srv:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    networks:
+      edge:
+        # A unique name on the shared network: other sites may have a "web" too.
+        aliases:
+          - uchikartuli-web
+
+networks:
+  edge:
+    external: true
+
+volumes:
+  caddy-data:
+  caddy-config:

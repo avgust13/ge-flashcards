@@ -85,5 +85,8 @@ Design tokens in `src/theme/tokens.ts`; use `theme.fonts.ka` (Noto Sans Georgian
 ## PWA notes
 `registerType: 'prompt'`: a new build waits and is applied from the home screen (`src/pwa.ts`) so a session is never reloaded mid-way. The app shell, the fonts and `content/**/*.json` are precached; `/audio/*.mp3` and `words.json` are cached at runtime (CacheFirst). The server must return real 404s under `/audio/` and `/content/`, or an SPA fallback page could be cached as audio.
 
+## Deployment
+A push to `main` runs `.github/workflows/deploy.yml`: test, build, then rsync `dist/` to `deploy@$SSH_HOST:site/`, which is `/opt/uchikartuli/site` on the VPS (uchikartuli.xyz). The VPS is shared: the Caddy in `/opt/edge` owns ports 80/443 and TLS for every site on it (floor.pavloff.dev too) and proxies uchikartuli.xyz to this site's own static Caddy (`deploy/caddy/Caddyfile`: SPA fallback, real 404s, cache headers), reached as `uchikartuli-web` on the docker network `edge`. The `deploy` user's key is locked to `rrsync /opt/uchikartuli`, so it can only upload files. After a server reinstall, run `deploy/setup-server.sh` (its header says how; it is idempotent). Repository secrets: `SSH_HOST`, `SSH_USER` (= `deploy`), `SSH_PRIVATE_KEY` (the private half of `~/.ssh/uchikartuli_deploy`).
+
 ## Secrets
 Script keys live in `.env.local` (gitignored; see `.env.example`). Never use a `VITE_` prefix for a secret. The repository is public.

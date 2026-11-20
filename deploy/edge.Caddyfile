@@ -1,0 +1,8 @@
+# Uchikartuli (ge-flashcards PWA): /opt/uchikartuli, files uploaded by GitHub Actions
+uchikartuli.xyz {
+	reverse_proxy uchikartuli-web:80
+}
+
+www.uchikartuli.xyz {
+	redir https://uchikartuli.xyz{uri} permanent
+}

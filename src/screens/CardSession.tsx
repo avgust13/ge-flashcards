@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Icon } from '../components/ui/Icon';
 import { ProgressBar } from '../components/ui/ProgressBar';
 import { useSession } from '../state/SessionContext';
-import { playBase64 } from '../audio/player';
+import { playClip, prefetchClips } from '../audio/player';
+import { audioIdFor } from '../content/store';
 import { recordWordAnswer } from '../data/stats';
 import { getSettings } from '../db/progress';
 import type { FlashResult } from '../types';
@@ -140,11 +141,13 @@ export function CardSession() {
   // Listening first: a Georgian question is read out as it appears; a Russian
   // question is answered aloud by the app only once the card is turned.
   useEffect(() => {
-    if (autoplay && dir === 'ka-ru' && deck[i]) playBase64(deck[i].audio);
+    if (autoplay && dir === 'ka-ru' && deck[i]) void playClip(audioIdFor(deck[i].ka));
+    // Have the next cards' clips ready, so a card speaks the moment it appears.
+    prefetchClips(deck.slice(i + 1, i + 3).map((w) => audioIdFor(w.ka)));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i]);
   useEffect(() => {
-    if (autoplay && dir === 'ru-ka' && checked && deck[i]) playBase64(deck[i].audio);
+    if (autoplay && dir === 'ru-ka' && checked && deck[i]) void playClip(audioIdFor(deck[i].ka));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checked]);
 

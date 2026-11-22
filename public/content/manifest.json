@@ -17,5 +17,9 @@
     "sentences/u14.json",
     "sentences/u15.json",
     "sentences/u16.json"
-  ]
+  ],
+  "media": {
+    "audioBytes": 38209948,
+    "picBytes": 4075040
+  }
 }

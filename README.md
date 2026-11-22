@@ -52,9 +52,10 @@ npm run preview
 
 ## Data Sources
 
-Static learning content is loaded from:
-- `public/categories.json`
-- `public/words.json`
+Learning content is compiled by `npm run content` from `content-src/` into `public/content/`
+(the course and the picture dictionary, as text). Media are separate files:
+- `public/audio/` — audio clips
+- `public/pics/` — pictures of the dictionary words
 
 ## Project Structure
 

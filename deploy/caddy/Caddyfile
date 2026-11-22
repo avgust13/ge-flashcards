@@ -11,7 +11,7 @@
 
 	# Vite bundles are content-hashed; an audio id is sha1(voice|model|text) and a
 	# re-take gets a new id. Everything else (index.html, sw.js, the manifest,
-	# content/*.json, words.json) is revalidated on every load (ETag, then 304),
+	# content/*.json, pics/*.webp) is revalidated on every load (ETag, then 304),
 	# so a deploy is seen at once and the service worker can offer the update.
 	@hashed path /assets/*
 	@audio path /audio/*
@@ -23,7 +23,7 @@
 
 	# Client-side routes (/course/3, /verbs/...) get the app shell. A path with a
 	# file extension, or under /audio, /content or /assets, never does: a missing
-	# clip or JSON must be a real 404, or it could be cached as audio.
+	# clip, picture or JSON must be a real 404, or it could be cached as media.
 	@route {
 		not path_regexp \.[A-Za-z0-9]+$
 		not path /audio/* /content/* /assets/*

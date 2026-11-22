@@ -1,0 +1,5770 @@
+{
+ "გამარჯობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:15060"
+  ]
+ },
+ "მადლობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:128497"
+  ]
+ },
+ "კი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:918938"
+  ]
+ },
+ "არა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:907085"
+  ]
+ },
+ "წყალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:28329"
+  ]
+ },
+ "პური": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:11038"
+  ]
+ },
+ "სახლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:19369"
+  ]
+ },
+ "მეგობარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:17726"
+  ]
+ },
+ "სიყვარული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:28739"
+  ]
+ },
+ "ნახვამდის": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1382"
+  ]
+ },
+ "სალამი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:9080"
+  ]
+ },
+ "გთხოვთ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:37704"
+  ]
+ },
+ "ბოდიში": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:20969"
+  ]
+ },
+ "უკაცრავად": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:14351"
+  ]
+ },
+ "დიახ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:18698"
+  ]
+ },
+ "დახმარება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:18585"
+  ]
+ },
+ "სახელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:93955"
+  ]
+ },
+ "პოლიცია": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6003"
+  ]
+ },
+ "მე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1191923"
+  ]
+ },
+ "შენ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:478623"
+  ]
+ },
+ "თქვენ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:146361"
+  ]
+ },
+ "ის": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:757457"
+  ]
+ },
+ "ჩვენ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:212324"
+  ]
+ },
+ "ისინი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:83938"
+  ]
+ },
+ "ეს": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1428843"
+  ]
+ },
+ "ეგ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:620925"
+  ]
+ },
+ "ნული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2414"
+  ]
+ },
+ "ერთი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:589008"
+  ]
+ },
+ "ორი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:145856"
+  ]
+ },
+ "სამი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:52189"
+  ]
+ },
+ "ოთხი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:14677"
+  ]
+ },
+ "ხუთი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:11473"
+  ]
+ },
+ "ექვსი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5961"
+  ]
+ },
+ "შვიდი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5799"
+  ]
+ },
+ "რვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5169"
+  ]
+ },
+ "ცხრა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5403"
+  ]
+ },
+ "ათი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10039"
+  ]
+ },
+ "ვინ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:177453"
+  ]
+ },
+ "რა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1869882"
+  ]
+ },
+ "სად": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:191057"
+  ]
+ },
+ "როდის": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:52787"
+  ]
+ },
+ "რატომ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:186888"
+  ]
+ },
+ "როგორ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:359903"
+  ]
+ },
+ "რამდენი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:85824"
+  ]
+ },
+ "ვარ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:318228"
+  ]
+ },
+ "მაქვს": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:263872"
+  ]
+ },
+ "მინდა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:275499"
+  ]
+ },
+ "ვიცი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:337805"
+  ]
+ },
+ "ვხედავ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:28335"
+  ]
+ },
+ "ვლაპარაკობ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4741"
+  ]
+ },
+ "ჭამა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7578"
+  ]
+ },
+ "სმა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2820"
+  ]
+ },
+ "წასვლა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:14629"
+  ]
+ },
+ "მოსვლა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5281"
+  ]
+ },
+ "ცხოვრება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:48098"
+  ]
+ },
+ "გაგება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8954"
+  ]
+ },
+ "საჭმელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5092"
+  ]
+ },
+ "ჩაი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4335"
+  ]
+ },
+ "ყავა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3913"
+  ]
+ },
+ "ბავშვი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:25965"
+  ]
+ },
+ "დედა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:66899"
+  ]
+ },
+ "მამა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:37670"
+  ]
+ },
+ "ადამიანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:102408"
+  ]
+ },
+ "დღეს": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:205098"
+  ]
+ },
+ "ხვალ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:45902"
+  ]
+ },
+ "გუშინ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:42359"
+  ]
+ },
+ "ახლა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:231746"
+  ]
+ },
+ "დღე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:76567"
+  ]
+ },
+ "ღამე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:25823"
+  ]
+ },
+ "დრო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:83727"
+  ]
+ },
+ "აქ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:429748"
+  ]
+ },
+ "იქ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:184298"
+  ]
+ },
+ "მარჯვნივ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8904"
+  ]
+ },
+ "მარცხნივ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7728"
+  ]
+ },
+ "წინ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:135452"
+  ]
+ },
+ "უკან": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:64241"
+  ]
+ },
+ "კარგი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:254748"
+  ]
+ },
+ "ცუდი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:68681"
+  ]
+ },
+ "დიდი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:384253"
+  ]
+ },
+ "პატარა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:97005"
+  ]
+ },
+ "ექიმი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:9708"
+  ]
+ },
+ "ფული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:76928"
+  ]
+ },
+ "ოჯახი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:19530"
+  ]
+ },
+ "ძმა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:34550"
+  ]
+ },
+ "და": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8670483"
+  ]
+ },
+ "ბაბუა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4036"
+  ]
+ },
+ "ბებია": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4450"
+  ]
+ },
+ "შვილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:29691"
+  ]
+ },
+ "ვაჟი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5691"
+  ]
+ },
+ "გოგო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:37749"
+  ]
+ },
+ "ბიჭი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:33813"
+  ]
+ },
+ "ქალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:67304"
+  ]
+ },
+ "კაცი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:157203"
+  ]
+ },
+ "ცოლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:18098"
+  ]
+ },
+ "ქმარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10520"
+  ]
+ },
+ "მეზობელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:9429"
+  ]
+ },
+ "თავი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:147083"
+  ]
+ },
+ "სახე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:27759"
+  ]
+ },
+ "თვალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:27575"
+  ]
+ },
+ "ცხვირი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4610"
+  ]
+ },
+ "პირი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:19177"
+  ]
+ },
+ "ყური": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7263"
+  ]
+ },
+ "კბილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2903"
+  ]
+ },
+ "ენა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:45991"
+  ]
+ },
+ "ტუჩი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:704"
+  ]
+ },
+ "თმა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6611"
+  ]
+ },
+ "ხელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:71140"
+  ]
+ },
+ "ფეხი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:16803"
+  ]
+ },
+ "თითი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4217"
+  ]
+ },
+ "ზურგი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2717"
+  ]
+ },
+ "მუცელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2208"
+  ]
+ },
+ "კისერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2051"
+  ]
+ },
+ "გული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:60915"
+  ]
+ },
+ "რძე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3995"
+  ]
+ },
+ "ხორცი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7254"
+  ]
+ },
+ "თევზი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4690"
+  ]
+ },
+ "ბრინჯი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:809"
+  ]
+ },
+ "მაკარონი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:440"
+  ]
+ },
+ "სუპი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:497"
+  ]
+ },
+ "ხილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2488"
+  ]
+ },
+ "ვაშლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2652"
+  ]
+ },
+ "მსხალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:578"
+  ]
+ },
+ "ყურძენი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1253"
+  ]
+ },
+ "ფორთოხალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:677"
+  ]
+ },
+ "ლიმონი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1343"
+  ]
+ },
+ "ბანანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:662"
+  ]
+ },
+ "ბოსტნეული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:974"
+  ]
+ },
+ "პომიდორი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:508"
+  ]
+ },
+ "კარტოფილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2124"
+  ]
+ },
+ "ხახვი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1593"
+  ]
+ },
+ "კიტრი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1164"
+  ]
+ },
+ "სტაფილო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:765"
+  ]
+ },
+ "კვერცხი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4420"
+  ]
+ },
+ "ყველი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2776"
+  ]
+ },
+ "შაქარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2867"
+  ]
+ },
+ "მარილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3016"
+  ]
+ },
+ "ღვინო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:9795"
+  ]
+ },
+ "ლუდი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6142"
+  ]
+ },
+ "წვენი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2078"
+  ]
+ },
+ "ოთახი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6038"
+  ]
+ },
+ "სამზარეულო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2033"
+  ]
+ },
+ "აბაზანა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:931"
+  ]
+ },
+ "საძინებელი": {
+  "status": "attested",
+  "sources": [
+   "corpus:626"
+  ]
+ },
+ "მაგიდა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3676"
+  ]
+ },
+ "სკამი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3071"
+  ]
+ },
+ "საწოლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1505"
+  ]
+ },
+ "კარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13895"
+  ]
+ },
+ "ფანჯარა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5314"
+  ]
+ },
+ "კედელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3580"
+  ]
+ },
+ "იატაკი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:956"
+  ]
+ },
+ "ჭერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1490"
+  ]
+ },
+ "სარკე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2652"
+  ]
+ },
+ "ნათურა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1920"
+  ]
+ },
+ "ტელევიზორი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4047"
+  ]
+ },
+ "მაცივარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1384"
+  ]
+ },
+ "ჯამი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2978"
+  ]
+ },
+ "თეფში": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1871"
+  ]
+ },
+ "ჭიქა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5287"
+  ]
+ },
+ "დანა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4120"
+  ]
+ },
+ "ჩანგალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:391"
+  ]
+ },
+ "კოვზი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1868"
+  ]
+ },
+ "გასაღები": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3573"
+  ]
+ },
+ "ტანსაცმელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4205"
+  ]
+ },
+ "პერანგი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1414"
+  ]
+ },
+ "შარვალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2515"
+  ]
+ },
+ "კაბა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3774"
+  ]
+ },
+ "ფეხსაცმელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2714"
+  ]
+ },
+ "წინდები": {
+  "status": "attested",
+  "sources": [
+   "corpus:713"
+  ]
+ },
+ "მაისური": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1968"
+  ]
+ },
+ "ქურთუკი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:600"
+  ]
+ },
+ "ქუდი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4561"
+  ]
+ },
+ "შარფი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:289"
+  ]
+ },
+ "სვიტრი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:117"
+  ]
+ },
+ "ჯინსი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:546"
+  ]
+ },
+ "ფერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:18261"
+  ]
+ },
+ "წითელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:26758"
+  ]
+ },
+ "ლურჯი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8681"
+  ]
+ },
+ "მწვანე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:16974"
+  ]
+ },
+ "ყვითელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:9122"
+  ]
+ },
+ "შავი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:45119"
+  ]
+ },
+ "თეთრი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:42338"
+  ]
+ },
+ "ნაცრისფერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2122"
+  ]
+ },
+ "ყავისფერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2364"
+  ]
+ },
+ "ვარდისფერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3720"
+  ]
+ },
+ "ნარინჯისფერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:815"
+  ]
+ },
+ "ცხოველი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4205"
+  ]
+ },
+ "ძაღლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:11959"
+  ]
+ },
+ "კატა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5268"
+  ]
+ },
+ "ცხენი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:9126"
+  ]
+ },
+ "ძროხა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2633"
+  ]
+ },
+ "ცხვარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2530"
+  ]
+ },
+ "ღორი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3143"
+  ]
+ },
+ "ქათამი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2113"
+  ]
+ },
+ "ჩიტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2736"
+  ]
+ },
+ "ბუნება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6989"
+  ]
+ },
+ "ხე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:9674"
+  ]
+ },
+ "ფოთოლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1731"
+  ]
+ },
+ "ყვავილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2904"
+  ]
+ },
+ "ბალახი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2065"
+  ]
+ },
+ "მიწა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13577"
+  ]
+ },
+ "ქვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6755"
+  ]
+ },
+ "მთა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7235"
+  ]
+ },
+ "მდინარე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:17662"
+  ]
+ },
+ "ზღვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10279"
+  ]
+ },
+ "ტბა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4855"
+  ]
+ },
+ "ტყე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4739"
+  ]
+ },
+ "ცა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8625"
+  ]
+ },
+ "მზე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:20404"
+  ]
+ },
+ "მთვარე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6695"
+  ]
+ },
+ "ვარსკვლავი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4809"
+  ]
+ },
+ "ღრუბელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1519"
+  ]
+ },
+ "ამინდი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2581"
+  ]
+ },
+ "წვიმა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5123"
+  ]
+ },
+ "თოვლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6009"
+  ]
+ },
+ "ქარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6900"
+  ]
+ },
+ "მზიანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1476"
+  ]
+ },
+ "ცხელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8796"
+  ]
+ },
+ "ცივი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10586"
+  ]
+ },
+ "თბილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7414"
+  ]
+ },
+ "წუთი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:17609"
+  ]
+ },
+ "საათი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:27345"
+  ]
+ },
+ "კვირა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:16503"
+  ]
+ },
+ "თვე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:23980"
+  ]
+ },
+ "წელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:80036"
+  ]
+ },
+ "დილა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5345"
+  ]
+ },
+ "საღამო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4339"
+  ]
+ },
+ "ორშაბათი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1098"
+  ]
+ },
+ "სამშაბათი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:723"
+  ]
+ },
+ "ოთხშაბათი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:759"
+  ]
+ },
+ "ხუთშაბათი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:826"
+  ]
+ },
+ "პარასკევი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1375"
+  ]
+ },
+ "შაბათი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1830"
+  ]
+ },
+ "კვირადღე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:51"
+  ]
+ },
+ "გაზაფხული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3132"
+  ]
+ },
+ "ზაფხული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4251"
+  ]
+ },
+ "შემოდგომა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1937"
+  ]
+ },
+ "ზამთარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3676"
+  ]
+ },
+ "თერთმეტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:792"
+  ]
+ },
+ "თორმეტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2423"
+  ]
+ },
+ "ცამეტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:850"
+  ]
+ },
+ "თოთხმეტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:562"
+  ]
+ },
+ "თხუთმეტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1609"
+  ]
+ },
+ "თექვსმეტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:570"
+  ]
+ },
+ "ჩვიდმეტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:482"
+  ]
+ },
+ "თვრამეტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:569"
+  ]
+ },
+ "ცხრამეტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:298"
+  ]
+ },
+ "ოცი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4082"
+  ]
+ },
+ "ოცდაათი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1509"
+  ]
+ },
+ "ორმოცი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1784"
+  ]
+ },
+ "ორმოცდაათი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1085"
+  ]
+ },
+ "ასი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7033"
+  ]
+ },
+ "ათასი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:28411"
+  ]
+ },
+ "მანქანა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:58483"
+  ]
+ },
+ "ავტობუსი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2357"
+  ]
+ },
+ "მატარებელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4926"
+  ]
+ },
+ "მეტრო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3232"
+  ]
+ },
+ "ტაქსი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1520"
+  ]
+ },
+ "თვითმფრინავი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3465"
+  ]
+ },
+ "ველოსიპედი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1275"
+  ]
+ },
+ "ბილეთი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5340"
+  ]
+ },
+ "წერა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13237"
+  ]
+ },
+ "კითხვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:44411"
+  ]
+ },
+ "ლაპარაკი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:37915"
+  ]
+ },
+ "გაკეთება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:27452"
+  ]
+ },
+ "მუშაობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:18723"
+  ]
+ },
+ "სიარული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8624"
+  ]
+ },
+ "რბენა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:107"
+  ]
+ },
+ "ცურვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1625"
+  ]
+ },
+ "ფრენა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2044"
+  ]
+ },
+ "ძილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5757"
+  ]
+ },
+ "სწავლა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13267"
+  ]
+ },
+ "მღერა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:290"
+  ]
+ },
+ "ცეკვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3733"
+  ]
+ },
+ "თამაში": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:53310"
+  ]
+ },
+ "დასვენება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2886"
+  ]
+ },
+ "სიცილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3845"
+  ]
+ },
+ "ტირილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3479"
+  ]
+ },
+ "ღიმილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3765"
+  ]
+ },
+ "ფიქრი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:9896"
+  ]
+ },
+ "ყიდვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:21363"
+  ]
+ },
+ "მიცემა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4783"
+  ]
+ },
+ "აღება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7030"
+  ]
+ },
+ "პოვნა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3053"
+  ]
+ },
+ "ცდა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3406"
+  ]
+ },
+ "გახსნა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:23950"
+  ]
+ },
+ "დახურვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3338"
+  ]
+ },
+ "დაწყება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5490"
+  ]
+ },
+ "დასრულება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:892"
+  ]
+ },
+ "მაღაზია": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8727"
+  ]
+ },
+ "ბაზარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:21000"
+  ]
+ },
+ "ფასი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:123908"
+  ]
+ },
+ "ხურდა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1130"
+  ]
+ },
+ "ქალაქი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:26253"
+  ]
+ },
+ "სოფელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:17729"
+  ]
+ },
+ "ქვეყანა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:54634"
+  ]
+ },
+ "ქუჩა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6799"
+  ]
+ },
+ "გზა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:46783"
+  ]
+ },
+ "სკოლა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:14411"
+  ]
+ },
+ "რესტორანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1905"
+  ]
+ },
+ "კაფე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2161"
+  ]
+ },
+ "სასტუმრო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5700"
+  ]
+ },
+ "პარკი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5974"
+  ]
+ },
+ "ემოცია": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1740"
+  ]
+ },
+ "ბედნიერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:18023"
+  ]
+ },
+ "ბედნიერება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8695"
+  ]
+ },
+ "მოწყენილი": {
+  "status": "attested",
+  "sources": [
+   "corpus:1436"
+  ]
+ },
+ "სევდა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2964"
+  ]
+ },
+ "გაბრაზებული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2550"
+  ]
+ },
+ "ბრაზი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:552"
+  ]
+ },
+ "შიში": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:11027"
+  ]
+ },
+ "შეშინებული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2677"
+  ]
+ },
+ "გაკვირვებული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1822"
+  ]
+ },
+ "მოწყენილობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:284"
+  ]
+ },
+ "სიხარული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6676"
+  ]
+ },
+ "მადლიერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1502"
+  ]
+ },
+ "შეყვარებული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6485"
+  ]
+ },
+ "ახალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:220226"
+  ]
+ },
+ "ძველი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:67369"
+  ]
+ },
+ "ახალგაზრდა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:26060"
+  ]
+ },
+ "მოხუცი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7258"
+  ]
+ },
+ "ძლიერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:34282"
+  ]
+ },
+ "სუსტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13592"
+  ]
+ },
+ "მაღალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:42769"
+  ]
+ },
+ "დაბალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:23102"
+  ]
+ },
+ "გრძელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:11578"
+  ]
+ },
+ "მოკლე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:19765"
+  ]
+ },
+ "სწრაფი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10304"
+  ]
+ },
+ "ნელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4762"
+  ]
+ },
+ "ადვილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13908"
+  ]
+ },
+ "რთული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:18759"
+  ]
+ },
+ "მძიმე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:28502"
+  ]
+ },
+ "მსუბუქი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6871"
+  ]
+ },
+ "მშვენიერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:20709"
+  ]
+ },
+ "ლამაზი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:32296"
+  ]
+ },
+ "მახინჯი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3365"
+  ]
+ },
+ "სუფთა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:19540"
+  ]
+ },
+ "ჭუჭყიანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1243"
+  ]
+ },
+ "გემრიელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3905"
+  ]
+ },
+ "ცარიელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7665"
+  ]
+ },
+ "სავსე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:16166"
+  ]
+ },
+ "მართალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:45478"
+  ]
+ },
+ "მცდარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2820"
+  ]
+ },
+ "მნიშვნელოვანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:29995"
+  ]
+ },
+ "საინტერესო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:57314"
+  ]
+ },
+ "მოსაწყენი": {
+  "status": "attested",
+  "sources": [
+   "corpus:1379"
+  ]
+ },
+ "საშიში": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7970"
+  ]
+ },
+ "უსაფრთხო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2416"
+  ]
+ },
+ "გაგონება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:807"
+  ]
+ },
+ "გრძნობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13466"
+  ]
+ },
+ "შეცვლა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13201"
+  ]
+ },
+ "შესვლა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8459"
+  ]
+ },
+ "გასვლა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6622"
+  ]
+ },
+ "გაჩერება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2390"
+  ]
+ },
+ "გაგრძელება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6668"
+  ]
+ },
+ "გაყიდვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:11264"
+  ]
+ },
+ "გაგზავნა": {
+  "status": "attested",
+  "sources": [
+   "corpus:4735"
+  ]
+ },
+ "მიღება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:14386"
+  ]
+ },
+ "გახდომა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:442"
+  ]
+ },
+ "დამახსოვრება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:449"
+  ]
+ },
+ "დავიწყება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1271"
+  ]
+ },
+ "გაცნობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3204"
+  ]
+ },
+ "მოლოდინი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2151"
+  ]
+ },
+ "ჩართვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5796"
+  ]
+ },
+ "გამორთვა": {
+  "status": "attested",
+  "sources": [
+   "corpus:1978"
+  ]
+ },
+ "გართობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2681"
+  ]
+ },
+ "შეხება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10423"
+  ]
+ },
+ "კოცნა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2364"
+  ]
+ },
+ "ჩახუტება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1100"
+  ]
+ },
+ "გამარჯვება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8377"
+  ]
+ },
+ "წაგება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2398"
+  ]
+ },
+ "დაკარგვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3520"
+  ]
+ },
+ "გათხოვება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1054"
+  ]
+ },
+ "დაქორწინება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:315"
+  ]
+ },
+ "დაბადება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1914"
+  ]
+ },
+ "სიკვდილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:14628"
+  ]
+ },
+ "ჩაცმა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1253"
+  ]
+ },
+ "გახდა": {
+  "status": "attested",
+  "sources": [
+   "corpus:50356"
+  ]
+ },
+ "დაბანა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:583"
+  ]
+ },
+ "რეცხვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:344"
+  ]
+ },
+ "ხატვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1195"
+  ]
+ },
+ "ცემა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4585"
+  ]
+ },
+ "სამუშაო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:17735"
+  ]
+ },
+ "პროფესია": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3437"
+  ]
+ },
+ "მასწავლებელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7027"
+  ]
+ },
+ "სტუდენტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4168"
+  ]
+ },
+ "მოსწავლე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2788"
+  ]
+ },
+ "მძღოლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3665"
+  ]
+ },
+ "მზარეული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:580"
+  ]
+ },
+ "მებაღე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:297"
+  ]
+ },
+ "ფერმერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:357"
+  ]
+ },
+ "მხატვარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4915"
+  ]
+ },
+ "მუსიკოსი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3606"
+  ]
+ },
+ "ინჟინერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1548"
+  ]
+ },
+ "ოფისი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3742"
+  ]
+ },
+ "კოლეგა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2204"
+  ]
+ },
+ "ხელფასი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10919"
+  ]
+ },
+ "ეკლესია": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:24415"
+  ]
+ },
+ "ბანკი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7105"
+  ]
+ },
+ "ფოსტა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2968"
+  ]
+ },
+ "ბიბლიოთეკა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3214"
+  ]
+ },
+ "კინო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:9217"
+  ]
+ },
+ "თეატრი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5399"
+  ]
+ },
+ "მუზეუმი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4544"
+  ]
+ },
+ "საავადმყოფო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1053"
+  ]
+ },
+ "აფთიაქი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:468"
+  ]
+ },
+ "აეროპორტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1526"
+  ]
+ },
+ "სადგური": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2849"
+  ]
+ },
+ "მოედანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4645"
+  ]
+ },
+ "ხიდი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5353"
+  ]
+ },
+ "უნივერსიტეტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7664"
+  ]
+ },
+ "პლაჟი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:246"
+  ]
+ },
+ "მენიუ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3104"
+  ]
+ },
+ "ანგარიში": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8734"
+  ]
+ },
+ "ოფიციანტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:411"
+  ]
+ },
+ "ნამცხვარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1042"
+  ]
+ },
+ "შოკოლადი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1755"
+  ]
+ },
+ "ნაყინი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1320"
+  ]
+ },
+ "მარწყვი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:513"
+  ]
+ },
+ "ხინკალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4282"
+  ]
+ },
+ "ხაჭაპური": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1454"
+  ]
+ },
+ "მწვადი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1889"
+  ]
+ },
+ "ღომი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:426"
+  ]
+ },
+ "გემი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3198"
+  ]
+ },
+ "ნავი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2322"
+  ]
+ },
+ "მოტოციკლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:132"
+  ]
+ },
+ "მგზავრობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2125"
+  ]
+ },
+ "მგზავრი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1371"
+  ]
+ },
+ "შუქნიშანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:454"
+  ]
+ },
+ "ფეხით": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7951"
+  ]
+ },
+ "ცეცხლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:9908"
+  ]
+ },
+ "მცენარე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2353"
+  ]
+ },
+ "ფესვი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:963"
+  ]
+ },
+ "კუნძული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4299"
+  ]
+ },
+ "ნაპირი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:935"
+  ]
+ },
+ "ოკეანე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2138"
+  ]
+ },
+ "უდაბნო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1769"
+  ]
+ },
+ "ბორცვი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:386"
+  ]
+ },
+ "პლანეტა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2716"
+  ]
+ },
+ "დედამიწა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4424"
+  ]
+ },
+ "გრილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1710"
+  ]
+ },
+ "სველი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3408"
+  ]
+ },
+ "მშრალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4606"
+  ]
+ },
+ "ნისლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1638"
+  ]
+ },
+ "ღრუბლიანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:162"
+  ]
+ },
+ "ქარიშხალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1098"
+  ]
+ },
+ "მამალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3161"
+  ]
+ },
+ "იხვი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1143"
+  ]
+ },
+ "ბატი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:856"
+  ]
+ },
+ "გველი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2787"
+  ]
+ },
+ "ბაყაყი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:745"
+  ]
+ },
+ "ფუტკარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:608"
+  ]
+ },
+ "პეპელა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1035"
+  ]
+ },
+ "ბუზი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1131"
+  ]
+ },
+ "კოღო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:473"
+  ]
+ },
+ "ობობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:759"
+  ]
+ },
+ "ვირი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3303"
+  ]
+ },
+ "ლომი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3243"
+  ]
+ },
+ "ვეფხვი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1025"
+  ]
+ },
+ "დათვი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2201"
+  ]
+ },
+ "მგელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4639"
+  ]
+ },
+ "მელა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1180"
+  ]
+ },
+ "კურდღელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1752"
+  ]
+ },
+ "სპილო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1101"
+  ]
+ },
+ "მაიმუნი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1476"
+  ]
+ },
+ "შუადღე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:420"
+  ]
+ },
+ "ადრე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:89677"
+  ]
+ },
+ "გვიან": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:17062"
+  ]
+ },
+ "მალე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:78055"
+  ]
+ },
+ "ხშირად": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:65289"
+  ]
+ },
+ "ყოველთვის": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:73216"
+  ]
+ },
+ "არასოდეს": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:31402"
+  ]
+ },
+ "ზოგჯერ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:23893"
+  ]
+ },
+ "იანვარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:18191"
+  ]
+ },
+ "თებერვალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:16282"
+  ]
+ },
+ "მარტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:20003"
+  ]
+ },
+ "აპრილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:15190"
+  ]
+ },
+ "მაისი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:18839"
+  ]
+ },
+ "ივნისი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:16742"
+  ]
+ },
+ "ივლისი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:16638"
+  ]
+ },
+ "აგვისტო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:15825"
+  ]
+ },
+ "სექტემბერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:17168"
+  ]
+ },
+ "ოქტომბერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:17148"
+  ]
+ },
+ "ნოემბერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:16356"
+  ]
+ },
+ "დეკემბერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:15903"
+  ]
+ },
+ "რა თქმა უნდა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary"
+  ]
+ },
+ "ალბათ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:202098"
+  ]
+ },
+ "შესაძლოა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:20238"
+  ]
+ },
+ "მართლა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:174547"
+  ]
+ },
+ "მაგრამ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:987038"
+  ]
+ },
+ "ან": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:653509"
+  ]
+ },
+ "როცა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:234250"
+  ]
+ },
+ "რომ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2586399"
+  ]
+ },
+ "ჩანთა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2837"
+  ]
+ },
+ "ფასდაკლება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1970"
+  ]
+ },
+ "ბარათი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6974"
+  ]
+ },
+ "ნაღდი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7427"
+  ]
+ },
+ "ჯანმრთელობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3488"
+  ]
+ },
+ "ავადმყოფი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4803"
+  ]
+ },
+ "ჯანმრთელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5904"
+  ]
+ },
+ "დაავადება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3794"
+  ]
+ },
+ "ტკივილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6574"
+  ]
+ },
+ "ცხელება": {
+  "status": "attested",
+  "sources": [
+   "corpus:349"
+  ]
+ },
+ "გრიპი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1201"
+  ]
+ },
+ "გაცივება": {
+  "status": "attested",
+  "sources": [
+   "corpus:130"
+  ]
+ },
+ "ხველება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:224"
+  ]
+ },
+ "სურდო": {
+  "status": "attested",
+  "sources": [
+   "corpus:368"
+  ]
+ },
+ "წამალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6017"
+  ]
+ },
+ "ნემსი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1019"
+  ]
+ },
+ "რეცეპტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1617"
+  ]
+ },
+ "მკურნალობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4503"
+  ]
+ },
+ "ოპერაცია": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6837"
+  ]
+ },
+ "ექთანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:317"
+  ]
+ },
+ "სტომატოლოგი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:374"
+  ]
+ },
+ "ვიტამინი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:988"
+  ]
+ },
+ "ალერგია": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1504"
+  ]
+ },
+ "დიეტა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1187"
+  ]
+ },
+ "ვარჯიში": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3292"
+  ]
+ },
+ "სპორტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4468"
+  ]
+ },
+ "ცენტრი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:12371"
+  ]
+ },
+ "რაიონი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10861"
+  ]
+ },
+ "გარეუბანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:205"
+  ]
+ },
+ "შენობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7565"
+  ]
+ },
+ "სართული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3002"
+  ]
+ },
+ "ლიფტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:872"
+  ]
+ },
+ "საფეხური": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1345"
+  ]
+ },
+ "გარაჟი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:632"
+  ]
+ },
+ "ეზო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3079"
+  ]
+ },
+ "ბაღი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3293"
+  ]
+ },
+ "ტროტუარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:109"
+  ]
+ },
+ "მისამართი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13730"
+  ]
+ },
+ "საზღვარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6329"
+  ]
+ },
+ "ხეობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3043"
+  ]
+ },
+ "მინდორი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1156"
+  ]
+ },
+ "წყარო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:25767"
+  ]
+ },
+ "ჩანჩქერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1149"
+  ]
+ },
+ "გამოქვაბული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:444"
+  ]
+ },
+ "ხეივანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:371"
+  ]
+ },
+ "სანაპირო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3246"
+  ]
+ },
+ "სამყარო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:11689"
+  ]
+ },
+ "გარემო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5677"
+  ]
+ },
+ "შუაღამე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:424"
+  ]
+ },
+ "წამი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7297"
+  ]
+ },
+ "საუკუნე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13696"
+  ]
+ },
+ "ეპოქა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2708"
+  ]
+ },
+ "მომავალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:19345"
+  ]
+ },
+ "წარსული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4728"
+  ]
+ },
+ "აწმყო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1315"
+  ]
+ },
+ "ვადა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7699"
+  ]
+ },
+ "ლარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:168552"
+  ]
+ },
+ "დოლარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:17697"
+  ]
+ },
+ "ევრო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:11247"
+  ]
+ },
+ "რუბლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:820"
+  ]
+ },
+ "ვალუტა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1330"
+  ]
+ },
+ "ბანკომატი": {
+  "status": "attested",
+  "sources": [
+   "corpus:148"
+  ]
+ },
+ "გადახდა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8203"
+  ]
+ },
+ "ვალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5831"
+  ]
+ },
+ "ბიუჯეტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5176"
+  ]
+ },
+ "გადასახადი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5969"
+  ]
+ },
+ "შეფუთვა": {
+  "status": "attested",
+  "sources": [
+   "corpus:505"
+  ]
+ },
+ "გადაწყვეტა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2421"
+  ]
+ },
+ "არჩევა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3010"
+  ]
+ },
+ "აშენება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2394"
+  ]
+ },
+ "გატეხვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1463"
+  ]
+ },
+ "შეკეთება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:981"
+  ]
+ },
+ "გაცვლა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:12158"
+  ]
+ },
+ "გადაცემა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:11799"
+  ]
+ },
+ "აღწერა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:15216"
+  ]
+ },
+ "ახსნა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:11029"
+  ]
+ },
+ "შესწავლა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5853"
+  ]
+ },
+ "გამოყენება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:18451"
+  ]
+ },
+ "შექმნა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:24722"
+  ]
+ },
+ "განვითარება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:9464"
+  ]
+ },
+ "მართვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5591"
+  ]
+ },
+ "გადარჩენა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2182"
+  ]
+ },
+ "დაცვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13611"
+  ]
+ },
+ "შემოწმება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3551"
+  ]
+ },
+ "მონაწილეობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13418"
+  ]
+ },
+ "გამოგონება": {
+  "status": "attested",
+  "sources": [
+   "corpus:959"
+  ]
+ },
+ "გათვლა": {
+  "status": "attested",
+  "sources": [
+   "corpus:1054"
+  ]
+ },
+ "მიწოდება": {
+  "status": "attested",
+  "sources": [
+   "corpus:2094"
+  ]
+ },
+ "შენახვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2809"
+  ]
+ },
+ "შეპირება": {
+  "status": "attested",
+  "sources": [
+   "corpus:61"
+  ]
+ },
+ "მზად": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:19051"
+  ]
+ },
+ "საჭირო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:78486"
+  ]
+ },
+ "შესაძლებელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:15134"
+  ]
+ },
+ "შეუძლებელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6416"
+  ]
+ },
+ "ცნობილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:37019"
+  ]
+ },
+ "უცნობი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8902"
+  ]
+ },
+ "ბუნებრივი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:12092"
+  ]
+ },
+ "ხელოვნური": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4418"
+  ]
+ },
+ "რეალური": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:23374"
+  ]
+ },
+ "ნამდვილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:26265"
+  ]
+ },
+ "ცრუ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4272"
+  ]
+ },
+ "საერთო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:42115"
+  ]
+ },
+ "პირადი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:21770"
+  ]
+ },
+ "საჯარო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10307"
+  ]
+ },
+ "საიდუმლო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13217"
+  ]
+ },
+ "მთავარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:63781"
+  ]
+ },
+ "ცალკე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:43131"
+  ]
+ },
+ "ერთნაირი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7645"
+  ]
+ },
+ "განსხვავებული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:16876"
+  ]
+ },
+ "მსგავსი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:56435"
+  ]
+ },
+ "მკაცრი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6543"
+  ]
+ },
+ "რბილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4587"
+  ]
+ },
+ "მაგარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:225102"
+  ]
+ },
+ "ღრმა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:11933"
+  ]
+ },
+ "ფართო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:12657"
+  ]
+ },
+ "ვიწრო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6756"
+  ]
+ },
+ "ტკბილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6099"
+  ]
+ },
+ "მწარე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6587"
+  ]
+ },
+ "მჟავე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1574"
+  ]
+ },
+ "მარილიანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:595"
+  ]
+ },
+ "სიძულვილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2832"
+  ]
+ },
+ "იმედი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:43296"
+  ]
+ },
+ "სასოწარკვეთა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:228"
+  ]
+ },
+ "სიამაყე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1430"
+  ]
+ },
+ "სირცხვილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5090"
+  ]
+ },
+ "ეჭვი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:23268"
+  ]
+ },
+ "რწმენა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8315"
+  ]
+ },
+ "აღფრთოვანება": {
+  "status": "attested",
+  "sources": [
+   "corpus:518"
+  ]
+ },
+ "გულგრილობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:560"
+  ]
+ },
+ "კარიერა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3904"
+  ]
+ },
+ "შეხვედრა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10082"
+  ]
+ },
+ "პროექტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:14802"
+  ]
+ },
+ "გუნდი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:27417"
+  ]
+ },
+ "მენეჯერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3878"
+  ]
+ },
+ "დირექტორი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5340"
+  ]
+ },
+ "მფლობელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5186"
+  ]
+ },
+ "კლიენტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6349"
+  ]
+ },
+ "გასაუბრება": {
+  "status": "attested",
+  "sources": [
+   "corpus:1183"
+  ]
+ },
+ "შრომა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6704"
+  ]
+ },
+ "შვებულება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1090"
+  ]
+ },
+ "საქმე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:130279"
+  ]
+ },
+ "მიზანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:16233"
+  ]
+ },
+ "გეგმა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10647"
+  ]
+ },
+ "იდეა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:25180"
+  ]
+ },
+ "აზრი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:95406"
+  ]
+ },
+ "მიზეზი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:34703"
+  ]
+ },
+ "შედეგი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:26572"
+  ]
+ },
+ "მაგალითი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:15002"
+  ]
+ },
+ "პრობლემა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:91124"
+  ]
+ },
+ "გადაწყვეტილება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:11233"
+  ]
+ },
+ "საკითხი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:24918"
+  ]
+ },
+ "მნიშვნელობა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:54064"
+  ]
+ },
+ "მილიონი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:19813"
+  ]
+ },
+ "მილიარდი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4407"
+  ]
+ },
+ "ნახევარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:23194"
+  ]
+ },
+ "მეოთხედი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:979"
+  ]
+ },
+ "მთლიანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10908"
+  ]
+ },
+ "რამდენიმე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:82450"
+  ]
+ },
+ "ცოტა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:178552"
+  ]
+ },
+ "ბევრი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:173048"
+  ]
+ },
+ "ყველა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:353031"
+  ]
+ },
+ "ვინმე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:91063"
+  ]
+ },
+ "რაიმე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:61306"
+  ]
+ },
+ "არავინ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:93696"
+  ]
+ },
+ "არაფერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:188894"
+  ]
+ },
+ "საკუთარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:73896"
+  ]
+ },
+ "ჭექა-ქუხილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary"
+  ]
+ },
+ "ელვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1136"
+  ]
+ },
+ "სეტყვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:678"
+  ]
+ },
+ "ცვარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:263"
+  ]
+ },
+ "ჩრდილოეთი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3111"
+  ]
+ },
+ "სამხრეთი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4342"
+  ]
+ },
+ "აღმოსავლეთი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3657"
+  ]
+ },
+ "დასავლეთი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7016"
+  ]
+ },
+ "ახლოს": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:23884"
+  ]
+ },
+ "შორს": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:21638"
+  ]
+ },
+ "ზემოთ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:39798"
+  ]
+ },
+ "ქვემოთ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:17169"
+  ]
+ },
+ "შიგნით": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:17086"
+  ]
+ },
+ "გარეთ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:26607"
+  ]
+ },
+ "გადაბრუნება": {
+  "status": "attested",
+  "sources": [
+   "corpus:79"
+  ]
+ },
+ "გადატანა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4255"
+  ]
+ },
+ "ჩამოტანა": {
+  "status": "attested",
+  "sources": [
+   "corpus:3423"
+  ]
+ },
+ "გადაგდება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1227"
+  ]
+ },
+ "ჩაგდება": {
+  "status": "attested",
+  "sources": [
+   "corpus:1262"
+  ]
+ },
+ "აწევა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1857"
+  ]
+ },
+ "ჩარევა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2294"
+  ]
+ },
+ "გადახედვა": {
+  "status": "attested",
+  "sources": [
+   "corpus:624"
+  ]
+ },
+ "გადარჩევა": {
+  "status": "attested",
+  "sources": [
+   "corpus:307"
+  ]
+ },
+ "გადაქცევა": {
+  "status": "attested",
+  "sources": [
+   "corpus:810"
+  ]
+ },
+ "მისალმება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:445"
+  ]
+ },
+ "მოწვევა": {
+  "status": "attested",
+  "sources": [
+   "corpus:1430"
+  ]
+ },
+ "მინიჭება": {
+  "status": "attested",
+  "sources": [
+   "corpus:917"
+  ]
+ },
+ "მიკუთვნება": {
+  "status": "attested",
+  "sources": [
+   "corpus:165"
+  ]
+ },
+ "აღმოჩენა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2870"
+  ]
+ },
+ "გამოცნობა": {
+  "status": "attested",
+  "sources": [
+   "corpus:617"
+  ]
+ },
+ "გადატრიალება": {
+  "status": "attested",
+  "sources": [
+   "corpus:2135"
+  ]
+ },
+ "დახარისხება": {
+  "status": "attested",
+  "sources": [
+   "corpus:235"
+  ]
+ },
+ "შენარჩუნება": {
+  "status": "attested",
+  "sources": [
+   "corpus:2871"
+  ]
+ },
+ "ჩამორთმევა": {
+  "status": "attested",
+  "sources": [
+   "corpus:765"
+  ]
+ },
+ "განხორციელება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3979"
+  ]
+ },
+ "ხდება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:134605"
+  ]
+ },
+ "გადახარშვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary"
+  ]
+ },
+ "ცემინება": {
+  "status": "attested",
+  "sources": [
+   "corpus:76"
+  ]
+ },
+ "დაძინება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:840"
+  ]
+ },
+ "გაღვიძება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:692"
+  ]
+ },
+ "გაშვება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3679"
+  ]
+ },
+ "აშვება": {
+  "status": "attested",
+  "sources": [
+   "corpus:78"
+  ]
+ },
+ "ჩამოგდება": {
+  "status": "attested",
+  "sources": [
+   "corpus:746"
+  ]
+ },
+ "ღრმად": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10131"
+  ]
+ },
+ "ხშირი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5047"
+  ]
+ },
+ "იშვიათი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5534"
+  ]
+ },
+ "მკვეთრი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3474"
+  ]
+ },
+ "ნაზი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3781"
+  ]
+ },
+ "ფაქიზი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1024"
+  ]
+ },
+ "ერთგული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5658"
+  ]
+ },
+ "გულუხვი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:305"
+  ]
+ },
+ "ხელმომჭირნე": {
+  "status": "attested",
+  "sources": [
+   "corpus:29"
+  ]
+ },
+ "მამაცი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1519"
+  ]
+ },
+ "მშიშარა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1303"
+  ]
+ },
+ "ჭკვიანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:11983"
+  ]
+ },
+ "სულელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3368"
+  ]
+ },
+ "მზაკვარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:158"
+  ]
+ },
+ "გულახდილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:872"
+  ]
+ },
+ "ბრძენი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3369"
+  ]
+ },
+ "გონიერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2624"
+  ]
+ },
+ "გულუბრყვილო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1869"
+  ]
+ },
+ "მომთმენი": {
+  "status": "attested",
+  "sources": [
+   "corpus:238"
+  ]
+ },
+ "გაბედული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1023"
+  ]
+ },
+ "ცნობისმოყვარე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:580"
+  ]
+ },
+ "მონდომებული": {
+  "status": "attested",
+  "sources": [
+   "corpus:842"
+  ]
+ },
+ "ზარმაცი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1528"
+  ]
+ },
+ "აქტიური": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:12098"
+  ]
+ },
+ "მშვიდი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4307"
+  ]
+ },
+ "მოუსვენარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:501"
+  ]
+ },
+ "ცოცხალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:20452"
+  ]
+ },
+ "მკვდარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10025"
+  ]
+ },
+ "სანელებლები": {
+  "status": "attested",
+  "sources": [
+   "corpus:104"
+  ]
+ },
+ "ნიორი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1073"
+  ]
+ },
+ "პილპილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:416"
+  ]
+ },
+ "კარაქი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1020"
+  ]
+ },
+ "ზეთი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:9293"
+  ]
+ },
+ "ძმარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:442"
+  ]
+ },
+ "ფქვილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1791"
+  ]
+ },
+ "ფაფა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:472"
+  ]
+ },
+ "ნამცხვრები": {
+  "status": "attested",
+  "sources": [
+   "corpus:239"
+  ]
+ },
+ "ორცხობილა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:94"
+  ]
+ },
+ "მურაბა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1311"
+  ]
+ },
+ "თაფლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1616"
+  ]
+ },
+ "კომბოსტო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:894"
+  ]
+ },
+ "ისპანახი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:83"
+  ]
+ },
+ "სოკო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1648"
+  ]
+ },
+ "ციტრუსი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:109"
+  ]
+ },
+ "ბუჩქი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:633"
+  ]
+ },
+ "ეკალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:381"
+  ]
+ },
+ "ფესვები": {
+  "status": "attested",
+  "sources": [
+   "corpus:2112"
+  ]
+ },
+ "ნაყოფი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4529"
+  ]
+ },
+ "მარცვალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2049"
+  ]
+ },
+ "ნაკადული": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:926"
+  ]
+ },
+ "ჭაობი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:562"
+  ]
+ },
+ "ვულკანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:879"
+  ]
+ },
+ "მიწისძვრა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1915"
+  ]
+ },
+ "ფრჩხილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:400"
+  ]
+ },
+ "მუხლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8386"
+  ]
+ },
+ "მხარი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:6113"
+  ]
+ },
+ "ძვალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1950"
+  ]
+ },
+ "სისხლი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:15086"
+  ]
+ },
+ "ტვინი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:15307"
+  ]
+ },
+ "ფილტვები": {
+  "status": "attested",
+  "sources": [
+   "corpus:538"
+  ]
+ },
+ "კანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3578"
+  ]
+ },
+ "წვერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2700"
+  ]
+ },
+ "ულვაში": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:729"
+  ]
+ },
+ "წარბი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:548"
+  ]
+ },
+ "მკლავი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1346"
+  ]
+ },
+ "მონატრება": {
+  "status": "attested",
+  "sources": [
+   "corpus:528"
+  ]
+ },
+ "შფოთვა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:281"
+  ]
+ },
+ "აღელვება": {
+  "status": "attested",
+  "sources": [
+   "corpus:361"
+  ]
+ },
+ "შვება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8783"
+  ]
+ },
+ "გაოცება": {
+  "status": "attested",
+  "sources": [
+   "corpus:510"
+  ]
+ },
+ "შეცბუნება": {
+  "status": "attested",
+  "sources": [
+   "corpus:23"
+  ]
+ },
+ "გულისწყრომა": {
+  "status": "attested",
+  "sources": [
+   "corpus:293"
+  ]
+ },
+ "ღმერთო ჩემო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary:parts",
+   "corpus:13963+39518"
+  ]
+ },
+ "ნუ ღელავ": {
+  "status": "attested",
+  "sources": [
+   "wiktionary:parts",
+   "corpus:299198+609"
+  ]
+ },
+ "არ ღირს": {
+  "status": "verified",
+  "sources": [
+   "wiktionary:parts",
+   "corpus:3767689+73512"
+  ]
+ },
+ "გენაცვალე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:9241"
+  ]
+ },
+ "ჩემო კარგო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary"
+  ]
+ },
+ "ხომ კარგად ხარ": {
+  "status": "verified",
+  "sources": [
+   "wiktionary:parts",
+   "corpus:282707+165028+245009"
+  ]
+ },
+ "რას იზამ": {
+  "status": "attested",
+  "sources": [
+   "wiktionary:parts",
+   "corpus:277107+7365"
+  ]
+ },
+ "არა უშავს": {
+  "status": "verified",
+  "sources": [
+   "wiktionary"
+  ]
+ },
+ "ძალიან": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:424854"
+  ]
+ },
+ "ბონუსი": {
+  "status": "attested",
+  "sources": [
+   "corpus:638"
+  ]
+ },
+ "ხელშეკრულება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5955"
+  ]
+ },
+ "შემოსავალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7340"
+  ]
+ },
+ "ხარჯი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:3505"
+  ]
+ },
+ "ბიზნესი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:8554"
+  ]
+ },
+ "გაყიდვები": {
+  "status": "attested",
+  "sources": [
+   "corpus:706"
+  ]
+ },
+ "რეკლამა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:12552"
+  ]
+ },
+ "მომხმარებელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:113410"
+  ]
+ },
+ "ფაბრიკა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:830"
+  ]
+ },
+ "ფირმა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7092"
+  ]
+ },
+ "სტადიონი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:7507"
+  ]
+ },
+ "საელჩო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1730"
+  ]
+ },
+ "ციხე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10989"
+  ]
+ },
+ "მონასტერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4729"
+  ]
+ },
+ "კომპიუტერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:13353"
+  ]
+ },
+ "ტელეფონი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:21338"
+  ]
+ },
+ "ინტერნეტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:16087"
+  ]
+ },
+ "ვებსაიტი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:656"
+  ]
+ },
+ "ფაილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:56569"
+  ]
+ },
+ "შეტყობინება": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2243"
+  ]
+ },
+ "ფოტო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:15027"
+  ]
+ },
+ "ვიდეო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:51707"
+  ]
+ },
+ "მუსიკა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:21435"
+  ]
+ },
+ "თამაშები": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:10685"
+  ]
+ },
+ "აპლიკაცია": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:766"
+  ]
+ },
+ "ხვლიკი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:428"
+  ]
+ },
+ "კალია": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:493"
+  ]
+ },
+ "ჭიანჭველა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:403"
+  ]
+ },
+ "ხოჭო": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:424"
+  ]
+ },
+ "დელფინი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:277"
+  ]
+ },
+ "ვეშაპი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:621"
+  ]
+ },
+ "ზვიგენი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:428"
+  ]
+ },
+ "ჟირაფი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:246"
+  ]
+ },
+ "ზებრა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:312"
+  ]
+ },
+ "იისფერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:696"
+  ]
+ },
+ "ცისფერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4495"
+  ]
+ },
+ "მუქი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:4327"
+  ]
+ },
+ "ღია": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:15744"
+  ]
+ },
+ "ვერცხლისფერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:2219"
+  ]
+ },
+ "ოქროსფერი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1362"
+  ]
+ },
+ "ჩექმები": {
+  "status": "attested",
+  "sources": [
+   "corpus:603"
+  ]
+ },
+ "საცვალი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:236"
+  ]
+ },
+ "პიჟამა": {
+  "status": "attested",
+  "sources": [
+   "corpus:39"
+  ]
+ },
+ "ხალათი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:717"
+  ]
+ },
+ "ხელთათმანი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:292"
+  ]
+ },
+ "სარტყელი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:5139"
+  ]
+ },
+ "კოსტუმი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:564"
+  ]
+ },
+ "ღილი": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:271"
+  ]
+ },
+ "ჯიბე": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:840"
+  ]
+ },
+ "რკინიგზა": {
+  "status": "verified",
+  "sources": [
+   "wiktionary",
+   "corpus:1507"
+  ]
+ }
+}

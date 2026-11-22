@@ -54,15 +54,15 @@ const SplashError = styled.div`
 `;
 
 /**
- * The legacy vocabulary screens need the 67 MB word library. It is downloaded
- * only when one of them is opened, so the course itself starts at once.
+ * The free-practice screens need the picture dictionary. It is a small text
+ * file, loaded when one of them is first opened; the course does not wait for it.
  */
 function RequireWords() {
-  const { ready, error, loaded, total, ensureWords } = useWordsLoad();
+  const { ready, error, ensureWords } = useWordsLoad();
   useEffect(() => {
     ensureWords();
   }, [ensureWords]);
-  if (!ready) return <LoadingScreen loaded={loaded} total={total} error={error} />;
+  if (!ready) return <LoadingScreen error={error} onRetry={ensureWords} />;
   return <Outlet />;
 }
 

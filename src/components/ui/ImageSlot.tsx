@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  src?: string;
+  /** URL of the picture; without one (or when it cannot be loaded) a labelled placeholder is shown. */
+  src?: string | null;
   label?: string;
   height?: number;
   radius?: number;
@@ -36,11 +38,16 @@ const Img = styled.img<{ $height: number; $radius: number }>`
 `;
 
 export function ImageSlot({ src, label = 'image', height = 160, radius = 18, accent = '#FFD6B8' }: Props) {
-  if (src) {
+  // Remembered per URL, so the next word's picture gets its own chance.
+  const [failed, setFailed] = useState<string | null>(null);
+  if (src && failed !== src) {
     return (
       <Img
-        src={`data:image/png;base64,${src}`}
+        src={src}
         alt={label}
+        decoding="async"
+        // Offline and never shown before: fall back to the placeholder.
+        onError={() => setFailed(src)}
         $height={height}
         $radius={radius}
       />

@@ -35,13 +35,14 @@ export default defineConfig({
       workbox: {
         // Takes over from the old app's service worker at once (see the file).
         importScripts: ['sw-legacy-migrate.js'],
-        // Precache the app shell and the small course JSON, so the course works
-        // offline right after install. The 67 MB word library and the audio
-        // clips are cached lazily instead (see runtimeCaching).
-        globPatterns: ['**/*.{js,css,html,svg,woff2}', 'icon-*.png', 'categories.json', 'content/**/*.json'],
-        globIgnores: ['words.json', 'audio/**'],
+        // Precache the app shell and the small content JSON (the course and the
+        // picture dictionary as text), so everything works offline right after
+        // install. Audio clips and pictures are cached as they are used instead
+        // (see runtimeCaching), or all at once from Settings.
+        globPatterns: ['**/*.{js,css,html,svg,woff2}', 'icon-*.png', 'content/**/*.json'],
+        globIgnores: ['audio/**', 'pics/**'],
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
-        navigateFallbackDenylist: [/^\/audio\//, /^\/content\//, /\.json$/],
+        navigateFallbackDenylist: [/^\/audio\//, /^\/pics\//, /^\/content\//, /\.json$/],
         runtimeCaching: [
           {
             urlPattern: /\/audio\/.+\.mp3$/,
@@ -49,14 +50,11 @@ export default defineConfig({
             options: { cacheName: 'audio-v1', cacheableResponse: { statuses: [200] } },
           },
           {
-            urlPattern: /\/words\.json/,
+            // Dictionary pictures are named by word id: a replaced picture needs
+            // a new cache name (see src/data/pictures.ts).
+            urlPattern: /\/pics\/.+\.webp$/,
             handler: 'CacheFirst',
-            options: {
-              cacheName: 'legacy-words-v1',
-              cacheableResponse: { statuses: [200] },
-              matchOptions: { ignoreSearch: true },
-              expiration: { maxEntries: 1 },
-            },
+            options: { cacheName: 'word-pics-v1', cacheableResponse: { statuses: [200] } },
           },
         ],
       },

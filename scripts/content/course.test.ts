@@ -1,6 +1,9 @@
 import { beforeAll, describe, expect, it } from 'vitest';
+import { LEXICON as LEXICON_SRC } from '../../content-src/lexicon';
 import { fillCourse, allCardIds, examplesFor, getUnit, ruText, sentencesWithWord, UNITS } from '../../src/content/store';
-import type { Course, Sentence } from '../../src/content/types';
+import type { Course, DictWord, Sentence } from '../../src/content/types';
+import { CATEGORIES } from '../../src/data/categories';
+import { WORDS, fillWords } from '../../src/data/words';
 import {
   buildExercise,
   cardInfo,
@@ -23,7 +26,8 @@ import { newSrsCard, review } from '../../src/srs/fsrs';
 import { EXERCISE_COST_MS, pickExercise } from '../../src/srs/ladder';
 import { nextUnlocked, noteAttempt, unitProgress } from '../../src/srs/mastery';
 import { DEFAULT_SETTINGS, type SrsCard } from '../../src/srs/types';
-import { compile } from './build';
+import { audioTexts, compile } from './build';
+import { compileDictionary, dictTokens, readDictionarySource, validateDictionary } from './dictionary';
 import { cardsInOrder, validateCourse } from './validate';
 
 let course: Course;
@@ -650,5 +654,72 @@ describe('session flow and unit gate', () => {
     }
     expect(unitProgress(unit, get).gateMet).toBe(true);
     expect(nextUnlocked(UNITS, 1, get)).toBe(2);
+  });
+});
+
+describe('picture dictionary', () => {
+  const src = readDictionarySource();
+  const problems = (words: DictWord[]) => validateDictionary({ ...src, words }, LEXICON_SRC).join('\n');
+
+  it('the source is well-formed and agrees with the course on shared ids', () => {
+    expect(validateDictionary(src, LEXICON_SRC)).toEqual([]);
+  });
+
+  it('rejects a reused id, a foreign letter, a repeated word and an unknown category', () => {
+    const w = src.words[0];
+    expect(problems([...src.words, { ...w, ka: 'ახალისიტყვა' }])).toMatch(/id is already used/);
+    expect(problems([...src.words, { ...w, id: 1999, ka: 'gamarjoba' }])).toMatch(/must be Georgian words/);
+    expect(problems([...src.words, { ...w, id: 1999 }])).toMatch(/the same text as word/);
+    expect(problems([...src.words, { ...w, id: 1999, ka: 'ახალისიტყვა', cat: 'nope' }])).toMatch(/unknown category/);
+    // Ids from 2001 up belong to the words the course added.
+    expect(problems([...src.words, { ...w, id: 2001, ka: 'ახალისიტყვა' }])).toMatch(/id must be/);
+  });
+
+  it('rejects a course word whose dictionary id means another word', () => {
+    const shared = LEXICON_SRC.find((l) => l.id < 2000)!;
+    const moved = src.words.map((w) => (w.id === shared.id ? { ...w, ka: 'სხვასიტყვა' } : w));
+    expect(problems(moved)).toMatch(/the dictionary has «სხვასიტყვა» under this id/);
+    expect(problems(src.words.filter((w) => w.id !== shared.id))).toMatch(/no dictionary word with this id/);
+  });
+
+  it('ships only words whose spelling is confirmed, each with a picture', () => {
+    const { dictionary, held } = compileDictionary(src);
+    expect(dictionary.words.length + held.length).toBe(src.words.length);
+    expect(dictionary.words.length).toBeGreaterThan(800);
+    expect(dictionary.noPic).toEqual([]);
+    // Without any evidence nothing ships.
+    expect(compileDictionary(src, {}).dictionary.words).toEqual([]);
+    const one = src.words[0];
+    const only = compileDictionary(src, { [one.ka]: { status: 'attested', sources: [] } });
+    expect(only.dictionary.words).toEqual([one]);
+    expect(only.held).toHaveLength(src.words.length - 1);
+  });
+
+  it('checks an entry of several words part by part', () => {
+    expect(dictTokens('ჭექა-ქუხილი')).toEqual(['ჭექა', 'ქუხილი']);
+    expect(dictTokens('რა თქმა უნდა')).toEqual(['რა', 'თქმა', 'უნდა']);
+  });
+
+  it('records dictionary words after everything the course needs, each text once', () => {
+    const shared = course.lexicon[0].ka;
+    const texts = audioTexts(course, sentences, ['ახალისიტყვა', shared]);
+    expect(texts[texts.length - 1]).toBe('ახალისიტყვა');
+    expect(texts.filter((t) => t === shared)).toHaveLength(1);
+    expect(audioTexts(course, sentences, [])).toHaveLength(texts.length - 1);
+  });
+
+  it('the app computes the transliteration and the address of the picture', () => {
+    fillWords({
+      categories: src.categories,
+      words: [
+        { id: 82, ka: 'ფული', ru: 'деньги', cat: 'core', level: 0 },
+        { id: 3, ka: 'კი', ru: 'да', cat: 'core', level: 0 },
+      ],
+      noPic: [3],
+    });
+    expect(WORDS).toHaveLength(2);
+    expect(WORDS[0]).toMatchObject({ tr: 'puli', image: '/pics/82.webp', correct: 0, seen: 0 });
+    expect(WORDS[1].image).toBeNull();
+    expect(CATEGORIES).toHaveLength(src.categories.length);
   });
 });

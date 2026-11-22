@@ -30,8 +30,8 @@ function boot(): Promise<void> {
 }
 
 /**
- * First-stage boot: saved progress and the small course files.
- * The 67 MB legacy word library is NOT part of it — see `RequireWords`.
+ * Boot: saved progress and the small course files. The picture dictionary
+ * is not part of it — see `RequireWords`.
  */
 export function AppProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<Boot>({ status: 'loading' });

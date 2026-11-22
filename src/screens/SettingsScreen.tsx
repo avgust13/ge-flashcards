@@ -1,18 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-  downloadAllAudio,
-  offlineStatus,
-  offlineSupported,
-  storageUsed,
-  type OfflineStatus,
-} from '../audio/cache';
+import { downloadAllAudio, offlineStatus } from '../audio/cache';
 import { Icon } from '../components/ui/Icon';
 import { Pill } from '../components/ui/Pill';
 import { ScreenHeader } from '../components/ui/ScreenHeader';
 import { SectionLabel } from '../components/ui/SectionLabel';
 import { IosInstallSheet } from '../components/install/IosInstallSheet';
+import { mediaSize } from '../content/store';
+import { downloadAllPictures, picturesStatus } from '../data/pictures';
 import { applyStatsToWords } from '../data/stats';
 import { WORDS } from '../data/words';
 import { exportBackupToUser, parseBackup, restoreBackup } from '../db/backup';
@@ -20,8 +16,8 @@ import { cardCount, getSettings, resetProgress, setSettings } from '../db/progre
 import { clearReports, getReports, hiddenCount, reportsAsText, unhideAll } from '../db/reports';
 import { useProgressVersion } from '../db/useProgress';
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
+import { offlineSupported, storageUsed, type OfflineStatus } from '../offline';
 import { getClockOffset, setClockOffset } from '../srs/clock';
-import { useWordsLoad } from '../state/WordsContext';
 import { speechSupported } from '../speech/recognise';
 import { TutorCard } from './settings/TutorCard';
 
@@ -140,6 +136,11 @@ type SpeechCtor = new () => {
   start: () => void;
 };
 
+/** "около 37 МБ" from a byte count recorded by the build; empty when unknown. */
+function aboutMb(bytes: number): string {
+  return bytes > 0 ? ` Это около ${Math.max(1, Math.round(bytes / 1_048_576))} МБ.` : '';
+}
+
 function formatDate(ts: number | null): string {
   if (!ts) return 'ещё не делалась';
   return new Date(ts).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -149,9 +150,7 @@ export function SettingsScreen() {
   const navigate = useNavigate();
   useProgressVersion();
   const settings = getSettings();
-  const { reloadWords, reloading, error } = useWordsLoad();
   const { canShowSettings, platform, install } = useInstallPrompt();
-  const [status, setStatus] = useState('');
   const [backupMsg, setBackupMsg] = useState<{ text: string; error?: boolean } | null>(null);
   const [resetMsg, setResetMsg] = useState('');
   const [speechMsg, setSpeechMsg] = useState('');
@@ -162,6 +161,9 @@ export function SettingsScreen() {
   const [usedMb, setUsedMb] = useState<number | null>(null);
   const [downloading, setDownloading] = useState(false);
   const [offlineMsg, setOfflineMsg] = useState<{ text: string; error?: boolean } | null>(null);
+  const [pics, setPics] = useState<OfflineStatus | null>(null);
+  const [downloadingPics, setDownloadingPics] = useState(false);
+  const [picsMsg, setPicsMsg] = useState<{ text: string; error?: boolean } | null>(null);
   const [reportMsg, setReportMsg] = useState('');
   // Read on every render: the screen re-renders whenever saved progress changes.
   const reports = getReports();
@@ -178,6 +180,8 @@ export function SettingsScreen() {
 
   const refreshOffline = async () => {
     setOffline(await offlineStatus());
+    // The dictionary itself may be unreachable (offline before it was ever opened): then there is nothing to count.
+    setPics(await picturesStatus().catch(() => null));
     const used = await storageUsed();
     setUsedMb(used == null ? null : Math.round(used / 1_048_576));
   };
@@ -194,7 +198,7 @@ export function SettingsScreen() {
       setOfflineMsg(
         failed
           ? { text: `Не скачалось клипов: ${failed}. Проверь сеть и нажми ещё раз.`, error: true }
-          : { text: 'Весь звук курса сохранён на устройстве.' },
+          : { text: 'Весь звук сохранён на устройстве.' },
       );
     } catch (e) {
       setOfflineMsg({ text: (e as Error).message || 'Не удалось скачать звук.', error: true });
@@ -204,19 +208,27 @@ export function SettingsScreen() {
     }
   };
 
+  const onDownloadPics = async () => {
+    setDownloadingPics(true);
+    setPicsMsg(null);
+    try {
+      const { failed } = await downloadAllPictures(setPics);
+      setPicsMsg(
+        failed
+          ? { text: `Не скачалось картинок: ${failed}. Проверь сеть и нажми ещё раз.`, error: true }
+          : { text: 'Все картинки сохранены на устройстве.' },
+      );
+    } catch (e) {
+      setPicsMsg({ text: (e as Error).message || 'Не удалось скачать картинки.', error: true });
+    } finally {
+      setDownloadingPics(false);
+      void refreshOffline();
+    }
+  };
+
   const onInstallClick = () => {
     if (platform === 'ios') setShowIosSheet(true);
     else if (platform === 'native') void install();
-  };
-
-  const onRedownload = async () => {
-    setStatus('');
-    try {
-      await reloadWords();
-      setStatus('Словарь обновлён.');
-    } catch {
-      setStatus('');
-    }
   };
 
   const onExport = async () => {
@@ -409,12 +421,12 @@ export function SettingsScreen() {
         <Card>
           <Row>
             <Meta>
-              <Title>Звук курса на устройстве</Title>
+              <Title>Звук на устройстве</Title>
               <Desc>
                 {offline
-                  ? `Скачано ${offline.cached} из ${offline.total} клипов.`
-                  : 'Скачай весь звук заранее, чтобы заниматься без сети.'}{' '}
-                Весь звук занимает около 30 МБ.
+                  ? `Скачано ${offline.cached} из ${offline.total} клипов (курс и словарь).`
+                  : 'Скачай весь звук заранее, чтобы заниматься без сети.'}
+                {aboutMb(mediaSize().audioBytes)}
                 {usedMb != null && ` Сейчас приложение хранит ${usedMb} МБ.`}
               </Desc>
               {offlineMsg && <Message $isError={offlineMsg.error}>{offlineMsg.text}</Message>}
@@ -426,6 +438,26 @@ export function SettingsScreen() {
               onClick={onDownloadAudio}
             >
               {downloading ? 'Скачиваю…' : offline && offline.cached >= offline.total ? 'Скачано' : 'Скачать'}
+            </Pill>
+          </Row>
+          <Row>
+            <Meta>
+              <Title>Картинки словаря на устройстве</Title>
+              <Desc>
+                {pics
+                  ? `Скачано ${pics.cached} из ${pics.total} картинок.`
+                  : 'Картинки свободной практики подгружаются по одной, когда карточка их показывает.'}
+                {aboutMb(mediaSize().picBytes)}
+              </Desc>
+              {picsMsg && <Message $isError={picsMsg.error}>{picsMsg.text}</Message>}
+            </Meta>
+            <Pill
+              kind={pics && pics.cached < pics.total ? 'primary' : 'ghost'}
+              size="sm"
+              disabled={downloadingPics || !offlineSupported() || !pics || pics.cached >= pics.total}
+              onClick={onDownloadPics}
+            >
+              {downloadingPics ? 'Скачиваю…' : pics && pics.cached >= pics.total ? 'Скачано' : 'Скачать'}
             </Pill>
           </Row>
         </Card>
@@ -505,17 +537,6 @@ export function SettingsScreen() {
 
         <SectionLabel>Приложение</SectionLabel>
         <Card>
-          <Row>
-            <Meta>
-              <Title>Словарь с картинками</Title>
-              <Desc>Скачать заново библиотеку из 836 слов для свободной практики (около 67 МБ).</Desc>
-              {reloading && <Desc>Идёт загрузка, подожди…</Desc>}
-              {(error ?? status) && <Message $isError={Boolean(error)}>{error ?? status}</Message>}
-            </Meta>
-            <Pill kind="ghost" size="sm" onClick={onRedownload} disabled={reloading}>
-              {reloading ? 'Обновляю…' : 'Обновить'}
-            </Pill>
-          </Row>
           {canShowSettings && (
             <Row>
               <Meta>

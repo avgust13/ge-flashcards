@@ -1,9 +1,10 @@
 /**
  * Core vocabulary of the course.
  *
- * Ids below 2000 are the ids of the same word in public/words.json, so existing
- * progress and pictures stay attached. Words that words.json lacks get ids from
- * 2001 upward; ids are never reused or renumbered.
+ * Ids below 2000 are the ids of the same word in the picture dictionary
+ * (content-src/dictionary.json), so existing progress and pictures stay
+ * attached. Words the dictionary lacks get ids from 2001 upward; ids are never
+ * reused or renumbered.
  *
  * Every Georgian surface here — the dictionary form and each named form in `k` —
  * is checked by `scripts/content/verify-lexicon.ts` against a Wiktionary

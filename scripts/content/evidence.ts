@@ -1,7 +1,9 @@
 /**
- * Independent evidence for Georgian word forms, shared by the verb and the
- * lexicon checks: Wiktionary inflection tables and a corpus frequency list.
- * Both are cached under node_modules/.cache, so a second run is offline.
+ * Independent evidence for Georgian word forms, shared by the verb, the
+ * lexicon and the dictionary checks: Wiktionary (inflection tables of a
+ * rendered page, or the plain entry of many words at once) and a corpus
+ * frequency list. All of it is cached under node_modules/.cache, so a second
+ * run is offline.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -9,6 +11,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const WIKT_CACHE = join(ROOT, 'node_modules/.cache/verify-verbs');
+const TEXT_CACHE = join(ROOT, 'node_modules/.cache/wikt-text');
 const FREQ_FILE = join(ROOT, 'node_modules/.cache/freq-ka/freq363.txt');
 /** 363k word forms with counts, built from Georgian web text (github.com/irakli97/Frequency_Dictionary_GE_363_202). */
 const FREQ_URL =
@@ -81,6 +84,127 @@ export async function wiktionaryPage(title: string): Promise<WiktPage | null> {
  */
 export async function wiktionaryWords(title: string): Promise<Set<string> | null> {
   return (await wiktionaryPage(title))?.words ?? null;
+}
+
+const NO_PAGE = '<no such page>';
+/** Titles per request: the API allows 50 for an anonymous client. */
+const BATCH = 40;
+
+/** Wikitext of several pages in one request; null for a page that does not exist. */
+async function fetchWikitext(titles: string[]): Promise<Map<string, string | null>> {
+  const body = new URLSearchParams({
+    action: 'query',
+    prop: 'revisions',
+    rvprop: 'content',
+    rvslots: 'main',
+    format: 'json',
+    formatversion: '2',
+    redirects: '1',
+    maxlag: '5',
+    titles: titles.join('|'),
+  });
+  let lastError = '';
+  for (let attempt = 0; attempt < 5; attempt++) {
+    await sleep(attempt === 0 ? 1000 : 4000 * 2 ** (attempt - 1));
+    // POST: forty Georgian titles are several kilobytes once percent-encoded.
+    const res = await fetch('https://en.wiktionary.org/w/api.php', {
+      method: 'POST',
+      headers: { 'User-Agent': UA, 'Content-Type': 'application/x-www-form-urlencoded' },
+      body,
+    });
+    const text = await res.text();
+    let data: {
+      query?: {
+        pages?: Array<{ title: string; missing?: boolean; revisions?: Array<{ slots?: { main?: { content?: string } } }> }>;
+        normalized?: Array<{ from: string; to: string }>;
+        redirects?: Array<{ from: string; to: string }>;
+      };
+      error?: { code?: string };
+    };
+    try {
+      data = JSON.parse(text);
+    } catch {
+      lastError = `HTTP ${res.status}: ${text.slice(0, 80)}`;
+      continue;
+    }
+    if (!data.query?.pages) {
+      lastError = `API error ${data.error?.code ?? res.status}`;
+      continue;
+    }
+    const pages = new Map(data.query.pages.map((p) => [p.title, p]));
+    const alias = new Map<string, string>();
+    for (const { from, to } of [...(data.query.normalized ?? []), ...(data.query.redirects ?? [])]) alias.set(from, to);
+    const out = new Map<string, string | null>();
+    for (const t of titles) {
+      let title = t;
+      for (let hop = 0; hop < 3 && alias.has(title); hop++) title = alias.get(title) as string;
+      const page = pages.get(title);
+      // A title the answer does not mention at all is a failed request, not a missing page.
+      if (!page) throw new Error(`Wiktionary did not answer for "${t}"`);
+      out.set(t, page.missing ? null : (page.revisions?.[0]?.slots?.main?.content ?? null));
+    }
+    return out;
+  }
+  throw new Error(`Wiktionary request for ${titles.length} titles failed: ${lastError}`);
+}
+
+/** What a template stands for in a definition line, roughly: enough for a human reader. */
+function templateText(inner: string): string {
+  const [rawName, ...args] = inner.split('|');
+  const name = rawName.trim();
+  const pos = args.map((a) => a.trim()).filter((a) => !/^[A-Za-z0-9_]+=/.test(a));
+  if (['lb', 'lbl', 'label', 'tlb'].includes(name)) return `(${pos.slice(1).filter((a) => !['_', 'and', 'or'].includes(a)).join(', ')})`;
+  if (['l', 'm', 'link', 'mention', 'l-self', 'm-self'].includes(name)) return pos[2] || pos[1] || '';
+  if (['gloss', 'gl', 'q', 'qualifier', 'i', 'qual', 'sense', 's'].includes(name)) return `(${pos.join(', ')})`;
+  if (['w', 'non-gloss definition', 'non-gloss', 'n-g', 'ngd', 'vern', 'taxlink', 'taxfmt'].includes(name)) return pos[0] ?? '';
+  // "verbal noun of|ka|X", "plural of|ka|X" and their relatives.
+  return `${name} ${pos.slice(1).join(' ')}`.trim();
+}
+
+/** The definition lines of the Georgian entry in a page's wikitext; null when it has no Georgian section. */
+export function georgianGloss(wikitext: string): string[] | null {
+  const head = /^==\s*Georgian\s*==\s*$/m.exec(wikitext);
+  if (!head) return null;
+  const rest = wikitext.slice(head.index + head[0].length);
+  const next = /^==[^=].*==\s*$/m.exec(rest);
+  const section = next ? rest.slice(0, next.index) : rest;
+  const out: string[] = [];
+  for (const line of section.split('\n')) {
+    if (!/^#\s*[^#:*\s]/.test(line)) continue;
+    let t = line.replace(/^#\s*/, '').replace(/<ref[^>]*>[\s\S]*?<\/ref>/g, '').replace(/<ref[^>]*\/>/g, '');
+    for (let i = 0; i < 6 && /\{\{[^{}]*\}\}/.test(t); i++) t = t.replace(/\{\{([^{}]*)\}\}/g, (_, inner: string) => templateText(inner));
+    t = t
+      .replace(/\[\[(?:[^\]|]*\|)?([^\]]*)\]\]/g, '$1')
+      .replace(/'{2,}/g, '')
+      .replace(/<[^>]+>/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (t && !out.includes(t)) out.push(t);
+  }
+  return out;
+}
+
+/**
+ * The Georgian entry of each title on en.wiktionary: its definition lines, or
+ * null when the page does not exist or has no Georgian section. Asked forty
+ * titles at a time and cached per title — far cheaper than rendering each
+ * page, which is only needed where an inflection table has to be read.
+ */
+export async function wiktionaryEntries(titles: string[]): Promise<Map<string, string[] | null>> {
+  mkdirSync(TEXT_CACHE, { recursive: true });
+  const fileOf = (t: string) => join(TEXT_CACHE, `${encodeURIComponent(t)}.txt`);
+  const unique = [...new Set(titles)];
+  const todo = unique.filter((t) => !existsSync(fileOf(t)));
+  for (let i = 0; i < todo.length; i += BATCH) {
+    const got = await fetchWikitext(todo.slice(i, i + BATCH));
+    for (const [t, text] of got) writeFileSync(fileOf(t), text ?? NO_PAGE);
+  }
+  const out = new Map<string, string[] | null>();
+  for (const t of unique) {
+    const text = readFileSync(fileOf(t), 'utf8');
+    out.set(t, text === NO_PAGE ? null : georgianGloss(text));
+  }
+  return out;
 }
 
 /** The corpus list as form → count. Downloaded once; null only when it cannot be had. */

@@ -216,6 +216,31 @@ export interface Course {
   letterPairs: LetterPair[];
 }
 
+/** A category of the picture dictionary. */
+export interface DictCategory {
+  id: string;
+  ka: string;
+  ru: string;
+  emoji: string;
+}
+
+/** A word of the picture dictionary ("free practice"). Its transliteration is computed, its clip is found by `ka`. */
+export interface DictWord {
+  id: number;
+  ka: string;
+  ru: string;
+  cat: string;
+  level: number;
+}
+
+/** `public/content/dictionary.json`: the dictionary as text; pictures are separate files `pics/<id>.webp`. */
+export interface Dictionary {
+  categories: DictCategory[];
+  words: DictWord[];
+  /** Ids of words that have no picture file. */
+  noPic: number[];
+}
+
 /**
  * How far Georgian text written by the AI tutor can be trusted: every word is
  * a form from the course tables, or at least one is not. Shown wherever such

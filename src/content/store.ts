@@ -46,6 +46,10 @@ const cardUnitMap = new Map<string, number>();
 const cardOrder: string[] = [];
 const audio = new Map<string, string>();
 let version = '';
+/** Total size of the clips and of the dictionary pictures, as recorded by the build. */
+const media = { audioBytes: 0, picBytes: 0 };
+
+export const mediaSize = (): Readonly<typeof media> => media;
 
 export function courseVersion(): string {
   return version;
@@ -120,7 +124,8 @@ async function getJson<T>(path: string, signal?: AbortSignal): Promise<T> {
 export function loadCourse(): Promise<void> {
   if (!loading) {
     loading = (async () => {
-      const manifest = await getJson<{ version: string; sentences: string[] }>('manifest.json');
+      const manifest = await getJson<{ version: string; sentences: string[]; media?: Partial<typeof media> }>('manifest.json');
+      Object.assign(media, manifest.media ?? {});
       const [course, audioIndex, ...parts] = await Promise.all([
         getJson<Course>('course.json'),
         getJson<Record<string, string>>('audio.json').catch(() => ({})),

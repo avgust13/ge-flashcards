@@ -5,7 +5,8 @@
  *   npm run content:tts -- --models             list models that can speak Georgian
  *   npm run content:tts -- --dry-run            what would be generated, and its size
  *   npm run content:tts -- --limit 3000         generate, spending at most ~3000 characters
- *   npm run content:tts -- --unit 1             only material of unit 1
+ *   npm run content:tts -- --unit 1             only material of unit 1 (0 = the alphabet)
+ *   npm run content:tts -- --dict               only the words of the picture dictionary
  *   npm run content:tts -- --sample <dir>       comparison clips (voices × models) into <dir>
  *   npm run content:tts -- --audit              flag clips whose length does not fit their text
  *   npm run content:tts -- --prune              delete clips of another voice / removed sentences
@@ -19,6 +20,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, wri
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { audioTexts, compile, hiFiTexts, letterTexts } from './build';
+import { dictionaryTexts } from './dictionary';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const AUDIO_DIR = join(ROOT, 'public/audio');
@@ -250,7 +252,10 @@ async function main(): Promise<void> {
     ...course.lexicon.filter((l) => l.unit === unit).map((l) => l.ka),
     ...sentences.filter((s) => s.unit === unit).map((s) => s.ka),
   ]);
-  const wanted = audioTexts(course, sentences).filter((t) => !unitTexts || unitTexts.has(t));
+  const dictOnly = has('--dict') ? new Set(dictionaryTexts()) : null;
+  const wanted = audioTexts(course, sentences).filter(
+    (t) => (!unitTexts || unitTexts.has(t)) && (!dictOnly || dictOnly.has(t)),
+  );
 
   const manifest: Record<string, string> = existsSync(MANIFEST)
     ? (JSON.parse(readFileSync(MANIFEST, 'utf8')) as Record<string, string>)

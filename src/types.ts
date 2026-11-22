@@ -34,14 +34,14 @@ export interface Category {
 export interface Word {
   id: number;
   ka: string;
+  /** Latin transliteration, computed from `ka`. */
   tr: string;
   ru: string;
-  audio: string; // base64-encoded MP3 (44.1kHz, 128kbps)
-  image: string; // base64-encoded PNG flashcard (294x180)
+  /** URL of the word's picture (a separate file), or null when it has none. */
+  image: string | null;
   cat: CategoryId;
   correct: number;
   seen: number;
-  isSeed: boolean;
   level: number; // 0..4
 }
 

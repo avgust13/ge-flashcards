@@ -1,4 +1,7 @@
-# LEGACY: produced the word pictures in public/words.json.
+# LEGACY: produced the word pictures of the picture dictionary. Kept for the prompt and the style.
+# It will not run as it is: public/words.json no longer exists. The words now live in
+# content-src/dictionary.json and each picture is a file public/pics/<id>.webp (294x180), so
+# the input and the output have to be adapted before it is used for a new word.
 # Needs GEMINI_API_KEY in the environment.
 import json, base64, urllib.request, urllib.error, sys, io, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

@@ -5,10 +5,11 @@
  *   npm run content -- --check validate only, write nothing
  *
  * Deterministic and offline: no model, no network. Verb cells without a
- * `verified` / `auto-verified` status never reach the output.
+ * `verified` / `auto-verified` status never reach the output, and neither do
+ * words of the picture dictionary whose spelling nothing confirms.
  */
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { LETTERS, LETTER_GROUPS, LETTER_PAIRS } from '../../content-src/letters';
@@ -32,6 +33,7 @@ import {
   type Unit,
   type Verb,
 } from '../../src/content/types';
+import { compileDictionary, dictionaryTexts, readDictionarySource, validateDictionary } from './dictionary';
 import { validateCourse } from './validate';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -40,6 +42,7 @@ const STATUS_FILE = join(ROOT, 'content-src/generated/verb-status.json');
 const LEX_STATUS_FILE = join(ROOT, 'content-src/generated/lexicon-status.json');
 const AUDIO_MANIFEST = join(ROOT, 'content-src/audio-manifest.json');
 const AUDIO_DIR = join(ROOT, 'public/audio');
+const PICS_DIR = join(ROOT, 'public/pics');
 
 type StatusFile = Record<string, Record<string, { status: ReviewStatus; sources: string[] }>>;
 type LexStatusFile = Record<string, Record<string, { status: LexStatus; sources: string[] }>>;
@@ -205,8 +208,12 @@ export function letterTexts(course: Course): string[] {
   return [...hiFiTexts(course), ...course.letters.map((l) => l.word.ka)];
 }
 
-/** Texts the app may want to play, in priority order (cheapest way to cover the most cards first). */
-export function audioTexts(course: Course, sentences: Sentence[]): string[] {
+/**
+ * Texts the app may want to play, in priority order (cheapest way to cover the
+ * most cards first). The words of the picture dictionary come last: they are
+ * free practice, the course does not depend on them.
+ */
+export function audioTexts(course: Course, sentences: Sentence[], dictionary: string[] = dictionaryTexts()): string[] {
   const out: string[] = [];
   const seen = new Set<string>();
   const add = (t: string) => {
@@ -232,6 +239,7 @@ export function audioTexts(course: Course, sentences: Sentence[]): string[] {
     }
     for (const s of mine) add(s.ka);
   }
+  for (const t of dictionary) add(t);
   return out;
 }
 
@@ -242,12 +250,20 @@ function audioPath(id: string): string {
 function main(): void {
   const checkOnly = process.argv.includes('--check');
   const { course, sentences, dropped } = compile();
-  const errors = validateCourse(course, sentences);
+  const dictSource = readDictionarySource();
+  const dict = compileDictionary(dictSource);
+  const errors = [...validateCourse(course, sentences), ...validateDictionary(dictSource, LEXICON)];
 
   if (dropped.length) {
     console.warn(`! ${dropped.length} card(s) held back: verb form not verified yet`);
     for (const d of dropped.slice(0, 20)) console.warn(`    ${d}`);
   }
+  if (dict.held.length) {
+    console.warn(`! ${dict.held.length} dictionary word(s) held back: spelling not confirmed (npm run content:verify-dictionary)`);
+    for (const w of dict.held.slice(0, 20)) console.warn(`    ${w.id} ${w.ka} — ${w.ru}`);
+  }
+  if (dict.dictionary.noPic.length) console.warn(`! dictionary words without a picture: ${dict.dictionary.noPic.join(', ')}`);
+  if (dict.orphanPics.length) console.warn(`! pictures of no word in public/pics: ${dict.orphanPics.join(', ')}`);
   if (errors.length) {
     console.error(`✗ ${errors.length} content problem(s):`);
     for (const e of errors.slice(0, 80)) console.error(`    ${e}`);
@@ -260,7 +276,7 @@ function main(): void {
   // Only audio that exists on disk is advertised to the app.
   const manifest = readJson<Record<string, string>>(AUDIO_MANIFEST, {});
   const audio: Record<string, string> = {};
-  const wanted = audioTexts(course, sentences);
+  const wanted = audioTexts(course, sentences, dict.dictionary.words.map((w) => w.ka));
   for (const text of wanted) {
     const id = manifest[text];
     if (id && existsSync(audioPath(id))) audio[text] = id;
@@ -269,7 +285,8 @@ function main(): void {
   const cells = course.units.flatMap((u) => u.steps.flatMap((s) => (s.kind === 'cards' ? s.cards : [])));
   console.log(
     `✓ course ${course.version}: ${cells.length} cards, ${sentences.length} sentences, ` +
-      `${course.verbs.length} verbs, ${course.lexicon.length} words, audio ${Object.keys(audio).length}/${wanted.length}`,
+      `${course.verbs.length} verbs, ${course.lexicon.length} words, dictionary ${dict.dictionary.words.length}/${dictSource.words.length}, ` +
+      `audio ${Object.keys(audio).length}/${wanted.length}`,
   );
   if (checkOnly) return;
 
@@ -283,7 +300,14 @@ function main(): void {
   }
   writeFileSync(join(OUT, 'course.json'), JSON.stringify(course));
   writeFileSync(join(OUT, 'audio.json'), JSON.stringify(audio));
-  writeFileSync(join(OUT, 'manifest.json'), JSON.stringify({ version: course.version, sentences: files }, null, 2));
+  writeFileSync(join(OUT, 'dictionary.json'), JSON.stringify(dict.dictionary));
+  // What the offline downloads weigh, for the Settings screen.
+  const noPic = new Set(dict.dictionary.noPic);
+  const media = {
+    audioBytes: [...new Set(Object.values(audio))].reduce((n, id) => n + statSync(audioPath(id)).size, 0),
+    picBytes: dict.dictionary.words.reduce((n, w) => n + (noPic.has(w.id) ? 0 : statSync(join(PICS_DIR, `${w.id}.webp`)).size), 0),
+  };
+  writeFileSync(join(OUT, 'manifest.json'), JSON.stringify({ version: course.version, sentences: files, media }, null, 2));
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();

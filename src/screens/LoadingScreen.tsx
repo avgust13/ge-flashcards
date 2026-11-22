@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { ProgressBar } from '../components/ui/ProgressBar';
+import { Pill } from '../components/ui/Pill';
 
 interface Props {
-  loaded: number;
-  total: number;
   error: string | null;
+  onRetry?: () => void;
 }
 
 const Screen = styled.div`
@@ -38,19 +37,6 @@ const Heading = styled.div`
   }
 `;
 
-const BarRow = styled.div`
-  display: flex;
-  width: 100%;
-  max-width: 320px;
-  align-items: center;
-`;
-
-const Meta = styled.div`
-  font-size: 12px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.inkSoft};
-`;
-
 const ErrorBox = styled.div`
   font-size: 13px;
   font-weight: 700;
@@ -58,33 +44,22 @@ const ErrorBox = styled.div`
   text-align: center;
 `;
 
-function formatMB(bytes: number): string {
-  return `${(bytes / (1024 * 1024)).toFixed(1)} МБ`;
-}
-
-export function LoadingScreen({ loaded, total, error }: Props) {
-  const value = total > 0 ? Math.min(loaded / total, 1) : 0;
-  const pct = Math.round(value * 100);
-
+/** Shown for the moment the picture dictionary (a small text file) is being fetched. */
+export function LoadingScreen({ error, onRetry }: Props) {
   return (
     <Screen>
       <Hello>გამარჯობა · Привет</Hello>
       <Heading>
         Загружаем <span>словарь</span>
       </Heading>
-
-      {error ? (
-        <ErrorBox>{error}</ErrorBox>
-      ) : (
+      {error && (
         <>
-          <BarRow>
-            <ProgressBar value={value} />
-          </BarRow>
-          <Meta>
-            {total > 0
-              ? `${formatMB(loaded)} из ${formatMB(total)} · ${pct}%`
-              : 'Начинаем загрузку…'}
-          </Meta>
+          <ErrorBox>{error}</ErrorBox>
+          {onRetry && (
+            <Pill kind="ghost" size="sm" onClick={onRetry}>
+              Попробовать ещё раз
+            </Pill>
+          )}
         </>
       )}
     </Screen>

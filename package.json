@@ -14,6 +14,7 @@
     "content:tts": "tsx --env-file=.env.local scripts/content/tts.ts",
     "content:stt": "tsx --env-file=.env.local scripts/content/stt-check.ts",
     "content:verify-lexicon": "tsx scripts/content/verify-lexicon.ts",
+    "content:verify-dictionary": "tsx scripts/content/verify-dictionary.ts",
     "tutor:smoke": "tsx --env-file=.env.local scripts/tutor/smoke.ts"
   },
   "dependencies": {

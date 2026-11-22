@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { playBase64 } from '../../audio/player';
+import { playClip } from '../../audio/player';
 import { Icon } from '../../components/ui/Icon';
 
 interface Props {
   ru: string;
-  audio?: string;
+  /** Clip id of the word in the course audio store, if it has one. */
+  audio?: string | null;
   solved: boolean;
 }
 
@@ -42,6 +43,11 @@ const SpeakerBtn = styled.button<{ $solved: boolean }>`
   cursor: pointer;
   color: ${({ $solved, theme }) =>
     $solved ? theme.colors.success : theme.colors.inkSoft};
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
 `;
 
 export function TranslationCard({ ru, audio, solved }: Props) {
@@ -54,9 +60,9 @@ export function TranslationCard({ ru, audio, solved }: Props) {
       <SpeakerBtn
         $solved={solved}
         aria-label="Прослушать"
-        disabled={!solved}
+        disabled={!solved || !audio}
         onClick={() => {
-          if (solved) playBase64(audio);
+          if (solved) void playClip(audio);
         }}
       >
         <Icon name="speaker" size={22} />

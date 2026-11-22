@@ -5,7 +5,7 @@ import { Icon } from '../components/ui/Icon';
 import { ImageSlot } from '../components/ui/ImageSlot';
 import { Pill } from '../components/ui/Pill';
 import { ProgressBar } from '../components/ui/ProgressBar';
-import { LETTERS, getLetter } from '../content/store';
+import { LETTERS, audioIdFor, getLetter } from '../content/store';
 import { bumpDay } from '../db/progress';
 import { useSession } from '../state/SessionContext';
 import type { AlphaResult } from '../types';
@@ -246,7 +246,7 @@ export function AlphabetSession() {
             })}
           </LetterRow>
 
-          <TranslationCard ru={word.ru} audio={word.audio} solved={solved} />
+          <TranslationCard ru={word.ru} audio={audioIdFor(word.ka)} solved={solved} />
         </WordCard>
 
         <TileKeyboard options={options} onTap={tap} onHint={hint} solved={solved} hint={solved ? undefined : 'Заполни все буквы, чтобы продолжить'} />

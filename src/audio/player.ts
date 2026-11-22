@@ -67,16 +67,6 @@ export async function playClip(id: string | null | undefined): Promise<boolean> 
   }
 }
 
-/** Legacy words carry their audio inline as base64 MP3. */
-export function playBase64(b64: string | null | undefined): void {
-  if (!b64) return;
-  ++token;
-  const a = element();
-  a.pause();
-  a.src = `data:audio/mpeg;base64,${b64}`;
-  void a.play().catch(() => undefined);
-}
-
 export function stopAudio(): void {
   ++token;
   el?.pause();

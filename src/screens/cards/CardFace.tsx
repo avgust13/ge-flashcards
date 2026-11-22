@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { playBase64 } from '../../audio/player';
+import { playClip } from '../../audio/player';
 import { Icon } from '../../components/ui/Icon';
 import { ImageSlot } from '../../components/ui/ImageSlot';
 import { trOnReveal, trVisible } from '../../content/reading';
+import { audioIdFor } from '../../content/store';
 import type { Word } from '../../types';
 
 export type CardDir = 'ka-ru' | 'ru-ka';
@@ -54,6 +55,11 @@ const SpeakerBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
 `;
 
 /** Takes the picture's place on a question side, where a picture would give the answer away. */
@@ -123,6 +129,8 @@ export function CardFace({ side, word, dir = 'ka-ru' }: Props) {
   // Which language this side is in.
   const georgian = back !== (dir === 'ka-ru');
   const showTr = back ? trOnReveal() : trVisible(word.ka);
+  // The word's clip in the course audio store; a word without one has a disabled speaker.
+  const clip = audioIdFor(word.ka);
 
   return (
     <Face $back={back}>
@@ -131,10 +139,11 @@ export function CardFace({ side, word, dir = 'ka-ru' }: Props) {
         {(georgian || back) && (
           <SpeakerBtn
             aria-label="Прослушать"
+            disabled={!clip}
             onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => {
               e.stopPropagation();
-              playBase64(word.audio);
+              void playClip(clip);
             }}
           >
             <Icon name="speaker" size={18} />

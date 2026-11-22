@@ -4,9 +4,11 @@
  * back as (nearly) the same words is suspect and worth regenerating.
  *
  *   npm run content:stt -- --all                    every clip in the manifest
- *   npm run content:stt -- --retake [--max 3] [--offset N]
+ *   npm run content:stt -- --retake [--max 3] [--offset N] [--letters | --dict]
  *                                                   re-record clips that failed, keep a better take;
- *                                                   --offset skips seeds an earlier round tried
+ *                                                   --offset skips seeds an earlier round tried;
+ *                                                   --letters / --dict limit the round to the alphabet
+ *                                                   clips / the words of the picture dictionary
  *   npm run content:stt -- <file.mp3> "<text>" ...  ad-hoc pairs
  *
  * Results are cached by clip id in content-src/generated/stt-cache.json, so a
@@ -19,6 +21,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { compile, letterTexts } from './build';
+import { dictionaryTexts } from './dictionary';
 import {
   clipId,
   clipPath as ttsClipPath,
@@ -271,8 +274,12 @@ async function main(): Promise<void> {
   if (args.includes('--retake')) {
     const i = args.indexOf('--max');
     const o = args.indexOf('--offset');
-    // `--letters` limits the round to the alphabet clips.
-    const only = args.includes('--letters') ? new Set(letterTexts(compile().course)) : null;
+    // `--letters` limits the round to the alphabet clips, `--dict` to the picture dictionary.
+    const only = args.includes('--letters')
+      ? new Set(letterTexts(compile().course))
+      : args.includes('--dict')
+        ? new Set(dictionaryTexts())
+        : null;
     return retake(i >= 0 ? Number(args[i + 1]) : 3, o >= 0 ? Number(args[o + 1]) : 0, only);
   }
   for (let i = 0; i + 1 < args.length; i += 2) {

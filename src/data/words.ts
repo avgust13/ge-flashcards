@@ -1,93 +1,52 @@
-import type { Word } from '../types';
-import { LEVELS } from './levels';
+/**
+ * The picture dictionary ("free practice"). The words are a small text file
+ * (`content/dictionary.json`, built from content-src/dictionary.json); each
+ * picture is a separate file fetched when a card shows it, and a word's audio
+ * is a clip of the course store, found by its Georgian text.
+ */
+import { translit } from '../content/translit';
+import type { Dictionary } from '../content/types';
+import type { Category, Word } from '../types';
+import { CATEGORIES } from './categories';
 
 export const WORDS: Word[] = [];
 
-export interface LoadProgress {
-  loaded: number;
-  total: number;
-}
+export const pictureUrl = (id: number): string => `${import.meta.env.BASE_URL}pics/${id}.webp`;
 
-export async function loadWords(
-  onProgress?: (p: LoadProgress) => void,
-  signal?: AbortSignal,
-  forceRedownload = false,
-): Promise<Word[]> {
-  const baseUrl = `${import.meta.env.BASE_URL}words.json`;
-  const url = forceRedownload
-    ? `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}_ts=${Date.now()}`
-    : baseUrl;
-
-  if (forceRedownload) {
-    // The service worker serves words.json cache-first; drop its copy so
-    // "update" really fetches a fresh file.
-    try {
-      await globalThis.caches?.delete('legacy-words-v1');
-    } catch {
-      // Cache Storage unavailable: the cache-busting query below still applies.
-    }
-  }
-
-  const response = await fetch(url, {
-    signal,
-    cache: forceRedownload ? 'no-store' : 'default',
-  });
-  if (!response.ok) throw new Error(`Failed to load words.json: ${response.status}`);
-
-  // If the server serves the file with Gzip/Brotli compression, the Content-Length header 
-  // is removed by the browser. In this case, use the approximate size of the uncompressed JSON (~63.7 MB).
-  const APPROX_TOTAL = 66849908;
-  const total = Number(response.headers.get('Content-Length')) || APPROX_TOTAL;
-  const reader = response.body?.getReader();
-
-  if (!reader) {
-    const data = (await response.json()) as Word[];
-    backfillLevels(data);
-    WORDS.splice(0, WORDS.length, ...data);
-    onProgress?.({ loaded: total || 1, total: total || 1 });
-    return WORDS;
-  }
-
-  const chunks: Uint8Array[] = [];
-  let loaded = 0;
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    chunks.push(value);
-    loaded += value.length;
-    onProgress?.({ loaded, total });
-  }
-
-  const buf = new Uint8Array(loaded);
-  let offset = 0;
-  for (const c of chunks) {
-    buf.set(c, offset);
-    offset += c.length;
-  }
-  const data = JSON.parse(new TextDecoder().decode(buf)) as Word[];
-  backfillLevels(data);
-  WORDS.splice(0, WORDS.length, ...data);
+/** Replace the dictionary in place (the arrays are shared by reference). Used by the loader and by tests. */
+export function fillWords(dict: Dictionary): Word[] {
+  const noPic = new Set(dict.noPic ?? []);
+  const words = dict.words.map(
+    (w): Word => ({
+      id: w.id,
+      ka: w.ka,
+      tr: translit(w.ka),
+      ru: w.ru,
+      image: noPic.has(w.id) ? null : pictureUrl(w.id),
+      cat: w.cat as Word['cat'],
+      level: w.level,
+      correct: 0,
+      seen: 0,
+    }),
+  );
+  CATEGORIES.splice(0, CATEGORIES.length, ...(dict.categories as Category[]));
+  WORDS.splice(0, WORDS.length, ...words);
   return WORDS;
 }
 
-function backfillLevels(data: Word[]): void {
-  for (let i = 0; i < data.length; i++) {
-    const w = data[i];
-    // Every record carries an explicit level; this only guards a malformed one.
-    if (w.level == null) w.level = LEVELS.length - 1;
-    w.correct = sanitizeCorrect(w.correct);
-    w.seen = sanitizeSeen(w.seen);
+let loading: Promise<Word[]> | null = null;
+
+/** Idempotent: fetch the dictionary (text only, well under 100 KB) and fill `WORDS` and `CATEGORIES`. */
+export function loadWords(): Promise<Word[]> {
+  if (!loading) {
+    loading = (async () => {
+      const response = await fetch(`${import.meta.env.BASE_URL}content/dictionary.json`);
+      if (!response.ok) throw new Error(`Не удалось загрузить словарь: ${response.status}`);
+      return fillWords((await response.json()) as Dictionary);
+    })().catch((e) => {
+      loading = null;
+      throw e;
+    });
   }
-}
-
-function sanitizeCorrect(v: unknown): number {
-  if (typeof v !== 'number' || !Number.isFinite(v)) return 0;
-  if (v < 0) return 0;
-  if (v > 1) return 1;
-  return v;
-}
-
-function sanitizeSeen(v: unknown): number {
-  if (typeof v !== 'number' || !Number.isFinite(v) || v < 0) return 0;
-  return v;
+  return loading;
 }

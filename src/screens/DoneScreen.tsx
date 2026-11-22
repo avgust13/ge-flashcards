@@ -1,3 +1,5 @@
+import { aiTagOf } from '../content/store';
+import { AiBadge } from './session/parts';
 import { useEffect, useMemo } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -210,6 +212,7 @@ export function DoneScreen() {
                     <Icon name={r.rating >= 3 ? 'check' : 'close'} size={14} stroke={2.6} />
                   </Mark>
                   <div style={{ flex: 1, minWidth: 0 }}>
+                    {aiTagOf(r.card) && <AiBadge tag={aiTagOf(r.card)!} />}
                     <RowKa>{r.ka}</RowKa>
                     <RowMeta>
                       {r.ka && trVisible(r.ka) ? `${translit(r.ka)} · ` : ''}

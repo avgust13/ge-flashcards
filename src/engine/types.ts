@@ -1,3 +1,4 @@
+import type { AiTag } from '../content/types';
 import type { CardId, ExerciseKind, Rating } from '../srs/types';
 
 /** What is shown once the learner has answered. */
@@ -7,6 +8,8 @@ export interface Reveal {
   /** Audio clip id, if one exists for this text. */
   audio: string | null;
   note: string | null;
+  /** The text came from the AI tutor: how far its words are confirmed. */
+  ai?: AiTag;
 }
 
 export interface ChoiceOption {
@@ -89,3 +92,6 @@ export interface SessionResultRow {
   ka: string;
   ru: string;
 }
+
+/** Longest phrase that is still drilled with tiles; longer ones go straight to "say it". */
+export const MAX_ASSEMBLE_TOKENS = 8;

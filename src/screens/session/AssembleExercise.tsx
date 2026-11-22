@@ -7,7 +7,7 @@ import { trVisible } from '../../content/reading';
 import { translit } from '../../content/translit';
 import { checkAssemble } from '../../engine/grade';
 import type { AssembleExercise as Ex, ExerciseResult, Tile } from '../../engine/types';
-import { Body, Card, Eyebrow, Footer, Muted, PromptRu, RevealCard, shake } from './parts';
+import { AiBadge, Body, Card, Eyebrow, Footer, Muted, PromptRu, RevealCard, shake } from './parts';
 
 interface Props {
   ex: Ex;
@@ -88,6 +88,8 @@ export function AssembleExercise({ ex, autoplay, onDone }: Props) {
   const [errOnFocus, setErrOnFocus] = useState(false);
   const [status, setStatus] = useState<'idle' | 'wrong' | 'right' | 'shown'>('idle');
   const [shaking, setShaking] = useState(false);
+  /** The last order the learner tried and got wrong — what the tutor is asked about. */
+  const [lastWrong, setLastWrong] = useState<string | null>(null);
   const startedAt = useRef(Date.now());
   const solvedMs = useRef(0);
 
@@ -119,6 +121,7 @@ export function AssembleExercise({ ex, autoplay, onDone }: Props) {
       return;
     }
     setErrs((n) => n + 1);
+    setLastWrong(answer.map((t) => t.t).join(' '));
     if (res.focusWrong) setErrOnFocus(true);
     setStatus('wrong');
     setShaking(true);
@@ -141,6 +144,7 @@ export function AssembleExercise({ ex, autoplay, onDone }: Props) {
     <>
       <Body>
         <Card>
+          {ex.reveal.ai && <AiBadge tag={ex.reveal.ai} />}
           <Eyebrow>Собери по-грузински</Eyebrow>
           <PromptRu>{ex.promptRu}</PromptRu>
         </Card>
@@ -159,7 +163,7 @@ export function AssembleExercise({ ex, autoplay, onDone }: Props) {
           </>
         )}
 
-        {done && <RevealCard reveal={ex.reveal} ok={status === 'right' && errs === 0} source={ex} />}
+        {done && <RevealCard reveal={ex.reveal} ok={status === 'right' && errs === 0} source={ex} given={lastWrong} />}
       </Body>
 
       <Footer>

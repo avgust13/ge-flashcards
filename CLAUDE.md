@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Uchikartuli is an installable PWA that teaches Georgian to a Russian speaker, built around Dmitry Petrov's "skeleton" idea: a small set of sentence patterns (above all the verb matrix: 3 tenses × statement / negation / question) drilled to automatism, on top of spaced repetition. All learner-facing text and the whole UI are in **Russian**.
 
-Stack: Vite + React 18 + TypeScript + styled-components + react-router-dom + vite-plugin-pwa, `idb` (IndexedDB), `ts-fsrs` (scheduler, pinned to 5.x), vitest. No linter.
+Stack: Vite + React 18 + TypeScript + styled-components + react-router-dom + vite-plugin-pwa, `idb` (IndexedDB), `ts-fsrs` (scheduler, pinned to 5.x), `@anthropic-ai/sdk` + `zod` (the optional AI tutor, a lazy chunk), vitest. No linter.
 
 All 16 units of the course have content (28 verbs, about 260 words, about 900 cards), plus an alphabet track (33 letters with sound) that runs alongside it. The older vocabulary trainer (836 words with pictures) remains as "free practice".
 
@@ -21,6 +21,7 @@ npm run content:verify  # check the verb table against Wiktionary / a blind pass
 npm run content:verify-lexicon  # check every surface of the lexicon against Wiktionary declension tables / the corpus list
 npm run content:tts     # generate audio with ElevenLabs (--quota, --dry-run, --unit N, --limit CHARS, --audit; --unit 0 = alphabet)
 npm run content:stt     # recognise the clips back to text (--all) and re-record mismatches (--retake [--max N] [--offset N] [--letters])
+npm run tutor:smoke     # run the tutor's real prompts against the API with the key in .env.local (a few cents; `-- badkey` spends nothing)
 ```
 
 `PWA_DEV=1 npm run dev` enables the service worker in dev (off by default: it serves stale content while authoring). If a running dev server ever picks up an older `vite.config.ts` (e.g. after switching branches), touch the file to restart it — otherwise a dev service worker can keep serving a stale `index.html`.
@@ -30,7 +31,7 @@ npm run content:stt     # recognise the clips back to text (--all) and re-record
 ### Two-stage boot
 `src/state/AppContext.tsx` gates the app on IndexedDB progress (`initProgress`) plus the small course JSON (`loadCourse`, a few hundred KB). The 67 MB `public/words.json` is **not** part of boot: `WordsProvider.ensureWords()` loads it lazily and only the legacy routes sit behind `<RequireWords>` in `src/App.tsx`.
 
-Routes: `/` Home · `/session` the one session runner · `/done` summary · `/course`, `/course/:unitId` · `/verbs`, `/verbs/:verbId` (matrix) · `/alphabet` · `/stats` · `/settings` · legacy behind `RequireWords`: `/levels`, `/select/:mode`, `/session/flash`, `/session/alpha`, `/summary`.
+Routes: `/` Home · `/session` the one session runner · `/done` summary · `/course`, `/course/:unitId` · `/verbs`, `/verbs/:verbId` (matrix) · `/alphabet` · `/stats` · `/tutor` · `/phrases` · `/settings` · legacy behind `RequireWords`: `/levels`, `/select/:mode`, `/session/flash`, `/session/alpha`, `/summary`.
 
 ### Content (`content-src/` → `public/content/`)
 - `content-src/verbs.ts` — **the only source of Georgian verb paradigms**: 18 hand-entered forms per verb, plus an optional `opt` row (the optative, «чтобы я сделал») for verbs used after უნდა / მინდა / შემიძლია. Never derive a form by rule and never take one from a model. `cellUnit` schedules each cell; `null` = reference only (shown in the matrix, never a card). `objCase` and `subjectCase` say which case the object and the subject take per tense — the sentence builders and the validator both lean on them. `wikt` lists extra Wiktionary pages for verbs that borrow their future / past from another root.
@@ -61,11 +62,23 @@ A sentence marked `strict` has one word order (two verbs, a clause after a comma
 - `mastery.ts` — "automatism" (last 3 production attempts passed, 2 of them fast) and the gate that unlocks the next unit.
 - All time goes through `clock.ts` (`now()`), and the study day rolls over at 04:00 (`day.ts`).
 
+### AI tutor (`src/tutor/`, optional)
+The learner may add their own Claude API key in Settings; without it (or offline) every tutor control is disabled and nothing in a lesson waits for the tutor.
+- `client.ts` is the **only** file that imports `@anthropic-ai/sdk` and `zod`; `index.ts` loads it with a dynamic `import()`, so the SDK is a separate chunk. Requests go straight from the browser to Anthropic (`dangerouslyAllowBrowser` — it is the learner's own key on the learner's own device; there is no backend). Model `claude-opus-5-5`, structured outputs through `client.beta.messages.parse` + `betaZodOutputFormat`, server-side refusal fallbacks on, the explanation streamed.
+- `prompts.ts` — pure prompt builders. The first system block (role, house rules, every course form grouped by unit) must stay byte-stable: it is the cached prefix. Per-request text goes into the second block and the user turn. `scripts/tutor/smoke.ts` runs the same prompts from Node — use it to judge a prompt change before shipping.
+- The key lives in the IndexedDB store `secrets` (`src/db/secrets.ts`): never in `kv`, never in a backup, never logged.
+- **Everything Georgian the tutor writes is checked against the course tables** (`src/content/known.ts`: lexicon surfaces + verified verb forms) and shown under a label — «ИИ · формы есть в таблицах» or «ИИ · не проверено» (`AiBadge`). The label says the words exist, not that the sentence is right. Never show tutor output without it, and never feed tutor output into `content-src/`: the tutor is not a source of forms.
+- Features: «Почему так?» under an answer (`context.ts` writes out what the app knows about the sentence; the tutor explains from those facts), «Мои фразы» (`/phrases`), a role-play dialogue and a check of the learner's own text (`/tutor`).
+- A saved phrase (`phrases.ts`) is a user item plus a card `s:u:<id>` in the learning queue. Its sentence is registered in the store apart from `SENTENCES`, so unverified text is never offered as a wrong option next to course material.
+
+### Speech (`src/speech/`)
+Both helpers are optional and leave the grade to the learner. `recognise.ts` wraps the browser's speech recognition (Chrome on Android, `ka-GE`, online); with the setting `speechCheck` on, "say it aloud" offers a microphone and `compare.ts` says whether the recogniser heard the same letters — a hint that outlines the suggested grade, never a grade. `recorder.ts` records a take in memory so it can be played next to the reference clip; nothing is stored.
+
 ### Engine (`src/engine/`)
 `build.ts` picks an example that uses only introduced material and builds distractors where the card is tested; `grade.ts` checks tile answers by rule (verb last, "არ" before it, free order otherwise); `session.ts` is a serialisable session state machine; `run.ts` glues these to the stores.
 
 ### Persistence (`src/db/`)
-IndexedDB is the store of record with a full in-memory mirror (`progress.ts`), so reads are synchronous. One answer = one transaction over `cards`, `revlog`, `days`, `exposure`. `migrate-v1.ts` copies the old localStorage word scores once. `backup.ts` exports/imports everything except `secrets`. `reports.ts` keeps the learner's "здесь ошибка?" notes on cards (and hides a flagged card) — there is no server, the notes are copied out from Settings. `src/data/stats.ts` is a thin façade for the legacy word score (EMA).
+IndexedDB is the store of record with a full in-memory mirror (`progress.ts`), so reads are synchronous. One answer = one transaction over `cards`, `revlog`, `days`, `exposure`. `migrate-v1.ts` copies the old localStorage word scores once. `backup.ts` exports/imports everything except `secrets` (the tutor key). User items (`userItems`: saved phrases) are mirrored in `progress.ts` like cards. `reports.ts` keeps the learner's "здесь ошибка?" notes on cards (and hides a flagged card) — there is no server, the notes are copied out from Settings. `src/data/stats.ts` is a thin façade for the legacy word score (EMA).
 
 ### Audio
 Course clips are separate files `public/audio/<2 hex>/<id>.mp3`, `id = sha1(voice|model|text)` with `|128` appended for hi-fi clips and `|takeN` for a re-recorded take; `content-src/audio-manifest.json` maps text → id and `public/content/audio.json` advertises only clips that exist. Clips are 64 kbps, except letter syllables and minimal-pair words (`hiFiTexts` in `scripts/content/build.ts`), which are 128 kbps so that თ/ტ, კ/ქ, ც/წ, ჩ/ჭ, პ/ფ stay distinguishable. Missing audio must degrade gracefully (disabled speaker, no listening exercise). `src/audio/player.ts` owns one shared `<audio>` element and plays through `src/audio/cache.ts`, which also implements "download all audio for offline" (Settings) into the same `audio-v1` cache the service worker uses. Legacy words still carry inline base64 audio/images in `words.json`.
@@ -89,4 +102,4 @@ Design tokens in `src/theme/tokens.ts`; use `theme.fonts.ka` (Noto Sans Georgian
 A push to `main` runs `.github/workflows/deploy.yml`: test, build, then rsync `dist/` to `deploy@$SSH_HOST:site/`, which is `/opt/uchikartuli/site` on the VPS (uchikartuli.xyz). The VPS is shared: the Caddy in `/opt/edge` owns ports 80/443 and TLS for every site on it (floor.pavloff.dev too) and proxies uchikartuli.xyz to this site's own static Caddy (`deploy/caddy/Caddyfile`: SPA fallback, real 404s, cache headers), reached as `uchikartuli-web` on the docker network `edge`. The `deploy` user's key is locked to `rrsync /opt/uchikartuli`, so it can only upload files. After a server reinstall, run `deploy/setup-server.sh` (its header says how; it is idempotent). Repository secrets: `SSH_HOST`, `SSH_USER` (= `deploy`), `SSH_PRIVATE_KEY` (the private half of `~/.ssh/uchikartuli_deploy`).
 
 ## Secrets
-Script keys live in `.env.local` (gitignored; see `.env.example`). Never use a `VITE_` prefix for a secret. The repository is public.
+Script keys live in `.env.local` (gitignored; see `.env.example`). Never use a `VITE_` prefix for a secret. The repository is public. The tutor key inside the app is a different thing: the learner types it into Settings and it stays in that browser's `secrets` store.

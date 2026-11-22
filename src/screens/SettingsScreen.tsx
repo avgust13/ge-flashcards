@@ -22,6 +22,8 @@ import { useProgressVersion } from '../db/useProgress';
 import { useInstallPrompt } from '../hooks/useInstallPrompt';
 import { getClockOffset, setClockOffset } from '../srs/clock';
 import { useWordsLoad } from '../state/WordsContext';
+import { speechSupported } from '../speech/recognise';
+import { TutorCard } from './settings/TutorCard';
 
 const Screen = styled.div`
   flex: 1;
@@ -428,6 +430,34 @@ export function SettingsScreen() {
           </Row>
         </Card>
 
+        <SectionLabel>Репетитор и речь</SectionLabel>
+        <TutorCard />
+        <Card>
+          <Row>
+            <Meta>
+              <Title>Микрофон в «Скажи вслух»</Title>
+              <Desc>
+                {speechSupported()
+                  ? 'Перед ответом можно сказать фразу в микрофон: приложение покажет, что услышало. Оценку всё равно ставишь ты — распознавание ошибается.'
+                  : 'В этом браузере нет распознавания речи. Оно есть в Chrome на Android.'}
+              </Desc>
+            </Meta>
+            <Choices>
+              <Pill
+                size="sm"
+                kind={settings.speechCheck ? 'dark' : 'ghost'}
+                disabled={!speechSupported()}
+                onClick={() => setSettings({ speechCheck: true })}
+              >
+                вкл
+              </Pill>
+              <Pill size="sm" kind={!settings.speechCheck ? 'dark' : 'ghost'} onClick={() => setSettings({ speechCheck: false })}>
+                выкл
+              </Pill>
+            </Choices>
+          </Row>
+        </Card>
+
         <SectionLabel>Замечания к карточкам</SectionLabel>
         <Card>
           <Row>
@@ -500,7 +530,7 @@ export function SettingsScreen() {
           <Row>
             <Meta>
               <Title>Распознавание речи</Title>
-              <Desc>Проверка: понимает ли этот телефон грузинскую речь. Нужно для будущей авто-проверки «скажи вслух».</Desc>
+              <Desc>Проверка: понимает ли этот телефон грузинскую речь. От этого зависит микрофон в «Скажи вслух».</Desc>
               {speechMsg && <Message>{speechMsg}</Message>}
             </Meta>
             <Pill kind="ghost" size="sm" onClick={onSpeechProbe}>

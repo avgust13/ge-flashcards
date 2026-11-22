@@ -25,6 +25,10 @@ const days = new Map<string, DayStat>();
 const wordStats = new Map<number, WordStat>();
 const exposure = new Map<string, Exposure>();
 const kv = new Map<string, unknown>();
+/** Things the learner added themselves (phrases from the tutor), by id. */
+const userItems = new Map<string, UserItem>();
+
+export type UserItem = { id: string } & Record<string, unknown>;
 
 let ready: Promise<void> | null = null;
 let chain: Promise<void> = Promise.resolve();
@@ -65,18 +69,21 @@ export function initProgress(): Promise<void> {
 
 export async function hydrate(dbArg?: AppDb): Promise<void> {
   const db = dbArg ?? (await getDb());
-  const [c, d, w, e, k] = await Promise.all([
+  const [c, d, w, e, k, u] = await Promise.all([
     db.getAll('cards'),
     db.getAll('days'),
     db.getAll('wordStats'),
     db.getAll('exposure'),
     db.getAll('kv'),
+    db.getAll('userItems'),
   ]);
   cards.clear();
   days.clear();
   wordStats.clear();
   exposure.clear();
   kv.clear();
+  userItems.clear();
+  for (const x of u) userItems.set(x.id, x);
   for (const x of c) cards.set(x.id, x);
   for (const x of d) days.set(x.day, x);
   for (const x of w) wordStats.set(x.id, { correct: x.correct, seen: x.seen, lastSeen: x.lastSeen });
@@ -160,6 +167,14 @@ export function getExposure(id: string): Exposure | undefined {
   return exposure.get(id);
 }
 
+export function allUserItems(): IterableIterator<UserItem> {
+  return userItems.values();
+}
+
+export function getUserItem(id: string): UserItem | undefined {
+  return userItems.get(id);
+}
+
 export function getKv<T>(key: string): T | undefined {
   return kv.get(key) as T | undefined;
 }
@@ -183,6 +198,25 @@ export function setSettings(patch: Partial<Settings>): void {
 
 export function setCourse(patch: Partial<CourseState>): void {
   setKv('course', { ...getCourse(), ...patch });
+}
+
+export function putUserItem(item: UserItem): void {
+  userItems.set(item.id, item);
+  enqueue((db) => db.put('userItems', item));
+  emit();
+}
+
+/** Remove a user item together with its card, so nothing schedules a phrase that no longer exists. */
+export function deleteUserItem(id: string, cardId?: CardId): void {
+  userItems.delete(id);
+  if (cardId) cards.delete(cardId);
+  enqueue(async (db) => {
+    const tx = db.transaction(['userItems', 'cards'], 'readwrite');
+    void tx.objectStore('userItems').delete(id);
+    if (cardId) void tx.objectStore('cards').delete(cardId);
+    await tx.done;
+  });
+  emit();
 }
 
 export function putCard(card: SrsCard): void {

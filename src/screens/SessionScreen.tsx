@@ -422,6 +422,7 @@ export function SessionScreen() {
           <AssembleExercise key={ex.uid} ex={ex} autoplay={settings.autoplay} onDone={onAnswer} />
         ) : ex.kind === 'speak' ? (
           <SpeakExercise
+            speechCheck={settings.speechCheck}
             key={ex.uid}
             ex={ex}
             autoplay={settings.autoplay}

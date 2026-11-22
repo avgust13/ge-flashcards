@@ -7,6 +7,7 @@ import {
   LETTERS,
   LEXICON,
   SENTENCES,
+  aiTagOf,
   audioIdFor,
   describeCard,
   examplesFor,
@@ -36,6 +37,7 @@ import {
 import type { CardInfo } from '../srs/composer';
 import type { ExerciseKind, SrsCard } from '../srs/types';
 import { shuffled } from './rng';
+import { MAX_ASSEMBLE_TOKENS } from './types';
 import type {
   AssembleExercise,
   ChoiceOption,
@@ -482,11 +484,14 @@ function assemble(cardId: string, s: Sentence, ctx: BuildCtx, reveal: Reveal): A
 function buildSentenceCard(cardId: string, s: Sentence, kind: ExerciseKind, ctx: BuildCtx): Exercise {
   const p = parseCardId(cardId);
   const note = p?.kind === 'pattern' ? getPattern(p.pattern)?.noteRu ?? null : null;
-  const reveal = revealOf(s, ctx, note);
+  const ai = aiTagOf(cardId);
+  const reveal: Reveal = ai ? { ...revealOf(s, ctx, note), ai } : revealOf(s, ctx, note);
   const base = { uid: nextUid(cardId), card: cardId, sentenceId: s.id, tokens: s.tokens.length, reveal };
   const promptRu = ruText(s.ru, ctx.gender);
 
-  if (kind === 'assemble' && s.tokens.length >= 2) return assemble(cardId, s, ctx, reveal);
+  if (kind === 'assemble' && s.tokens.length >= 2 && s.tokens.length <= MAX_ASSEMBLE_TOKENS) {
+    return assemble(cardId, s, ctx, reveal);
+  }
 
   if (kind === 'listen' && reveal.audio) {
     const c = choice({ text: promptRu, ka: false }, ruSiblings(s, ctx).map((t) => ({ text: t, ka: false })), ctx);

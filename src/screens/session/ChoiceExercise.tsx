@@ -7,7 +7,7 @@ import { SpeakerButton } from '../../components/ui/SpeakerButton';
 import { trVisible } from '../../content/reading';
 import { translit } from '../../content/translit';
 import type { ExerciseResult, ListenExercise, RecogniseExercise } from '../../engine/types';
-import { Body, Card, Eyebrow, Footer, Ka, Muted, PromptRu, RevealCard, Tr, shake } from './parts';
+import { AiBadge, Body, Card, Eyebrow, Footer, Ka, Muted, PromptRu, RevealCard, Tr, shake } from './parts';
 
 interface Props {
   ex: RecogniseExercise | ListenExercise;
@@ -127,6 +127,7 @@ export function ChoiceExercise({ ex, autoplay, onDone }: Props) {
     <>
       <Body>
         <Card>
+          {ex.reveal.ai && <AiBadge tag={ex.reveal.ai} />}
           {ex.kind === 'listen' ? (
             <ListenBox>
               <Eyebrow>{ex.title ?? 'Что ты слышишь?'}</Eyebrow>
@@ -174,7 +175,14 @@ export function ChoiceExercise({ ex, autoplay, onDone }: Props) {
           })}
         </Options>
 
-        {solved && <RevealCard reveal={ex.reveal} ok={errs === 0} source={ex} />}
+        {solved && (
+          <RevealCard
+            reveal={ex.reveal}
+            ok={errs === 0}
+            source={ex}
+            given={ex.options[picked.find((i) => i !== ex.correct) ?? -1]?.text}
+          />
+        )}
       </Body>
 
       <Footer>

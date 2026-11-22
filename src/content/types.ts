@@ -216,6 +216,19 @@ export interface Course {
   letterPairs: LetterPair[];
 }
 
+/**
+ * How far Georgian text written by the AI tutor can be trusted: every word is
+ * a form from the course tables, or at least one is not. Shown wherever such
+ * text appears.
+ */
+export type AiTag = 'checked' | 'unchecked';
+export const AI_TAG_RU: Record<AiTag, string> = {
+  checked: 'ИИ · формы есть в таблицах',
+  unchecked: 'ИИ · не проверено',
+};
+/** Card id of a phrase the learner added: `s:u:<id>`. */
+export const USER_PHRASE_PREFIX = 's:u:';
+
 export const cellCardId = (verbId: string, tense: Screeve, person: Person): string =>
   `c:${verbId}.${tense}.${person}`;
 export const CELL_RE = /^c:([a-z0-9]+)\.(prs|aor|fut|opt)\.(1sg|2sg|3sg|1pl|2pl|3pl)$/;

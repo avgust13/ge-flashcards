@@ -14,7 +14,9 @@ import { MatrixScreen } from './screens/MatrixScreen';
 import { SelectionScreen } from './screens/SelectionScreen';
 import { SessionScreen } from './screens/SessionScreen';
 import { SettingsScreen } from './screens/SettingsScreen';
+import { PhrasesScreen } from './screens/PhrasesScreen';
 import { StatsScreen } from './screens/StatsScreen';
+import { TutorScreen } from './screens/TutorScreen';
 import { SummaryScreen } from './screens/SummaryScreen';
 import { UnitScreen } from './screens/UnitScreen';
 import { VerbsScreen } from './screens/VerbsScreen';
@@ -96,6 +98,8 @@ function Gate() {
           <Route path="/verbs/:verbId" element={<MatrixScreen />} />
           <Route path="/alphabet" element={<AlphabetScreen />} />
           <Route path="/stats" element={<StatsScreen />} />
+          <Route path="/phrases" element={<PhrasesScreen />} />
+          <Route path="/tutor" element={<TutorScreen />} />
           <Route path="/settings" element={<SettingsScreen />} />
           <Route element={<RequireWords />}>
             <Route path="/levels" element={<LevelsScreen />} />

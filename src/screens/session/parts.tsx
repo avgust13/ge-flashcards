@@ -1,5 +1,10 @@
 import { useState } from 'react';
+import { AI_TAG_RU, type AiTag } from '../../content/types';
 import { addReport, hideCard } from '../../db/reports';
+import type { Exercise } from '../../engine/types';
+import { getTutor, tutorBlocked } from '../../tutor';
+import { describeExercise } from '../../tutor/context';
+import { tagFor } from '../../tutor/phrases';
 import styled, { css, keyframes } from 'styled-components';
 import { SpeakerButton } from '../../components/ui/SpeakerButton';
 import { trOnReveal } from '../../content/reading';
@@ -108,9 +113,32 @@ const Note = styled.div`
   color: ${({ theme }) => theme.colors.inkSoft};
 `;
 
-const ReportLink = styled.button`
+const Badge = styled.span<{ $tag: AiTag }>`
+  display: inline-flex;
   align-self: flex-start;
+  margin-bottom: 6px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-family: ${({ theme }) => theme.fonts.ui};
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  background: ${({ $tag, theme }) => ($tag === 'checked' ? theme.colors.purpleSoft : theme.colors.warnSoft)};
+  color: ${({ $tag, theme }) => ($tag === 'checked' ? theme.colors.purple : '#8A5A00')};
+`;
+
+/** Says that a piece of Georgian came from the AI tutor, and whether its words are in the course tables. */
+export function AiBadge({ tag }: { tag: AiTag }) {
+  return <Badge $tag={tag}>{AI_TAG_RU[tag]}</Badge>;
+}
+
+const Links = styled.div`
+  display: flex;
+  gap: 16px;
   margin-top: 6px;
+`;
+
+const ReportLink = styled.button`
   padding: 4px 0;
   border: none;
   background: transparent;
@@ -146,6 +174,13 @@ const ReportBox = styled.div`
   }
 `;
 
+const WhyText = styled.div`
+  font-size: 14px;
+  line-height: 1.5;
+  color: ${({ theme }) => theme.colors.ink};
+  white-space: pre-wrap;
+`;
+
 const ReportActions = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -168,27 +203,57 @@ interface RevealProps {
   reveal: Reveal;
   /** false: the answer is being shown after a miss. */
   ok?: boolean;
-  /** The card behind the answer; with it the learner can flag a mistake in the content. */
-  source?: { card: string; sentenceId: string | null };
+  /** The exercise behind the answer; with it the learner can flag a mistake or ask the tutor why. */
+  source?: Exercise;
+  /** The learner's wrong answer, when there was one: the tutor says what was off in it. */
+  given?: string | null;
 }
+
+type Why = { status: 'idle' | 'loading' | 'done' | 'error'; text: string };
 
 /**
  * The correct answer: Georgian, transliteration, Russian, a replay button and
- * an optional rule — and a way to say "this looks wrong".
+ * an optional rule — plus two ways out for a puzzled learner: ask the tutor
+ * why, or say "this looks wrong".
  */
-export function RevealCard({ reveal, ok = true, source }: RevealProps) {
+export function RevealCard({ reveal, ok = true, source, given }: RevealProps) {
   const [stage, setStage] = useState<'idle' | 'form' | 'saved' | 'hidden'>('idle');
   const [note, setNote] = useState('');
+  const [why, setWhy] = useState<Why>({ status: 'idle', text: '' });
+
   const save = (hide: boolean) => {
     if (!source) return;
     addReport({ t: Date.now(), card: source.card, sentenceId: source.sentenceId, ka: reveal.ka, ru: reveal.ru, note: note.trim() });
     if (hide) hideCard(source.card);
     setStage(hide ? 'hidden' : 'saved');
   };
+
+  const askWhy = async () => {
+    if (!source || why.status === 'loading') return;
+    const blocked = tutorBlocked();
+    if (blocked) {
+      setWhy({ status: 'error', text: blocked });
+      return;
+    }
+    setWhy({ status: 'loading', text: '' });
+    try {
+      const tutor = await getTutor();
+      let acc = '';
+      const full = await tutor.explain(describeExercise(source, given), (delta) => {
+        acc += delta;
+        setWhy({ status: 'loading', text: acc });
+      });
+      setWhy({ status: 'done', text: full });
+    } catch (e) {
+      setWhy({ status: 'error', text: e instanceof Error ? e.message : 'Не получилось получить объяснение.' });
+    }
+  };
+
   return (
     <>
       <RevealBox $ok={ok}>
         <RevealText>
+          {reveal.ai && <AiBadge tag={reveal.ai} />}
           <Ka>{reveal.ka}</Ka>
           {trOnReveal() && <Tr>{translit(reveal.ka)}</Tr>}
           <RevealRu>{reveal.ru}</RevealRu>
@@ -196,10 +261,31 @@ export function RevealCard({ reveal, ok = true, source }: RevealProps) {
         </RevealText>
         <SpeakerButton audio={reveal.audio} size={42} tone="solid" />
       </RevealBox>
-      {source && stage === 'idle' && (
-        <ReportLink type="button" onClick={() => setStage('form')}>
-          Здесь ошибка?
-        </ReportLink>
+      {source && (
+        <Links>
+          {why.status === 'idle' && (
+            <ReportLink type="button" onClick={askWhy}>
+              Почему так?
+            </ReportLink>
+          )}
+          {stage === 'idle' && (
+            <ReportLink type="button" onClick={() => setStage('form')}>
+              Здесь ошибка?
+            </ReportLink>
+          )}
+        </Links>
+      )}
+      {why.status !== 'idle' && (
+        <ReportBox>
+          {why.status === 'error' ? (
+            why.text
+          ) : (
+            <>
+              <WhyText>{why.text || 'Репетитор думает…'}</WhyText>
+              {why.status === 'done' && <AiBadge tag={tagFor(why.text)} />}
+            </>
+          )}
+        </ReportBox>
       )}
       {source && stage === 'form' && (
         <ReportBox>

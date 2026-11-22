@@ -92,6 +92,8 @@ export interface Settings {
   autoplay: boolean;
   /** Grammatical gender used for the learner in Russian prompts ("я сделал / сделала"). */
   ruGender: 'm' | 'f';
+  /** Offer the microphone in "say it aloud": the recogniser's verdict is a hint, the grade stays the learner's. */
+  speechCheck: boolean;
   lastBackupAt: number | null;
 }
 
@@ -105,6 +107,7 @@ export const DEFAULT_SETTINGS: Settings = {
   freeDirection: 'ka-ru',
   autoplay: true,
   ruGender: 'm',
+  speechCheck: false,
   lastBackupAt: null,
 };
 

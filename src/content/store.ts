@@ -3,6 +3,7 @@
  * loader, so every importer holds the same reference.
  */
 import type {
+  AiTag,
   Course,
   Letter,
   LetterGroup,
@@ -15,7 +16,7 @@ import type {
   Unit,
   Verb,
 } from './types';
-import { CELL_RE, verbForm, verbRu } from './types';
+import { CELL_RE, USER_PHRASE_PREFIX, verbForm, verbRu } from './types';
 
 export const UNITS: Unit[] = [];
 export const VERBS: Verb[] = [];
@@ -35,6 +36,12 @@ const patternById = new Map<string, PatternCell>();
 const examples = new Map<string, Sentence[]>();
 /** Sentences a word occurs in, by word card — a learned word is practised inside them. */
 const wordSentences = new Map<string, Sentence[]>();
+/**
+ * Phrases the learner added through the tutor, by sentence id (`u:<id>`).
+ * Kept apart from SENTENCES: unverified text is never offered as a wrong
+ * option next to course material.
+ */
+const userSentences = new Map<string, { sentence: Sentence; tag: AiTag }>();
 const cardUnitMap = new Map<string, number>();
 const cardOrder: string[] = [];
 const audio = new Map<string, string>();
@@ -130,7 +137,20 @@ export function loadCourse(): Promise<void> {
 
 export const getVerb = (id: string): Verb | undefined => verbById.get(id);
 export const getLexeme = (id: number): Lexeme | undefined => lexById.get(id);
-export const getSentence = (id: string): Sentence | undefined => sentenceById.get(id);
+export const getSentence = (id: string): Sentence | undefined =>
+  sentenceById.get(id) ?? userSentences.get(id)?.sentence;
+
+/** Replace the learner's own phrases (called at start and whenever one is added or removed). */
+export function setUserSentences(list: ReadonlyArray<{ sentence: Sentence; tag: AiTag }>): void {
+  userSentences.clear();
+  for (const x of list) userSentences.set(x.sentence.id, x);
+}
+
+/** The trust label of a card that came from the AI tutor; null for course material. */
+export function aiTagOf(cardId: string): AiTag | null {
+  if (!cardId.startsWith(USER_PHRASE_PREFIX)) return null;
+  return userSentences.get(cardId.slice(2))?.tag ?? 'unchecked';
+}
 export const getPattern = (id: string): PatternCell | undefined => patternById.get(id);
 export const getUnit = (id: number): Unit | undefined => UNITS.find((u) => u.id === id);
 export const examplesFor = (cardId: string): readonly Sentence[] => examples.get(cardId) ?? [];
@@ -178,6 +198,8 @@ export function parseCardId(id: string): ParsedCard | null {
 export interface CardView {
   id: string;
   kind: ParsedCard['kind'];
+  /** Set for phrases that came from the AI tutor. */
+  ai?: AiTag;
   /** Georgian side; empty for pattern cards, which are a rule rather than a word. */
   ka: string;
   ru: string;
@@ -197,8 +219,10 @@ export function describeCard(id: string): CardView | null {
     return l ? { id, kind: 'word', ka: l.ka, ru: l.ru, note: l.note } : null;
   }
   if (p.kind === 'phrase') {
-    const s = sentenceById.get(p.sentenceId);
-    return s ? { id, kind: 'phrase', ka: s.ka, ru: s.ru, note: null } : null;
+    const s = getSentence(p.sentenceId);
+    if (!s) return null;
+    const ai = aiTagOf(id);
+    return ai ? { id, kind: 'phrase', ka: s.ka, ru: s.ru, note: null, ai } : { id, kind: 'phrase', ka: s.ka, ru: s.ru, note: null };
   }
   if (p.kind === 'cell') {
     const v = verbById.get(p.verb);

@@ -1,4 +1,6 @@
 import { useMemo, useSyncExternalStore } from 'react';
+import { TUTOR_KEY, hasSecret, subscribeSecrets } from '../db/secrets';
+import { userPhrases } from '../tutor/phrases';
 import styled, { useTheme } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { unlockAudio } from '../audio/player';
@@ -222,6 +224,7 @@ export function HomeScreen() {
   const theme = useTheme();
   const version = useProgressVersion();
   const updateReady = useSyncExternalStore(subscribeUpdate, isUpdateWaiting, isUpdateWaiting);
+  const tutorKey = useSyncExternalStore(subscribeSecrets, () => hasSecret(TUTOR_KEY));
 
   const view = useMemo(() => {
     const settings = getSettings();
@@ -249,6 +252,7 @@ export function HomeScreen() {
       saved,
       automatic,
       inReview,
+      phrases: userPhrases().length,
       unit,
       unitProgress: unit ? unitProgress(unit, getCard) : null,
       streakDays: streak(allDays(), today()),
@@ -413,6 +417,24 @@ export function HomeScreen() {
             subtitle="Свободная практика словаря с картинками"
             extra="836 слов · по уровням и темам"
             onClick={() => navigate('/select/flash')}
+          />
+          <ModeCard
+            accent={theme.colors.purple}
+            tint={theme.colors.purpleSoft}
+            icon="sparkle"
+            title="Репетитор"
+            subtitle="Диалог по ситуации и проверка своего текста — отвечает Claude"
+            extra={tutorKey ? 'Ключ добавлен' : 'Нужен ключ Claude в настройках'}
+            onClick={() => navigate('/tutor')}
+          />
+          <ModeCard
+            accent={theme.colors.blue}
+            tint={theme.colors.blueSoft}
+            icon="bulb"
+            title="Мои фразы"
+            subtitle="Скажи по-русски — получи по-грузински с разбором и добавь в повторения"
+            extra={`сохранено: ${view.phrases}`}
+            onClick={() => navigate('/phrases')}
           />
           <ModeCard
             accent={theme.colors.success}
